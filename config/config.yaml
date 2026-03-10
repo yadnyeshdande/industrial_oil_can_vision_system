@@ -1,0 +1,149 @@
+system:
+  name: "IndustrialVisionSystem"
+  version: "2.1"
+  log_level: "INFO"
+  daily_restart_interval_hours: 24
+  heartbeat_timeout_seconds: 10
+  fps_zero_timeout_seconds: 30
+  startup_grace_period_seconds: 15
+
+cameras:
+  - id: 0
+    name: "Camera_1"
+    rtsp_url: "rtsp://admin:password@192.168.1.101:554/stream1"
+    enabled: true
+    fps_limit: 12
+    reconnect_base_delay: 2.0
+    reconnect_max_delay: 60.0
+    reconnect_max_attempts: 0
+    buffer_size: 1
+    shared_memory_name: "cam0_frame"
+    frame_width: 1280
+    frame_height: 720
+    memory_limit_mb: 400
+  - id: 1
+    name: "Camera_2"
+    rtsp_url: "rtsp://admin:password@192.168.1.102:554/stream1"
+    enabled: true
+    fps_limit: 12
+    reconnect_base_delay: 2.0
+    reconnect_max_delay: 60.0
+    reconnect_max_attempts: 0
+    buffer_size: 1
+    shared_memory_name: "cam1_frame"
+    frame_width: 1280
+    frame_height: 720
+    memory_limit_mb: 400
+  - id: 2
+    name: "Camera_3"
+    rtsp_url: "rtsp://admin:password@192.168.1.103:554/stream1"
+    enabled: true
+    fps_limit: 12
+    reconnect_base_delay: 2.0
+    reconnect_max_delay: 60.0
+    reconnect_max_attempts: 0
+    buffer_size: 1
+    shared_memory_name: "cam2_frame"
+    frame_width: 1280
+    frame_height: 720
+    memory_limit_mb: 400
+
+model:
+  path: "models/best.pt"
+  confidence: 0.5
+  iou: 0.45
+  class_names: ["oil_can", "bunk_hole"]
+  oil_can_class_id: 0
+  bunk_hole_class_id: 1
+  strict_boundary_mode: true
+
+gpu_pool:
+  enabled: true
+  pool_size: 2
+  device: "cuda"
+  use_fp16: true
+  fps_limit: 12
+  memory_limit_mb: 4500
+  vram_limit_mb: 5200
+  inference_timeout_seconds: 5
+  heartbeat_interval_seconds: 2
+  boundary_poll_interval_seconds: 5
+
+detection:
+  model_path: "models/best.pt"
+  device: "cuda"
+  use_fp16: true
+  confidence_threshold: 0.5
+  iou_threshold: 0.45
+  class_names: ["oil_can", "bunk_hole"]
+  oil_can_class_id: 0
+  bunk_hole_class_id: 1
+  strict_boundary_mode: true
+  fps_limit: 12
+  memory_limit_mb: 1500
+  vram_limit_mb: 5200
+  inference_timeout_seconds: 5
+  heartbeat_interval_seconds: 2
+
+relay:
+  enabled: true
+  library: "simulated"
+  retry_attempts: 3
+  retry_delay_seconds: 0.5
+  reinit_after_failures: 5
+  memory_limit_mb: 300
+  heartbeat_interval_seconds: 2
+  relay_count: 9
+  relay_mapping:
+    camera_0: [0, 1, 2]
+    camera_1: [3, 4, 5]
+    camera_2: [6, 7, 8]
+
+gui:
+  enabled: true
+  window_title: "Industrial Vision System v2.1"
+  window_width: 1600
+  window_height: 900
+  update_interval_ms: 50
+  memory_limit_mb: 700
+  font_scale: 0.55
+  overlay_alpha: 0.25
+  show_fps: true
+  show_uptime: true
+  show_success_rate: true
+  show_health_metrics: true
+  show_relay_state: true
+  bounding_box_thickness: 2
+  boundary_thickness: 2
+  enable_boundary_editor: true
+  start_in_preview_mode: false
+
+gpu_monitor:
+  enabled: true
+  poll_interval_seconds: 5
+  vram_threshold_mb: 5200
+  temperature_threshold_celsius: 85
+  critical_temperature_celsius: 90
+  fps_throttle_on_overheat: 8
+  restart_on_persistent_overheat: true
+  overheat_duration_seconds: 30
+
+supervisor:
+  memory_poll_interval_seconds: 10
+  health_log_interval_seconds: 60
+  health_broadcast_interval_seconds: 3
+  max_restart_attempts: 10
+  restart_backoff_seconds: 5
+  sequential_detection_restart_delay: 10
+  process_start_timeout_seconds: 30
+  validate_model_on_startup: true
+
+logging:
+  log_dir: "logs"
+  max_bytes: 10485760
+  backup_count: 5
+  format: "%(asctime)s [%(levelname)s] [%(name)s] %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+
+boundaries:
+  boundary_dir: "boundaries"

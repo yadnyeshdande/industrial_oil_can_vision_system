@@ -1,0 +1,49 @@
+2026-03-09 07:10:07 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 07:10:07 [INFO] [relay.relay_process] [Relay] PID=34148 starting
+2026-03-09 07:10:07 [ERROR] [relay.relay_process] [PyhidRelay] pyhid_usb_relay not installed, falling back to simulated
+2026-03-09 07:10:07 [WARNING] [relay.relay_process] Falling back to simulated relay driver
+2026-03-09 07:11:23 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 07:11:23 [INFO] [relay.relay_process] [Relay] PID=33984 starting
+2026-03-09 07:11:23 [ERROR] [relay.relay_process] [PyhidRelay] pyhid_usb_relay not installed, falling back to simulated
+2026-03-09 07:11:23 [WARNING] [relay.relay_process] Falling back to simulated relay driver
+2026-03-09 07:13:30 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 07:13:30 [INFO] [relay.relay_process] [Relay] PID=6024 starting
+2026-03-09 07:13:30 [ERROR] [relay.relay_process] [PyhidRelay] pyhid_usb_relay not installed, falling back to simulated
+2026-03-09 07:13:30 [WARNING] [relay.relay_process] Falling back to simulated relay driver
+2026-03-09 07:13:54 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 07:13:54 [INFO] [relay.relay_process] [Relay] PID=31536 starting
+2026-03-09 07:13:54 [ERROR] [relay.relay_process] [PyhidRelay] pyhid_usb_relay not installed, falling back to simulated
+2026-03-09 07:13:54 [WARNING] [relay.relay_process] Falling back to simulated relay driver
+2026-03-09 13:08:48 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 13:08:48 [INFO] [relay.relay_process] [Relay] PID=33924 starting (9 relays)
+2026-03-09 13:08:48 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-09 13:10:41 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 13:10:41 [INFO] [relay.relay_process] [Relay] PID=32340 starting (9 relays)
+2026-03-09 13:10:41 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-09 13:13:38 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 13:13:38 [INFO] [relay.relay_process] [Relay] PID=33024 starting (9 relays)
+2026-03-09 13:13:38 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-09 13:14:02 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 13:14:02 [INFO] [relay.relay_process] [Relay] PID=32048 starting (9 relays)
+2026-03-09 13:14:02 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-09 16:22:26 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-09 16:22:26 [INFO] [relay.relay_process] [Relay] PID=18916 starting (9 relays)
+2026-03-09 16:22:26 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-10 07:07:44 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-10 07:07:44 [INFO] [relay.relay_process] [Relay] PID=32200 starting (9 relays)
+2026-03-10 07:07:44 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-10 07:15:11 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-10 07:15:11 [INFO] [relay.relay_process] [Relay] PID=30864 starting (9 relays)
+2026-03-10 07:15:11 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-10 07:54:23 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-10 07:54:23 [INFO] [relay.relay_process] [Relay] PID=9072 starting (9 relays)
+2026-03-10 07:54:23 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-10 08:03:33 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-10 08:03:33 [INFO] [relay.relay_process] [Relay] PID=33796 starting (9 relays)
+2026-03-10 08:03:33 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-10 08:04:45 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-10 08:04:45 [INFO] [relay.relay_process] [Relay] PID=10640 starting (9 relays)
+2026-03-10 08:04:45 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-10 08:10:45 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-10 08:10:45 [INFO] [relay.relay_process] [Relay] PID=27232 starting (9 relays)
+2026-03-10 08:10:45 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)

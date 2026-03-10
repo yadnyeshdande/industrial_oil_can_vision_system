@@ -1,0 +1,22 @@
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-03-10 07:10:12
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\main.py", line 55, in <module>
+    main()
+  File "d:\New folder\pc 3\vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 327, in run_supervisor
+    Supervisor(config_path).start()
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 67, in start
+    self._running = True; self._supervision_loop()
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 157, in _supervision_loop
+    logger.info("Supervision loop ending"); self._shutdown_all()
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 314, in _shutdown_all
+    if mproc.process and mproc.process.is_alive(): mproc.process.terminate()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\process.py", line 133, in terminate
+    self._popen.terminate()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\popen_spawn_win32.py", line 123, in terminate
+    _winapi.TerminateProcess(int(self._handle), TERMINATE)
+PermissionError: [WinError 5] Access is denied
+================================================================================

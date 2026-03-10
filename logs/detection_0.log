@@ -1,0 +1,20 @@
+2026-03-09 07:10:05 [INFO] [detection_0] Logging initialised → logs\detection_0.log (level=INFO)
+2026-03-09 07:10:05 [INFO] [detection.detection_process] [Detection_0] PID=34280 starting
+2026-03-09 07:10:29 [ERROR] [detection.detection_process] [Detection_0] Model not found: models\best.pt
+2026-03-09 07:10:29 [CRITICAL] [detection.detection_process] [Detection_0] Model load failed, exiting
+2026-03-09 07:10:36 [INFO] [detection_0] Logging initialised → logs\detection_0.log (level=INFO)
+2026-03-09 07:10:36 [INFO] [detection.detection_process] [Detection_0] PID=3752 starting
+2026-03-09 07:10:42 [ERROR] [detection.detection_process] [Detection_0] Model not found: models\best.pt
+2026-03-09 07:10:42 [CRITICAL] [detection.detection_process] [Detection_0] Model load failed, exiting
+2026-03-09 07:10:52 [INFO] [detection_0] Logging initialised → logs\detection_0.log (level=INFO)
+2026-03-09 07:10:52 [INFO] [detection.detection_process] [Detection_0] PID=11924 starting
+2026-03-09 07:11:01 [ERROR] [detection.detection_process] [Detection_0] Model not found: models\best.pt
+2026-03-09 07:11:01 [CRITICAL] [detection.detection_process] [Detection_0] Model load failed, exiting
+2026-03-09 07:11:08 [INFO] [detection_0] Logging initialised → logs\detection_0.log (level=INFO)
+2026-03-09 07:11:08 [INFO] [detection.detection_process] [Detection_0] PID=29400 starting
+2026-03-09 07:13:28 [INFO] [detection_0] Logging initialised → logs\detection_0.log (level=INFO)
+2026-03-09 07:13:28 [INFO] [detection.detection_process] [Detection_0] PID=17580 starting
+2026-03-09 07:13:33 [ERROR] [detection.detection_process] [Detection_0] Model not found: models\best.pt
+2026-03-09 07:13:33 [CRITICAL] [detection.detection_process] [Detection_0] Model load failed, exiting
+2026-03-09 07:13:39 [INFO] [detection_0] Logging initialised → logs\detection_0.log (level=INFO)
+2026-03-09 07:13:39 [INFO] [detection.detection_process] [Detection_0] PID=10692 starting

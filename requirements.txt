@@ -1,0 +1,32 @@
+# =============================================================================
+# Industrial Vision Detection System v2.0
+# Requirements
+# =============================================================================
+
+# Core
+numpy>=1.23.0
+opencv-python>=4.7.0
+PyYAML>=6.0
+psutil>=5.9.0
+
+# Deep Learning — INSTALL CUDA VERSION MANUALLY:
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+# DO NOT install via this file if CUDA support is needed.
+# torch>=2.0.0
+# torchvision>=0.15.0
+
+# YOLO
+ultralytics>=8.0.0
+
+# GPU monitoring
+pynvml>=11.5.0
+
+# USB Relay
+# pyhid-usb-relay  # Install separately: pip install pyhid-usb-relay
+# hid              # Install separately: pip install hid
+
+# GUI (optional PyQt5 — not required for OpenCV GUI)
+# PyQt5>=5.15.0
+
+# Windows service deployment
+# Download NSSM from https://nssm.cc/download

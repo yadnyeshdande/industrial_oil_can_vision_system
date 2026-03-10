@@ -1,0 +1,25 @@
+2026-03-09 07:10:07 [INFO] [detection_2] Logging initialised → logs\detection_2.log (level=INFO)
+2026-03-09 07:10:07 [INFO] [detection.detection_process] [Detection_2] PID=28808 starting
+2026-03-09 07:10:29 [ERROR] [detection.detection_process] [Detection_2] Model not found: models\best.pt
+2026-03-09 07:10:29 [CRITICAL] [detection.detection_process] [Detection_2] Model load failed, exiting
+2026-03-09 07:10:46 [INFO] [detection_2] Logging initialised → logs\detection_2.log (level=INFO)
+2026-03-09 07:10:46 [INFO] [detection.detection_process] [Detection_2] PID=6908 starting
+2026-03-09 07:10:55 [ERROR] [detection.detection_process] [Detection_2] Model not found: models\best.pt
+2026-03-09 07:10:55 [CRITICAL] [detection.detection_process] [Detection_2] Model load failed, exiting
+2026-03-09 07:11:02 [INFO] [detection_2] Logging initialised → logs\detection_2.log (level=INFO)
+2026-03-09 07:11:02 [INFO] [detection.detection_process] [Detection_2] PID=30292 starting
+2026-03-09 07:11:07 [ERROR] [detection.detection_process] [Detection_2] Model not found: models\best.pt
+2026-03-09 07:11:07 [CRITICAL] [detection.detection_process] [Detection_2] Model load failed, exiting
+2026-03-09 07:11:18 [INFO] [detection_2] Logging initialised → logs\detection_2.log (level=INFO)
+2026-03-09 07:11:18 [INFO] [detection.detection_process] [Detection_2] PID=28760 starting
+2026-03-09 07:11:22 [ERROR] [detection.detection_process] [Detection_2] Model not found: models\best.pt
+2026-03-09 07:11:22 [CRITICAL] [detection.detection_process] [Detection_2] Model load failed, exiting
+2026-03-09 07:13:30 [INFO] [detection_2] Logging initialised → logs\detection_2.log (level=INFO)
+2026-03-09 07:13:30 [INFO] [detection.detection_process] [Detection_2] PID=16652 starting
+2026-03-09 07:13:36 [ERROR] [detection.detection_process] [Detection_2] Model not found: models\best.pt
+2026-03-09 07:13:36 [CRITICAL] [detection.detection_process] [Detection_2] Model load failed, exiting
+2026-03-09 07:13:49 [INFO] [detection_2] Logging initialised → logs\detection_2.log (level=INFO)
+2026-03-09 07:13:49 [INFO] [detection.detection_process] [Detection_2] PID=29700 starting
+2026-03-09 07:13:51 [INFO] [torch._subclasses.fake_tensor] FakeTensor cache stats:
+2026-03-09 07:13:51 [INFO] [torch._subclasses.fake_tensor]   cache_hits: 0
+2026-03-09 07:13:51 [INFO] [torch._subclasses.fake_tensor]   cache_misses: 0

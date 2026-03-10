@@ -1,0 +1,1258 @@
+2026-03-09 07:10:01 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 07:10:01 [INFO] [core.config_loader] Configuration loaded: 3 cameras
+2026-03-09 07:10:01 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 07:10:01 [INFO] [core.config_loader] Configuration loaded: 3 cameras
+2026-03-09 07:10:01 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 07:10:01 [INFO] [supervisor.supervisor] Supervisor starting — IndustrialVisionSystem v2.0
+2026-03-09 07:10:01 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 07:10:01 [INFO] [supervisor.supervisor] Starting processes for cameras: [0, 1, 2]
+2026-03-09 07:10:03 [INFO] [supervisor.supervisor] Started camera process: camera_0 (PID=1984)
+2026-03-09 07:10:03 [INFO] [supervisor.supervisor] Started camera process: camera_1 (PID=15836)
+2026-03-09 07:10:03 [INFO] [supervisor.supervisor] Started camera process: camera_2 (PID=23036)
+2026-03-09 07:10:04 [INFO] [supervisor.supervisor] Started detection process: detection_0 (PID=34280)
+2026-03-09 07:10:05 [INFO] [supervisor.supervisor] Started detection process: detection_1 (PID=16236)
+2026-03-09 07:10:06 [INFO] [supervisor.supervisor] Started detection process: detection_2 (PID=28808)
+2026-03-09 07:10:06 [INFO] [supervisor.supervisor] Started relay process: relay (PID=34148)
+2026-03-09 07:10:06 [INFO] [supervisor.supervisor] Started GUI process: gui (PID=1640)
+2026-03-09 07:10:06 [INFO] [supervisor.supervisor] Started GPU monitor: gpu_monitor (PID=28856)
+2026-03-09 07:10:06 [INFO] [supervisor.supervisor] All processes started. Supervision active.
+2026-03-09 07:10:06 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-09 07:10:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (13.2s)
+2026-03-09 07:10:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (13.2s)
+2026-03-09 07:10:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (13.2s)
+2026-03-09 07:10:17 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (12.2s)
+2026-03-09 07:10:17 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (11.2s)
+2026-03-09 07:10:17 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (10.1s)
+2026-03-09 07:10:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (14.2s)
+2026-03-09 07:10:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (14.2s)
+2026-03-09 07:10:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (14.2s)
+2026-03-09 07:10:18 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (13.2s)
+2026-03-09 07:10:18 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (12.2s)
+2026-03-09 07:10:18 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (11.2s)
+2026-03-09 07:10:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (15.3s)
+2026-03-09 07:10:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (15.2s)
+2026-03-09 07:10:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (15.2s)
+2026-03-09 07:10:19 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (14.2s)
+2026-03-09 07:10:19 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (13.2s)
+2026-03-09 07:10:19 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (12.2s)
+2026-03-09 07:10:20 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (16.3s)
+2026-03-09 07:10:20 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (16.3s)
+2026-03-09 07:10:20 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (16.2s)
+2026-03-09 07:10:20 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (15.2s)
+2026-03-09 07:10:20 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (14.2s)
+2026-03-09 07:10:20 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (13.2s)
+2026-03-09 07:10:21 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (17.3s)
+2026-03-09 07:10:21 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (17.3s)
+2026-03-09 07:10:21 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (17.3s)
+2026-03-09 07:10:21 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (16.2s)
+2026-03-09 07:10:21 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (15.2s)
+2026-03-09 07:10:21 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (14.2s)
+2026-03-09 07:10:22 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (18.3s)
+2026-03-09 07:10:22 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (18.3s)
+2026-03-09 07:10:22 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (18.3s)
+2026-03-09 07:10:22 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (17.2s)
+2026-03-09 07:10:22 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (16.2s)
+2026-03-09 07:10:22 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (15.2s)
+2026-03-09 07:10:23 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (19.3s)
+2026-03-09 07:10:23 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (19.3s)
+2026-03-09 07:10:23 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (19.3s)
+2026-03-09 07:10:23 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (18.2s)
+2026-03-09 07:10:23 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (17.2s)
+2026-03-09 07:10:23 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (16.2s)
+2026-03-09 07:10:24 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (20.3s)
+2026-03-09 07:10:24 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (20.3s)
+2026-03-09 07:10:24 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (20.3s)
+2026-03-09 07:10:24 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (19.3s)
+2026-03-09 07:10:24 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (18.3s)
+2026-03-09 07:10:24 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (17.2s)
+2026-03-09 07:10:25 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (21.3s)
+2026-03-09 07:10:25 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (21.3s)
+2026-03-09 07:10:25 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (21.3s)
+2026-03-09 07:10:25 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (20.3s)
+2026-03-09 07:10:25 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (19.3s)
+2026-03-09 07:10:25 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (18.3s)
+2026-03-09 07:10:26 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (22.3s)
+2026-03-09 07:10:26 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (22.3s)
+2026-03-09 07:10:26 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (22.3s)
+2026-03-09 07:10:26 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (21.3s)
+2026-03-09 07:10:26 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (20.3s)
+2026-03-09 07:10:26 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (19.3s)
+2026-03-09 07:10:27 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (23.4s)
+2026-03-09 07:10:27 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (23.3s)
+2026-03-09 07:10:27 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (23.3s)
+2026-03-09 07:10:27 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (22.3s)
+2026-03-09 07:10:27 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (21.3s)
+2026-03-09 07:10:27 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (20.3s)
+2026-03-09 07:10:28 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (24.4s)
+2026-03-09 07:10:28 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (24.4s)
+2026-03-09 07:10:28 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (24.3s)
+2026-03-09 07:10:28 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (23.3s)
+2026-03-09 07:10:28 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (22.3s)
+2026-03-09 07:10:28 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (21.3s)
+2026-03-09 07:10:29 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (25.4s)
+2026-03-09 07:10:29 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (25.4s)
+2026-03-09 07:10:29 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (25.4s)
+2026-03-09 07:10:29 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (24.3s)
+2026-03-09 07:10:29 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (23.3s)
+2026-03-09 07:10:29 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (22.3s)
+2026-03-09 07:10:30 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (26.4s)
+2026-03-09 07:10:30 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (26.4s)
+2026-03-09 07:10:30 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (26.4s)
+2026-03-09 07:10:30 [WARNING] [supervisor.supervisor] [Supervisor] detection_0 heartbeat timeout (25.3s)
+2026-03-09 07:10:30 [WARNING] [supervisor.supervisor] [Supervisor] detection_1 heartbeat timeout (24.3s)
+2026-03-09 07:10:30 [WARNING] [supervisor.supervisor] [Supervisor] detection_2 heartbeat timeout (23.3s)
+2026-03-09 07:10:31 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (27.4s)
+2026-03-09 07:10:31 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (27.4s)
+2026-03-09 07:10:31 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (27.4s)
+2026-03-09 07:10:31 [ERROR] [supervisor.supervisor] [Supervisor] detection_0 died, restarting
+2026-03-09 07:10:31 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_0 (restart #1)
+2026-03-09 07:10:31 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:10:36 [INFO] [supervisor.supervisor] Started detection process: detection_0 (PID=3752)
+2026-03-09 07:10:36 [ERROR] [supervisor.supervisor] [Supervisor] detection_1 died, restarting
+2026-03-09 07:10:36 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_1 (restart #1)
+2026-03-09 07:10:36 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:10:41 [INFO] [supervisor.supervisor] Started detection process: detection_1 (PID=29824)
+2026-03-09 07:10:41 [ERROR] [supervisor.supervisor] [Supervisor] detection_2 died, restarting
+2026-03-09 07:10:41 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_2 (restart #1)
+2026-03-09 07:10:41 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:10:46 [INFO] [supervisor.supervisor] Started detection process: detection_2 (PID=6908)
+2026-03-09 07:10:47 [ERROR] [supervisor.supervisor] [camera] cam=2 Error: ConnectionFailed — RTSP connection failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 07:10:47 [ERROR] [supervisor.supervisor] [camera] cam=1 Error: ConnectionFailed — RTSP connection failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 07:10:47 [ERROR] [supervisor.supervisor] [camera] cam=0 Error: ConnectionFailed — RTSP connection failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 07:10:47 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (43.5s)
+2026-03-09 07:10:47 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (43.5s)
+2026-03-09 07:10:47 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (43.5s)
+2026-03-09 07:10:47 [ERROR] [supervisor.supervisor] [Supervisor] detection_0 died, restarting
+2026-03-09 07:10:47 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_0 (restart #1)
+2026-03-09 07:10:47 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:10:52 [INFO] [supervisor.supervisor] Started detection process: detection_0 (PID=11924)
+2026-03-09 07:10:52 [ERROR] [supervisor.supervisor] [Supervisor] detection_1 is not alive, restarting
+2026-03-09 07:10:52 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_1 (restart #1)
+2026-03-09 07:10:52 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:10:57 [INFO] [supervisor.supervisor] Started detection process: detection_1 (PID=27984)
+2026-03-09 07:10:57 [ERROR] [supervisor.supervisor] [Supervisor] detection_2 is not alive, restarting
+2026-03-09 07:10:57 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_2 (restart #1)
+2026-03-09 07:10:57 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor] Started detection process: detection_2 (PID=30292)
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor] [Health] Uptime: 0h1m | Processes:
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   camera_0             alive=True  restarts=0   mem=0.0MB fps=0.0 status=starting
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   camera_1             alive=True  restarts=0   mem=0.0MB fps=0.0 status=starting
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   camera_2             alive=True  restarts=0   mem=0.0MB fps=0.0 status=starting
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   detection_0          alive=True  restarts=0   mem=0.0MB fps=0.0 status=starting
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   detection_1          alive=True  restarts=0   mem=0.0MB fps=0.0 status=starting
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   detection_2          alive=True  restarts=0   mem=0.0MB fps=0.0 status=starting
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   relay                alive=True  restarts=0   mem=20.3MB fps=0.0 status=running
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   gui                  alive=True  restarts=0   mem=51.2MB fps=0.0 status=running
+2026-03-09 07:11:02 [INFO] [supervisor.supervisor]   gpu_monitor          alive=True  restarts=0   mem=35.7MB fps=0.0 status=running
+2026-03-09 07:11:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 heartbeat timeout (59.6s)
+2026-03-09 07:11:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 heartbeat timeout (59.6s)
+2026-03-09 07:11:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 heartbeat timeout (59.6s)
+2026-03-09 07:11:03 [ERROR] [supervisor.supervisor] [Supervisor] detection_0 died, restarting
+2026-03-09 07:11:03 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_0 (restart #1)
+2026-03-09 07:11:03 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:11:08 [INFO] [supervisor.supervisor] Started detection process: detection_0 (PID=29400)
+2026-03-09 07:11:08 [ERROR] [supervisor.supervisor] [Supervisor] detection_1 is not alive, restarting
+2026-03-09 07:11:08 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_1 (restart #1)
+2026-03-09 07:11:08 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:11:12 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:11:13 [INFO] [supervisor.supervisor] Started detection process: detection_1 (PID=29336)
+2026-03-09 07:11:13 [ERROR] [supervisor.supervisor] [Supervisor] detection_2 is not alive, restarting
+2026-03-09 07:11:13 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_2 (restart #1)
+2026-03-09 07:11:13 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:11:14 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:11:15 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:11:15 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:11:18 [INFO] [supervisor.supervisor] Started detection process: detection_2 (PID=28760)
+2026-03-09 07:11:18 [ERROR] [supervisor.supervisor] [Supervisor] relay is not alive, restarting
+2026-03-09 07:11:18 [INFO] [supervisor.supervisor] [Supervisor] Restarting relay (restart #1)
+2026-03-09 07:11:18 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:11:23 [INFO] [supervisor.supervisor] Started relay process: relay (PID=33984)
+2026-03-09 07:11:23 [ERROR] [supervisor.supervisor] [Supervisor] gpu_monitor is not alive, restarting
+2026-03-09 07:11:23 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_monitor (restart #1)
+2026-03-09 07:11:23 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:11:27 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:11:28 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:11:28 [INFO] [supervisor.supervisor] Started GPU monitor: gpu_monitor (PID=32384)
+2026-03-09 07:11:28 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all processes...
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping camera_0
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping camera_1
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping camera_2
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping detection_0
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping detection_1
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping detection_2
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping relay
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping gui
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] Stopping gpu_monitor
+2026-03-09 07:11:29 [INFO] [supervisor.supervisor] [Supervisor] All processes stopped. System shutdown complete.
+2026-03-09 07:13:27 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 07:13:27 [INFO] [core.config_loader] Configuration loaded: 3 cameras
+2026-03-09 07:13:27 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 07:13:27 [INFO] [core.config_loader] Configuration loaded: 3 cameras
+2026-03-09 07:13:27 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 07:13:27 [INFO] [supervisor.supervisor] Supervisor starting — IndustrialVisionSystem v2.0
+2026-03-09 07:13:27 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 07:13:27 [INFO] [supervisor.supervisor] Starting processes for cameras: [0, 1, 2]
+2026-03-09 07:13:27 [INFO] [supervisor.supervisor] Started camera process: camera_0 (PID=16416)
+2026-03-09 07:13:27 [INFO] [supervisor.supervisor] Started camera process: camera_1 (PID=19912)
+2026-03-09 07:13:27 [INFO] [supervisor.supervisor] Started camera process: camera_2 (PID=4028)
+2026-03-09 07:13:28 [INFO] [supervisor.supervisor] Started detection process: detection_0 (PID=17580)
+2026-03-09 07:13:29 [INFO] [supervisor.supervisor] Started detection process: detection_1 (PID=30984)
+2026-03-09 07:13:30 [INFO] [supervisor.supervisor] Started detection process: detection_2 (PID=16652)
+2026-03-09 07:13:30 [INFO] [supervisor.supervisor] Started relay process: relay (PID=6024)
+2026-03-09 07:13:30 [INFO] [supervisor.supervisor] Started GUI process: gui (PID=3672)
+2026-03-09 07:13:30 [INFO] [supervisor.supervisor] Started GPU monitor: gpu_monitor (PID=34592)
+2026-03-09 07:13:30 [INFO] [supervisor.supervisor] All processes started. Supervision active.
+2026-03-09 07:13:30 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-09 07:13:34 [ERROR] [supervisor.supervisor] [Supervisor] detection_0 is not alive, restarting
+2026-03-09 07:13:34 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_0 (restart #1)
+2026-03-09 07:13:34 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:13:39 [INFO] [supervisor.supervisor] Started detection process: detection_0 (PID=10692)
+2026-03-09 07:13:39 [ERROR] [supervisor.supervisor] [Supervisor] detection_1 is not alive, restarting
+2026-03-09 07:13:39 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_1 (restart #1)
+2026-03-09 07:13:39 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:13:43 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:13:44 [INFO] [supervisor.supervisor] Started detection process: detection_1 (PID=11840)
+2026-03-09 07:13:44 [ERROR] [supervisor.supervisor] [Supervisor] detection_2 is not alive, restarting
+2026-03-09 07:13:44 [INFO] [supervisor.supervisor] [Supervisor] Restarting detection_2 (restart #1)
+2026-03-09 07:13:44 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:13:48 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:13:49 [INFO] [supervisor.supervisor] Started detection process: detection_2 (PID=29700)
+2026-03-09 07:13:49 [ERROR] [supervisor.supervisor] [Supervisor] relay is not alive, restarting
+2026-03-09 07:13:49 [INFO] [supervisor.supervisor] [Supervisor] Restarting relay (restart #1)
+2026-03-09 07:13:49 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:13:51 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 received, initiating shutdown
+2026-03-09 07:13:54 [INFO] [supervisor.supervisor] Started relay process: relay (PID=31536)
+2026-03-09 07:13:54 [ERROR] [supervisor.supervisor] [Supervisor] gpu_monitor is not alive, restarting
+2026-03-09 07:13:54 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_monitor (restart #1)
+2026-03-09 07:13:54 [INFO] [supervisor.supervisor] [Supervisor] Backoff 5.0s before restart
+2026-03-09 07:13:59 [INFO] [supervisor.supervisor] Started GPU monitor: gpu_monitor (PID=29740)
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all processes...
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping camera_0
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping camera_1
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping camera_2
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping detection_0
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping detection_1
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping detection_2
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping relay
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping gui
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] Stopping gpu_monitor
+2026-03-09 07:14:00 [INFO] [supervisor.supervisor] [Supervisor] All processes stopped. System shutdown complete.
+2026-03-09 13:08:47 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 13:08:47 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-09 13:08:47 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 13:08:47 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-09 13:08:47 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 13:08:47 [CRITICAL] [supervisor.supervisor] MODEL NOT FOUND: models/best.pt — detection will NOT start
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] Started camera_0 PID=23488
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] Started camera_1 PID=34612
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] Started camera_2 PID=14500
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] Started relay PID=33924
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] Started gui PID=34720
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] Started gpu_monitor PID=2096
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] All processes started.
+2026-03-09 13:08:48 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-09 13:09:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 15.1s
+2026-03-09 13:09:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 15.1s
+2026-03-09 13:09:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 15.1s
+2026-03-09 13:09:04 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 16.1s
+2026-03-09 13:09:04 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 16.1s
+2026-03-09 13:09:04 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 16.1s
+2026-03-09 13:09:05 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 17.2s
+2026-03-09 13:09:05 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 17.1s
+2026-03-09 13:09:05 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 17.1s
+2026-03-09 13:09:06 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 18.2s
+2026-03-09 13:09:06 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 18.2s
+2026-03-09 13:09:06 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 18.2s
+2026-03-09 13:09:07 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 19.2s
+2026-03-09 13:09:07 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 19.2s
+2026-03-09 13:09:07 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 19.2s
+2026-03-09 13:09:08 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 20.2s
+2026-03-09 13:09:08 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 20.2s
+2026-03-09 13:09:08 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 20.2s
+2026-03-09 13:09:09 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 21.2s
+2026-03-09 13:09:09 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 21.2s
+2026-03-09 13:09:09 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 21.2s
+2026-03-09 13:09:10 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 22.2s
+2026-03-09 13:09:10 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 22.2s
+2026-03-09 13:09:10 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 22.2s
+2026-03-09 13:09:11 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 23.2s
+2026-03-09 13:09:11 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 23.2s
+2026-03-09 13:09:11 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 23.2s
+2026-03-09 13:09:12 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 24.2s
+2026-03-09 13:09:12 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 24.2s
+2026-03-09 13:09:12 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 24.2s
+2026-03-09 13:09:13 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 25.3s
+2026-03-09 13:09:13 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 25.2s
+2026-03-09 13:09:13 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 25.2s
+2026-03-09 13:09:14 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 26.3s
+2026-03-09 13:09:14 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 26.3s
+2026-03-09 13:09:14 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 26.3s
+2026-03-09 13:09:15 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 27.3s
+2026-03-09 13:09:15 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 27.3s
+2026-03-09 13:09:15 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 27.3s
+2026-03-09 13:09:16 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 28.3s
+2026-03-09 13:09:16 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 28.3s
+2026-03-09 13:09:16 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 28.3s
+2026-03-09 13:09:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 29.3s
+2026-03-09 13:09:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 29.3s
+2026-03-09 13:09:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 29.3s
+2026-03-09 13:09:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 30.3s
+2026-03-09 13:09:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 30.3s
+2026-03-09 13:09:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 30.3s
+2026-03-09 13:09:19 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 13:09:19 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 13:09:19 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 13:09:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 31.3s
+2026-03-09 13:09:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 31.3s
+2026-03-09 13:09:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 31.3s
+2026-03-09 13:09:20 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 32.3s
+2026-03-09 13:09:20 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 32.3s
+2026-03-09 13:09:20 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 32.3s
+2026-03-09 13:09:21 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 33.3s
+2026-03-09 13:09:21 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 33.3s
+2026-03-09 13:09:21 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 33.3s
+2026-03-09 13:09:22 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 34.3s
+2026-03-09 13:09:22 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 34.3s
+2026-03-09 13:09:22 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 34.3s
+2026-03-09 13:09:23 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 35.3s
+2026-03-09 13:09:23 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 35.3s
+2026-03-09 13:09:23 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 35.3s
+2026-03-09 13:09:24 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 36.4s
+2026-03-09 13:09:24 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 36.3s
+2026-03-09 13:09:24 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 36.3s
+2026-03-09 13:09:25 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 37.4s
+2026-03-09 13:09:25 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 37.4s
+2026-03-09 13:09:25 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 37.4s
+2026-03-09 13:09:26 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 38.4s
+2026-03-09 13:09:26 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 38.4s
+2026-03-09 13:09:26 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 38.4s
+2026-03-09 13:09:27 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 39.4s
+2026-03-09 13:09:27 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 39.4s
+2026-03-09 13:09:27 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 39.4s
+2026-03-09 13:09:28 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 40.4s
+2026-03-09 13:09:28 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 40.4s
+2026-03-09 13:09:28 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 40.4s
+2026-03-09 13:09:29 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 41.4s
+2026-03-09 13:09:29 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 41.4s
+2026-03-09 13:09:29 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 41.4s
+2026-03-09 13:09:30 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 42.4s
+2026-03-09 13:09:30 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 42.4s
+2026-03-09 13:09:30 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 42.4s
+2026-03-09 13:09:31 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 43.4s
+2026-03-09 13:09:31 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 43.4s
+2026-03-09 13:09:31 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 43.4s
+2026-03-09 13:09:32 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 44.5s
+2026-03-09 13:09:32 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 44.4s
+2026-03-09 13:09:32 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 44.4s
+2026-03-09 13:09:33 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 45.5s
+2026-03-09 13:09:33 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 45.5s
+2026-03-09 13:09:33 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 45.5s
+2026-03-09 13:09:34 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 46.5s
+2026-03-09 13:09:34 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 46.5s
+2026-03-09 13:09:34 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 46.5s
+2026-03-09 13:09:35 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 47.5s
+2026-03-09 13:09:35 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 47.5s
+2026-03-09 13:09:35 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 47.5s
+2026-03-09 13:09:36 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 48.5s
+2026-03-09 13:09:36 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 48.5s
+2026-03-09 13:09:36 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 48.5s
+2026-03-09 13:09:37 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 49.5s
+2026-03-09 13:09:37 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 49.5s
+2026-03-09 13:09:37 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 49.5s
+2026-03-09 13:09:38 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 50.5s
+2026-03-09 13:09:38 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 50.5s
+2026-03-09 13:09:38 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 50.5s
+2026-03-09 13:09:39 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 51.5s
+2026-03-09 13:09:39 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 51.5s
+2026-03-09 13:09:39 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 51.5s
+2026-03-09 13:09:40 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 52.6s
+2026-03-09 13:09:40 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 52.6s
+2026-03-09 13:09:40 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 52.6s
+2026-03-09 13:09:41 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 53.6s
+2026-03-09 13:09:41 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 53.6s
+2026-03-09 13:09:41 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 53.6s
+2026-03-09 13:09:42 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 54.6s
+2026-03-09 13:09:42 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 54.6s
+2026-03-09 13:09:42 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 54.6s
+2026-03-09 13:09:43 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 55.6s
+2026-03-09 13:09:43 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 55.6s
+2026-03-09 13:09:43 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 55.6s
+2026-03-09 13:09:44 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 56.6s
+2026-03-09 13:09:44 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 56.6s
+2026-03-09 13:09:44 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 56.6s
+2026-03-09 13:09:45 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 57.6s
+2026-03-09 13:09:45 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 57.6s
+2026-03-09 13:09:45 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 57.6s
+2026-03-09 13:09:46 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 58.6s
+2026-03-09 13:09:46 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 58.6s
+2026-03-09 13:09:46 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 58.6s
+2026-03-09 13:09:47 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 59.6s
+2026-03-09 13:09:47 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 59.6s
+2026-03-09 13:09:47 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 59.6s
+2026-03-09 13:09:47 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-03-09 13:09:47 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 13:09:47 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 13:09:47 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 13:09:47 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-09 13:09:47 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=50.7MB fps=0.0
+2026-03-09 13:09:47 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-09 13:09:48 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 60.7s
+2026-03-09 13:09:48 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 60.7s
+2026-03-09 13:09:48 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 60.7s
+2026-03-09 13:09:49 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 61.7s
+2026-03-09 13:09:49 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 61.7s
+2026-03-09 13:09:49 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 61.7s
+2026-03-09 13:09:50 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 62.7s
+2026-03-09 13:09:50 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 62.7s
+2026-03-09 13:09:50 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 62.7s
+2026-03-09 13:09:51 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 13:09:51 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 13:09:51 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 13:09:51 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 63.7s
+2026-03-09 13:09:51 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 63.7s
+2026-03-09 13:09:51 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 63.7s
+2026-03-09 13:09:52 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 64.7s
+2026-03-09 13:09:52 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 64.7s
+2026-03-09 13:09:52 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 64.7s
+2026-03-09 13:09:53 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 65.7s
+2026-03-09 13:09:53 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 65.7s
+2026-03-09 13:09:53 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 65.7s
+2026-03-09 13:09:54 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 66.7s
+2026-03-09 13:09:54 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 66.7s
+2026-03-09 13:09:54 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 66.7s
+2026-03-09 13:09:55 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 67.7s
+2026-03-09 13:09:55 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 67.7s
+2026-03-09 13:09:55 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 67.7s
+2026-03-09 13:09:56 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 68.7s
+2026-03-09 13:09:56 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 68.7s
+2026-03-09 13:09:56 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 68.7s
+2026-03-09 13:09:57 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 69.8s
+2026-03-09 13:09:57 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 69.8s
+2026-03-09 13:09:57 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 69.7s
+2026-03-09 13:09:58 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 70.8s
+2026-03-09 13:09:58 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 70.8s
+2026-03-09 13:09:58 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 70.8s
+2026-03-09 13:09:59 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 71.8s
+2026-03-09 13:09:59 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 71.8s
+2026-03-09 13:09:59 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 71.8s
+2026-03-09 13:10:00 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 72.8s
+2026-03-09 13:10:00 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 72.8s
+2026-03-09 13:10:00 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 72.8s
+2026-03-09 13:10:01 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 73.8s
+2026-03-09 13:10:01 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 73.8s
+2026-03-09 13:10:01 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 73.8s
+2026-03-09 13:10:02 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 74.8s
+2026-03-09 13:10:02 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 74.8s
+2026-03-09 13:10:02 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 74.8s
+2026-03-09 13:10:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 75.8s
+2026-03-09 13:10:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 75.8s
+2026-03-09 13:10:03 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 75.8s
+2026-03-09 13:10:04 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 76.8s
+2026-03-09 13:10:04 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 76.8s
+2026-03-09 13:10:04 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 76.8s
+2026-03-09 13:10:05 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 77.8s
+2026-03-09 13:10:05 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 77.8s
+2026-03-09 13:10:05 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 77.8s
+2026-03-09 13:10:07 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 78.8s
+2026-03-09 13:10:07 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 78.8s
+2026-03-09 13:10:07 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 78.8s
+2026-03-09 13:10:08 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 79.9s
+2026-03-09 13:10:08 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 79.9s
+2026-03-09 13:10:08 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 79.9s
+2026-03-09 13:10:09 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 80.9s
+2026-03-09 13:10:09 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 80.9s
+2026-03-09 13:10:09 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 80.9s
+2026-03-09 13:10:10 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 81.9s
+2026-03-09 13:10:10 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 81.9s
+2026-03-09 13:10:10 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 81.9s
+2026-03-09 13:10:11 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 82.9s
+2026-03-09 13:10:11 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 82.9s
+2026-03-09 13:10:11 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 82.9s
+2026-03-09 13:10:12 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 83.9s
+2026-03-09 13:10:12 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 83.9s
+2026-03-09 13:10:12 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 83.9s
+2026-03-09 13:10:13 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 84.9s
+2026-03-09 13:10:13 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 84.9s
+2026-03-09 13:10:13 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 84.9s
+2026-03-09 13:10:14 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 85.9s
+2026-03-09 13:10:14 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 85.9s
+2026-03-09 13:10:14 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 85.9s
+2026-03-09 13:10:15 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 86.9s
+2026-03-09 13:10:15 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 86.9s
+2026-03-09 13:10:15 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 86.9s
+2026-03-09 13:10:16 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 87.9s
+2026-03-09 13:10:16 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 87.9s
+2026-03-09 13:10:16 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 87.9s
+2026-03-09 13:10:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 88.9s
+2026-03-09 13:10:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 88.9s
+2026-03-09 13:10:17 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 88.9s
+2026-03-09 13:10:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 89.9s
+2026-03-09 13:10:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 89.9s
+2026-03-09 13:10:18 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 89.9s
+2026-03-09 13:10:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 90.9s
+2026-03-09 13:10:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 90.9s
+2026-03-09 13:10:19 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 90.9s
+2026-03-09 13:10:19 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 13:10:20 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-09 13:10:20 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-09 13:10:20 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-03-09 13:10:40 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 13:10:40 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-09 13:10:40 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 13:10:40 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-09 13:10:40 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 13:10:40 [CRITICAL] [supervisor.supervisor] MODEL NOT FOUND: models/best.pt — detection will NOT start
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] Started camera_0 PID=28540
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] Started camera_1 PID=10880
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] Started camera_2 PID=20968
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] Started relay PID=32340
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] Started gui PID=18816
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] Started gpu_monitor PID=31948
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] All processes started.
+2026-03-09 13:10:41 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-09 13:10:56 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 15.2s
+2026-03-09 13:10:56 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 15.2s
+2026-03-09 13:10:56 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 15.2s
+2026-03-09 13:10:57 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 16.2s
+2026-03-09 13:10:57 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 16.2s
+2026-03-09 13:10:57 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 16.2s
+2026-03-09 13:10:58 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 17.2s
+2026-03-09 13:10:58 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 17.2s
+2026-03-09 13:10:58 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 17.2s
+2026-03-09 13:10:59 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 18.2s
+2026-03-09 13:10:59 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 18.2s
+2026-03-09 13:10:59 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 18.2s
+2026-03-09 13:11:00 [WARNING] [supervisor.supervisor] [Supervisor] camera_0 HB timeout 19.2s
+2026-03-09 13:11:00 [WARNING] [supervisor.supervisor] [Supervisor] camera_1 HB timeout 19.2s
+2026-03-09 13:11:00 [WARNING] [supervisor.supervisor] [Supervisor] camera_2 HB timeout 19.2s
+2026-03-09 13:11:00 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 13:11:01 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-09 13:11:01 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-09 13:11:01 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-03-09 13:13:38 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 13:13:38 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Started camera_0 PID=33568
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Started camera_1 PID=26480
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Started camera_2 PID=33628
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Started gpu_pool PID=32360
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Started relay PID=33024
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Started gui PID=21716
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Started gpu_monitor PID=20492
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] All processes started.
+2026-03-09 13:13:38 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-09 13:13:39 [ERROR] [supervisor.supervisor] [Supervisor] gpu_pool not alive → restart
+2026-03-09 13:13:39 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-09 13:13:44 [INFO] [supervisor.supervisor] Started gpu_pool PID=4444
+2026-03-09 13:13:45 [ERROR] [supervisor.supervisor] [Supervisor] gpu_pool not alive → restart
+2026-03-09 13:13:45 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-09 13:13:50 [INFO] [supervisor.supervisor] Started gpu_pool PID=18216
+2026-03-09 13:13:51 [ERROR] [supervisor.supervisor] [Supervisor] gpu_pool not alive → restart
+2026-03-09 13:13:51 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-09 13:13:55 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 13:13:56 [INFO] [supervisor.supervisor] Started gpu_pool PID=34720
+2026-03-09 13:13:56 [ERROR] [supervisor.supervisor] [Supervisor] relay not alive → restart
+2026-03-09 13:13:56 [INFO] [supervisor.supervisor] [Supervisor] Restarting relay (#1)
+2026-03-09 13:13:59 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 13:14:00 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 13:14:00 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 13:14:01 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 13:14:01 [INFO] [supervisor.supervisor] Started relay PID=32048
+2026-03-09 13:14:01 [ERROR] [supervisor.supervisor] [Supervisor] gpu_monitor not alive → restart
+2026-03-09 13:14:01 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_monitor (#1)
+2026-03-09 13:14:06 [INFO] [supervisor.supervisor] Started gpu_monitor PID=29480
+2026-03-09 13:14:08 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-09 13:14:08 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-09 13:14:08 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-03-09 16:22:26 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-09 16:22:26 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] ============================================================
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Started camera_0 PID=16252
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Started camera_1 PID=3036
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Started camera_2 PID=30076
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Started gpu_pool PID=27804 (daemon=False, spawns GPU worker children)
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Started relay PID=18916
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Started gui PID=32992
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Started gpu_monitor PID=11752
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] All processes started.
+2026-03-09 16:22:26 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-09 16:22:32 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-09 16:22:57 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 16:22:57 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 16:22:57 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.0MB fps=0.0
+2026-03-09 16:23:26 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-03-09 16:23:29 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 16:23:29 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 16:23:29 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 16:24:05 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 16:24:05 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 16:24:05 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m01s
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=56.7MB fps=0.0
+2026-03-09 16:24:27 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-03-09 16:24:43 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 16:24:43 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 16:24:43 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 16:25:22 [INFO] [supervisor.supervisor] [Supervisor] Detection PAUSED by operator
+2026-03-09 16:25:23 [INFO] [supervisor.supervisor] [Supervisor] Detection PAUSED by operator
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor] [Supervisor] Detection PAUSED by operator
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor] [Supervisor] Detection PAUSED by operator
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor] [Health] Uptime 00h03m01s
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.0MB fps=0.0
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=56.8MB fps=0.0
+2026-03-09 16:25:28 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-03-09 16:25:30 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-09 16:25:30 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-09 16:25:30 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-09 16:25:40 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-09 16:25:41 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-09 16:25:41 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-09 16:25:41 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-03-10 07:07:43 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-10 07:07:43 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:07:43 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 07:07:43 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-10 07:07:43 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 07:07:43 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Started camera_0 PID=34028
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Started camera_1 PID=23416
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Started camera_2 PID=26060
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Started gpu_pool PID=15872 (daemon=False, spawns GPU worker children)
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Started relay PID=32200
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Started gui PID=28024
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Started gpu_monitor PID=24204
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] All processes started.
+2026-03-10 07:07:44 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-10 07:08:15 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:08:15 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:08:15 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:08:40 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:42 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:42 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.2MB fps=0.0
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=53.8MB fps=0.0
+2026-03-10 07:08:43 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-03-10 07:08:44 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:46 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:46 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 07:08:49 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:08:49 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:08:49 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:09:23 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:09:23 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:09:23 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m00s
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=57.0MB fps=0.0
+2026-03-10 07:09:44 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:10:01 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:10:01 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:10:01 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:10:11 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 07:10:11 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-10 07:10:11 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-10 07:10:12 [CRITICAL] [root] UNHANDLED EXCEPTION in supervisor
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\main.py", line 55, in <module>
+    main()
+  File "d:\New folder\pc 3\vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 327, in run_supervisor
+    Supervisor(config_path).start()
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 67, in start
+    self._running = True; self._supervision_loop()
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 157, in _supervision_loop
+    logger.info("Supervision loop ending"); self._shutdown_all()
+  File "d:\New folder\pc 3\vision_system\supervisor\supervisor.py", line 314, in _shutdown_all
+    if mproc.process and mproc.process.is_alive(): mproc.process.terminate()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\process.py", line 133, in terminate
+    self._popen.terminate()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\popen_spawn_win32.py", line 123, in terminate
+    _winapi.TerminateProcess(int(self._handle), TERMINATE)
+PermissionError: [WinError 5] Access is denied
+2026-03-10 07:15:11 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-10 07:15:11 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Started camera_0 PID=16416
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Started camera_1 PID=34340
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Started camera_2 PID=24544
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Started gpu_pool PID=5124 (daemon=False, spawns GPU worker children)
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Started relay PID=30864
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Started gui PID=17992
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Started gpu_monitor PID=30092
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] All processes started.
+2026-03-10 07:15:11 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-10 07:15:43 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:15:43 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:15:43 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.2MB fps=0.0
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=53.6MB fps=0.0
+2026-03-10 07:16:12 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:16:15 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:16:15 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:16:15 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:16:49 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:16:49 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:16:49 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m01s
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=53.8MB fps=0.0
+2026-03-10 07:17:13 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:17:29 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:17:29 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:17:29 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor] [Health] Uptime 00h03m02s
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=53.7MB fps=0.0
+2026-03-10 07:18:13 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:18:15 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:18:15 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:18:15 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor] [Health] Uptime 00h04m02s
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.7MB fps=0.0
+2026-03-10 07:19:14 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:19:18 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:19:18 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:19:18 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor] [Health] Uptime 00h05m03s
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.8MB fps=0.0
+2026-03-10 07:20:15 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:20:48 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:20:48 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:20:48 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor] [Health] Uptime 00h06m04s
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.8MB fps=0.0
+2026-03-10 07:21:15 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor] [Health] Uptime 00h07m05s
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.8MB fps=0.0
+2026-03-10 07:22:16 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:22:19 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:22:19 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:22:19 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor] [Health] Uptime 00h08m05s
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.8MB fps=0.0
+2026-03-10 07:23:17 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:23:49 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:23:49 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:23:49 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor] [Health] Uptime 00h09m06s
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.8MB fps=0.0
+2026-03-10 07:24:18 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor] [Health] Uptime 00h10m07s
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=58.7MB fps=0.0
+2026-03-10 07:25:18 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:25:20 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:25:20 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:25:20 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor] [Health] Uptime 00h11m08s
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=58.2MB fps=0.0
+2026-03-10 07:26:19 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:26:50 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:26:50 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:26:50 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor] [Health] Uptime 00h12m08s
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=58.1MB fps=0.0
+2026-03-10 07:27:20 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor] [Health] Uptime 00h13m09s
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=58.1MB fps=0.0
+2026-03-10 07:28:20 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:28:21 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:28:21 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:28:21 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor] [Health] Uptime 00h14m10s
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=58.1MB fps=0.0
+2026-03-10 07:29:21 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 07:29:52 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:29:52 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:29:52 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:30:20 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 07:30:21 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-10 07:30:21 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-10 07:30:21 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-03-10 07:54:22 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-10 07:54:22 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:54:22 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 07:54:22 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-10 07:54:22 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 07:54:22 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Started camera_0 PID=33156
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Started camera_1 PID=1600
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Started camera_2 PID=27096
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Started gpu_pool PID=5112 (daemon=False, spawns GPU worker children)
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Started relay PID=9072
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Started gui PID=27048
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Started gpu_monitor PID=19816
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] All processes started.
+2026-03-10 07:54:23 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-10 07:54:42 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.3MB > 2500.0MB → restart
+2026-03-10 07:54:42 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:54:47 [INFO] [supervisor.supervisor] Started gpu_pool PID=13372 (daemon=False, spawns GPU worker children)
+2026-03-10 07:54:54 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:54:54 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:54:54 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:55:05 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.5MB > 2500.0MB → restart
+2026-03-10 07:55:05 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:55:10 [INFO] [supervisor.supervisor] Started gpu_pool PID=28792 (daemon=False, spawns GPU worker children)
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.2MB fps=0.0
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=56.5MB fps=0.0
+2026-03-10 07:55:22 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 07:55:27 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:55:27 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:55:27 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:55:28 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.9MB > 2500.0MB → restart
+2026-03-10 07:55:28 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:55:33 [INFO] [supervisor.supervisor] Started gpu_pool PID=26216 (daemon=False, spawns GPU worker children)
+2026-03-10 07:55:50 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.7MB > 2500.0MB → restart
+2026-03-10 07:55:50 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:55:55 [INFO] [supervisor.supervisor] Started gpu_pool PID=26360 (daemon=False, spawns GPU worker children)
+2026-03-10 07:56:01 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:56:01 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:56:01 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:56:13 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.6MB > 2500.0MB → restart
+2026-03-10 07:56:13 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:56:18 [INFO] [supervisor.supervisor] Started gpu_pool PID=18820 (daemon=False, spawns GPU worker children)
+2026-03-10 07:56:19 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.2MB > 2500.0MB → restart
+2026-03-10 07:56:19 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor] Started gpu_pool PID=4008 (daemon=False, spawns GPU worker children)
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m02s
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=56.5MB fps=0.0
+2026-03-10 07:56:24 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 07:56:41 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:56:41 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:56:41 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:56:41 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.6MB > 2500.0MB → restart
+2026-03-10 07:56:41 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:56:46 [INFO] [supervisor.supervisor] Started gpu_pool PID=31700 (daemon=False, spawns GPU worker children)
+2026-03-10 07:57:04 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3270.9MB > 2500.0MB → restart
+2026-03-10 07:57:04 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:57:09 [INFO] [supervisor.supervisor] Started gpu_pool PID=28252 (daemon=False, spawns GPU worker children)
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor] [Health] Uptime 00h03m03s
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=56.7MB fps=0.0
+2026-03-10 07:57:25 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 07:57:26 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3270.5MB > 2500.0MB → restart
+2026-03-10 07:57:26 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:57:31 [INFO] [supervisor.supervisor] Started gpu_pool PID=28676 (daemon=False, spawns GPU worker children)
+2026-03-10 07:57:32 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:57:32 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:57:32 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:57:49 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.9MB > 2500.0MB → restart
+2026-03-10 07:57:49 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:57:54 [INFO] [supervisor.supervisor] Started gpu_pool PID=34348 (daemon=False, spawns GPU worker children)
+2026-03-10 07:58:12 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.8MB > 2500.0MB → restart
+2026-03-10 07:58:12 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:58:17 [INFO] [supervisor.supervisor] Started gpu_pool PID=18912 (daemon=False, spawns GPU worker children)
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor] [Health] Uptime 00h04m04s
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=57.1MB fps=0.0
+2026-03-10 07:58:26 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 07:58:30 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 07:58:30 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 07:58:30 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 07:58:35 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3270.7MB > 2500.0MB → restart
+2026-03-10 07:58:35 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:58:40 [INFO] [supervisor.supervisor] Started gpu_pool PID=19668 (daemon=False, spawns GPU worker children)
+2026-03-10 07:58:58 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.7MB > 2500.0MB → restart
+2026-03-10 07:58:58 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:59:03 [INFO] [supervisor.supervisor] Started gpu_pool PID=4820 (daemon=False, spawns GPU worker children)
+2026-03-10 07:59:20 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.5MB > 2500.0MB → restart
+2026-03-10 07:59:20 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:59:25 [INFO] [supervisor.supervisor] Started gpu_pool PID=26420 (daemon=False, spawns GPU worker children)
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor] [Health] Uptime 00h05m04s
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=57.2MB fps=0.0
+2026-03-10 07:59:26 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 07:59:44 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.2MB > 2500.0MB → restart
+2026-03-10 07:59:44 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 07:59:49 [INFO] [supervisor.supervisor] Started gpu_pool PID=26672 (daemon=False, spawns GPU worker children)
+2026-03-10 08:00:00 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:00:00 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:00:00 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:00:07 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.8MB > 2500.0MB → restart
+2026-03-10 08:00:07 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:00:12 [INFO] [supervisor.supervisor] Started gpu_pool PID=30092 (daemon=False, spawns GPU worker children)
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor] [Health] Uptime 00h06m05s
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=57.2MB fps=0.0
+2026-03-10 08:00:27 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 08:00:30 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.1MB > 2500.0MB → restart
+2026-03-10 08:00:30 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:00:35 [INFO] [supervisor.supervisor] Started gpu_pool PID=26652 (daemon=False, spawns GPU worker children)
+2026-03-10 08:00:54 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.5MB > 2500.0MB → restart
+2026-03-10 08:00:54 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:00:59 [INFO] [supervisor.supervisor] Started gpu_pool PID=23644 (daemon=False, spawns GPU worker children)
+2026-03-10 08:01:18 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3270.6MB > 2500.0MB → restart
+2026-03-10 08:01:18 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:01:23 [INFO] [supervisor.supervisor] Started gpu_pool PID=30764 (daemon=False, spawns GPU worker children)
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor] [Health] Uptime 00h07m06s
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=57.2MB fps=0.0
+2026-03-10 08:01:28 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 08:01:31 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:01:31 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:01:31 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:01:39 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3270.9MB > 2500.0MB → restart
+2026-03-10 08:01:39 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:01:44 [INFO] [supervisor.supervisor] Started gpu_pool PID=676 (daemon=False, spawns GPU worker children)
+2026-03-10 08:02:02 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.1MB > 2500.0MB → restart
+2026-03-10 08:02:02 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:02:07 [INFO] [supervisor.supervisor] Started gpu_pool PID=2128 (daemon=False, spawns GPU worker children)
+2026-03-10 08:02:24 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.2MB > 2500.0MB → restart
+2026-03-10 08:02:24 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor] Started gpu_pool PID=18424 (daemon=False, spawns GPU worker children)
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor] [Health] Uptime 00h08m07s
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=57.2MB fps=0.0
+2026-03-10 08:02:29 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.7MB fps=0.0
+2026-03-10 08:02:47 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.5MB > 2500.0MB → restart
+2026-03-10 08:02:47 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:02:52 [INFO] [supervisor.supervisor] Started gpu_pool PID=1476 (daemon=False, spawns GPU worker children)
+2026-03-10 08:03:02 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:03:02 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:03:02 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:03:09 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.8MB > 2500.0MB → restart
+2026-03-10 08:03:09 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:03:14 [INFO] [supervisor.supervisor] Started gpu_pool PID=20292 (daemon=False, spawns GPU worker children)
+2026-03-10 08:03:23 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.2MB > 2500.0MB → restart
+2026-03-10 08:03:23 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:03:24 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:03:28 [INFO] [supervisor.supervisor] Started gpu_pool PID=13108 (daemon=False, spawns GPU worker children)
+2026-03-10 08:03:28 [ERROR] [supervisor.supervisor] [Supervisor] relay not alive → restart
+2026-03-10 08:03:28 [INFO] [supervisor.supervisor] [Supervisor] Restarting relay (#1)
+2026-03-10 08:03:33 [INFO] [supervisor.supervisor] Started relay PID=33796
+2026-03-10 08:03:33 [ERROR] [supervisor.supervisor] [Supervisor] gpu_monitor not alive → restart
+2026-03-10 08:03:33 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_monitor (#1)
+2026-03-10 08:03:34 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:03:35 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:03:35 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:03:36 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor] Started gpu_monitor PID=21480
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor] [Health] Uptime 00h09m16s
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor]   camera_0               alive=False restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor]   camera_1               alive=False restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor]   camera_2               alive=False restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor]   gpu_pool               alive=False restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor]   relay                  alive=False restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor]   gui                    alive=False restarts=0   mem=57.2MB fps=0.0
+2026-03-10 08:03:38 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:03:39 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-10 08:03:39 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-10 08:03:39 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-03-10 08:04:45 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-10 08:04:45 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Started camera_0 PID=30736
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Started camera_1 PID=31756
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Started camera_2 PID=19972
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Started gpu_pool PID=32604 (daemon=False, spawns GPU worker children)
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Started relay PID=10640
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Started gui PID=19552
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Started gpu_monitor PID=16172
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] All processes started.
+2026-03-10 08:04:45 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-10 08:05:03 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.4MB > 2500.0MB → restart
+2026-03-10 08:05:03 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:05:08 [INFO] [supervisor.supervisor] Started gpu_pool PID=33212 (daemon=False, spawns GPU worker children)
+2026-03-10 08:05:17 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:05:17 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:05:17 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:05:27 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3270.9MB > 2500.0MB → restart
+2026-03-10 08:05:27 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:05:32 [INFO] [supervisor.supervisor] Started gpu_pool PID=7776 (daemon=False, spawns GPU worker children)
+2026-03-10 08:05:33 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.9MB > 2500.0MB → restart
+2026-03-10 08:05:33 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:05:38 [INFO] [supervisor.supervisor] Started gpu_pool PID=34184 (daemon=False, spawns GPU worker children)
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.2MB fps=0.0
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.8MB fps=0.0
+2026-03-10 08:05:46 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-03-10 08:05:49 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:05:49 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:05:49 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:05:54 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.8MB > 2500.0MB → restart
+2026-03-10 08:05:54 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:05:59 [INFO] [supervisor.supervisor] Started gpu_pool PID=8720 (daemon=False, spawns GPU worker children)
+2026-03-10 08:06:17 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.5MB > 2500.0MB → restart
+2026-03-10 08:06:17 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:06:22 [INFO] [supervisor.supervisor] Started gpu_pool PID=28828 (daemon=False, spawns GPU worker children)
+2026-03-10 08:06:23 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:06:23 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:06:23 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:06:39 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.1MB > 2500.0MB → restart
+2026-03-10 08:06:39 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:06:45 [INFO] [supervisor.supervisor] Started gpu_pool PID=11532 (daemon=False, spawns GPU worker children)
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m01s
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.2MB fps=0.0
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=54.8MB fps=0.0
+2026-03-10 08:06:47 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-03-10 08:07:02 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.0MB > 2500.0MB → restart
+2026-03-10 08:07:02 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:07:07 [INFO] [supervisor.supervisor] Started gpu_pool PID=13560 (daemon=False, spawns GPU worker children)
+2026-03-10 08:07:08 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:07:08 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:07:08 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:07:25 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.1MB > 2500.0MB → restart
+2026-03-10 08:07:25 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:07:30 [INFO] [supervisor.supervisor] Started gpu_pool PID=20444 (daemon=False, spawns GPU worker children)
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor] [Health] Uptime 00h03m02s
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=55.7MB fps=0.0
+2026-03-10 08:07:47 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 08:07:48 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.3MB > 2500.0MB → restart
+2026-03-10 08:07:48 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:07:53 [INFO] [supervisor.supervisor] Started gpu_pool PID=28840 (daemon=False, spawns GPU worker children)
+2026-03-10 08:07:54 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:07:54 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:07:54 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:07:54 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 08:08:07 [INFO] [supervisor.supervisor] [Supervisor] Detection PAUSED by operator
+2026-03-10 08:08:11 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.5MB > 2500.0MB → restart
+2026-03-10 08:08:11 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:08:17 [INFO] [supervisor.supervisor] Started gpu_pool PID=15700 (daemon=False, spawns GPU worker children)
+2026-03-10 08:08:35 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.7MB > 2500.0MB → restart
+2026-03-10 08:08:35 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:08:40 [INFO] [supervisor.supervisor] Started gpu_pool PID=29208 (daemon=False, spawns GPU worker children)
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor] [Health] Uptime 00h04m02s
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=55.7MB fps=0.0
+2026-03-10 08:08:48 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-03-10 08:08:52 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:08:52 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:08:52 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:08:58 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3270.0MB > 2500.0MB → restart
+2026-03-10 08:08:58 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:09:03 [INFO] [supervisor.supervisor] Started gpu_pool PID=29000 (daemon=False, spawns GPU worker children)
+2026-03-10 08:09:04 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.3MB > 2500.0MB → restart
+2026-03-10 08:09:04 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:09:09 [INFO] [supervisor.supervisor] Started gpu_pool PID=7164 (daemon=False, spawns GPU worker children)
+2026-03-10 08:09:25 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.1MB > 2500.0MB → restart
+2026-03-10 08:09:25 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:09:30 [INFO] [supervisor.supervisor] Started gpu_pool PID=29728 (daemon=False, spawns GPU worker children)
+2026-03-10 08:09:32 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 08:09:48 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3271.9MB > 2500.0MB → restart
+2026-03-10 08:09:48 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor] Started gpu_pool PID=984 (daemon=False, spawns GPU worker children)
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor] [Health] Uptime 00h05m08s
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=19.1MB fps=0.0
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=55.8MB fps=0.0
+2026-03-10 08:09:54 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-03-10 08:10:09 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.1MB > 2500.0MB → restart
+2026-03-10 08:10:09 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:10:12 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:13 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:14 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:14 [INFO] [supervisor.supervisor] Started gpu_pool PID=31492 (daemon=False, spawns GPU worker children)
+2026-03-10 08:10:14 [ERROR] [supervisor.supervisor] [Supervisor] relay not alive → restart
+2026-03-10 08:10:14 [INFO] [supervisor.supervisor] [Supervisor] Restarting relay (#1)
+2026-03-10 08:10:19 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:19 [INFO] [supervisor.supervisor] Started relay PID=26196
+2026-03-10 08:10:19 [ERROR] [supervisor.supervisor] [Supervisor] gpu_monitor not alive → restart
+2026-03-10 08:10:19 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_monitor (#1)
+2026-03-10 08:10:19 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:19 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:20 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:20 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:20 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:20 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:21 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:22 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:23 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:23 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:24 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:24 [INFO] [supervisor.supervisor] Started gpu_monitor PID=29180
+2026-03-10 08:10:24 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:10:25 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-10 08:10:25 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-10 08:10:25 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-03-10 08:10:44 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-03-10 08:10:44 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:10:44 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 08:10:44 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-03-10 08:10:44 [INFO] [supervisor.supervisor] ============================================================
+2026-03-10 08:10:44 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Started camera_0 PID=26116
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Started camera_1 PID=1864
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Started camera_2 PID=30512
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Started gpu_pool PID=9036 (daemon=False, spawns GPU worker children)
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Started relay PID=27232
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Started gui PID=34720
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Started gpu_monitor PID=26696
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] All processes started.
+2026-03-10 08:10:45 [INFO] [supervisor.supervisor] Supervision loop running
+2026-03-10 08:11:03 [WARNING] [supervisor.supervisor] [Supervisor] gpu_pool mem 3272.1MB > 2500.0MB → restart
+2026-03-10 08:11:03 [INFO] [supervisor.supervisor] [Supervisor] Restarting gpu_pool (#1)
+2026-03-10 08:11:08 [INFO] [supervisor.supervisor] Started gpu_pool PID=32124 (daemon=False, spawns GPU worker children)
+2026-03-10 08:11:10 [INFO] [supervisor.supervisor] [Supervisor] Detection STARTED by operator
+2026-03-10 08:11:16 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-10 08:11:16 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-10 08:11:16 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/stream1
+2026-03-10 08:11:19 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-03-10 08:11:20 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-03-10 08:11:20 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-03-10 08:11:20 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete

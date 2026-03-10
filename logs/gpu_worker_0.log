@@ -1,0 +1,789 @@
+2026-03-09 16:22:26 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-09 16:22:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=30780 starting
+2026-03-09 16:22:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-09 16:22:36 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] FP16 enabled
+2026-03-09 16:22:38 [CRITICAL] [detection.gpu_worker_pool] [GPUWorker_0] Model load error: expected mat1 and mat2 to have the same dtype, but got: struct c10::Half != float
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 280, in _load_model
+    self._model.predict(dummy, conf=self.mcfg.confidence,
+  File "D:\New folder\pc 3\vision_system\scripts\venv\lib\site-packages\ultralytics\engine\model.py", line 529, in predict
+    self.predictor.setup_model(model=self.model, verbose=is_cli)
+  File "D:\New folder\pc 3\vision_system\scripts\venv\lib\site-packages\ultralytics\engine\predictor.py", line 395, in setup_model
+    self.model = AutoBackend(
+  File "D:\New folder\pc 3\vision_system\scripts\venv\lib\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "D:\New folder\pc 3\vision_system\scripts\venv\lib\site-packages\ultralytics\nn\autobackend.py", line 223, in __init__
+    model = model.fuse(verbose=verbose)
+  File "D:\New folder\pc 3\vision_system\scripts\venv\lib\site-packages\ultralytics\nn\tasks.py", line 238, in fuse
+    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+  File "D:\New folder\pc 3\vision_system\scripts\venv\lib\site-packages\ultralytics\utils\torch_utils.py", line 263, in fuse_conv_and_bn
+    fused_bias = torch.mm(w_bn, b_conv.reshape(-1, 1)).reshape(-1) + b_bn
+RuntimeError: expected mat1 and mat2 to have the same dtype, but got: struct c10::Half != float
+2026-03-09 16:22:38 [CRITICAL] [detection.gpu_worker_pool] [GPUWorker_0] Model load failed, exiting
+2026-03-10 07:07:44 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:07:44 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=7712 starting
+2026-03-10 07:08:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:08:06 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] FP16 enabled
+2026-03-10 07:08:11 [CRITICAL] [detection.gpu_worker_pool] [GPUWorker_0] Model load error: expected scalar type Half but found Float
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 280, in _load_model
+    self._model.predict(dummy, conf=self.mcfg.confidence,
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\engine\model.py", line 529, in predict
+    self.predictor.setup_model(model=self.model, verbose=is_cli)
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\engine\predictor.py", line 395, in setup_model
+    self.model = AutoBackend(
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\torch\utils\_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\nn\autobackend.py", line 223, in __init__
+    model = model.fuse(verbose=verbose)
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\nn\tasks.py", line 238, in fuse
+    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\utils\torch_utils.py", line 263, in fuse_conv_and_bn
+    fused_bias = torch.mm(w_bn, b_conv.reshape(-1, 1)).reshape(-1) + b_bn
+RuntimeError: expected scalar type Half but found Float
+2026-03-10 07:08:11 [CRITICAL] [detection.gpu_worker_pool] [GPUWorker_0] Model load failed, exiting
+2026-03-10 07:15:12 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:15:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=32060 starting
+2026-03-10 07:15:15 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:15:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] FP16 enabled
+2026-03-10 07:15:24 [CRITICAL] [detection.gpu_worker_pool] [GPUWorker_0] Model load error: expected scalar type Half but found Float
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 280, in _load_model
+    self._model.predict(dummy, conf=self.mcfg.confidence,
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\engine\model.py", line 529, in predict
+    self.predictor.setup_model(model=self.model, verbose=is_cli)
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\engine\predictor.py", line 395, in setup_model
+    self.model = AutoBackend(
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\torch\utils\_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\nn\autobackend.py", line 223, in __init__
+    model = model.fuse(verbose=verbose)
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\nn\tasks.py", line 238, in fuse
+    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+  File "D:\New folder\pc 3\vision_system\venv\lib\site-packages\ultralytics\utils\torch_utils.py", line 263, in fuse_conv_and_bn
+    fused_bias = torch.mm(w_bn, b_conv.reshape(-1, 1)).reshape(-1) + b_bn
+RuntimeError: expected scalar type Half but found Float
+2026-03-10 07:15:24 [CRITICAL] [detection.gpu_worker_pool] [GPUWorker_0] Model load failed, exiting
+2026-03-10 07:54:24 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:54:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=30420 starting
+2026-03-10 07:54:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:54:29 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:54:41 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:54:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:54:41 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:54:41 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:54:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:54:41 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:54:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:54:41 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:54:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:54:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:54:42 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:54:43 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:54:43 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:54:48 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:54:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=28140 starting
+2026-03-10 07:54:52 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:54:52 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:55:04 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:55:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:55:04 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:55:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:55:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:55:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:55:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:55:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:55:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:55:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:55:04 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:55:05 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:55:05 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:55:10 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:55:10 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=26476 starting
+2026-03-10 07:55:14 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:55:15 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:55:27 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:55:27 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:55:28 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:55:28 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:55:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:55:28 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:55:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:55:28 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:55:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:55:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:55:28 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:55:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:55:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:55:34 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:55:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=25644 starting
+2026-03-10 07:55:37 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:55:37 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:55:49 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:55:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:55:49 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:55:49 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:55:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:55:49 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:55:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:55:49 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:55:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:55:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:55:50 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:55:50 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:55:50 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:55:56 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:55:56 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=24364 starting
+2026-03-10 07:56:00 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:56:00 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:56:12 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:56:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:56:12 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:56:12 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:56:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:56:12 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:56:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:56:12 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:56:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:56:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:56:13 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:56:13 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:56:13 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:56:19 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:56:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=27584 starting
+2026-03-10 07:56:23 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:56:23 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:56:25 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:56:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=33216 starting
+2026-03-10 07:56:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:56:28 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:56:34 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:56:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:56:34 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:56:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:56:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:56:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:56:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:56:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:56:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:56:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:56:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:56:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:56:40 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:56:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:56:40 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:56:40 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:56:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:56:40 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:56:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:56:40 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:56:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:56:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:56:40 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:56:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:56:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:56:46 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:56:46 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=1704 starting
+2026-03-10 07:56:50 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:56:51 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:57:03 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:57:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:57:03 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:57:03 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:57:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:57:03 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:57:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:57:03 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:57:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:57:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:57:03 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:57:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:57:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:57:10 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:57:10 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=29704 starting
+2026-03-10 07:57:13 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:57:14 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:57:26 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:57:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:57:26 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:57:26 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:57:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:57:26 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:57:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:57:26 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:57:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:57:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:57:26 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:57:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:57:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:57:32 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:57:32 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=8748 starting
+2026-03-10 07:57:35 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:57:36 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:57:49 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:57:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:57:49 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:57:49 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:57:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:57:49 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:57:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:57:49 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:57:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:57:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:57:49 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:57:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:57:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:57:55 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:57:55 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=26136 starting
+2026-03-10 07:57:59 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:57:59 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:58:11 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:58:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:58:11 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:58:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:58:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:58:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:58:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:58:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:58:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:58:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:58:11 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:58:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:58:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:58:17 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:58:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=34704 starting
+2026-03-10 07:58:21 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:58:22 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:58:34 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:58:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:58:34 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:58:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:58:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:58:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:58:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:58:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:58:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:58:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:58:35 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:58:35 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:58:35 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:58:41 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:58:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=8804 starting
+2026-03-10 07:58:44 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:58:45 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:58:57 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:58:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:58:57 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:58:57 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:58:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:58:57 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:58:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:58:57 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:58:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:58:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:58:57 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:58:58 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:58:58 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:59:04 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:59:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=34492 starting
+2026-03-10 07:59:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:59:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:59:20 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:59:20 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:59:20 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:59:20 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:59:20 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:59:20 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:59:20 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:59:20 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:59:20 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:59:20 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:59:20 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:59:21 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:59:21 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:59:26 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:59:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=26580 starting
+2026-03-10 07:59:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:59:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 07:59:43 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 07:59:43 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 07:59:43 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 07:59:43 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 07:59:43 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 07:59:43 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 07:59:43 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 07:59:43 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 07:59:43 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 07:59:43 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 07:59:43 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 07:59:44 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 07:59:44 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 07:59:49 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 07:59:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=31820 starting
+2026-03-10 07:59:53 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 07:59:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:00:06 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:00:06 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:00:06 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:00:06 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:00:06 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:00:06 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:00:06 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:00:06 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:00:06 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:00:06 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:00:06 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:00:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:00:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:00:13 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:00:13 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=3016 starting
+2026-03-10 08:00:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:00:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:00:30 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:00:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:00:30 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:00:30 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:00:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:00:30 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:00:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:00:30 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:00:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:00:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:00:30 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:00:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:00:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:00:36 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:00:36 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=9232 starting
+2026-03-10 08:00:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:00:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:00:53 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:00:53 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:00:54 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:00:54 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:00:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:00:54 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:00:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:00:54 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:00:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:00:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:00:54 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:00:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:00:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:01:00 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:01:00 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=4664 starting
+2026-03-10 08:01:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:01:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:01:17 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:01:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:01:17 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:01:17 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:01:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:01:17 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:01:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:01:17 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:01:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:01:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:01:17 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:01:18 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:01:18 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:01:23 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:01:23 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=30736 starting
+2026-03-10 08:01:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:01:27 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:01:38 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:01:38 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:01:38 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:01:38 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:01:38 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:01:38 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:01:38 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:01:38 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:01:38 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:01:38 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:01:39 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:01:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:01:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:01:45 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:01:45 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=33196 starting
+2026-03-10 08:01:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:01:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:02:01 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:02:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:02:01 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:02:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:02:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:02:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:02:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:02:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:02:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:02:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:02:01 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:02:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:02:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:02:08 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:02:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=33344 starting
+2026-03-10 08:02:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:02:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:02:24 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:02:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:02:24 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:02:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:02:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:02:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:02:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:02:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:02:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:02:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:02:24 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:02:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:02:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:02:30 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:02:30 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=32896 starting
+2026-03-10 08:02:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:02:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:02:46 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:02:46 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:02:46 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:02:46 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:02:46 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:02:46 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:02:46 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:02:46 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:02:46 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:02:46 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:02:46 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:02:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:02:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:02:52 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:02:52 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=12012 starting
+2026-03-10 08:02:56 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:02:56 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:03:08 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:03:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:03:08 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:03:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:03:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:03:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:03:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:03:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:03:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:03:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:03:08 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:03:09 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:03:09 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:03:14 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:03:14 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=27108 starting
+2026-03-10 08:03:18 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:03:18 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:03:22 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:03:22 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:03:22 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:03:22 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:03:22 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:03:22 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:03:22 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:03:22 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:03:22 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:03:22 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:03:22 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:03:23 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:03:23 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:03:29 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:03:29 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=4596 starting
+2026-03-10 08:03:33 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:03:33 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:04:46 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:04:46 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=25864 starting
+2026-03-10 08:04:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:04:50 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:05:02 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:05:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:05:02 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:05:02 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:05:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:05:02 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:05:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:05:02 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:05:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:05:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:05:02 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:05:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:05:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:05:09 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:05:09 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=19168 starting
+2026-03-10 08:05:13 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:05:13 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:05:25 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:05:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:05:25 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:05:25 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:05:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:05:25 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:05:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:05:26 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:05:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:05:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:05:26 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:05:27 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:05:27 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:05:32 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:05:32 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=24116 starting
+2026-03-10 08:05:36 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:05:36 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:05:39 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:05:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=16888 starting
+2026-03-10 08:05:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:05:41 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:05:48 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:05:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:05:48 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:05:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:05:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:05:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:05:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:05:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:05:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:05:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:05:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:05:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:05:53 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:05:53 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:05:53 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:05:53 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:05:53 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:05:53 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:05:53 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:05:53 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:05:53 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:05:53 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:05:54 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:05:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:05:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:06:00 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:06:00 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=5296 starting
+2026-03-10 08:06:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:06:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:06:16 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:06:16 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:06:17 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:06:17 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:06:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:06:17 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:06:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:06:17 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:06:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:06:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:06:17 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:06:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:06:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:06:23 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:06:23 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=320 starting
+2026-03-10 08:06:26 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:06:27 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:06:39 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:06:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:06:39 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:06:39 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:06:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:06:39 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:06:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:06:39 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:06:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:06:39 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:06:39 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:06:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:06:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:06:45 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:06:45 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=22624 starting
+2026-03-10 08:06:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:06:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:07:01 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:07:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:07:01 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:07:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:07:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:07:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:07:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:07:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:07:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:07:01 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:07:01 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:07:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:07:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:07:07 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:07:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=20408 starting
+2026-03-10 08:07:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:07:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:07:24 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:07:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:07:24 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:07:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:07:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:07:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:07:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:07:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:07:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:07:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:07:25 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:07:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:07:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:07:31 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:07:31 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=21992 starting
+2026-03-10 08:07:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:07:35 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:07:47 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:07:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:07:47 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:07:47 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:07:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:07:47 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:07:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:07:47 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:07:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:07:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:07:47 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:07:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:07:48 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:07:54 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:07:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=26332 starting
+2026-03-10 08:07:58 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:07:59 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:08:11 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:08:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:08:11 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:08:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:08:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:08:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:08:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:08:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:08:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:08:11 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:08:11 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:08:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:08:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:08:17 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:08:17 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=31380 starting
+2026-03-10 08:08:21 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:08:21 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:08:34 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:08:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:08:34 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:08:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:08:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:08:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:08:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:08:34 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:08:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:08:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:08:34 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:08:35 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:08:35 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:08:40 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:08:40 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=30652 starting
+2026-03-10 08:08:44 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:08:45 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:08:57 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:08:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:08:57 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:08:57 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:08:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:08:57 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:08:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:08:57 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:08:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:08:57 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:08:57 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:08:58 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:08:58 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:09:04 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:09:04 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=34260 starting
+2026-03-10 08:09:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:09:08 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:09:10 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:09:10 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=27704 starting
+2026-03-10 08:09:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:09:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:09:19 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:09:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:09:19 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:09:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:09:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:09:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:09:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:09:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:09:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:09:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:09:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:09:19 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:09:24 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:09:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:09:24 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:09:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:09:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:09:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:09:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:09:24 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:09:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:09:24 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:09:25 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:09:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:09:25 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:09:31 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:09:31 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=15620 starting
+2026-03-10 08:09:34 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:09:35 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:09:47 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:09:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:09:47 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:09:47 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:09:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:09:47 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:09:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:09:47 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:09:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:09:47 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:09:48 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:09:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:09:49 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:09:54 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:09:54 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=7308 starting
+2026-03-10 08:09:58 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:09:58 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:10:07 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:10:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:10:07 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:10:07 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:10:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:10:07 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:10:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:10:07 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:10:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:10:07 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:10:08 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:10:09 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:10:09 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:10:14 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:10:14 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=6736 starting
+2026-03-10 08:10:18 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:10:18 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:10:45 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:10:45 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=29708 starting
+2026-03-10 08:10:50 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:10:50 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...
+2026-03-10 08:11:02 [WARNING] [detection.gpu_worker_pool] [GPUWorker_0] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same), falling back to fp32
+2026-03-10 08:11:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Model ready
+2026-03-10 08:11:02 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-10 08:11:02 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-10 08:11:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 0
+2026-03-10 08:11:02 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-10 08:11:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 1
+2026-03-10 08:11:02 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-10 08:11:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Boundaries loaded for camera 2
+2026-03-10 08:11:02 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Ready — serving 3 cameras
+2026-03-10 08:11:03 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-10 08:11:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] CUDA cache cleared, readers closed
+2026-03-10 08:11:03 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Exiting cleanly
+2026-03-10 08:11:09 [INFO] [gpu_worker_0] Logging initialised → logs\gpu_worker_0.log (level=INFO)
+2026-03-10 08:11:09 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] PID=34308 starting
+2026-03-10 08:11:12 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Loading d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-10 08:11:13 [INFO] [detection.gpu_worker_pool] [GPUWorker_0] Warming up (fp32)...

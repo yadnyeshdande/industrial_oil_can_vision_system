@@ -1,0 +1,233 @@
+2026-03-09 13:13:39 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-09 13:13:39 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=32360 starting with pool_size=2
+2026-03-09 13:13:39 [CRITICAL] [detection.gpu_worker_pool] [gpu_pool] Fatal: daemonic processes are not allowed to have children
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 623, in pool_manager_process_entry
+    manager.run()
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 474, in run
+    p.start()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\process.py", line 118, in start
+    assert not _current_process._config.get('daemon'), \
+AssertionError: daemonic processes are not allowed to have children
+2026-03-09 13:13:45 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-09 13:13:45 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=4444 starting with pool_size=2
+2026-03-09 13:13:45 [CRITICAL] [detection.gpu_worker_pool] [gpu_pool] Fatal: daemonic processes are not allowed to have children
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 623, in pool_manager_process_entry
+    manager.run()
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 474, in run
+    p.start()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\process.py", line 118, in start
+    assert not _current_process._config.get('daemon'), \
+AssertionError: daemonic processes are not allowed to have children
+2026-03-09 13:13:51 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-09 13:13:51 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=18216 starting with pool_size=2
+2026-03-09 13:13:51 [CRITICAL] [detection.gpu_worker_pool] [gpu_pool] Fatal: daemonic processes are not allowed to have children
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 623, in pool_manager_process_entry
+    manager.run()
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 474, in run
+    p.start()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\process.py", line 118, in start
+    assert not _current_process._config.get('daemon'), \
+AssertionError: daemonic processes are not allowed to have children
+2026-03-09 13:13:57 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-09 13:13:57 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=34720 starting with pool_size=2
+2026-03-09 13:13:57 [CRITICAL] [detection.gpu_worker_pool] [gpu_pool] Fatal: daemonic processes are not allowed to have children
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 623, in pool_manager_process_entry
+    manager.run()
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 474, in run
+    p.start()
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\process.py", line 118, in start
+    assert not _current_process._config.get('daemon'), \
+AssertionError: daemonic processes are not allowed to have children
+2026-03-09 16:22:26 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-09 16:22:26 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=27804 starting with pool_size=2
+2026-03-09 16:22:26 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=30780
+2026-03-09 16:22:29 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=2504
+2026-03-10 07:07:44 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:07:44 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=15872 starting with pool_size=2
+2026-03-10 07:07:44 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=7712
+2026-03-10 07:07:47 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=30576
+2026-03-10 07:15:11 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:15:11 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=5124 starting with pool_size=2
+2026-03-10 07:15:11 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=32060
+2026-03-10 07:15:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=31876
+2026-03-10 07:54:23 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:54:23 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=5112 starting with pool_size=2
+2026-03-10 07:54:23 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=30420
+2026-03-10 07:54:26 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=16444
+2026-03-10 07:54:48 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:54:48 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=13372 starting with pool_size=2
+2026-03-10 07:54:48 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=28140
+2026-03-10 07:54:51 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=26252
+2026-03-10 07:55:10 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:55:10 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28792 starting with pool_size=2
+2026-03-10 07:55:10 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=26476
+2026-03-10 07:55:13 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=17944
+2026-03-10 07:55:33 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:55:33 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=26216 starting with pool_size=2
+2026-03-10 07:55:33 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=25644
+2026-03-10 07:55:36 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=10772
+2026-03-10 07:55:55 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:55:56 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=26360 starting with pool_size=2
+2026-03-10 07:55:56 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=24364
+2026-03-10 07:55:59 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=22992
+2026-03-10 07:56:19 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:56:19 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=18820 starting with pool_size=2
+2026-03-10 07:56:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=27584
+2026-03-10 07:56:25 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:56:25 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=4008 starting with pool_size=2
+2026-03-10 07:56:25 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=33216
+2026-03-10 07:56:28 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=31472
+2026-03-10 07:56:46 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:56:46 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=31700 starting with pool_size=2
+2026-03-10 07:56:46 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=1704
+2026-03-10 07:56:49 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=20232
+2026-03-10 07:57:09 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:57:09 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28252 starting with pool_size=2
+2026-03-10 07:57:09 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=29704
+2026-03-10 07:57:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=9992
+2026-03-10 07:57:32 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:57:32 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28676 starting with pool_size=2
+2026-03-10 07:57:32 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=8748
+2026-03-10 07:57:35 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=9684
+2026-03-10 07:57:55 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:57:55 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=34348 starting with pool_size=2
+2026-03-10 07:57:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=26136
+2026-03-10 07:57:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=3108
+2026-03-10 07:58:17 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:58:17 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=18912 starting with pool_size=2
+2026-03-10 07:58:17 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=34704
+2026-03-10 07:58:20 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=25872
+2026-03-10 07:58:40 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:58:40 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=19668 starting with pool_size=2
+2026-03-10 07:58:40 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=8804
+2026-03-10 07:58:43 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=32268
+2026-03-10 07:59:04 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:59:04 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=4820 starting with pool_size=2
+2026-03-10 07:59:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=34492
+2026-03-10 07:59:07 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=10252
+2026-03-10 07:59:26 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:59:26 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=26420 starting with pool_size=2
+2026-03-10 07:59:26 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=26580
+2026-03-10 07:59:29 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=31100
+2026-03-10 07:59:49 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 07:59:49 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=26672 starting with pool_size=2
+2026-03-10 07:59:49 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=31820
+2026-03-10 07:59:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=29780
+2026-03-10 08:00:12 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:00:12 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=30092 starting with pool_size=2
+2026-03-10 08:00:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=3016
+2026-03-10 08:00:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=32224
+2026-03-10 08:00:36 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:00:36 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=26652 starting with pool_size=2
+2026-03-10 08:00:36 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=9232
+2026-03-10 08:00:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=4556
+2026-03-10 08:01:00 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:01:00 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=23644 starting with pool_size=2
+2026-03-10 08:01:00 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=4664
+2026-03-10 08:01:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=26056
+2026-03-10 08:01:23 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:01:23 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=30764 starting with pool_size=2
+2026-03-10 08:01:23 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=30736
+2026-03-10 08:01:26 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=26424
+2026-03-10 08:01:44 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:01:44 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=676 starting with pool_size=2
+2026-03-10 08:01:44 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=33196
+2026-03-10 08:01:47 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=34208
+2026-03-10 08:02:07 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:02:07 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=2128 starting with pool_size=2
+2026-03-10 08:02:07 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=33344
+2026-03-10 08:02:10 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=17352
+2026-03-10 08:02:30 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:02:30 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=18424 starting with pool_size=2
+2026-03-10 08:02:30 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=32896
+2026-03-10 08:02:33 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=31152
+2026-03-10 08:02:52 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:02:52 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=1476 starting with pool_size=2
+2026-03-10 08:02:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=12012
+2026-03-10 08:02:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=19624
+2026-03-10 08:03:14 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:03:14 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=20292 starting with pool_size=2
+2026-03-10 08:03:14 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=27108
+2026-03-10 08:03:17 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=26448
+2026-03-10 08:03:28 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:03:28 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=13108 starting with pool_size=2
+2026-03-10 08:03:28 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=4596
+2026-03-10 08:03:32 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=23688
+2026-03-10 08:04:45 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:04:45 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=32604 starting with pool_size=2
+2026-03-10 08:04:45 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=25864
+2026-03-10 08:04:48 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=32824
+2026-03-10 08:05:09 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:05:09 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=33212 starting with pool_size=2
+2026-03-10 08:05:09 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=19168
+2026-03-10 08:05:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=22716
+2026-03-10 08:05:32 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:05:32 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=7776 starting with pool_size=2
+2026-03-10 08:05:32 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=24116
+2026-03-10 08:05:38 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:05:38 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=34184 starting with pool_size=2
+2026-03-10 08:05:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=16888
+2026-03-10 08:05:41 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=31596
+2026-03-10 08:05:59 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:05:59 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=8720 starting with pool_size=2
+2026-03-10 08:05:59 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=5296
+2026-03-10 08:06:02 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=2304
+2026-03-10 08:06:23 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:06:23 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28828 starting with pool_size=2
+2026-03-10 08:06:23 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=320
+2026-03-10 08:06:26 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=29332
+2026-03-10 08:06:45 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:06:45 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=11532 starting with pool_size=2
+2026-03-10 08:06:45 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=22624
+2026-03-10 08:06:48 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=4356
+2026-03-10 08:07:07 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:07:07 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=13560 starting with pool_size=2
+2026-03-10 08:07:07 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=20408
+2026-03-10 08:07:10 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=30860
+2026-03-10 08:07:30 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:07:30 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=20444 starting with pool_size=2
+2026-03-10 08:07:30 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=21992
+2026-03-10 08:07:33 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=24444
+2026-03-10 08:07:54 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:07:54 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28840 starting with pool_size=2
+2026-03-10 08:07:54 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=26332
+2026-03-10 08:07:57 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=33748
+2026-03-10 08:08:17 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:08:17 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=15700 starting with pool_size=2
+2026-03-10 08:08:17 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=31380
+2026-03-10 08:08:20 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=27780
+2026-03-10 08:08:40 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:08:40 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=29208 starting with pool_size=2
+2026-03-10 08:08:40 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=30652
+2026-03-10 08:08:43 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=29948
+2026-03-10 08:09:03 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:09:03 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=29000 starting with pool_size=2
+2026-03-10 08:09:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=34260
+2026-03-10 08:09:09 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:09:09 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=7164 starting with pool_size=2
+2026-03-10 08:09:09 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=27704
+2026-03-10 08:09:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=23912
+2026-03-10 08:09:31 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:09:31 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=29728 starting with pool_size=2
+2026-03-10 08:09:31 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=15620
+2026-03-10 08:09:34 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=25036
+2026-03-10 08:09:54 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:09:54 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=984 starting with pool_size=2
+2026-03-10 08:09:54 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=7308
+2026-03-10 08:09:57 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=6516
+2026-03-10 08:10:14 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:10:14 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=31492 starting with pool_size=2
+2026-03-10 08:10:14 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=6736
+2026-03-10 08:10:17 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=17712
+2026-03-10 08:10:45 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:10:45 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=9036 starting with pool_size=2
+2026-03-10 08:10:45 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=29708
+2026-03-10 08:10:48 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=26964
+2026-03-10 08:11:08 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-10 08:11:08 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=32124 starting with pool_size=2
+2026-03-10 08:11:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=34308
+2026-03-10 08:11:11 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=18060
