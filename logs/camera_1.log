@@ -143,3 +143,65 @@
 2026-03-12 13:06:53 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 16.0s
 2026-03-12 13:07:09 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
 2026-03-12 13:07:39 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 32.0s
+2026-03-12 13:28:26 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-12 13:28:26 [INFO] [camera.camera_process] [Camera_1] PID=4912 starting
+2026-03-12 13:28:26 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-12 13:28:26 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:28:57 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 2.0s
+2026-03-12 13:28:59 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:29:30 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 4.0s
+2026-03-12 13:29:34 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:54:23 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-12 13:54:23 [INFO] [camera.camera_process] [Camera_1] PID=8804 starting
+2026-03-12 13:54:23 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-12 13:54:23 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:54:54 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 2.0s
+2026-03-12 13:54:56 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:55:26 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 4.0s
+2026-03-12 13:55:30 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:56:01 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 8.0s
+2026-03-12 13:56:09 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:56:39 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 16.0s
+2026-03-12 13:56:55 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 13:57:26 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 32.0s
+2026-03-12 14:04:15 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-12 14:04:15 [INFO] [camera.camera_process] [Camera_1] PID=24904 starting
+2026-03-12 14:04:15 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-12 14:04:15 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:04:45 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 2.0s
+2026-03-12 14:04:47 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:05:18 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 4.0s
+2026-03-12 14:05:22 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:05:53 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 8.0s
+2026-03-12 14:06:01 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:06:31 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 16.0s
+2026-03-12 14:06:47 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:07:18 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 32.0s
+2026-03-12 14:07:50 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:08:58 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-12 14:08:58 [INFO] [camera.camera_process] [Camera_1] PID=5800 starting
+2026-03-12 14:08:58 [CRITICAL] [camera.camera_process] [camera_1] Fatal: [WinError 1455] The paging file is too small for this operation to complete: 'cam1_frame'
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\camera\camera_process.py", line 171, in camera_process_entry
+    try: worker.run()
+  File "d:\New folder\pc 3\vision_system\camera\camera_process.py", line 51, in run
+    self._shm_writer = SharedFrameWriter(
+  File "d:\New folder\pc 3\vision_system\core\shared_frame.py", line 50, in __init__
+    self._shm = shared_memory.SharedMemory(name=name, create=True, size=size)
+  File "C:\Users\admin\AppData\Local\Programs\Python\Python310\lib\multiprocessing\shared_memory.py", line 131, in __init__
+    h_map = _winapi.CreateFileMapping(
+OSError: [WinError 1455] The paging file is too small for this operation to complete: 'cam1_frame'
+2026-03-12 14:21:27 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-12 14:21:27 [INFO] [camera.camera_process] [Camera_1] PID=2980 starting
+2026-03-12 14:21:27 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-12 14:21:27 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:21:57 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 2.0s
+2026-03-12 14:21:59 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:22:30 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 4.0s
+2026-03-12 14:22:34 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:39:56 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-12 14:39:56 [INFO] [camera.camera_process] [Camera_1] PID=20688 starting
+2026-03-12 14:39:56 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-12 14:39:56 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1
+2026-03-12 14:40:27 [INFO] [camera.camera_process] [Camera_1] Reconnecting in 2.0s
+2026-03-12 14:40:29 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:password@192.168.1.102:554/stream1

@@ -48,9 +48,37 @@ class GPUMonitorWorker:
         self.pid = os.getpid()
         self.name = "GPUMonitor"
 
-        self._overheat_start: float = 0.0
-        self._overheating: bool = False
-        self._last_heartbeat = time.time()
+        self._overheat_start: float  = 0.0
+        self._overheating:    bool   = False
+        self._last_heartbeat: float  = time.time()
+
+        # ── VRAM restart storm guard ────────────────────────────────────────
+        # Bug: without these guards the monitor fires a restart on EVERY 5-second
+        # poll whenever VRAM > threshold, causing an infinite restart loop.
+        #
+        # Three-layer protection:
+        #  1. Sustained violation: VRAM must stay over threshold for
+        #     `vram_sustained_seconds` (default 45s) before we act.
+        #     This absorbs transient spikes during model warmup (~30s).
+        #
+        #  2. Cooldown: after triggering a restart we wait
+        #     `vram_restart_cooldown_seconds` (default 120s) before
+        #     considering another one. This gives the pool time to
+        #     reload and VRAM to settle.
+        #
+        #  3. Max retries: after `vram_max_restarts` (default 5)
+        #     consecutive VRAM-triggered restarts we stop and emit
+        #     CRITICAL. The operator must intervene (reduce pool_size
+        #     or lower vram_threshold_mb in config).
+        self._vram_over_since:    float = 0.0   # epoch when first exceeded
+        self._vram_is_over:       bool  = False
+        self._last_vram_restart:  float = 0.0   # epoch of last restart trigger
+        self._vram_restart_count: int   = 0     # consecutive VRAM restarts
+
+        # Read optional fields with safe defaults for older configs
+        self._vram_sustained  = getattr(self.gcfg, "vram_sustained_seconds",    45)
+        self._vram_cooldown   = getattr(self.gcfg, "vram_restart_cooldown_seconds", 120)
+        self._vram_max        = getattr(self.gcfg, "vram_max_restarts",          5)
 
     def run(self):
         logger.info("[GPUMonitor] PID=%d starting", self.pid)
@@ -90,11 +118,62 @@ class GPUMonitorWorker:
                         logger.info("[GPUMonitor] GPU temperature normalised: %.1f°C", temp_c)
                     self._overheating = False
 
-                # VRAM threshold
+                # ── VRAM threshold — sustained violation + cooldown ─────────
+                # OLD (buggy): fired a restart on every single 5-second poll.
+                # NEW: requires sustained violation AND enforces cooldown between
+                #      consecutive restarts to prevent restart storms.
                 if vram_mb > self.gcfg.vram_threshold_mb:
-                    logger.critical("[GPUMonitor] VRAM exceeded %.1f/%.1fMB → restart detection",
+                    now = time.time()
+                    if not self._vram_is_over:
+                        # First poll to exceed threshold — start the clock
+                        self._vram_is_over    = True
+                        self._vram_over_since = now
+                        logger.warning(
+                            "[GPUMonitor] VRAM %.1f/%.1f MB exceeded — "
+                            "waiting %.0fs sustained before restart",
+                            vram_mb, self.gcfg.vram_threshold_mb, self._vram_sustained)
+                    else:
+                        sustained = now - self._vram_over_since
+                        cooldown_ok = (now - self._last_vram_restart) >= self._vram_cooldown
+
+                        if sustained >= self._vram_sustained and cooldown_ok:
+                            if self._vram_restart_count >= self._vram_max:
+                                # Storm guard tripped — stop triggering, require manual fix
+                                logger.critical(
+                                    "[GPUMonitor] VRAM restart limit reached (%d/%d). "
+                                    "VRAM=%.1fMB — reduce pool_size or raise vram_threshold_mb. "
+                                    "Detection disabled until restart.",
+                                    self._vram_restart_count, self._vram_max, vram_mb)
+                            else:
+                                self._vram_restart_count += 1
+                                self._last_vram_restart   = now
+                                self._vram_over_since     = now  # reset sustain window
+                                logger.critical(
+                                    "[GPUMonitor] VRAM %.1f/%.1f MB sustained %.0fs "
+                                    "→ restart detection (#%d/%d)",
+                                    vram_mb, self.gcfg.vram_threshold_mb,
+                                    sustained, self._vram_restart_count, self._vram_max)
+                                self._send_restart_command("vram_exceeded")
+                        elif not cooldown_ok:
+                            remaining = self._vram_cooldown - (now - self._last_vram_restart)
+                            logger.warning(
+                                "[GPUMonitor] VRAM %.1f MB still high — "
+                                "cooldown %.0fs remaining before next restart",
+                                vram_mb, remaining)
+                        # else: still in sustained window — log progress
+                        elif sustained < self._vram_sustained:
+                            logger.info(
+                                "[GPUMonitor] VRAM %.1f MB over threshold — "
+                                "%.0f/%.0fs sustained",
+                                vram_mb, sustained, self._vram_sustained)
+                else:
+                    # VRAM back under threshold
+                    if self._vram_is_over:
+                        logger.info("[GPUMonitor] VRAM normalised: %.1f/%.1f MB",
                                     vram_mb, self.gcfg.vram_threshold_mb)
-                    self._send_restart_command("vram_exceeded")
+                        self._vram_restart_count = 0   # reset consecutive counter
+                    self._vram_is_over    = False
+                    self._vram_over_since = 0.0
 
                 # Build and send stats message
                 gpu_msg = GPUStatsMessage(

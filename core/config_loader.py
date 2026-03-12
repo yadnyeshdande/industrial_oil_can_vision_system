@@ -123,26 +123,35 @@ class GUIConfig:
 
 class GPUMonitorConfig:
     def __init__(self, d):
-        self.enabled = d.get("enabled", True)
-        self.poll_interval_seconds = d.get("poll_interval_seconds", 5)
-        self.vram_threshold_mb = d.get("vram_threshold_mb", 5200)
-        self.temperature_threshold_celsius = d.get("temperature_threshold_celsius", 85)
-        self.critical_temperature_celsius = d.get("critical_temperature_celsius", 90)
-        self.fps_throttle_on_overheat = d.get("fps_throttle_on_overheat", 8)
+        self.enabled                    = d.get("enabled",                      True)
+        self.poll_interval_seconds      = d.get("poll_interval_seconds",        5)
+        self.vram_threshold_mb          = d.get("vram_threshold_mb",            5800)
+        self.temperature_threshold_celsius  = d.get("temperature_threshold_celsius",  85)
+        self.critical_temperature_celsius   = d.get("critical_temperature_celsius",   90)
+        self.fps_throttle_on_overheat   = d.get("fps_throttle_on_overheat",     8)
         self.restart_on_persistent_overheat = d.get("restart_on_persistent_overheat", True)
-        self.overheat_duration_seconds = d.get("overheat_duration_seconds", 30)
+        self.overheat_duration_seconds  = d.get("overheat_duration_seconds",    30)
+        # Storm-guard fields (new in v3.3 — safe defaults for older configs)
+        self.vram_sustained_seconds         = d.get("vram_sustained_seconds",         45)
+        self.vram_restart_cooldown_seconds  = d.get("vram_restart_cooldown_seconds",  120)
+        self.vram_max_restarts              = d.get("vram_max_restarts",              5)
 
 
 class SupervisorConfig:
     def __init__(self, d):
-        self.memory_poll_interval_seconds = d.get("memory_poll_interval_seconds", 10)
-        self.health_log_interval_seconds = d.get("health_log_interval_seconds", 60)
-        self.health_broadcast_interval_seconds = d.get("health_broadcast_interval_seconds", 3)
-        self.max_restart_attempts = d.get("max_restart_attempts", 10)
-        self.restart_backoff_seconds = d.get("restart_backoff_seconds", 5)
+        self.memory_poll_interval_seconds       = d.get("memory_poll_interval_seconds", 10)
+        self.health_log_interval_seconds        = d.get("health_log_interval_seconds", 60)
+        self.health_broadcast_interval_seconds  = d.get("health_broadcast_interval_seconds", 3)
+        self.max_restart_attempts               = d.get("max_restart_attempts", 10)
+        self.restart_backoff_seconds            = d.get("restart_backoff_seconds", 5)
         self.sequential_detection_restart_delay = d.get("sequential_detection_restart_delay", 10)
-        self.process_start_timeout_seconds = d.get("process_start_timeout_seconds", 30)
-        self.validate_model_on_startup = d.get("validate_model_on_startup", True)
+        self.process_start_timeout_seconds      = d.get("process_start_timeout_seconds", 30)
+        self.validate_model_on_startup          = d.get("validate_model_on_startup", True)
+        # Storm guard: if a process restarts > storm_max_restarts times within
+        # storm_window_seconds, it is suspended until a supervisor restart.
+        # Prevents Windows paging file exhaustion from repeated CUDA DLL loads.
+        self.storm_max_restarts                 = d.get("storm_max_restarts", 5)
+        self.storm_window_seconds               = d.get("storm_window_seconds", 120)
 
 
 class LoggingConfig:

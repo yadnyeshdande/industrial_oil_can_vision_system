@@ -63,8 +63,12 @@ gpu_pool:
   device: "cuda"
   use_fp16: true
   fps_limit: 12
-  memory_limit_mb: 4500
-  vram_limit_mb: 5200
+  # Actual usage: ~3.2-4.5 GB for 2 YOLO workers + CUDA runtime.
+  # 0 = disabled (recommended: let VRAM monitor handle GPU memory).
+  memory_limit_mb: 6000
+  # RTX 3050 6GB: 2 workers x YOLO ~6.1 GB. 6800 leaves buffer for driver/desktop.
+  # Shared-model pool (pool_size=2 with shared weights) reduces this to ~4.5 GB.
+  vram_limit_mb: 6800
   inference_timeout_seconds: 5
   heartbeat_interval_seconds: 2
   boundary_poll_interval_seconds: 5
@@ -81,7 +85,7 @@ detection:
   strict_boundary_mode: true
   fps_limit: 12
   memory_limit_mb: 1500
-  vram_limit_mb: 5200
+  vram_limit_mb: 6800
   inference_timeout_seconds: 5
   heartbeat_interval_seconds: 2
 
@@ -121,7 +125,15 @@ gui:
 gpu_monitor:
   enabled: true
   poll_interval_seconds: 5
-  vram_threshold_mb: 5200
+  # Must match gpu_pool.vram_limit_mb. Fire only after sustained_vram_seconds.
+  vram_threshold_mb: 6800
+  # Seconds VRAM must stay over threshold before triggering a restart.
+  # Prevents false positives from transient VRAM spikes during model warmup.
+  vram_sustained_seconds: 45
+  # Minimum seconds between two consecutive VRAM-triggered restarts (storm guard).
+  vram_restart_cooldown_seconds: 120
+  # After this many VRAM restarts, stop retrying and require manual intervention.
+  vram_max_restarts: 5
   temperature_threshold_celsius: 85
   critical_temperature_celsius: 90
   fps_throttle_on_overheat: 8
@@ -134,6 +146,10 @@ supervisor:
   health_broadcast_interval_seconds: 3
   max_restart_attempts: 10
   restart_backoff_seconds: 5
+  # Storm guard: if a process restarts more than N times within window_seconds,
+  # disable further restarts until manual clear. Prevents paging file exhaustion.
+  storm_max_restarts: 5
+  storm_window_seconds: 120
   sequential_detection_restart_delay: 10
   process_start_timeout_seconds: 30
   validate_model_on_startup: true

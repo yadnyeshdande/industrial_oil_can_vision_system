@@ -11,7 +11,6 @@ Windows Service (NSSM):
     nssm install VisionSystem python main.py
     nssm set VisionSystem AppDirectory C:\\VisionSystem
     nssm start VisionSystem
-    NSSM Pending Restart:
 """
 
 from __future__ import annotations

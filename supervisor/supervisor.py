@@ -30,13 +30,37 @@ except ImportError:
 @dataclass
 class ManagedProcess:
     name: str; process_key: str; process: Optional[Process]; stop_event: Event
-    last_heartbeat: float = field(default_factory=time.time)
-    last_fps: float = 0.0; last_fps_nonzero: float = field(default_factory=time.time)
-    memory_mb: float = 0.0; restart_count: int = 0; status: str = "starting"
-    extra: dict = field(default_factory=dict); camera_id: Optional[int] = None; pid_val: int = 0
+    last_heartbeat:   float = field(default_factory=time.time)
+    last_fps:         float = 0.0
+    last_fps_nonzero: float = field(default_factory=time.time)
+    memory_mb:    float = 0.0
+    restart_count: int  = 0
+    status:        str  = "starting"
+    extra:        dict  = field(default_factory=dict)
+    camera_id: Optional[int] = None
+    pid_val: int = 0
+    # Storm guard — rolling timestamps of restart events in storm_window
+    _restart_times: list = field(default_factory=list)
+    storm_disabled: bool = False   # True once storm limit reached
+
     @property
     def pid(self): return self.process.pid if self.process and self.process.is_alive() else None
     def is_alive(self): return self.process is not None and self.process.is_alive()
+
+    def record_restart(self, storm_window: float, storm_max: int) -> bool:
+        """
+        Record a restart timestamp.
+        Returns False if the storm guard has tripped (too many restarts too fast),
+        True if the restart is allowed.
+        Removes timestamps older than storm_window to keep the rolling window clean.
+        """
+        now = time.time()
+        # Purge old entries
+        self._restart_times = [t for t in self._restart_times if now - t <= storm_window]
+        self._restart_times.append(now)
+        if len(self._restart_times) > storm_max:
+            self.storm_disabled = True
+        return not self.storm_disabled
 
 
 class Supervisor:
@@ -205,21 +229,84 @@ class Supervisor:
         elif mtype == MessageType.GPU_STATS.value:
             self._last_gpu_stats = msg
 
+    # Maximum restarts before a process is considered permanently failed.
+    # GUI is allowed more restarts than production-critical workers.
+    _MAX_RESTARTS: dict = {}  # populated lazily per key
+
+    def _restart_limit(self, key: str) -> int:
+        """Return the max restart count before giving up on a process."""
+        if key == "gui":
+            return 20   # GUI may crash on display init; keep trying
+        if key == "gpu_monitor":
+            return 10
+        return 15       # cameras, relay, gpu_pool — production-critical
+
     def _check_health(self):
         now = time.time()
         for key, mproc in list(self._processes.items()):
-            if key == "gui": continue
-            age = now - mproc.last_heartbeat; uptime = now - self._start_time
-            grace = self.cfg.system.startup_grace_period_seconds
-            hb_timeout = self.cfg.system.heartbeat_timeout_seconds
-            # Extra grace for gpu_pool (model loading takes time)
-            effective_grace = grace + 120 if key == "gpu_pool" else grace
-            if age > hb_timeout and uptime > effective_grace:
+            # ── GUI is checked exactly like every other process.
+            # It is non-critical (a crash doesn't stop detection) but it
+            # MUST be restarted automatically so operators don't lose visibility.
+            # The old "if key == 'gui': continue" was the bug — removed.
+
+            uptime         = now - self._start_time
+            grace          = self.cfg.system.startup_grace_period_seconds
+            hb_timeout     = self.cfg.system.heartbeat_timeout_seconds
+            # Extra grace for processes that do heavy init (model loading, display)
+            extra_grace    = 120 if key == "gpu_pool" else 30 if key == "gui" else 0
+            effective_grace = grace + extra_grace
+
+            # ── Storm guard — disables restart after too many crashes too fast ──
+            # This prevents the Windows paging file exhaustion caused by repeated
+            # CUDA DLL loads (torch, cuBLAS, cuFFT each ~500MB virtual memory).
+            if mproc.storm_disabled:
+                if int(now) % 300 == 0:  # log every 5 min, not every second
+                    logger.critical(
+                        "[Supervisor] %s storm guard ACTIVE — "
+                        "restarted >%d times in %ds. "
+                        "Restart the supervisor to clear. "
+                        "Check config memory limits.",
+                        key,
+                        self.cfg.supervisor.storm_max_restarts,
+                        self.cfg.supervisor.storm_window_seconds)
+                continue
+
+            # ── Restart limit guard — prevents infinite crash loops ──────────
+            max_r = self._restart_limit(key)
+            if mproc.restart_count >= max_r:
+                # Log once every 5 minutes so it doesn't spam
+                if int(now) % 300 == 0:
+                    logger.critical(
+                        "[Supervisor] %s restart limit reached (%d/%d) — "
+                        "manual intervention required", key, mproc.restart_count, max_r)
+                continue
+
+            # ── Clean up zombie handles before liveness check ───────────────
+            # join(timeout=0) is non-blocking; it just reaps the exit status so
+            # is_alive() reports correctly and we don't accumulate zombie PIDs.
+            if mproc.process and not mproc.process.is_alive():
+                try:
+                    mproc.process.join(timeout=0)
+                except Exception:
+                    pass
+
+            # ── Heartbeat timeout (missed heartbeats → process hung) ─────────
+            # GUI in headless / no-display mode may not send heartbeats;
+            # only apply the HB timeout when we have received at least one HB.
+            hb_received = mproc.last_heartbeat > (self._start_time + 5)
+            age = now - mproc.last_heartbeat
+            if hb_received and age > hb_timeout and uptime > effective_grace:
                 if not mproc.is_alive():
-                    logger.error("[Supervisor] %s died → restart", key); self._restart_process(key); continue
-            if not mproc.is_alive():
-                if uptime > effective_grace:
-                    logger.error("[Supervisor] %s not alive → restart", key); self._restart_process(key); continue
+                    logger.error("[Supervisor] %s died (hb timeout) → restart", key)
+                    self._restart_process(key)
+                    continue
+
+            # ── Simple liveness check ────────────────────────────────────────
+            if not mproc.is_alive() and uptime > effective_grace:
+                logger.error("[Supervisor] %s not alive → restart", key)
+                self._restart_process(key)
+                continue
+
             self._check_proc_mem(key, mproc)
 
     def _check_proc_mem(self, key, mproc):
@@ -234,22 +321,101 @@ class Supervisor:
 
     def _restart_process(self, key):
         mproc = self._processes.get(key)
-        if not mproc: return
-        mproc.restart_count += 1; logger.info("[Supervisor] Restarting %s (#%d)", key, mproc.restart_count)
+        if not mproc:
+            return
+        mproc.restart_count += 1
+        logger.info("[Supervisor] Restarting %s (#%d)", key, mproc.restart_count)
+
+        # Storm guard: record this restart in the rolling window.
+        # If the process is crashing too fast (>N times in storm_window_seconds),
+        # record_restart returns False and sets mproc.storm_disabled = True.
+        # The next _check_health pass will see storm_disabled and stop restarting.
+        allowed = mproc.record_restart(
+            self.cfg.supervisor.storm_window_seconds,
+            self.cfg.supervisor.storm_max_restarts,
+        )
+        if not allowed:
+            logger.critical(
+                "[Supervisor] %s STORM GUARD TRIPPED — %d restarts in %ds. "
+                "Stopping restart attempts. Fix config and restart supervisor.",
+                key,
+                self.cfg.supervisor.storm_max_restarts,
+                self.cfg.supervisor.storm_window_seconds,
+            )
+            return   # do NOT respawn — leave process dead until operator intervenes
+
+        # Signal the process to stop cleanly
         mproc.stop_event.set()
-        if mproc.process and mproc.process.is_alive():
-            mproc.process.terminate(); mproc.process.join(timeout=8.0)
-            if mproc.process.is_alive(): mproc.process.kill()
-        delay = min(self.cfg.supervisor.restart_backoff_seconds * mproc.restart_count, 60)
-        time.sleep(delay); self._respawn(key)
+
+        if mproc.process:
+            if mproc.process.is_alive():
+                mproc.process.terminate()
+                mproc.process.join(timeout=8.0)
+                if mproc.process.is_alive():
+                    logger.warning("[Supervisor] %s did not terminate — killing", key)
+                    mproc.process.kill()
+                    mproc.process.join(timeout=3.0)
+            else:
+                # Process already dead — reap the zombie so the OS can clean up
+                mproc.process.join(timeout=0)
+
+        # Reset the stop event so the new process instance starts clean
+        mproc.stop_event.clear()
+
+        # Backoff: 1s × restart_count, capped at 60s.
+        # GUI gets a shorter cap (10s) so the operator doesn't wait long.
+        max_delay = 10 if key == "gui" else 60
+        delay = min(self.cfg.supervisor.restart_backoff_seconds * mproc.restart_count,
+                    max_delay)
+        if delay > 0:
+            logger.info("[Supervisor] %s backoff %.1fs", key, delay)
+            time.sleep(delay)
+
+        self._respawn(key)
 
     def _respawn(self, key):
-        if key.startswith("camera_"): self._start_camera(int(key.split("_")[1]))
-        elif key == "gpu_pool": self._start_gpu_pool()
+        """
+        Spawn a replacement process for `key`.
+
+        BUG FIX: Every _start_X() call creates a fresh ManagedProcess(restart_count=0),
+        which would silently reset the counter we just incremented in _restart_process().
+        We preserve the critical bookkeeping fields from the OLD entry and copy them
+        into the new ManagedProcess after _start_X() overwrites the slot.
+
+        Fields preserved across a respawn:
+          restart_count   — must never go backwards (drives backoff + limit guard)
+          last_heartbeat  — kept so the grace window is not incorrectly reset
+          last_fps_nonzero— kept for FPS-zero watchdog continuity
+        """
+        # Snapshot fields we must preserve BEFORE _start_X() overwrites the slot
+        old = self._processes.get(key)
+        saved_restarts      = old.restart_count      if old else 0
+        saved_hb            = old.last_heartbeat     if old else time.time()
+        saved_fps_nonzero   = old.last_fps_nonzero   if old else time.time()
+        saved_restart_times = list(old._restart_times) if old else []
+        saved_storm_disabled = old.storm_disabled    if old else False
+
+        # Spawn the new process (this OVERWRITES self._processes[key])
+        if key.startswith("camera_"):      self._start_camera(int(key.split("_")[1]))
+        elif key == "gpu_pool":            self._start_gpu_pool()
         elif key.startswith("detection_"): self._start_detection(int(key.split("_")[1]))
-        elif key == "relay": self._start_relay()
-        elif key == "gui": self._start_gui()
-        elif key == "gpu_monitor": self._start_gpu_monitor()
+        elif key == "relay":               self._start_relay()
+        elif key == "gui":                 self._start_gui()
+        elif key == "gpu_monitor":         self._start_gpu_monitor()
+        else:
+            logger.error("[Supervisor] Unknown process key in _respawn: %s", key)
+            return
+
+        # Restore preserved fields into the new ManagedProcess entry
+        new = self._processes.get(key)
+        if new:
+            new.restart_count    = saved_restarts       # counter must never go backwards
+            new.last_heartbeat   = saved_hb
+            new.last_fps_nonzero = saved_fps_nonzero
+            new._restart_times   = saved_restart_times  # storm rolling window
+            new.storm_disabled   = saved_storm_disabled # storm flag
+            logger.debug("[Supervisor] %s respawned — restart_count=%d storm=%s",
+                         key, new.restart_count, new.storm_disabled)
 
     def _restart_all_detection(self):
         if "gpu_pool" in self._processes: self._restart_process("gpu_pool")

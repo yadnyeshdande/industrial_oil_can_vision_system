@@ -239,3 +239,105 @@ AssertionError: daemonic processes are not allowed to have children
 2026-03-12 13:04:36 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=24504 starting with pool_size=2
 2026-03-12 13:04:36 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=25360
 2026-03-12 13:04:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=25408
+2026-03-12 13:28:26 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:28:26 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28696 starting with pool_size=2
+2026-03-12 13:28:26 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=20456
+2026-03-12 13:28:29 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=12460
+2026-03-12 13:54:23 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:54:23 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=29528 starting with pool_size=2
+2026-03-12 13:54:23 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=6828
+2026-03-12 13:54:26 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=26568
+2026-03-12 13:54:36 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:54:36 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=14536 starting with pool_size=2
+2026-03-12 13:54:36 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=17048
+2026-03-12 13:54:42 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:54:42 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=30060 starting with pool_size=2
+2026-03-12 13:54:42 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=5536
+2026-03-12 13:54:48 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:54:48 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=15892 starting with pool_size=2
+2026-03-12 13:54:48 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=28248
+2026-03-12 13:55:29 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:55:29 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=8752 starting with pool_size=2
+2026-03-12 13:55:29 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=28488
+2026-03-12 13:55:32 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=5884
+2026-03-12 13:56:51 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:56:51 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=29004 starting with pool_size=2
+2026-03-12 13:56:51 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=1784
+2026-03-12 13:57:02 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:57:02 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=7212 starting with pool_size=2
+2026-03-12 13:57:02 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=25184
+2026-03-12 14:04:15 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:04:15 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28040 starting with pool_size=2
+2026-03-12 14:04:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=26684
+2026-03-12 14:04:18 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=28060
+2026-03-12 14:04:28 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:04:28 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=25084 starting with pool_size=2
+2026-03-12 14:04:28 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=13116
+2026-03-12 14:04:39 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:04:39 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28820 starting with pool_size=2
+2026-03-12 14:04:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=4328
+2026-03-12 14:04:55 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:04:55 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=20936 starting with pool_size=2
+2026-03-12 14:04:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=28440
+2026-03-12 14:05:16 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:05:16 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=9404 starting with pool_size=2
+2026-03-12 14:05:16 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=27596
+2026-03-12 14:05:42 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:05:42 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=21844 starting with pool_size=2
+2026-03-12 14:05:42 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=30108
+2026-03-12 14:05:45 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=23480
+2026-03-12 14:06:18 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:06:18 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=10316 starting with pool_size=2
+2026-03-12 14:06:18 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=24636
+2026-03-12 14:06:55 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:06:55 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28468 starting with pool_size=2
+2026-03-12 14:06:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=19188
+2026-03-12 14:06:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=23428
+2026-03-12 14:08:44 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:08:44 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=15568 starting with pool_size=2
+2026-03-12 14:08:44 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=10624
+2026-03-12 14:08:47 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=25272
+2026-03-12 14:21:27 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:21:27 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=28832 — shared-model pool, 2 inference threads
+2026-03-12 14:21:28 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-12 14:21:28 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-03-12 14:21:31 [WARNING] [detection.gpu_worker_pool] [PoolManager] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same) — running fp32
+2026-03-12 14:21:31 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 14:21:31 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-03-12 14:21:32 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-12 14:21:32 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-12 14:21:32 [ERROR] [detection.gpu_worker_pool] [PoolManager] Boundary load error cam 0: 'PoolManager' object has no attribute 'b_lock'
+2026-03-12 14:21:32 [CRITICAL] [detection.gpu_worker_pool] [gpu_pool] Fatal: 'PoolManager' object has no attribute 'b_lock'
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 454, in _load_boundaries
+    with self.b_lock:
+AttributeError: 'PoolManager' object has no attribute 'b_lock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 595, in pool_manager_process_entry
+    manager.run()
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 331, in run
+    self._load_boundaries(cam.id)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 460, in _load_boundaries
+    with self.b_lock:
+AttributeError: 'PoolManager' object has no attribute 'b_lock'
+2026-03-12 14:39:56 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 14:39:56 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=19036 — shared-model pool, 2 inference threads
+2026-03-12 14:40:00 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-03-12 14:40:00 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-03-12 14:40:03 [WARNING] [detection.gpu_worker_pool] [PoolManager] FP16 failed (Input type (float) and bias type (struct c10::Half) should be the same) — running fp32
+2026-03-12 14:40:03 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-03-12 14:40:03 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-12 14:40:03 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-03-12 14:40:03 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-03-12 14:40:03 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1

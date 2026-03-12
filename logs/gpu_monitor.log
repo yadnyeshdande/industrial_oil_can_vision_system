@@ -38,3 +38,90 @@
 2026-03-12 13:04:36 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
 2026-03-12 13:04:36 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=6696 starting
 2026-03-12 13:04:38 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 13:28:26 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-12 13:28:26 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=30304 starting
+2026-03-12 13:28:28 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 13:54:23 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-12 13:54:23 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=20668 starting
+2026-03-12 13:54:25 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 13:54:46 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 5793.8/5200.0MB → restart detection
+2026-03-12 13:54:52 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:54:57 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:55:03 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:55:08 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:55:13 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:55:19 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:55:24 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:55:30 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6130.8/5200.0MB → restart detection
+2026-03-12 13:55:35 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:55:40 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:55:46 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:55:51 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:55:57 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:02 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:08 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:13 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:18 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:24 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:29 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:35 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:40 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:45 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:51 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6128.7/5200.0MB → restart detection
+2026-03-12 13:56:56 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6127.4/5200.0MB → restart detection
+2026-03-12 13:57:02 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6127.4/5200.0MB → restart detection
+2026-03-12 13:57:07 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6125.6/5200.0MB → restart detection
+2026-03-12 13:57:13 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6119.6/5200.0MB → restart detection
+2026-03-12 13:57:18 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6119.6/5200.0MB → restart detection
+2026-03-12 13:57:24 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM exceeded 6119.6/5200.0MB → restart detection
+2026-03-12 14:04:15 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-12 14:04:15 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=704 starting
+2026-03-12 14:04:17 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 14:05:00 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6130.8/5800.0 MB exceeded — waiting 45s sustained before restart
+2026-03-12 14:05:05 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6130.8 MB over threshold — 5/45s sustained
+2026-03-12 14:05:11 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6130.8 MB over threshold — 11/45s sustained
+2026-03-12 14:05:16 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6130.8 MB over threshold — 16/45s sustained
+2026-03-12 14:05:22 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6129.7 MB over threshold — 22/45s sustained
+2026-03-12 14:05:27 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6129.7 MB over threshold — 27/45s sustained
+2026-03-12 14:05:32 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6129.7 MB over threshold — 32/45s sustained
+2026-03-12 14:05:38 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6129.7 MB over threshold — 38/45s sustained
+2026-03-12 14:05:43 [INFO] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6129.7 MB over threshold — 43/45s sustained
+2026-03-12 14:05:49 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6112.1/5800.0 MB sustained 49s → restart detection (#1/5)
+2026-03-12 14:05:54 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6128.7 MB still high — cooldown 115s remaining before next restart
+2026-03-12 14:05:59 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6128.7 MB still high — cooldown 109s remaining before next restart
+2026-03-12 14:06:05 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6128.7 MB still high — cooldown 104s remaining before next restart
+2026-03-12 14:06:10 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6128.7 MB still high — cooldown 98s remaining before next restart
+2026-03-12 14:06:16 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6128.7 MB still high — cooldown 93s remaining before next restart
+2026-03-12 14:06:21 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6127.6 MB still high — cooldown 87s remaining before next restart
+2026-03-12 14:06:27 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6126.1 MB still high — cooldown 82s remaining before next restart
+2026-03-12 14:06:32 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6126.1 MB still high — cooldown 77s remaining before next restart
+2026-03-12 14:06:37 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6126.1 MB still high — cooldown 71s remaining before next restart
+2026-03-12 14:06:43 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6126.1 MB still high — cooldown 66s remaining before next restart
+2026-03-12 14:06:48 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6126.1 MB still high — cooldown 60s remaining before next restart
+2026-03-12 14:06:54 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6126.1 MB still high — cooldown 55s remaining before next restart
+2026-03-12 14:06:59 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6126.1 MB still high — cooldown 50s remaining before next restart
+2026-03-12 14:07:04 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 44s remaining before next restart
+2026-03-12 14:07:10 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 39s remaining before next restart
+2026-03-12 14:07:15 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 33s remaining before next restart
+2026-03-12 14:07:21 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 28s remaining before next restart
+2026-03-12 14:07:26 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 23s remaining before next restart
+2026-03-12 14:07:31 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 17s remaining before next restart
+2026-03-12 14:07:37 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 12s remaining before next restart
+2026-03-12 14:07:42 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 6s remaining before next restart
+2026-03-12 14:07:48 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 1s remaining before next restart
+2026-03-12 14:07:53 [CRITICAL] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7/5800.0 MB sustained 124s → restart detection (#2/5)
+2026-03-12 14:07:58 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 115s remaining before next restart
+2026-03-12 14:08:04 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 109s remaining before next restart
+2026-03-12 14:08:09 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 104s remaining before next restart
+2026-03-12 14:08:15 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 98s remaining before next restart
+2026-03-12 14:08:20 [WARNING] [supervisor.gpu_monitor] [GPUMonitor] VRAM 6066.7 MB still high — cooldown 93s remaining before next restart
+2026-03-12 14:21:27 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-12 14:21:27 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=27760 starting
+2026-03-12 14:21:28 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 14:23:15 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-12 14:23:15 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=13080 starting
+2026-03-12 14:39:56 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-12 14:39:56 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=25132 starting
+2026-03-12 14:39:58 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-03-12 14:41:06 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-12 14:41:06 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=10648 starting
