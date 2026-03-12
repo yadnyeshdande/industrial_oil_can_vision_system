@@ -231,3 +231,11 @@ AssertionError: daemonic processes are not allowed to have children
 2026-03-10 08:11:08 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=32124 starting with pool_size=2
 2026-03-10 08:11:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=34308
 2026-03-10 08:11:11 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=18060
+2026-03-12 13:01:44 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:01:44 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=30480 starting with pool_size=2
+2026-03-12 13:01:44 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=14712
+2026-03-12 13:01:47 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=30492
+2026-03-12 13:04:36 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-12 13:04:36 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=24504 starting with pool_size=2
+2026-03-12 13:04:36 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_0 PID=25360
+2026-03-12 13:04:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Started GPUWorker_1 PID=25408
