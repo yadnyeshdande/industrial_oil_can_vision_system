@@ -30,6 +30,7 @@ import logging
 import os
 import signal
 import sys
+import threading
 import time
 from collections import deque
 from multiprocessing import Event, Queue
@@ -162,24 +163,84 @@ class MouseState:
         return None
 
 
+# ── Frame poller ───────────────────────────────────────────────────────────────
+# Reads every camera's shared memory in a background thread at ~60 fps.
+# The render loop just reads from this cache — it never blocks for frames.
+# This fixes: dashboard black, camera view lag, detection-mode blank screen.
+class FramePoller:
+    _POLL_SLEEP = 0.016   # ~60 fps
+    _RETRY_WAIT = 2.0     # seconds between reconnect attempts
+
+    def __init__(self, cam_cfgs):
+        self._cfgs   = {c.id: c for c in cam_cfgs}
+        self._frames = {c.id: None for c in cam_cfgs}
+        self._ts     = {c.id: 0.0  for c in cam_cfgs}
+        self._rdrs   = {c.id: None for c in cam_cfgs}
+        self._retry  = {c.id: 0.0  for c in cam_cfgs}
+        self._lock   = threading.Lock()
+        self._stop   = threading.Event()
+        self._thread = threading.Thread(
+            target=self._run, daemon=True, name="FramePoller")
+
+    def start(self): self._thread.start()
+    def stop(self):  self._stop.set()
+
+    def get(self, cam_id):
+        """Return (frame_or_None, timestamp). Never blocks."""
+        with self._lock:
+            return self._frames.get(cam_id), self._ts.get(cam_id, 0.0)
+
+    def _run(self):
+        from core.shared_frame import SharedFrameReader
+        while not self._stop.is_set():
+            now = time.time()
+            for cid, cc in self._cfgs.items():
+                try:
+                    rdr = self._rdrs[cid]
+                    if rdr is None:
+                        if now - self._retry[cid] < self._RETRY_WAIT:
+                            continue
+                        self._retry[cid] = now
+                        r = SharedFrameReader(
+                            cc.shared_memory_name,
+                            cc.frame_width,
+                            cc.frame_height)
+                        if r.connect(timeout=0.05):
+                            self._rdrs[cid] = r
+                        continue
+                    frame, _ = rdr.read()
+                    if frame is not None:
+                        with self._lock:
+                            self._frames[cid] = frame
+                            self._ts[cid]     = now
+                except Exception:
+                    try:
+                        if self._rdrs[cid]:
+                            self._rdrs[cid].close()
+                    except Exception:
+                        pass
+                    self._rdrs[cid] = None
+            time.sleep(self._POLL_SLEEP)
+
+
 # ── Camera state ───────────────────────────────────────────────────────────────
 class CameraState:
     def __init__(self, cam_id: int, cfg: VisionSystemConfig):
         self.cam_id  = cam_id
         self.cfg     = cfg
         self.cam_cfg = cfg.get_camera(cam_id)
+        # frame is written by UnifiedGUI from FramePoller cache every render tick.
+        # It is NEVER written by update() — that avoids JPEG decode on the GUI thread.
         self.frame: Optional[np.ndarray] = None
+        self.frame_ts: float = 0.0       # timestamp FramePoller last wrote a frame
         self.detections:   List[dict] = []
         self.pair_results: List[dict] = []
         self.fps           = 0.0
         self.inference_ms  = 0.0
         self.problem_count = 0
         self.success_rate  = 100.0
-        self.last_update   = 0.0
-        self.connected     = False
+        self.last_det_update = 0.0       # when detection results last arrived
         self._bset         = None
-        self._shm_reader   = None
-        self._shm_ok       = False
         self._load_bd()
 
     def _load_bd(self):
@@ -199,23 +260,17 @@ class CameraState:
         return self.cfg.get_boundary_path(self.cam_id).exists()
 
     def update(self, msg: dict):
-        fd = msg.get("frame_data")
-        if fd:
-            try:
-                buf = np.frombuffer(fd, dtype=np.uint8)
-                dec = cv2.imdecode(buf, cv2.IMREAD_COLOR)
-                if dec is not None:
-                    self.frame = dec
-            except Exception:
-                pass
+        # Do NOT decode frame_data here — the FramePoller feeds frames directly
+        # from shared memory at full rate. Decoding JPEG here would:
+        #   1. Add a full decode cycle on the GUI thread every result message
+        #   2. Show stale frames (by the time the message arrives the frame is old)
         self.detections   = msg.get("detections", [])
         self.pair_results = msg.get("pair_results", [])
         self.fps          = msg.get("fps", 0.0)
         self.inference_ms = msg.get("inference_time_ms", 0.0)
         self.problem_count= msg.get("problem_count", 0)
         self.success_rate = msg.get("success_rate", 100.0)
-        self.last_update  = time.time()
-        self.connected    = True
+        self.last_det_update = time.time()
 
     @property
     def has_problem(self) -> bool:
@@ -223,24 +278,13 @@ class CameraState:
 
     @property
     def stale(self) -> bool:
-        return time.time() - self.last_update > 5.0
+        # A camera is stale when the FramePoller hasn't seen a new frame for 3 s.
+        # (was: based on detection result timestamps — didn't work in preview mode)
+        return self.frame_ts == 0.0 or (time.time() - self.frame_ts > 3.0)
 
-    def read_preview(self) -> Optional[np.ndarray]:
-        try:
-            if not self._shm_ok:
-                from core.shared_frame import SharedFrameReader
-                cc = self.cfg.get_camera(self.cam_id)
-                if cc is None:
-                    return None
-                self._shm_reader = SharedFrameReader(
-                    cc.shared_memory_name, cc.frame_width, cc.frame_height)
-                self._shm_ok = self._shm_reader.connect(timeout=1.5)
-            if self._shm_ok and self._shm_reader:
-                frame, _ = self._shm_reader.read()
-                return frame
-        except Exception:
-            self._shm_ok = False
-        return None
+    @property
+    def connected(self) -> bool:
+        return not self.stale
 
 
 # ── Tab hit-test ───────────────────────────────────────────────────────────────
@@ -365,7 +409,7 @@ def _render_dashboard(canvas, W, H, by, bh,
                 _fill(canvas, fx2, fy2, fx2+fw2, fy2+fh2, (18, 18, 18))
         else:
             _fill(canvas, fx2, fy2, fx2+fw2, fy2+fh2, (18, 18, 18))
-            msg = "No Signal" if not st.connected else "Stale"
+            msg = "No Signal" if st.frame_ts == 0.0 else "Stale"
             (tw2, _), _ = cv2.getTextSize(msg, FONT, 0.55, 1)
             _t(canvas, msg, (fx2 + (fw2-tw2)//2, fy2 + fh2//2), sc=0.55, col=DIM)
 
@@ -503,7 +547,7 @@ def _render_camera_view(canvas, W, H, by, bh,
         except Exception:
             pass
     else:
-        msg = "No Signal" if not state.connected else "Waiting for frame..."
+        msg = "No Signal" if state.frame_ts == 0.0 else "Waiting for frame..."
         (tw2, _), _ = cv2.getTextSize(msg, FONT, 0.7, 1)
         _t(canvas, msg, (fx + (fw-tw2)//2, fy + fh//2), sc=0.7, col=DIM)
 
@@ -793,6 +837,9 @@ class UnifiedGUI:
         self._in_editor = False
         self._ms        = MouseState()
         self._hit       = {}          # buttons drawn last frame
+        # FramePoller reads all camera SHMs in a background thread.
+        # Frames are available immediately in the render loop — no blocking.
+        self._poller    = FramePoller(cfg.cameras)
 
     # ── helpers ────────────────────────────────────────────────────────────────
     def _missing_bd(self) -> List[int]:
@@ -823,6 +870,9 @@ class UnifiedGUI:
         W, H     = self.gcfg.window_width, self.gcfg.window_height
         interval = self.gcfg.update_interval_ms / 1000.0
 
+        # Start background frame poller — runs for the lifetime of the GUI process
+        self._poller.start()
+
         while not self.stop_ev.is_set():
             t0    = time.time()
             click = self._ms.consume()
@@ -830,6 +880,15 @@ class UnifiedGUI:
                 self._on_click(*click, W, H, WNAME)
 
             self._drain()
+
+            # Pull latest frames from poller into CameraState objects.
+            # This happens every render tick regardless of preview/detect mode,
+            # so Dashboard, Camera View, and the boundary editor all see live video.
+            for cid, st in self.cam_states.items():
+                frame, ts = self._poller.get(cid)
+                if frame is not None:
+                    st.frame    = frame
+                    st.frame_ts = ts
 
             try:
                 r = cv2.getWindowImageRect(WNAME)
@@ -958,10 +1017,8 @@ class UnifiedGUI:
         elif t == 1:
             if self.cam_ids:
                 st = self._active_state()
-                if bool(self.preview.value):
-                    pf = st.read_preview()
-                    if pf is not None:
-                        st.frame = pf
+                # Frames now come from FramePoller (pushed above in the render loop).
+                # No read_preview() call needed — works in both preview and detect mode.
                 hit = {}
                 _render_camera_view(canvas, W, H, body_y, body_h,
                                     st, self.relay_states, self.cfg,
@@ -980,7 +1037,11 @@ class UnifiedGUI:
     # ── boundary editor ────────────────────────────────────────────────────────
     def _open_editor(self, main_wname: str):
         st    = self._active_state()
-        frame = st.frame or st.read_preview()
+        # BUG FIX: "st.frame or st.read_preview()" raises
+        #   ValueError: The truth value of an array is ambiguous
+        # because Python calls bool(numpy_array) on the left operand.
+        # Use explicit None check instead.
+        frame = st.frame if st.frame is not None else None
         if frame is None:
             cc = self.cfg.get_camera(st.cam_id)
             h  = cc.frame_height if cc else 720

@@ -68,3 +68,6 @@
 2026-03-12 14:39:56 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
 2026-03-12 14:39:56 [INFO] [relay.relay_process] [Relay] PID=5440 starting (9 relays)
 2026-03-12 14:39:56 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-03-30 10:01:39 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-03-30 10:01:39 [INFO] [relay.relay_process] [Relay] PID=1916 starting (9 relays)
+2026-03-30 10:01:39 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)

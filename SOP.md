@@ -35,7 +35,8 @@ From your project directory (example uses `D:\New folder\yolo`):
     ```powershell
     & "D:\New folder\yolo\yolo_env_py310\Scripts\Activate.ps1"
     ```
-
+    & "C:\projects\final\industrial_oil_can_vision_system\venv\Scripts\Activate.ps1"
+  
   - CMD:
 
     ```cmd

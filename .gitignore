@@ -1,1 +1,9 @@
 /venv
+.venv
+__pycache__/
+.log
+*.pyc
+*.pyo
+logs/
+*.log
+__pycache__

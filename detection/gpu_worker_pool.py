@@ -159,10 +159,9 @@ class _InferenceThread(threading.Thread):
         # FPS accounting
         fps = self._update_fps(cam_id)
 
-        # Encode thumbnail
-        frame_data = self._encode(frame)
-
-        # Build result
+        # frame_data intentionally omitted — GUI reads SHM directly via FramePoller.
+        # Encoding JPEG here used to cost ~5ms per frame × 3 cameras × pool threads,
+        # and sent large byte payloads over the IPC queue for no benefit.
         det_dicts = [
             {"class_id": d.class_id, "class_name": d.class_name,
              "confidence": d.confidence, "bbox": list(d.bbox)}
@@ -174,7 +173,7 @@ class _InferenceThread(threading.Thread):
             detections=det_dicts,
             pair_results=pair_results,
             relay_states=relay_states,
-            frame_data=frame_data,
+            frame_data=None,
             inference_time_ms=self._inference_ms,
             fps=fps,
             problem_count=problem_count,

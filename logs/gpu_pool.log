@@ -341,3 +341,15 @@ AttributeError: 'PoolManager' object has no attribute 'b_lock'
 2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
 2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
 2026-03-12 14:40:03 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-03-30 10:01:39 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 10:01:39 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=3344 — shared-model pool, 2 inference threads
+2026-03-30 10:01:39 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 390, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 10:01:39 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
