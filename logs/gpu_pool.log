@@ -353,3 +353,207 @@ Traceback (most recent call last):
     raise err
 OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
 2026-03-30 10:01:39 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 10:22:03 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 10:22:03 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=12032 — shared-model pool, 2 inference threads
+2026-03-30 10:22:03 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 10:22:03 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:05:52 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:05:52 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=14324 — shared-model pool, 2 inference threads
+2026-03-30 11:05:52 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:05:52 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:40:17 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:40:17 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=14068 — shared-model pool, 2 inference threads
+2026-03-30 11:40:17 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:40:17 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:42:37 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:42:37 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=12200 — shared-model pool, 2 inference threads
+2026-03-30 11:42:37 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:42:37 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:42:48 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:42:48 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=13228 — shared-model pool, 2 inference threads
+2026-03-30 11:42:48 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:42:48 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:43:04 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:43:04 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=12676 — shared-model pool, 2 inference threads
+2026-03-30 11:43:04 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:43:04 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:43:25 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:43:25 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=10748 — shared-model pool, 2 inference threads
+2026-03-30 11:43:25 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:43:25 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:43:51 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:43:51 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=9996 — shared-model pool, 2 inference threads
+2026-03-30 11:43:51 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:43:51 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:44:25 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:44:25 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=8708 — shared-model pool, 2 inference threads
+2026-03-30 11:44:25 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:44:25 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 11:46:42 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 11:46:42 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=11308 — shared-model pool, 2 inference threads
+2026-03-30 11:46:42 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 11:46:42 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 12:30:22 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 12:30:22 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=11144 — shared-model pool, 2 inference threads
+2026-03-30 12:30:22 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 12:30:22 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 12:35:26 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 12:35:26 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=13236 — shared-model pool, 2 inference threads
+2026-03-30 12:35:26 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 12:35:26 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 12:37:47 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 12:37:47 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=10960 — shared-model pool, 2 inference threads
+2026-03-30 12:37:47 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 12:37:47 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 12:37:58 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 12:37:58 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=1528 — shared-model pool, 2 inference threads
+2026-03-30 12:37:58 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 12:37:58 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 12:38:14 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 12:38:14 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=13512 — shared-model pool, 2 inference threads
+2026-03-30 12:38:14 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 12:38:14 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 12:38:35 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 12:38:35 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=11220 — shared-model pool, 2 inference threads
+2026-03-30 12:38:35 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 12:38:35 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 12:39:01 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 12:39:01 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=8500 — shared-model pool, 2 inference threads
+2026-03-30 12:39:01 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load error: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 389, in _load_model
+    import torch
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 285, in <module>
+    _load_dll_libraries()
+  File "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\__init__.py", line 281, in _load_dll_libraries
+    raise err
+OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
+2026-03-30 12:39:01 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start

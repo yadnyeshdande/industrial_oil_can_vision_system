@@ -200,3 +200,40 @@
 2026-03-30 10:01:39 [INFO] [camera.camera_process] [Camera_0] PID=4456 starting
 2026-03-30 10:01:39 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
 2026-03-30 10:01:39 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-30 10:22:03 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-03-30 10:22:03 [INFO] [camera.camera_process] [Camera_0] PID=9428 starting
+2026-03-30 10:22:03 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 10:22:03 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-30 10:22:34 [INFO] [camera.camera_process] [Camera_0] Reconnecting in 2.0s
+2026-03-30 10:22:36 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:password@192.168.1.101:554/stream1
+2026-03-30 11:05:52 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-03-30 11:05:52 [INFO] [camera.camera_process] [Camera_0] PID=12188 starting
+2026-03-30 11:05:52 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 11:05:52 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-03-30 11:06:22 [INFO] [camera.camera_process] [Camera_0] Reconnecting in 2.0s
+2026-03-30 11:06:24 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-03-30 11:40:17 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-03-30 11:40:17 [INFO] [camera.camera_process] [Camera_0] PID=9140 starting
+2026-03-30 11:40:17 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 11:40:17 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-03-30 11:40:18 [INFO] [camera.camera_process] [Camera_0] Connected to RTSP
+2026-03-30 11:44:25 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-03-30 11:44:25 [INFO] [camera.camera_process] [Camera_0] PID=13720 starting
+2026-03-30 11:44:25 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 11:44:25 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-03-30 11:44:27 [INFO] [camera.camera_process] [Camera_0] Connected to RTSP
+2026-03-30 11:46:42 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-03-30 11:46:42 [INFO] [camera.camera_process] [Camera_0] PID=4952 starting
+2026-03-30 11:46:42 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 11:46:42 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-03-30 11:46:44 [INFO] [camera.camera_process] [Camera_0] Connected to RTSP
+2026-03-30 12:30:22 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-03-30 12:30:22 [INFO] [camera.camera_process] [Camera_0] PID=5440 starting
+2026-03-30 12:30:22 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 12:30:22 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-03-30 12:30:24 [INFO] [camera.camera_process] [Camera_0] Connected to RTSP
+2026-03-30 12:35:26 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-03-30 12:35:26 [INFO] [camera.camera_process] [Camera_0] PID=12200 starting
+2026-03-30 12:35:26 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 12:35:26 [INFO] [camera.camera_process] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-03-30 12:35:28 [INFO] [camera.camera_process] [Camera_0] Connected to RTSP

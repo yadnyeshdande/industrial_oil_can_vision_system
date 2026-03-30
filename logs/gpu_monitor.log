@@ -127,3 +127,17 @@
 2026-03-12 14:41:06 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=10648 starting
 2026-03-30 10:01:39 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
 2026-03-30 10:01:39 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=10256 starting
+2026-03-30 10:22:03 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-30 10:22:03 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=11428 starting
+2026-03-30 11:05:51 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-30 11:05:51 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=7672 starting
+2026-03-30 11:40:16 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-30 11:40:16 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=4012 starting
+2026-03-30 11:44:25 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-30 11:44:25 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=4652 starting
+2026-03-30 11:46:42 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-30 11:46:42 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=10768 starting
+2026-03-30 12:30:22 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-30 12:30:22 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=3700 starting
+2026-03-30 12:35:26 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-03-30 12:35:26 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=5032 starting

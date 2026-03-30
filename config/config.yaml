@@ -10,7 +10,7 @@ system:
 cameras:
   - id: 0
     name: "Camera_1"
-    rtsp_url: "rtsp://admin:password@192.168.1.101:554/stream1"
+    rtsp_url: "rtsp://admin:Pass_123@192.168.1.248:554/"
     enabled: true
     fps_limit: 12
     reconnect_base_delay: 2.0
@@ -23,7 +23,7 @@ cameras:
     memory_limit_mb: 400
   - id: 1
     name: "Camera_2"
-    rtsp_url: "rtsp://admin:password@192.168.1.102:554/stream1"
+    rtsp_url: "rtsp://admin:Pass_123@192.168.1.249:554/"
     enabled: true
     fps_limit: 12
     reconnect_base_delay: 2.0
@@ -36,7 +36,7 @@ cameras:
     memory_limit_mb: 400
   - id: 2
     name: "Camera_3"
-    rtsp_url: "rtsp://admin:password@192.168.1.103:554/stream1"
+    rtsp_url: "rtsp://admin:password@192.168.1.103:554/"
     enabled: true
     fps_limit: 12
     reconnect_base_delay: 2.0
