@@ -7,7 +7,7 @@ v2.2 fixes:
   - nvidia-ml-py replaces pynvml import alias
 """
 from __future__ import annotations
-import logging, multiprocessing as mp, os, signal, sys, time
+import logging, multiprocessing as mp, os, signal, sys, threading, time
 from dataclasses import dataclass, field
 from multiprocessing import Queue, Process, Event, Value
 from pathlib import Path
@@ -69,7 +69,16 @@ class Supervisor:
         self.log_dir = self.cfg.logging.log_dir
         self._heartbeat_q = mp.Queue(maxsize=500); self._supervisor_q = mp.Queue(maxsize=200)
         self._gui_cmd_q = mp.Queue(maxsize=100); self._health_q = mp.Queue(maxsize=50)
-        self._inference_q = mp.Queue(maxsize=60); self._result_q = mp.Queue(maxsize=200)
+        self._inference_q = mp.Queue(maxsize=60)
+        # ROOT CAUSE FIX: relay and GUI were BOTH reading from the same _result_q.
+        # Python Queue.get() is destructive — whoever calls it first takes the message.
+        # The two processes raced for detection results, so relay toggled randomly
+        # and the GUI showed wrong state.
+        # Fix: GPU pool writes to _result_q. A fanout thread copies every message
+        # to _relay_result_q (relay) and _gui_result_q (GUI) so both get everything.
+        self._result_q      = mp.Queue(maxsize=400)   # GPU pool writes here
+        self._relay_result_q= mp.Queue(maxsize=200)   # relay reads from here
+        self._gui_result_q  = mp.Queue(maxsize=200)   # GUI reads from here
         self._relay_state_q = mp.Queue(maxsize=100); self._preview_mode = Value('i', 1)  # start in preview
         self._processes: Dict[str, ManagedProcess] = {}
         self._running = False; self._start_time = time.time()
@@ -90,7 +99,27 @@ class Supervisor:
             self._start_all(detection_ok=True)
         self._running = True; self._supervision_loop()
 
+    def _start_fanout(self):
+        """Background thread: reads _result_q, copies each message to both
+        _relay_result_q and _gui_result_q.  Runs for the lifetime of the supervisor."""
+        def _loop():
+            while True:
+                try:
+                    msg = self._result_q.get(timeout=0.5)
+                except Exception:
+                    continue
+                # Relay queue
+                try: self._relay_result_q.put_nowait(msg)
+                except Exception: pass
+                # GUI queue
+                try: self._gui_result_q.put_nowait(msg)
+                except Exception: pass
+        t = threading.Thread(target=_loop, daemon=True, name="ResultFanout")
+        t.start()
+        logger.info("[Supervisor] Result fanout thread started")
+
     def _start_all(self, detection_ok):
+        self._start_fanout()   # must start before processes that read fan-out queues
         for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
         if detection_ok:
             if self.cfg.gpu_pool.enabled: self._start_gpu_pool()
@@ -141,7 +170,7 @@ class Supervisor:
         from relay.relay_process import relay_process_entry
         key = "relay"; stop_ev = Event()
         p = Process(target=relay_process_entry,
-            args=(self.config_path, self._result_q, self._relay_state_q,
+            args=(self.config_path, self._relay_result_q, self._relay_state_q,
                   self._heartbeat_q, stop_ev, self.log_dir),
             name=key, daemon=True)
         p.start()
@@ -152,7 +181,7 @@ class Supervisor:
         from gui.unified_gui import gui_process_entry
         key = "gui"; stop_ev = Event()
         p = Process(target=gui_process_entry,
-            args=(self.config_path, self._result_q, self._relay_state_q,
+            args=(self.config_path, self._gui_result_q, self._relay_state_q,
                   self._heartbeat_q, self._gui_cmd_q, self._health_q,
                   stop_ev, self._preview_mode, self.log_dir),
             name=key, daemon=True)

@@ -20,3 +20,45 @@ Traceback (most recent call last):
     _winapi.TerminateProcess(int(self._handle), TERMINATE)
 PermissionError: [WinError 5] Access is denied
 ================================================================================
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-03-30 19:54:43
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 493, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 88, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 99, in _start_all
+    self._start_relay()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 141, in _start_relay
+    from relay.relay_process import relay_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\relay\relay_process.py", line 66
+    if state: self._device.True(relay_num)
+                           ^^^^
+SyntaxError: invalid syntax
+================================================================================
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-03-30 20:14:10
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 522, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 97, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 128, in _start_all
+    self._start_relay()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 170, in _start_relay
+    from relay.relay_process import relay_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\relay\relay_process.py", line 66
+    if state: self._device.True(relay_num)
+                           ^^^^
+SyntaxError: invalid syntax
+================================================================================

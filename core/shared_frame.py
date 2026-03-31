@@ -94,6 +94,10 @@ class SharedFrameReader:
 
     def connect(self, timeout: float = 10.0) -> bool:
         """Attempt to open existing shared memory. Retries until timeout."""
+        if not self.name:
+            logger.error("SharedFrameReader cannot connect: empty shared memory name")
+            return False
+
         deadline = time.time() + timeout
         while time.time() < deadline:
             try:

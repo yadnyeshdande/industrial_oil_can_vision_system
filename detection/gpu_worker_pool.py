@@ -136,10 +136,14 @@ class _InferenceThread(threading.Thread):
 
     def _process(self, task: dict):
         cam_id  = task.get("camera_id")
-        shm     = task.get("shared_memory_name", "")
+        shm     = task.get("shm_name") or task.get("shared_memory_name", "")
         w       = task.get("frame_width",  1280)
         h       = task.get("frame_height", 720)
         t_req   = task.get("timestamp",    time.time())
+
+        if not shm:
+            logger.warning("[InferThread-%d] Invalid inference task: missing shm_name", self.tid)
+            return
 
         # Read frame from shared memory
         frame = self._read_frame(cam_id, shm, w, h)

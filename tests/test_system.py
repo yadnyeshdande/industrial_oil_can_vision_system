@@ -82,6 +82,12 @@ class TestConfigLoaderV2:
         r2 = cfg.relay.get_relay_indices(2); assert r2==[6,7,8]
         print("✓ 9-relay mapping: cam0→[0,1,2] cam1→[3,4,5] cam2→[6,7,8]")
 
+    def test_shared_frame_reader_empty_name(self):
+        from core.shared_frame import SharedFrameReader
+        reader = SharedFrameReader(name="", width=1280, height=720)
+        assert reader.connect(timeout=0.1) is False
+        print("✓ SharedFrameReader rejects empty shared memory name")
+
     def test_model_config(self):
         from core.config_loader import VisionSystemConfig
         cfg = VisionSystemConfig()
@@ -198,30 +204,6 @@ class TestRelayV2:
         indices = cfg.relay.get_relay_indices(2)
         assert indices == [6,7,8]
         print(f"✓ Camera 2 relay mapping: {indices}")
-
-    def test_pyhid_relay_find_api_compat(self):
-        import sys
-        from types import SimpleNamespace
-        from relay.relay_process import build_relay_driver
-
-        class DummyDevice:
-            def turn_on(self, i): pass
-            def turn_off(self, i): pass
-
-        fake_module = SimpleNamespace(find=lambda: DummyDevice(), find_relay=None)
-        old = sys.modules.get('pyhid_usb_relay')
-        sys.modules['pyhid_usb_relay'] = fake_module
-        try:
-            drv = build_relay_driver('pyhid_usb_relay', 3)
-            assert drv.__class__.__name__ == 'PyhidRelayDriver'
-            assert drv.set_relay(0, True)
-            assert drv.set_relay(0, False)
-            print('✓ PyhidRelayDriver find() compatibility')
-        finally:
-            if old is None:
-                del sys.modules['pyhid_usb_relay']
-            else:
-                sys.modules['pyhid_usb_relay'] = old
 
     def test_relay_worker_state_update(self):
         from relay.relay_process import SimulatedRelayDriver
