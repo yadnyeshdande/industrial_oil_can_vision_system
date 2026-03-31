@@ -557,3 +557,284 @@ Traceback (most recent call last):
     raise err
 OSError: [WinError 126] The specified module could not be found. Error loading "C:\projects\final\industrial_oil_can_vision_system\.venv\lib\site-packages\torch\lib\c10.dll" or one of its dependencies.
 2026-03-30 12:39:01 [CRITICAL] [detection.gpu_worker_pool] [PoolManager] Model load failed — pool cannot start
+2026-03-30 19:20:16 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 19:20:16 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=3684 — shared-model pool, 2 inference threads
+2026-03-30 19:20:51 [WARNING] [detection.gpu_worker_pool] [PoolManager] CUDA unavailable, using CPU
+2026-03-30 19:20:51 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model c:\projects\final\industrial_oil_can_vision_system\models\best.pt on cpu
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~0 MB
+2026-03-30 19:20:52 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-30 19:20:52 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-03-30 19:20:52 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-03-30 19:20:52 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-03-30 19:20:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-03-30 19:40:35 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 19:40:35 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=9100 — shared-model pool, 2 inference threads
+2026-03-30 19:40:38 [WARNING] [detection.gpu_worker_pool] [PoolManager] CUDA unavailable, using CPU
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model c:\projects\final\industrial_oil_can_vision_system\models\best.pt on cpu
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~0 MB
+2026-03-30 19:40:38 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-30 19:40:38 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-03-30 19:40:38 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-03-30 19:40:38 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-03-30 19:40:38 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-03-30 19:40:50 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:50 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:55 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:40:55 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:40:55 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:40:55 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:40:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:57 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:57 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:57 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:57 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:58 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:58 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:58 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:58 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:40:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:00 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:00 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:41:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:00 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:00 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:41:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:01 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:01 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:01 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:02 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:02 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:02 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:04 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:04 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:04 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:04 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:05 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:05 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:05 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:05 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:06 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:06 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:06 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:41:06 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:41:06 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:06 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:06 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:06 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:07 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:07 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:07 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:07 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:08 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:08 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:08 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:08 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:09 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:09 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:09 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:09 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:10 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:10 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:10 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:10 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:11 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:11 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:11 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:41:11 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:41:11 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:11 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:11 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:11 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:12 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:12 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:12 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:12 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:13 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:13 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:13 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:13 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:14 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:14 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:14 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:14 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:15 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:15 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:15 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:15 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:16 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:16 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:16 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:41:16 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:41:16 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:16 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:16 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:16 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:17 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:17 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:17 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:17 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:36 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-03-30 19:41:36 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=1708 — shared-model pool, 2 inference threads
+2026-03-30 19:41:39 [WARNING] [detection.gpu_worker_pool] [PoolManager] CUDA unavailable, using CPU
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model c:\projects\final\industrial_oil_can_vision_system\models\best.pt on cpu
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~0 MB
+2026-03-30 19:41:39 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-03-30 19:41:39 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-03-30 19:41:39 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-03-30 19:41:39 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-03-30 19:41:39 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-03-30 19:41:42 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:42 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:42 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:42 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:43 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:43 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:43 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:43 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:44 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:44 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:44 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:44 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:45 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:45 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:45 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:45 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:46 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:46 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:46 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:46 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:47 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:47 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:41:47 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:47 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:47 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:41:47 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:47 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:47 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:48 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:48 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:48 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:48 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:49 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:49 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:49 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:49 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:50 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:50 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:50 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:50 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:51 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:52 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:52 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:41:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:52 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:52 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:41:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:52 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:53 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:54 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:55 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:56 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:57 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:57 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:41:57 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:57 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:41:57 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:41:57 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:57 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:58 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:58 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:58 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:41:59 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:00 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:01 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:01 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:01 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:01 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:02 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:02 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:02 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:42:02 [WARNING] [detection.gpu_worker_pool] [InferThread-0] Cannot connect to shm 
+2026-03-30 19:42:02 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:02 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: 
+2026-03-30 19:42:02 [WARNING] [detection.gpu_worker_pool] [InferThread-1] Cannot connect to shm 
+2026-03-30 19:42:02 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''
+2026-03-30 19:42:03 [WARNING] [core.shared_frame] SharedFrameReader connect error: [WinError 6] The handle is invalid: ''

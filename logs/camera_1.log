@@ -268,3 +268,18 @@ OSError: [WinError 1455] The paging file is too small for this operation to comp
 2026-03-30 12:35:26 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
 2026-03-30 12:35:26 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
 2026-03-30 12:35:28 [INFO] [camera.camera_process] [Camera_1] Connected to RTSP
+2026-03-30 19:20:16 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-30 19:20:16 [INFO] [camera.camera_process] [Camera_1] PID=10292 starting
+2026-03-30 19:20:16 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 19:20:16 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-03-30 19:20:19 [INFO] [camera.camera_process] [Camera_1] Connected to RTSP
+2026-03-30 19:40:35 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-30 19:40:35 [INFO] [camera.camera_process] [Camera_1] PID=2916 starting
+2026-03-30 19:40:35 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 19:40:35 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-03-30 19:40:37 [INFO] [camera.camera_process] [Camera_1] Connected to RTSP
+2026-03-30 19:41:36 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-03-30 19:41:36 [INFO] [camera.camera_process] [Camera_1] PID=7492 starting
+2026-03-30 19:41:36 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-03-30 19:41:36 [INFO] [camera.camera_process] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-03-30 19:41:38 [INFO] [camera.camera_process] [Camera_1] Connected to RTSP

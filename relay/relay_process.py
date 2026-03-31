@@ -48,8 +48,11 @@ class PyhidRelayDriver(RelayDriver):
         super().__init__(relay_count); self._device = None
     def initialize(self):
         try:
-            from pyhid_usb_relay import find_relay
-            self._device = find_relay()
+            import pyhid_usb_relay
+            find_fn = getattr(pyhid_usb_relay, "find_relay", None) or getattr(pyhid_usb_relay, "find", None)
+            if not callable(find_fn):
+                logger.error("[PyhidRelay] pyhid_usb_relay has no find/find_relay API"); return False
+            self._device = find_fn()
             if self._device is None:
                 logger.error("[PyhidRelay] No device found"); return False
             logger.info("[PyhidRelay] Device found: %s", self._device); return True
