@@ -92,17 +92,33 @@ class FrameReadyMessage(BaseMessage):
 
 @dataclass
 class DetectionResultMessage(BaseMessage):
-    type: MessageType = field(default=MessageType.DETECTION_RESULT,init=False)
+    type: MessageType = field(default=MessageType.DETECTION_RESULT, init=False)
     detections: List[Dict] = field(default_factory=list)
     pair_results: List[Dict] = field(default_factory=list)
-    inference_time_ms: float = 0.0; fps: float = 0.0
-    total_detections: int = 0; problem_count: int = 0; success_rate: float = 100.0
-    frame_shape: Tuple = (720,1280,3); frame_data: Optional[bytes] = None
+    relay_states: List[bool] = field(default_factory=list)   # ← ADD THIS
+    inference_time_ms: float = 0.0
+    fps: float = 0.0
+    total_detections: int = 0
+    problem_count: int = 0
+    success_rate: float = 100.0
+    frame_shape: Tuple = (720, 1280, 3)
+    frame_data: Optional[bytes] = None
+
     def to_dict(self):
-        d=super().to_dict(); d.update({"detections":self.detections,"pair_results":self.pair_results,
-            "inference_time_ms":self.inference_time_ms,"fps":self.fps,
-            "total_detections":self.total_detections,"problem_count":self.problem_count,
-            "success_rate":self.success_rate,"frame_shape":self.frame_shape,"frame_data":self.frame_data}); return d
+        d = super().to_dict()
+        d.update({
+            "detections": self.detections,
+            "pair_results": self.pair_results,
+            "relay_states": self.relay_states,               # ← ADD THIS
+            "inference_time_ms": self.inference_time_ms,
+            "fps": self.fps,
+            "total_detections": self.total_detections,
+            "problem_count": self.problem_count,
+            "success_rate": self.success_rate,
+            "frame_shape": self.frame_shape,
+            "frame_data": self.frame_data,
+        })
+        return d
 
 @dataclass
 class HeartbeatMessage(BaseMessage):

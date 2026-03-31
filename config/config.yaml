@@ -91,7 +91,7 @@ detection:
 
 relay:
   enabled: true
-  library: "simulated"
+  library: "pyhid_usb_relay"  # was "Pyhid" — must be exactly this string 
   retry_attempts: 3
   retry_delay_seconds: 0.5
   reinit_after_failures: 5

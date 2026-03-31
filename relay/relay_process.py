@@ -133,7 +133,7 @@ class RelayWorker:
                 self._write_relay(i, new_states[i])
 
         # Broadcast relay state
-        state_msg = RelayStateMessage(
+        state_msg = RelayStateMessage(  
             source=ProcessSource.RELAY,
             camera_id=camera_id,
             relay_states=list(self._cached_states),

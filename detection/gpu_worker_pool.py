@@ -173,10 +173,11 @@ class _InferenceThread(threading.Thread):
         ]
         sr = 0.0
         msg: dict = DetectionResultMessage(
+            source=ProcessSource.GPU_POOL,      # ← was missing — BaseMessage requires this
             camera_id=cam_id,
             detections=det_dicts,
             pair_results=pair_results,
-            relay_states=relay_states,
+            relay_states=relay_states,          # ← relay process needs this to trigger relay activations without waiting for the GUI to read the result message
             frame_data=None,
             inference_time_ms=self._inference_ms,
             fps=fps,
@@ -232,12 +233,37 @@ class _InferenceThread(threading.Thread):
         if bset is None:
             return [], [], 0
         try:
-            pair_results  = bset.evaluate(detections)
-            relay_states  = [p.get("relay_active", False) for p in pair_results]
-            problem_count = sum(1 for p in pair_results if p.get("relay_active", False))
-            return pair_results, relay_states, problem_count
+            frame_h, frame_w = frame.shape[:2]
+
+            # Read class IDs directly from config — no fragile .index() lookup
+            oc_class_id = self.mcfg.oil_can_class_id   # = 0 per config.yaml
+            bh_class_id = self.mcfg.bunk_hole_class_id # = 1 per config.yaml
+
+            pair_results = bset.evaluate(
+                detections, frame_w, frame_h,
+                oc_class_id, bh_class_id
+            )
+
+            relay_states  = [p.relay_active for p in pair_results]
+            problem_count = sum(1 for p in pair_results if p.relay_active)
+
+            # Serialise PairResult dataclasses → dicts for IPC queue
+            pair_dicts = [
+                {
+                    "pair_id":           p.pair_id,
+                    "pair_name":         p.pair_name,
+                    "oil_can_present":   p.oil_can_present,
+                    "bunk_hole_present": p.bunk_hole_present,
+                    "status":            p.status.value,
+                    "relay_index":       p.relay_index,
+                    "relay_active":      p.relay_active,
+                }
+                for p in pair_results
+            ]
+            return pair_dicts, relay_states, problem_count
+
         except Exception as e:
-            logger.debug("[InferThread-%d] boundary eval error: %s", self.tid, e)
+            logger.error("[InferThread-%d] boundary eval error: %s", self.tid, e, exc_info=True)
             return [], [], 0
 
     def _update_fps(self, cam_id) -> float:

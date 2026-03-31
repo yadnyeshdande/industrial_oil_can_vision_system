@@ -62,3 +62,24 @@ Traceback (most recent call last):
                            ^^^^
 SyntaxError: invalid syntax
 ================================================================================
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-03-30 23:34:36
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 522, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 97, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 125, in _start_all
+    if self.cfg.gpu_pool.enabled: self._start_gpu_pool()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 145, in _start_gpu_pool
+    from detection.gpu_worker_pool import pool_manager_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\detection\gpu_worker_pool.py", line 231
+    with self.b_lock:
+    ^^^^
+IndentationError: expected an indented block after function definition on line 230
+================================================================================
