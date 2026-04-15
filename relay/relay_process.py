@@ -44,39 +44,60 @@ class SimulatedRelayDriver(RelayDriver):
 
 
 class PyhidRelayDriver(RelayDriver):
+    """
+    Correct pyhid_usb_relay API (>= 0.0.2):
+        import pyhid_usb_relay
+        device = pyhid_usb_relay.find()          # NOT find_relay()
+        device.set_state(channel_1based, True)   # NOT turn_on() / turn_off()
+    """
     def __init__(self, relay_count):
         super().__init__(relay_count); self._device = None
+
     def initialize(self):
         try:
-            from pyhid_usb_relay import find_relay
-            self._device = find_relay()
+            import pyhid_usb_relay
+            self._device = pyhid_usb_relay.find()
             if self._device is None:
-                logger.error("[PyhidRelay] No device found"); return False
-            logger.info("[PyhidRelay] Device found: %s", self._device); return True
+                logger.error("[PyhidRelay] No USB relay device found — is it plugged in?")
+                return False
+            logger.info("[PyhidRelay] USB relay device found: %s", self._device)
+            return True
         except ImportError:
-            logger.error("[PyhidRelay] pyhid_usb_relay not installed"); return False
+            logger.error(
+                "[PyhidRelay] pyhid_usb_relay not installed. "
+                "Run: pip install pyhid-usb-relay hid  "
+                "(Windows: also run fix_pyhid_libusb.py)"
+            )
+            return False
         except Exception as e:
             logger.error("[PyhidRelay] Init error: %s", e); return False
+
     def set_relay(self, index, state):
         try:
-            relay_num = index+1
-            if state: self._device.turn_on(relay_num)
-            else: self._device.turn_off(relay_num)
+            self._device.set_state(index + 1, bool(state))  # 1-based channel
             return True
         except Exception as e:
-            logger.error("[PyhidRelay] set_relay(%d,%s) error: %s", index, state, e); return False
+            logger.error("[PyhidRelay] set_relay(ch=%d, state=%s) error: %s",
+                         index + 1, state, e)
+            return False
+
     def close(self):
         if self._device:
             for i in range(self.relay_count):
-                try: self._device.turn_off(i+1)
+                try: self._device.set_state(i + 1, False)
                 except Exception: pass
+            logger.info("[PyhidRelay] All relays off, device closed")
 
 
 def build_relay_driver(library, relay_count) -> RelayDriver:
     if library == "pyhid_usb_relay":
         drv = PyhidRelayDriver(relay_count)
         if drv.initialize(): return drv
-        logger.warning("Falling back to simulated relay")
+        logger.warning(
+            "[Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. "
+            "Physical relay outputs will NOT fire. "
+            "Check USB connection and install: pip install pyhid-usb-relay hid"
+        )
     drv = SimulatedRelayDriver(relay_count)
     drv.initialize()
     return drv
@@ -127,13 +148,13 @@ class RelayWorker:
             if 0 <= global_relay_idx < self.rcfg.relay_count:
                 new_states[global_relay_idx] = bool(pr.get("relay_active", False))
 
-        # Write only changed relays
+        # Write only changed relays; _cached_states updated inside _write_relay
         for i in range(self.rcfg.relay_count):
             if new_states[i] != self._cached_states[i]:
                 self._write_relay(i, new_states[i])
 
-        # Broadcast relay state
-        state_msg = RelayStateMessage(  
+        # Broadcast AFTER all writes so the GUI sees the real current state
+        state_msg = RelayStateMessage(
             source=ProcessSource.RELAY,
             camera_id=camera_id,
             relay_states=list(self._cached_states),
@@ -158,13 +179,20 @@ class RelayWorker:
             self._reinit_device()
 
     def _reinit_device(self):
+        # BUG FIX: turn all relays OFF on the current driver before discarding it.
+        # Without this, _cached_states is reset to all-False but the physical relay
+        # board still has channels energised — they would stay stuck ON.
         try:
-            if self._driver: self._driver.close()
+            if self._driver:
+                for i in range(self.rcfg.relay_count):
+                    try: self._driver.set_relay(i, False)
+                    except Exception: pass
+                self._driver.close()
         except Exception: pass
         time.sleep(1.0)
         self._driver = build_relay_driver(self.rcfg.library, self.rcfg.relay_count)
         self._consecutive_failures = 0
-        self._cached_states = [False]*self.rcfg.relay_count
+        self._cached_states = [False] * self.rcfg.relay_count
 
     def _all_off(self):
         if self._driver:
@@ -199,6 +227,20 @@ def relay_process_entry(config_path, result_queue, state_out_queue,
     def _sig(s,f): stop_event.set()
     signal.signal(signal.SIGTERM, _sig)
     worker = RelayWorker(cfg, result_queue, state_out_queue, heartbeat_queue, stop_event)
-    try: worker.run()
+    try:
+        worker.run()
     except Exception as e:
-        logger.critical("[relay] Fatal: %s", e, exc_info=True); sys.exit(1)
+        logger.critical("[relay] Fatal: %s", e, exc_info=True)
+    finally:
+        # BUG FIX: guarantee all relays are turned OFF on any exit path —
+        # clean shutdown, unhandled exception, or SIGTERM.
+        # Without this finally block, a crash left physical relays stuck ON.
+        try:
+            if worker._driver:
+                for i in range(worker.rcfg.relay_count):
+                    try: worker._driver.set_relay(i, False)
+                    except Exception: pass
+                logger.info("[relay] All relays forced OFF on exit")
+        except Exception:
+            pass
+        sys.exit(0)
