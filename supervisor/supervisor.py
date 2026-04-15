@@ -79,7 +79,11 @@ class Supervisor:
         self._result_q      = mp.Queue(maxsize=400)   # GPU pool writes here
         self._relay_result_q= mp.Queue(maxsize=200)   # relay reads from here
         self._gui_result_q  = mp.Queue(maxsize=200)   # GUI reads from here
-        self._relay_state_q = mp.Queue(maxsize=100); self._preview_mode = Value('i', 1)  # start in preview
+        self._relay_state_q = mp.Queue(maxsize=100)
+        # BUG FIX: was hardcoded Value('i', 1) — always preview ON, detection never ran.
+        # Now respects config.yaml  gui.start_in_preview_mode  (default: false).
+        _preview_init = 1 if self.cfg.gui.start_in_preview_mode else 0
+        self._preview_mode = Value('i', _preview_init)
         self._processes: Dict[str, ManagedProcess] = {}
         self._running = False; self._start_time = time.time()
         self._last_health_log = time.time(); self._last_daily_restart = time.time()

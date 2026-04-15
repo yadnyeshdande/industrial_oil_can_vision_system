@@ -49,6 +49,56 @@ from core.boundary_engine import CameraBoundarySet
 logger = logging.getLogger(__name__)
 
 
+# ---------------------------------------------------------------------------
+# Boundary data normaliser
+# camera_X_boundaries.json uses the flat format:
+#   {"camera_id": 0, "oil_can": [...], "bunk_hole": [...]}
+# but CameraBoundarySet expects the nested format:
+#   {"camera_id": 0, "boundaries": {"oil_can": [...], "bunk_hole": [...]}, "pairs": [...]}
+# This function converts between the two. gpu_worker_pool.py already does this;
+# detection_process.py was missing the step, so CameraBoundarySet was built with
+# 0 pairs and evaluate() always returned [] — detections silently dropped.
+# ---------------------------------------------------------------------------
+def _normalize_boundary_data(data: dict, camera_id: int,
+                              relay_mapping: Optional[List[int]] = None) -> dict:
+    """Return boundary data in the nested form CameraBoundarySet expects."""
+    if "boundaries" in data and "pairs" in data:
+        return data   # already normalised
+
+    oc_raw = data.get("oil_can", [])
+    bh_raw = data.get("bunk_hole", [])
+
+    def _to_boundary(item: dict, idx: int) -> dict:
+        bid     = item.get("id", f"B{idx}")
+        polygon = item.get("polygon", item.get("points", []))
+        return {"id": bid, "name": bid, "type": "polygon", "points": polygon, "pair": ""}
+
+    oc_boundaries = [_to_boundary(b, i) for i, b in enumerate(oc_raw)]
+    bh_boundaries = [_to_boundary(b, i) for i, b in enumerate(bh_raw)]
+
+    pairs: List[dict] = []
+    for i in range(min(len(oc_boundaries), len(bh_boundaries))):
+        oc_id = oc_boundaries[i]["id"]
+        bh_id = bh_boundaries[i]["id"]
+        oc_boundaries[i]["pair"] = bh_id
+        bh_boundaries[i]["pair"] = oc_id
+        relay_idx = (relay_mapping[i] if relay_mapping and i < len(relay_mapping)
+                     else camera_id * 3 + i)
+        pairs.append({
+            "id":                 i,
+            "name":               f"Pair {i + 1}",
+            "oil_can_boundary":   oc_id,
+            "bunk_hole_boundary": bh_id,
+            "relay_index":        relay_idx,
+        })
+
+    return {
+        "camera_id":  camera_id,
+        "boundaries": {"oil_can": oc_boundaries, "bunk_hole": bh_boundaries},
+        "pairs":      pairs,
+    }
+
+
 class DetectionWorker:
     """
     Core detection loop for one camera.
@@ -109,9 +159,22 @@ class DetectionWorker:
             logger.critical("[%s] Model load failed, exiting", self.name)
             return
 
-        # Load boundaries
+        # Load and normalise boundaries
+        # BUG FIX: the raw JSON is flat {"oil_can":[...],"bunk_hole":[...]} but
+        # CameraBoundarySet expects {"boundaries":{...},"pairs":[...]}.
+        # gpu_worker_pool normalises this via _normalize_boundary_data(); this
+        # code path was missing that step so CameraBoundarySet was built with
+        # 0 pairs and evaluate() always returned [] — all detections were silently
+        # dropped and relays never triggered.
         boundary_data = self.cfg.load_boundaries(self.camera_id)
         if boundary_data:
+            try:
+                relay_indices = self.cfg.relay.get_relay_indices(self.camera_id)
+            except Exception:
+                relay_indices = None
+            boundary_data = _normalize_boundary_data(
+                boundary_data, self.camera_id, relay_indices
+            )
             self._boundary_set = CameraBoundarySet(
                 boundary_data,
                 strict_mode=self.dcfg.strict_boundary_mode
@@ -245,10 +308,22 @@ class DetectionWorker:
             import torch
             from ultralytics import YOLO
 
+            # BUG FIX: bare relative path "models/best.pt" fails when the
+            # subprocess CWD differs from the project root. Resolve via _ROOT
+            # (same pattern gpu_worker_pool.py already uses correctly).
             model_path = Path(self.dcfg.model_path)
+            if not model_path.is_absolute():
+                model_path = _ROOT / model_path
             if not model_path.exists():
-                logger.error("[%s] Model not found: %s", self.name, model_path)
-                return False
+                # Secondary fallback: try config.model.path
+                alt = Path(self.cfg.model.path) if hasattr(self.cfg, "model") else model_path
+                if not alt.is_absolute():
+                    alt = _ROOT / alt
+                if alt.exists():
+                    model_path = alt
+                else:
+                    logger.error("[%s] Model not found at %s or %s", self.name, model_path, alt)
+                    return False
 
             # Stability: disable cudnn benchmark
             torch.backends.cudnn.benchmark = False
