@@ -3072,3 +3072,162 @@ IndentationError: expected an indented block after function definition on line 2
 2026-04-15 14:32:37 [INFO] [supervisor.supervisor] Supervision loop ending
 2026-04-15 14:32:37 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
 2026-04-15 14:32:37 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-04-15 15:06:12 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-15 15:06:12 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-15 15:06:12 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 15:06:12 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-15 15:06:12 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 15:06:12 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-15 15:06:12 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Started camera_0 PID=280
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Started camera_1 PID=5232
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Started camera_2 PID=1368
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Started gpu_pool PID=1392 (daemon=False, spawns GPU worker children)
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Started relay PID=9196
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Started gui PID=8996
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Started gpu_monitor PID=1532
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] All processes started.
+2026-04-15 15:06:13 [INFO] [supervisor.supervisor] Supervision loop running
+2026-04-15 15:06:45 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-15 15:06:45 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-15 15:06:45 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=313.7MB fps=0.0
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=29.8MB fps=0.0
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=47.4MB fps=0.0
+2026-04-15 15:07:13 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=21.8MB fps=0.0
+2026-04-15 15:07:18 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-15 15:07:18 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-15 15:07:18 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-15 15:07:52 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-15 15:07:52 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-15 15:07:52 [ERROR] [supervisor.supervisor] [camera] cam=0 ConnectionFailed: RTSP failed: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m00s
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=84.7MB fps=0.0
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=359.4MB fps=0.0
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=29.8MB fps=0.0
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=55.7MB fps=0.0
+2026-04-15 15:08:13 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=21.7MB fps=0.0
+2026-04-15 15:08:30 [ERROR] [supervisor.supervisor] [camera] cam=1 ConnectionFailed: RTSP failed: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-15 15:08:30 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor] [Health] Uptime 00h03m01s
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=94.1MB fps=10.9
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=93.3MB fps=11.0
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=374.2MB fps=0.0
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=29.8MB fps=0.0
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=58.5MB fps=0.0
+2026-04-15 15:09:14 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=21.7MB fps=0.0
+2026-04-15 15:09:18 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-15 15:09:48 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-04-15 15:09:48 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-04-15 15:09:48 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-04-15 15:09:48 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-04-15 20:05:35 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-15 20:05:35 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-15 20:05:35 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:05:35 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-15 20:05:35 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:05:35 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-15 20:05:35 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-15 20:05:36 [CRITICAL] [root] UNHANDLED EXCEPTION in supervisor
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)
+2026-04-15 20:06:11 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-15 20:06:11 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-15 20:06:11 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:06:11 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-15 20:06:11 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:06:11 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-15 20:06:11 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-15 20:06:12 [CRITICAL] [root] UNHANDLED EXCEPTION in supervisor
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)
+2026-04-15 20:14:56 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-15 20:14:56 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-15 20:14:56 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:14:56 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-15 20:14:56 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:14:56 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-15 20:14:56 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-15 20:14:57 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-15 20:14:57 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-15 20:14:57 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:14:57 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-15 20:14:57 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:14:57 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-15 20:14:57 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-15 20:14:58 [CRITICAL] [root] UNHANDLED EXCEPTION in supervisor
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)
+2026-04-15 20:16:35 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-15 20:16:35 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-15 20:16:35 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:16:35 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-15 20:16:35 [INFO] [supervisor.supervisor] ============================================================
+2026-04-15 20:16:35 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-15 20:16:35 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-15 20:16:35 [CRITICAL] [root] UNHANDLED EXCEPTION in supervisor
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)

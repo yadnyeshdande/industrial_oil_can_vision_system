@@ -151,6 +151,17 @@ class ErrorMessage(BaseMessage):
         d=super().to_dict(); d.update({"error_type":self.error_type,"error_msg":self.error_msg,"traceback":self.traceback,"severity":self.severity}); return d
 
 @dataclass
+class ProcessStatusMessage(BaseMessage):
+    type: MessageType = field(default=MessageType.PROCESS_STATUS, init=False)
+    connected: bool = False
+    fps: float = 0.0
+    status: str = "running"
+    def to_dict(self):
+        d = super().to_dict()
+        d.update({"connected": self.connected, "fps": self.fps, "status": self.status})
+        return d
+
+@dataclass
 class GPUStatsMessage(BaseMessage):
     type: MessageType = field(default=MessageType.GPU_STATS,init=False)
     source: ProcessSource = field(default=ProcessSource.GPU_MONITOR,init=False)
@@ -211,6 +222,15 @@ def make_heartbeat(source,camera_id,process_name,pid,memory_mb,fps,status="runni
 def make_error(source,camera_id,error_type,error_msg,traceback="",severity="error"):
     return ErrorMessage(source=source,camera_id=camera_id,error_type=error_type,
         error_msg=error_msg,traceback=traceback,severity=severity)
+
+def make_heartbeat_msg(source,camera_id,process_name,pid,memory_mb,fps,status="running",extra=None):
+    return make_heartbeat(source,camera_id,process_name,pid,memory_mb,fps,status=status,extra=extra)
+
+def make_error_msg(source,camera_id,error_type,error_msg,traceback="",severity="error"):
+    return make_error(source,camera_id,error_type,error_msg,traceback=traceback,severity=severity)
+
+def make_camera_status_msg(camera_id,fps,connected,source=ProcessSource.CAMERA,status="running"):
+    return ProcessStatusMessage(source=source,camera_id=camera_id,fps=fps,connected=connected,status=status)
 
 def make_inference_request(camera_id,shm_name,frame_shape,frame_index):
     return InferenceRequestMessage(source=ProcessSource.CAMERA,camera_id=camera_id,

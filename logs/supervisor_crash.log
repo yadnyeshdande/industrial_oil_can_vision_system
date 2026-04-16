@@ -83,3 +83,83 @@ Traceback (most recent call last):
     ^^^^
 IndentationError: expected an indented block after function definition on line 230
 ================================================================================
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-04-15 20:05:36
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)
+================================================================================
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-04-15 20:06:12
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)
+================================================================================
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-04-15 20:14:58
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)
+================================================================================
+
+================================================================================
+CRASH DUMP [supervisor] @ 2026-04-15 20:16:35
+Traceback (most recent call last):
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 55, in <module>
+    main()
+  File "c:\projects\final\industrial_oil_can_vision_system\main.py", line 51, in main
+    run_supervisor(config_path)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 526, in run_supervisor
+    Supervisor(config_path).start()
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 101, in start
+    logger.info("Model OK: %s", self.cfg.model.path); self._start_all(detection_ok=True)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 127, in _start_all
+    for cam_id in self.cfg.camera_ids: self._start_camera(cam_id)
+  File "c:\projects\final\industrial_oil_can_vision_system\supervisor\supervisor.py", line 138, in _start_camera
+    from camera.camera_process import camera_process_entry
+  File "c:\projects\final\industrial_oil_can_vision_system\camera\camera_process.py", line 44, in <module>
+    from core.ipc_schema import (
+ImportError: cannot import name 'make_heartbeat_msg' from 'core.ipc_schema' (c:\projects\final\industrial_oil_can_vision_system\core\ipc_schema.py)
+================================================================================

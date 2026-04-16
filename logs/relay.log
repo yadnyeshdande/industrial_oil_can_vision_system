@@ -208,3 +208,14 @@
 2026-04-15 14:20:53 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
 2026-04-15 14:32:36 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
 2026-04-15 14:32:36 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-15 15:06:14 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-15 15:06:14 [INFO] [relay.relay_process] [Relay] PID=9196 starting (9 relays)
+2026-04-15 15:06:14 [INFO] [relay.relay_process] [PyhidRelay] USB relay device found: <pyhid_usb_relay.controller.Controller object at 0x000002B2189E84C0>
+2026-04-15 15:08:12 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-15 15:08:12 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-15 15:08:12 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-15 15:08:49 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-15 15:08:49 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-15 15:08:49 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-15 15:09:48 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
+2026-04-15 15:09:48 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
