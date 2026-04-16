@@ -25,7 +25,7 @@ Fixes applied
 
 6. SHARED MEMORY WRITE MODEL  →  Frames are written to shared memory with the
    "overwrite" model (no Queue backlog), exactly matching the IPC schema in the
-   README.  A frame_ready Event signals the detection process without polling.
+   README.
 """
 
 from __future__ import annotations
@@ -33,6 +33,8 @@ from __future__ import annotations
 import logging
 import multiprocessing as mp
 import os
+import signal
+import sys
 import time
 import threading
 from typing import Optional
@@ -41,14 +43,16 @@ import cv2
 import numpy as np
 
 # ── project-local imports (adjust if your package layout differs) ──────────────
+from core.config_loader import VisionSystemConfig
 from core.ipc_schema import (
-    make_heartbeat_msg,
-    make_camera_status_msg,
-    make_error_msg,
+    ProcessSource,
+    make_heartbeat,
+    make_error,
+    make_inference_request,
 )
-from core.shared_frame import SharedFrame
-from core.config_loader import get_config
-from core.logging_setup import setup_process_logger
+from core.shared_frame import SharedFrameWriter
+from core.logging_setup import setup_process_logging, setup_crash_handler
+from core.resource_monitor import get_process_memory_mb, is_memory_over_limit
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -69,47 +73,46 @@ class BufferlessCapture:
     """
 
     def __init__(self, rtsp_url: str, camera_id: int, logger: logging.Logger) -> None:
-        self.rtsp_url  = rtsp_url
+        self.rtsp_url = rtsp_url
         self.camera_id = camera_id
-        self.logger    = logger
+        self.logger = logger
 
-        self._cap:   Optional[cv2.VideoCapture] = None
-        self._lock   = threading.Lock()
-        self._frame: Optional[np.ndarray]       = None
+        self._cap: Optional[cv2.VideoCapture] = None
+        self._lock = threading.Lock()
+        self._frame: Optional[np.ndarray] = None
         self._frame_available = threading.Event()
-        self._stop   = threading.Event()
+        self._stop = threading.Event()
         self._thread: Optional[threading.Thread] = None
         self._connected = False
 
-    # ── public API ─────────────────────────────────────────────────────────────
-
     def open(self) -> bool:
         """Open the RTSP stream and start the background grab thread."""
-        url = self._make_tcp_url(self.rtsp_url)
+        # ✅ CORRECT: set FFmpeg TCP transport as env var BEFORE VideoCapture
+        # ❌ WRONG (my mistake): appending ?rtsp_transport=tcp to the URL — causes 404
+        os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
+
+        url = self.rtsp_url          # ← use the URL exactly as it is in config.yaml
         self.logger.info(f"[cam{self.camera_id}] Opening RTSP: {url}")
 
         cap = cv2.VideoCapture(url, cv2.CAP_FFMPEG)
-
-        # FIX 4 — minimise the FFmpeg ring-buffer as a belt-and-braces measure
         cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+        # ... rest of the method unchanged
 
         if not cap.isOpened():
             self.logger.error(f"[cam{self.camera_id}] Failed to open stream.")
             cap.release()
             return False
 
-        # Log what the camera reported back
-        w   = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        h   = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
         self.logger.info(f"[cam{self.camera_id}] Stream opened — {w}×{h} @ {fps:.1f} FPS")
 
-        self._cap        = cap
+        self._cap = cap
         self._native_fps = fps
-        self._connected  = True
+        self._connected = True
         self._stop.clear()
 
-        # Start the background grab thread (daemon so it dies with the process)
         self._thread = threading.Thread(
             target=self._grab_loop,
             name=f"grab-cam{self.camera_id}",
@@ -119,11 +122,7 @@ class BufferlessCapture:
         return True
 
     def read(self) -> tuple[bool, Optional[np.ndarray]]:
-        """
-        Return (True, frame) with the **latest** live frame, or (False, None).
-
-        Blocks for at most 1 s waiting for a frame to be grabbed.
-        """
+        """Return (True, frame) with the latest live frame, or (False, None)."""
         if not self._connected:
             return False, None
 
@@ -133,7 +132,7 @@ class BufferlessCapture:
 
         with self._lock:
             frame = self._frame
-            self._frame_available.clear()   # reset — next grab will set it again
+            self._frame_available.clear()
 
         if frame is None:
             return False, None
@@ -153,14 +152,7 @@ class BufferlessCapture:
     def is_connected(self) -> bool:
         return self._connected
 
-    # ── internal ───────────────────────────────────────────────────────────────
-
     def _grab_loop(self) -> None:
-        """
-        FIX 1 — runs in a daemon thread; continuously drains the OpenCV buffer
-        via grab().  This is what keeps the latency at true ~0 ms network RTT
-        instead of buffer_depth / camera_fps seconds.
-        """
         interval = 1.0 / max(self._native_fps, 1.0)
 
         while not self._stop.is_set():
@@ -176,28 +168,21 @@ class BufferlessCapture:
                 self._connected = False
                 break
 
-            # Decode the frame (cheap — just YUV→BGR on the already-grabbed data)
             with self._lock:
                 ret, frame = self._cap.retrieve()
 
             if ret and frame is not None:
                 with self._lock:
                     self._frame = frame
-                self._frame_available.set()   # signal: fresh frame is ready
+                self._frame_available.set()
 
-            # FIX 3 — throttle grab loop to the camera's native FPS; avoids
-            # spinning at 100 % CPU even when the network is fast.
             elapsed = time.monotonic() - t0
             sleep_t = interval - elapsed
             if sleep_t > 0:
-                time.sleep(sleep_t)       # FIX 2 — never busy-wait
+                time.sleep(sleep_t)
 
     @staticmethod
     def _make_tcp_url(url: str) -> str:
-        """
-        FIX 5 — append ?rtsp_transport=tcp if there is no query string yet.
-        TCP eliminates UDP packet-loss which causes blocking reads and stutter.
-        """
         if "rtsp_transport" not in url:
             sep = "&" if "?" in url else "?"
             url = f"{url}{sep}rtsp_transport=tcp"
@@ -208,161 +193,217 @@ class BufferlessCapture:
 # 2.  CAMERA PROCESS ENTRY POINT
 # ──────────────────────────────────────────────────────────────────────────────
 
-def camera_process(
-    camera_id:       int,
-    rtsp_url:        str,
-    shared_frame:    SharedFrame,
-    control_queue:   mp.Queue,
-    heartbeat_queue: mp.Queue,
-    stop_event:      mp.Event,
-) -> None:
-    """
-    Main camera process.
+class CameraWorker:
+    def __init__(
+        self,
+        cam_cfg,
+        inference_queue: mp.Queue,
+        heartbeat_queue: mp.Queue,
+        stop_event: mp.Event,
+        preview_mode: mp.Value,
+    ):
+        self.cfg = cam_cfg
+        self.inference_queue = inference_queue
+        self.heartbeat_queue = heartbeat_queue
+        self.stop_event = stop_event
+        self.preview_mode = preview_mode
+        self.pid = os.getpid()
+        self.camera_id = cam_cfg.id
+        self.name = f"Camera_{cam_cfg.id}"
+        self._cap: Optional[BufferlessCapture] = None
+        self._shm_writer: Optional[SharedFrameWriter] = None
+        self._frame_count = 0
+        self._fps = 0.0
+        self._last_fps_time = time.time()
+        self._last_heartbeat = time.time()
+        self._reconnect_delay = cam_cfg.reconnect_base_delay
+        self._reconnect_attempts = 0
 
-    Reads live frames from the RTSP stream via BufferlessCapture, writes them
-    to shared memory, and sends heartbeat / status messages to the supervisor.
+    def run(self):
+        logger = logging.getLogger(self.name)
+        logger.info("[%s] PID=%d starting", self.name, self.pid)
 
-    Parameters
-    ----------
-    camera_id       : integer index (0 / 1 / 2)
-    rtsp_url        : full RTSP URL including credentials
-    shared_frame    : SharedFrame IPC object (overwrite model — no backlog)
-    control_queue   : mp.Queue for inbound commands from supervisor
-    heartbeat_queue : mp.Queue for outbound heartbeat / status to supervisor
-    stop_event      : mp.Event — set to True by supervisor to request shutdown
-    """
+        self._shm_writer = SharedFrameWriter(
+            name=self.cfg.shared_memory_name,
+            width=self.cfg.frame_width,
+            height=self.cfg.frame_height,
+        )
 
-    # ── logging ────────────────────────────────────────────────────────────────
-    logger = setup_process_logger(f"camera_{camera_id}")
-    logger.info(f"[cam{camera_id}] Process started (PID {os.getpid()})")
+        interval = 1.0 / max(self.cfg.fps_limit, 1)
 
-    # ── config ─────────────────────────────────────────────────────────────────
-    cfg        = get_config()
-    fps_limit  = cfg.get("cameras", [{}])[camera_id].get("fps_limit", 15)
-    frame_interval = 1.0 / max(fps_limit, 1)
+        while not self.stop_event.is_set():
+            if not self._connect():
+                if self.stop_event.is_set():
+                    break
+                self._wait_reconnect()
+                continue
 
-    # ── capture ────────────────────────────────────────────────────────────────
-    cap = BufferlessCapture(rtsp_url, camera_id, logger)
+            logger.info("[%s] Connected to RTSP", self.name)
+            self._reconnect_delay = self.cfg.reconnect_base_delay
+            self._reconnect_attempts = 0
+            consecutive_failures = 0
 
-    def _connect_with_retry() -> bool:
-        max_delay   = cfg.get("cameras", [{}])[camera_id].get("reconnect_max_delay", 30)
-        delay       = 1.0
-        while not stop_event.is_set():
-            if cap.open():
-                return True
-            logger.warning(f"[cam{camera_id}] Reconnect in {delay:.0f}s …")
-            time.sleep(delay)                   # FIX 2 — structured sleep, not spin
-            delay = min(delay * 2, max_delay)
-        return False
+            while not self.stop_event.is_set():
+                loop_start = time.time()
+                ok, frame = self._cap.read() if self._cap else (False, None)
 
-    if not _connect_with_retry():
-        logger.error(f"[cam{camera_id}] Could not connect — exiting.")
-        return
+                if not ok or frame is None:
+                    consecutive_failures += 1
+                    if consecutive_failures > 30:
+                        logger.error("[%s] Too many read failures, reconnecting", self.name)
+                        break
+                    time.sleep(0.05)
+                    continue
 
-    # ── performance counters ───────────────────────────────────────────────────
-    fps_counter       = 0
-    fps_window_start  = time.monotonic()
-    last_heartbeat_t  = time.monotonic()
-    heartbeat_interval = cfg.get("system", {}).get("heartbeat_interval_seconds", 2.0)
+                consecutive_failures = 0
 
-    # ── main loop ──────────────────────────────────────────────────────────────
-    logger.info(f"[cam{camera_id}] Entering main loop (fps_limit={fps_limit})")
+                if frame.shape[1] != self.cfg.frame_width or frame.shape[0] != self.cfg.frame_height:
+                    frame = cv2.resize(frame, (self.cfg.frame_width, self.cfg.frame_height))
 
-    while not stop_event.is_set():
+                self._shm_writer.write(frame)
+                self._frame_count += 1
 
-        t_loop_start = time.monotonic()
+                if not self.preview_mode.value:
+                    req = make_inference_request(
+                        camera_id=self.camera_id,
+                        shm_name=self.cfg.shared_memory_name,
+                        frame_shape=(self.cfg.frame_height, self.cfg.frame_width, 3),
+                        frame_index=self._frame_count,
+                    )
+                    try:
+                        self.inference_queue.put_nowait(req.to_dict())
+                    except Exception:
+                        pass
 
-        # ── drain inbound control queue without blocking ───────────────────────
-        # FIX 2 — non-blocking get avoids a polling spin; the sleep at the
-        # bottom of this loop provides the back-off.
-        try:
-            msg = control_queue.get_nowait()
-            _handle_control_msg(msg, cap, camera_id, logger)
-        except Exception:
-            pass  # Empty queue — normal; mp.queues.Empty is not re-raised
+                now = time.time()
+                if now - self._last_fps_time >= 2.0:
+                    self._fps = self._frame_count / (now - self._last_fps_time)
+                    self._frame_count = 0
+                    self._last_fps_time = now
 
-        # ── fetch latest frame ─────────────────────────────────────────────────
-        ok, frame = cap.read()
+                if now - self._last_heartbeat >= 2.0:
+                    self._send_heartbeat()
+                    self._last_heartbeat = now
 
-        if not ok or frame is None:
-            logger.warning(f"[cam{camera_id}] Frame read failed — attempting reconnect.")
-            cap.release()
-            if not _connect_with_retry():
-                break
-            continue
+                if is_memory_over_limit(self.cfg.memory_limit_mb):
+                    logger.critical("[%s] Memory limit exceeded, exiting", self.name)
+                    self.stop_event.set()
+                    break
 
-        # ── write to shared memory (overwrite model — no backlog) ─────────────
-        try:
-            shared_frame.write(frame, camera_id)
-        except Exception as exc:
-            logger.error(f"[cam{camera_id}] SharedFrame write error: {exc}")
+                sleep_t = interval - (time.time() - loop_start)
+                if sleep_t > 0:
+                    time.sleep(sleep_t)
 
-        fps_counter += 1
+            self._release_cap()
 
-        # ── heartbeat (every heartbeat_interval seconds) ───────────────────────
-        now = time.monotonic()
-        if now - last_heartbeat_t >= heartbeat_interval:
-            elapsed      = now - fps_window_start
-            measured_fps = fps_counter / elapsed if elapsed > 0 else 0.0
+        self._release_cap()
+        if self._shm_writer:
+            self._shm_writer.close()
+        logger.info("[%s] Exiting cleanly", self.name)
 
+    def _connect(self) -> bool:
+        self._release_cap()
+        logger = logging.getLogger(self.name)
+        logger.info("[%s] Connecting: %s", self.name, self.cfg.rtsp_url)
+        cap = BufferlessCapture(self.cfg.rtsp_url, self.camera_id, logger)
+        if not cap.open():
+            self._reconnect_attempts += 1
+            self._send_error("ConnectionFailed", f"RTSP failed: {self.cfg.rtsp_url}")
+            return False
+        self._cap = cap
+        return True
+
+    def _release_cap(self):
+        if self._cap:
             try:
-                heartbeat_queue.put_nowait(
-                    make_heartbeat_msg(
-                        source=f"camera_{camera_id}",
-                        camera_id=camera_id,
-                        payload={"fps": round(measured_fps, 1)},
-                    )
-                )
-                heartbeat_queue.put_nowait(
-                    make_camera_status_msg(
-                        camera_id=camera_id,
-                        fps=measured_fps,
-                        connected=cap.is_connected,
-                    )
-                )
+                self._cap.release()
             except Exception:
-                pass  # Queue full — supervisor is slow; not fatal
+                pass
+            self._cap = None
 
-            fps_counter      = 0
-            fps_window_start = now
-            last_heartbeat_t = now
+    def _wait_reconnect(self):
+        delay = min(self._reconnect_delay, self.cfg.reconnect_max_delay)
+        logger = logging.getLogger(self.name)
+        logger.info("[%s] Reconnecting in %.1fs", self.name, delay)
+        deadline = time.time() + delay
+        while time.time() < deadline and not self.stop_event.is_set():
+            time.sleep(0.1)
+        self._reconnect_delay = min(self._reconnect_delay * 2, self.cfg.reconnect_max_delay)
 
-        # ── FPS throttle ───────────────────────────────────────────────────────
-        # FIX 3 — sleep for the remainder of the frame_interval so we never
-        # call retrieve() faster than fps_limit, saving CPU.
-        elapsed = time.monotonic() - t_loop_start
-        sleep_t = frame_interval - elapsed
-        if sleep_t > 0.0:
-            time.sleep(sleep_t)             # FIX 2 — structured sleep
-        else:
-            # Even if we're behind, yield for 1 ms so the OS can schedule
-            # other threads (grab thread, etc.) without starvation.
-            time.sleep(0.001)               # FIX 2 — minimum yield
+    def _send_heartbeat(self):
+        hb = make_heartbeat(
+            source=ProcessSource.CAMERA,
+            camera_id=self.camera_id,
+            process_name=self.name,
+            pid=self.pid,
+            memory_mb=get_process_memory_mb(),
+            fps=self._fps,
+            extra={
+                "reconnect_attempts": self._reconnect_attempts,
+                "preview_mode": bool(self.preview_mode.value),
+            },
+        )
+        try:
+            self.heartbeat_queue.put_nowait(hb.to_dict())
+        except Exception:
+            pass
 
-    # ── cleanup ────────────────────────────────────────────────────────────────
-    cap.release()
-    logger.info(f"[cam{camera_id}] Process exiting cleanly.")
+    def _send_error(self, error_type: str, error_msg: str, severity: str = "error"):
+        err = make_error(
+            source=ProcessSource.CAMERA,
+            camera_id=self.camera_id,
+            error_type=error_type,
+            error_msg=error_msg,
+            severity=severity,
+        )
+        try:
+            self.heartbeat_queue.put_nowait(err.to_dict())
+        except Exception:
+            pass
 
+"""
+camera/camera_process.py  — PATCH (replace only camera_process_entry)
+======================================================================
+ONLY THIS FUNCTION NEEDS TO CHANGE from your current file.
+Replace the existing camera_process_entry() at the bottom of your
+camera_process.py with this one.
 
-# ──────────────────────────────────────────────────────────────────────────────
-# 3.  CONTROL MESSAGE HANDLER
-# ──────────────────────────────────────────────────────────────────────────────
+Root cause of crash:
+    cfg.logging.log_level  → AttributeError (LoggingConfig has no log_level)
+    cfg.system.log_level   ← CORRECT  (SystemConfig.log_level exists)
 
-def _handle_control_msg(
-    msg:       dict,
-    cap:       BufferlessCapture,
-    camera_id: int,
-    logger:    logging.Logger,
-) -> None:
-    msg_type = msg.get("type", "")
+Secondary fix:
+    signal.SIGINT handler added (was missing in your new version,
+    present in old working version — needed for Ctrl+C clean shutdown).
+"""
 
-    if msg_type == "RECONNECT":
-        logger.info(f"[cam{camera_id}] Supervisor requested reconnect.")
-        cap.release()
-        cap.open()
+def camera_process_entry(camera_id, config_path, inference_queue, heartbeat_queue,
+                          stop_event, preview_mode, log_dir="logs"):
+    import signal, sys, logging
+    from core.config_loader import VisionSystemConfig
+    from core.logging_setup import setup_process_logging, setup_crash_handler
 
-    elif msg_type == "PING":
-        logger.debug(f"[cam{camera_id}] PING received.")
+    cfg = VisionSystemConfig(config_path)
+    cam_cfg = cfg.get_camera(camera_id)
+    if cam_cfg is None:
+        raise ValueError(f"Camera {camera_id} not found in config")
 
-    else:
-        logger.debug(f"[cam{camera_id}] Unknown control message: {msg_type}")
+    pname = f"camera_{camera_id}"
+
+    # ✅ FIX: cfg.system.log_level   (was cfg.logging.log_level — AttributeError)
+    setup_process_logging(pname, log_dir, cfg.system.log_level,
+                          cfg.logging.max_bytes, cfg.logging.backup_count)
+    setup_crash_handler(pname, log_dir)
+
+    # ✅ FIX: SIGINT added back (was missing in new version, present in old working code)
+    def _sig(signum, frame):
+        stop_event.set()
+    signal.signal(signal.SIGTERM, _sig)
+    signal.signal(signal.SIGINT,  _sig)
+
+    worker = CameraWorker(cam_cfg, inference_queue, heartbeat_queue, stop_event, preview_mode)
+    try:
+        worker.run()
+    except Exception as e:
+        logging.critical("[camera_%d] Fatal: %s", camera_id, e, exc_info=True)
+        sys.exit(1)
