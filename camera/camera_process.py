@@ -152,34 +152,82 @@ class BufferlessCapture:
     def is_connected(self) -> bool:
         return self._connected
 
+    # def _grab_loop(self) -> None:
+    #     interval = 1.0 / max(self._native_fps, 1.0)
+
+    #     while not self._stop.is_set():
+    #         t0 = time.monotonic()
+
+    #         with self._lock:
+    #             if self._cap is None or not self._cap.isOpened():
+    #                 break
+    #             grabbed = self._cap.grab()
+
+    #         if not grabbed:
+    #             self.logger.warning(f"[cam{self.camera_id}] grab() failed — stream may have dropped.")
+    #             self._connected = False
+    #             break
+
+    #         with self._lock:
+    #             ret, frame = self._cap.retrieve()
+
+    #         if ret and frame is not None:
+    #             with self._lock:
+    #                 self._frame = frame
+    #             self._frame_available.set()
+
+    #         elapsed = time.monotonic() - t0
+    #         sleep_t = interval - elapsed
+    #         if sleep_t > 0:
+    #             time.sleep(sleep_t)
     def _grab_loop(self) -> None:
-        interval = 1.0 / max(self._native_fps, 1.0)
+        """
+        Drain the OpenCV/FFmpeg ring-buffer as fast as possible.
 
+        KEY RULES:
+        1. NO sleep throttle — cap.grab() blocks on the network when the
+        buffer is empty, providing natural pacing without wasting CPU.
+        When there IS backlog, we drain it instantly.
+
+        2. NEVER hold self._lock during cap.grab() — grab() is a blocking
+        network I/O call (~40ms). Holding the lock freezes the main
+        thread's read() for 40ms per frame, recreating the exact lag
+        we're trying to eliminate.
+
+        3. Hold the lock only for the brief retrieve() + frame store,
+        which is a pure memory operation (~0.1ms).
+        """
         while not self._stop.is_set():
-            t0 = time.monotonic()
 
-            with self._lock:
-                if self._cap is None or not self._cap.isOpened():
-                    break
-                grabbed = self._cap.grab()
-
-            if not grabbed:
-                self.logger.warning(f"[cam{self.camera_id}] grab() failed — stream may have dropped.")
+            # Check cap state WITHOUT holding lock during the actual grab
+            if self._cap is None or not self._cap.isOpened():
                 self._connected = False
                 break
 
+            # ── GRAB: do NOT hold self._lock here ─────────────────────────
+            # grab() blocks on network I/O until the next frame arrives.
+            # Holding the lock here would freeze read() for ~40ms per frame.
+            grabbed = self._cap.grab()
+
+            if not grabbed:
+                self.logger.warning(
+                    f"[cam{self.camera_id}] grab() failed — stream dropped."
+                )
+                self._connected = False
+                break
+
+            # ── RETRIEVE + STORE: hold lock only for this brief section ───
+            # retrieve() decodes the already-grabbed frame (pure CPU, ~1ms).
+            # Frame store is a pointer assignment (~0.01ms).
             with self._lock:
                 ret, frame = self._cap.retrieve()
+                if ret and frame is not None:
+                    self._frame = frame          # overwrite — always latest
+                    self._frame_available.set()  # signal main loop
 
-            if ret and frame is not None:
-                with self._lock:
-                    self._frame = frame
-                self._frame_available.set()
-
-            elapsed = time.monotonic() - t0
-            sleep_t = interval - elapsed
-            if sleep_t > 0:
-                time.sleep(sleep_t)
+            # No sleep — grab() IS the sleep. When buffer is empty it blocks
+            # on the network. When buffer has backlog it returns instantly,
+            # which is exactly when we WANT to drain fast.
 
     @staticmethod
     def _make_tcp_url(url: str) -> str:

@@ -514,3 +514,317 @@
 2026-04-16 00:59:15 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
 2026-04-16 01:00:05 [INFO] [core.shared_frame] SharedFrameWriter closed: cam2_frame
 2026-04-16 01:00:05 [INFO] [Camera_2] [Camera_2] Exiting cleanly
+2026-04-16 20:54:44 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-04-16 20:54:44 [INFO] [Camera_2] [Camera_2] PID=28752 starting
+2026-04-16 20:54:44 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-16 20:54:44 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 20:54:44 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 20:55:14 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 20:55:14 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-04-16 20:55:16 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 20:55:16 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:02:30 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-04-16 21:02:30 [INFO] [Camera_2] [Camera_2] PID=29632 starting
+2026-04-16 21:02:30 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-16 21:02:30 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:02:30 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:03:00 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:03:00 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-04-16 21:03:02 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:03:02 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:03:32 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:03:32 [INFO] [Camera_2] [Camera_2] Reconnecting in 4.0s
+2026-04-16 21:03:36 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:03:36 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:04:06 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:04:06 [INFO] [Camera_2] [Camera_2] Reconnecting in 8.0s
+2026-04-16 21:04:14 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:04:14 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:04:44 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:04:44 [INFO] [Camera_2] [Camera_2] Reconnecting in 16.0s
+2026-04-16 21:05:00 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:05:00 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:05:30 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:05:30 [INFO] [Camera_2] [Camera_2] Reconnecting in 32.0s
+2026-04-16 21:06:02 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:06:02 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:06:32 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:06:32 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:07:32 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:07:32 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:08:02 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:08:02 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:09:02 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:09:02 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:09:32 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:09:32 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:10:32 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:10:32 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:11:02 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:11:02 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:12:02 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:12:02 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:12:33 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:12:33 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:13:33 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:13:33 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:14:03 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:14:03 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:15:03 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:15:03 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:15:33 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:15:33 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:16:33 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:16:33 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:17:03 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:17:03 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:18:03 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:18:03 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:18:33 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:18:33 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:19:33 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:19:33 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:20:03 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:20:03 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:21:03 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:21:03 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:21:33 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:21:33 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:22:33 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:22:33 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:23:03 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:23:03 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:24:03 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:24:03 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:24:33 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:24:33 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:25:33 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:25:33 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:26:04 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:26:04 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:27:04 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:27:04 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:27:34 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:27:34 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:28:34 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:28:34 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:29:04 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:29:04 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:30:04 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:30:04 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:30:34 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:30:34 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:31:34 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:31:34 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:32:04 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:32:04 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:33:04 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:33:04 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:33:34 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:33:34 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:34:34 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:34:34 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:35:04 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:35:04 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:36:04 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:36:04 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:36:34 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:36:34 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:37:34 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:37:34 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:38:04 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:38:04 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:39:04 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:39:04 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:39:34 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:39:34 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:40:34 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:40:34 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:41:05 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:41:05 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:42:05 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:42:05 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:42:35 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:42:35 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:43:35 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:43:35 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:44:05 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:44:05 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:45:05 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:45:05 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:45:35 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:45:35 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:46:35 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:46:35 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:47:05 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:47:05 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:48:05 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:48:05 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:48:35 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:48:35 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:49:35 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:49:35 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:50:05 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:50:05 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:51:05 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:51:05 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:51:35 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:51:35 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:52:35 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:52:35 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:53:06 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:53:06 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:54:06 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:54:06 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:54:36 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:54:36 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:55:36 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:55:36 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:56:06 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:56:06 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:57:06 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:57:06 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:57:36 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:57:36 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 21:58:36 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:58:36 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 21:59:06 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 21:59:06 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:00:06 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:00:06 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:00:36 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:00:36 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:01:36 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:01:36 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:02:06 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:02:06 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:03:06 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:03:06 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:03:36 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:03:36 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:04:36 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:04:36 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:05:06 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:05:06 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:06:06 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:06:06 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:06:37 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:06:37 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:07:37 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:07:37 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:08:07 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:08:07 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:09:07 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:09:07 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:09:37 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:09:37 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:10:37 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:10:37 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:11:07 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:11:07 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:12:07 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:12:07 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:12:37 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:12:37 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:13:37 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:13:37 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:14:07 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:14:07 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:15:07 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:15:07 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:15:37 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:15:37 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:16:37 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:16:37 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:17:07 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:17:07 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:18:07 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:18:07 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:18:38 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:18:38 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:19:38 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:19:38 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:20:08 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:20:08 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:21:04 [INFO] [core.shared_frame] SharedFrameWriter closed: cam2_frame
+2026-04-16 22:21:04 [INFO] [Camera_2] [Camera_2] Exiting cleanly
+2026-04-16 22:21:25 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-04-16 22:21:25 [INFO] [Camera_2] [Camera_2] PID=16336 starting
+2026-04-16 22:21:25 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-16 22:21:25 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:21:25 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:21:56 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:21:56 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-04-16 22:21:58 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:21:58 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:22:28 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:22:28 [INFO] [Camera_2] [Camera_2] Reconnecting in 4.0s
+2026-04-16 22:22:32 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:22:32 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:23:19 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-04-16 22:23:19 [INFO] [Camera_2] [Camera_2] PID=23912 starting
+2026-04-16 22:23:19 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-16 22:23:19 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:23:19 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:23:49 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:23:49 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-04-16 22:23:51 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:23:51 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:24:21 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:24:21 [INFO] [Camera_2] [Camera_2] Reconnecting in 4.0s
+2026-04-16 22:24:25 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:24:25 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:24:55 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:24:55 [INFO] [Camera_2] [Camera_2] Reconnecting in 8.0s
+2026-04-16 22:25:03 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:25:03 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:25:33 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:25:33 [INFO] [Camera_2] [Camera_2] Reconnecting in 16.0s
+2026-04-16 22:25:49 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:25:49 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:26:20 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:26:20 [INFO] [Camera_2] [Camera_2] Reconnecting in 32.0s
+2026-04-16 22:26:52 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:26:52 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:27:22 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:27:22 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:28:22 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:28:22 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:28:52 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:28:52 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:29:52 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:29:52 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:30:22 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:30:22 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:31:22 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:31:22 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:31:52 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:31:52 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:32:52 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:32:52 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:33:22 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:33:22 [INFO] [Camera_2] [Camera_2] Reconnecting in 60.0s
+2026-04-16 22:33:48 [INFO] [core.shared_frame] SharedFrameWriter closed: cam2_frame
+2026-04-16 22:33:48 [INFO] [Camera_2] [Camera_2] Exiting cleanly
+2026-04-16 22:57:21 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-04-16 22:57:21 [INFO] [Camera_2] [Camera_2] PID=27016 starting
+2026-04-16 22:57:21 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-16 22:57:21 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:57:21 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:57:51 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:57:51 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-04-16 22:57:53 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:57:53 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:58:23 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:58:23 [INFO] [Camera_2] [Camera_2] Reconnecting in 4.0s
+2026-04-16 22:58:26 [INFO] [core.shared_frame] SharedFrameWriter closed: cam2_frame
+2026-04-16 22:58:26 [INFO] [Camera_2] [Camera_2] Exiting cleanly
+2026-04-16 22:58:53 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-04-16 22:58:53 [INFO] [Camera_2] [Camera_2] PID=3596 starting
+2026-04-16 22:58:53 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-16 22:58:53 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:58:53 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:59:23 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-04-16 22:59:23 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-04-16 22:59:25 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-04-16 22:59:25 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/

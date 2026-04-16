@@ -150,11 +150,14 @@ class _InferenceThread(threading.Thread):
         if frame is None:
             return
 
-        # Run inference under the shared lock
+        # Run inference
         t0 = time.time()
         with self.lock:
             detections = self._infer(frame)
         self._inference_ms = (time.time() - t0) * 1000
+
+        # ✅ ADD THIS — release the 2.7MB numpy array immediately after inference
+        del frame
 
         # Apply boundary logic
         pair_results, relay_states, problem_count = \
@@ -342,7 +345,9 @@ class PoolManager:
         self._boundary_lock  = threading.Lock()
         self._last_boundary_poll = 0.0
         self._threads: List[_InferenceThread] = []
-        self._task_q:  queue.Queue = queue.Queue(maxsize=60)
+        # AFTER — depth of 6 is enough: 3 cameras × 2 threads, one task each
+        self._task_q = queue.Queue(maxsize=6)
+        # self._task_q = queue.Queue(maxsize=6)
         self._last_hb  = time.time()
         self._last_vram_check = 0.0
 

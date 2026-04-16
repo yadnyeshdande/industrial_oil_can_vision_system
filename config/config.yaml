@@ -12,7 +12,7 @@ cameras:
     name: "Camera_1"
     rtsp_url: "rtsp://admin:Pass_123@192.168.1.248:554/"
     enabled: true
-    fps_limit: 12
+    fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
     reconnect_base_delay: 2.0
     reconnect_max_delay: 60.0
     reconnect_max_attempts: 0
@@ -25,7 +25,7 @@ cameras:
     name: "Camera_2"
     rtsp_url: "rtsp://admin:Pass_123@192.168.1.249:554/"
     enabled: true
-    fps_limit: 12
+    fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
     reconnect_base_delay: 2.0
     reconnect_max_delay: 60.0
     reconnect_max_attempts: 0
@@ -38,7 +38,7 @@ cameras:
     name: "Camera_3"
     rtsp_url: "rtsp://admin:password@192.168.1.103:554/"
     enabled: true
-    fps_limit: 12
+    fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
     reconnect_base_delay: 2.0
     reconnect_max_delay: 60.0
     reconnect_max_attempts: 0
@@ -59,10 +59,10 @@ model:
 
 gpu_pool:
   enabled: true
-  pool_size: 2
-  device: "cuda"
-  use_fp16: true
-  fps_limit: 12
+  pool_size: 3      # was 2 — add a third worker for better load distribution and responsiveness, especially during model warmup
+  device: "cuda"     # increase from 2 → 3 threads to handle 3 cameras at 15fps
+  use_fp16: false     # disable FP16 for better stability and compatibility, especially on consumer GPUs with limited FP16 support 1. your model is fp32 — forcing fp16 fails silently
+  fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
   # Actual usage: ~3.2-4.5 GB for 2 YOLO workers + CUDA runtime.
   # 0 = disabled (recommended: let VRAM monitor handle GPU memory).
   memory_limit_mb: 6000
