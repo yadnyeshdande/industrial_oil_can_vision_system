@@ -458,3 +458,43 @@
 2026-04-16 22:59:31 [INFO] [Camera_0] [cam0] Capture released.
 2026-04-16 22:59:31 [INFO] [core.shared_frame] SharedFrameWriter closed: cam0_frame
 2026-04-16 22:59:31 [INFO] [Camera_0] [Camera_0] Exiting cleanly
+2026-04-19 21:12:04 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-04-19 21:12:04 [INFO] [Camera_0] [Camera_0] PID=4916 starting
+2026-04-19 21:12:04 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-19 21:12:04 [INFO] [Camera_0] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:12:04 [INFO] [Camera_0] [cam0] Opening RTSP: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:12:05 [INFO] [Camera_0] [cam0] Stream opened — 1280×720 @ 25.0 FPS
+2026-04-19 21:12:05 [INFO] [Camera_0] [Camera_0] Connected to RTSP
+2026-04-19 21:12:31 [INFO] [Camera_0] [cam0] Capture released.
+2026-04-19 21:12:31 [INFO] [core.shared_frame] SharedFrameWriter closed: cam0_frame
+2026-04-19 21:12:31 [INFO] [Camera_0] [Camera_0] Exiting cleanly
+2026-04-19 21:17:01 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-04-19 21:17:01 [INFO] [Camera_0] [Camera_0] PID=27052 starting
+2026-04-19 21:17:01 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-19 21:17:01 [INFO] [Camera_0] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:17:01 [INFO] [Camera_0] [cam0] Opening RTSP: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:17:02 [INFO] [Camera_0] [cam0] Stream opened — 1280×720 @ 25.0 FPS
+2026-04-19 21:17:02 [INFO] [Camera_0] [Camera_0] Connected to RTSP
+2026-04-19 21:18:15 [INFO] [Camera_0] [cam0] Capture released.
+2026-04-19 21:18:15 [INFO] [core.shared_frame] SharedFrameWriter closed: cam0_frame
+2026-04-19 21:18:15 [INFO] [Camera_0] [Camera_0] Exiting cleanly
+2026-04-19 21:31:30 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-04-19 21:31:30 [INFO] [Camera_0] [Camera_0] PID=12076 starting
+2026-04-19 21:31:30 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-19 21:31:30 [INFO] [Camera_0] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:31:30 [INFO] [Camera_0] [cam0] Opening RTSP: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:31:32 [INFO] [Camera_0] [cam0] Stream opened — 1280×720 @ 25.0 FPS
+2026-04-19 21:31:32 [INFO] [Camera_0] [Camera_0] Connected to RTSP
+2026-04-19 21:35:01 [INFO] [Camera_0] [cam0] Capture released.
+2026-04-19 21:35:01 [INFO] [core.shared_frame] SharedFrameWriter closed: cam0_frame
+2026-04-19 21:35:01 [INFO] [Camera_0] [Camera_0] Exiting cleanly
+2026-04-19 21:35:16 [INFO] [camera_0] Logging initialised → logs\camera_0.log (level=INFO)
+2026-04-19 21:35:16 [INFO] [Camera_0] [Camera_0] PID=6764 starting
+2026-04-19 21:35:16 [INFO] [core.shared_frame] SharedFrameWriter created: cam0_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-19 21:35:16 [INFO] [Camera_0] [Camera_0] Connecting: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:35:16 [INFO] [Camera_0] [cam0] Opening RTSP: rtsp://admin:Pass_123@192.168.1.248:554/
+2026-04-19 21:35:17 [INFO] [Camera_0] [cam0] Stream opened — 1280×720 @ 25.0 FPS
+2026-04-19 21:35:17 [INFO] [Camera_0] [Camera_0] Connected to RTSP
+2026-04-19 21:35:38 [INFO] [Camera_0] [cam0] Capture released.
+2026-04-19 21:35:38 [INFO] [core.shared_frame] SharedFrameWriter closed: cam0_frame
+2026-04-19 21:35:38 [INFO] [Camera_0] [Camera_0] Exiting cleanly

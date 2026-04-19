@@ -120,15 +120,30 @@ class _InferenceThread(threading.Thread):
     def run(self):
         logger.info("[InferThread-%d] started", self.tid)
         while not self.stop_event.is_set():
+            # --- collect up to N tasks from the queue ---
+            tasks = []
             try:
-                task = self.task_q.get(timeout=0.3)
+                # block until at least one task arrives
+                tasks.append(self.task_q.get(timeout=0.3))
             except queue.Empty:
                 continue
+
+            # drain any additional tasks that are already waiting
+            # this is what enables batching — grab everything available right now
+            while len(tasks) < 3:   # max batch = pool_size
+                try:
+                    tasks.append(self.task_q.get_nowait())
+                except queue.Empty:
+                    break
+
             try:
-                self._process(task)
+                if len(tasks) == 1:
+                    self._process(tasks[0])          # single frame — existing path
+                else:
+                    self._process_batch(tasks)        # multi-frame batch path
             except Exception as e:
                 logger.error("[InferThread-%d] task error: %s", self.tid, e, exc_info=True)
-        # Release shared-memory readers
+
         for r in self._readers.values():
             try: r.close()
             except Exception: pass
@@ -152,17 +167,15 @@ class _InferenceThread(threading.Thread):
 
         # Run inference
         t0 = time.time()
+        # CORRECT — del frame moves to AFTER _apply_boundaries is done with it
         with self.lock:
             detections = self._infer(frame)
         self._inference_ms = (time.time() - t0) * 1000
 
-        # ✅ ADD THIS — release the 2.7MB numpy array immediately after inference
-        del frame
-
-        # Apply boundary logic
         pair_results, relay_states, problem_count = \
             self._apply_boundaries(cam_id, frame, detections)
 
+        del frame   # ← now safe — nobody needs frame after this point
         # FPS accounting
         fps = self._update_fps(cam_id)
 
@@ -193,6 +206,89 @@ class _InferenceThread(threading.Thread):
             pass
 
         self._maybe_heartbeat(cam_id, fps)
+
+    def _process_batch(self, tasks: list):
+        """
+        Run multiple frames through YOLO in a single batch call.
+        GPU processes N frames in ~1.1× the time of 1 frame instead of N× time.
+        """
+        # --- read all frames first ---
+        valid = []   # list of (task, frame) pairs
+        for task in tasks:
+            cam_id = task.get("camera_id")
+            shm    = task.get("shm_name") or task.get("shared_memory_name", "")
+            w      = task.get("frame_width",  1280)
+            h      = task.get("frame_height", 720)
+            frame  = self._read_frame(cam_id, shm, w, h)
+            if frame is not None:
+                valid.append((task, frame))
+
+        if not valid:
+            return
+
+        frames = [f for _, f in valid]
+
+        # --- single batched GPU call under the shared lock ---
+        t0 = time.time()
+        with self.lock:
+            import torch
+            with torch.no_grad():
+                # passing a list triggers YOLO's native batch mode
+                batch_results = self.model.predict(
+                    frames,
+                    conf=self.mcfg.confidence,
+                    iou=self.mcfg.iou,
+                    verbose=False
+                )
+        self._inference_ms = (time.time() - t0) * 1000
+
+        # --- distribute results --- 
+        for i, (task, frame) in enumerate(valid):
+            cam_id = task.get("camera_id")
+            result = batch_results[i]
+
+            # parse detections from this result
+            dets = []
+            if result.boxes is not None:
+                for box in result.boxes:
+                    cls_id   = int(box.cls[0].item())
+                    conf     = float(box.conf[0].item())
+                    x1,y1,x2,y2 = box.xyxyn[0].tolist()
+                    cls_name = (self.mcfg.class_names[cls_id]
+                                if cls_id < len(self.mcfg.class_names) else str(cls_id))
+                    dets.append(DetectionObject(
+                        class_id=cls_id, class_name=cls_name,
+                        confidence=conf, bbox=(x1,y1,x2,y2)))
+
+            pair_results, relay_states, problem_count = \
+                self._apply_boundaries(cam_id, frame, dets)
+
+            del frame   # release 2.7MB numpy array immediately
+
+            fps = self._update_fps(cam_id)
+            det_dicts = [
+                {"class_id": d.class_id, "class_name": d.class_name,
+                "confidence": d.confidence, "bbox": list(d.bbox)}
+                for d in dets
+            ]
+            msg = DetectionResultMessage(
+                source=ProcessSource.GPU_POOL,
+                camera_id=cam_id,
+                detections=det_dicts,
+                pair_results=pair_results,
+                relay_states=relay_states,
+                frame_data=None,
+                inference_time_ms=self._inference_ms,
+                fps=fps,
+                problem_count=problem_count,
+                success_rate=0.0,
+            ).to_dict()
+            try:
+                self.result_queue.put_nowait(msg)
+            except Exception:
+                pass
+
+            self._maybe_heartbeat(cam_id, fps)
 
     def _read_frame(self, cam_id, shm_name, w, h) -> Optional[np.ndarray]:
         if cam_id not in self._readers:

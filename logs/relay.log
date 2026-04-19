@@ -303,3 +303,45 @@
 2026-04-16 22:58:53 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
 2026-04-16 22:58:53 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
 2026-04-16 22:59:31 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 21:12:04 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 21:12:04 [INFO] [relay.relay_process] [Relay] PID=17636 starting (9 relays)
+2026-04-19 21:12:04 [ERROR] [relay.relay_process] [PyhidRelay] Init error: 
+2026-04-19 21:12:04 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-19 21:12:04 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-19 21:12:31 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 21:17:01 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 21:17:01 [INFO] [relay.relay_process] [Relay] PID=16940 starting (9 relays)
+2026-04-19 21:17:01 [ERROR] [relay.relay_process] [PyhidRelay] Init error: 
+2026-04-19 21:17:01 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-19 21:17:01 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-19 21:17:08 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-19 21:17:08 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-19 21:17:08 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-19 21:17:08 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-19 21:17:08 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-19 21:17:08 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-19 21:18:15 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 21:31:30 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 21:31:30 [INFO] [relay.relay_process] [Relay] PID=14704 starting (9 relays)
+2026-04-19 21:31:31 [ERROR] [relay.relay_process] [PyhidRelay] Init error: 
+2026-04-19 21:31:31 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-19 21:31:31 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-19 21:31:37 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-19 21:31:37 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-19 21:31:37 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-19 21:31:37 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-19 21:31:37 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-19 21:31:37 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-19 21:35:01 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 21:35:16 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 21:35:16 [INFO] [relay.relay_process] [Relay] PID=25412 starting (9 relays)
+2026-04-19 21:35:16 [ERROR] [relay.relay_process] [PyhidRelay] Init error: 
+2026-04-19 21:35:16 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-19 21:35:16 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-19 21:35:38 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit

@@ -215,3 +215,15 @@
 2026-04-16 22:58:53 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
 2026-04-16 22:58:53 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=11984 starting
 2026-04-16 22:58:55 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:12:04 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-04-19 21:12:04 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=13280 starting
+2026-04-19 21:12:06 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:17:01 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-04-19 21:17:01 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=17692 starting
+2026-04-19 21:17:03 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:31:30 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-04-19 21:31:30 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=29124 starting
+2026-04-19 21:31:32 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:35:16 [INFO] [gpu_monitor] Logging initialised → logs\gpu_monitor.log (level=INFO)
+2026-04-19 21:35:16 [INFO] [supervisor.gpu_monitor] [GPUMonitor] PID=22396 starting
+2026-04-19 21:35:17 [INFO] [core.resource_monitor] NVML initialized (pynvml)

@@ -32310,3 +32310,1419 @@ Traceback (most recent call last):
   File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
     self._apply_boundaries(cam_id, frame, detections)
 UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:04 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-04-19 21:12:04 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=24952 — shared-model pool, 3 inference threads
+2026-04-19 21:12:11 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-04-19 21:12:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-04-19 21:12:19 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-04-19 21:12:19 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 21:12:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-04-19 21:12:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-04-19 21:12:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-04-19 21:12:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-04-19 21:12:19 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:12:19 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:12:19 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:12:19 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:19 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:12:19 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:19 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:12:19 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:19 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:12:19 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:19 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:19 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:24 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:25 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:26 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:27 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:28 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:29 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:30 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-2] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-0] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:12:31 [ERROR] [detection.gpu_worker_pool] [InferThread-1] task error: local variable 'frame' referenced before assignment
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 128, in run
+    self._process(task)
+  File "d:\New folder\pc 3\vision_system\detection\gpu_worker_pool.py", line 164, in _process
+    self._apply_boundaries(cam_id, frame, detections)
+UnboundLocalError: local variable 'frame' referenced before assignment
+2026-04-19 21:17:01 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-04-19 21:17:01 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=27476 — shared-model pool, 3 inference threads
+2026-04-19 21:17:05 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-04-19 21:17:05 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-04-19 21:17:08 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-04-19 21:17:08 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 21:17:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-04-19 21:17:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-04-19 21:17:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-04-19 21:17:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-04-19 21:17:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:17:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:17:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:17:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:17:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:17:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:31:30 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-04-19 21:31:30 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=11992 — shared-model pool, 3 inference threads
+2026-04-19 21:31:34 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-04-19 21:31:34 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-04-19 21:31:37 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-04-19 21:31:37 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 21:31:37 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-04-19 21:31:37 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-04-19 21:31:37 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-04-19 21:31:37 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-04-19 21:31:37 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:31:37 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:31:37 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:31:37 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:31:37 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:31:37 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:35:16 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-04-19 21:35:16 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=5868 — shared-model pool, 3 inference threads
+2026-04-19 21:35:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-04-19 21:35:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-04-19 21:35:22 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-04-19 21:35:22 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 21:35:22 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-04-19 21:35:22 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-04-19 21:35:22 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-04-19 21:35:22 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-04-19 21:35:22 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:35:22 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:35:22 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:35:22 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-04-19 21:35:22 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-04-19 21:35:22 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
