@@ -388,6 +388,11 @@ class _InferenceThread(threading.Thread):
         if now - self._last_hb < self.pcfg.heartbeat_interval_seconds:
             return
         self._last_hb = now
+
+        # ✅ ADD THIS — log per-camera FPS so you can see real numbers
+        # forlogger. cid, cfps in self._fps_acc.items():
+        #     info("[InferThread-%d] cam%d actual FPS: %.1f", self.tid, cid, cfps)
+
         avg_fps = sum(self._fps_acc.values()) / max(len(self._fps_acc), 1)
         vram    = get_gpu_stats() or {}
         hb = make_heartbeat(

@@ -4430,3 +4430,134 @@ ImportError: cannot import name 'SharedFrame' from 'core.shared_frame' (c:\proje
 2026-04-19 21:35:38 [INFO] [supervisor.supervisor] Supervision loop ending
 2026-04-19 21:35:38 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
 2026-04-19 21:35:38 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-04-19 21:38:43 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-19 21:38:43 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Started camera_0 PID=23620
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Started camera_1 PID=25568
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Started camera_2 PID=3052
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Started gpu_pool PID=18288 (daemon=False, spawns GPU worker children)
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Started relay PID=13452
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Started gui PID=13480
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Started gpu_monitor PID=6976
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] All processes started.
+2026-04-19 21:38:43 [INFO] [supervisor.supervisor] Supervision loop running
+2026-04-19 21:39:13 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=113.5MB fps=13.0
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=110.6MB fps=13.0
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=3295.3MB fps=5.7
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=28.0MB fps=0.0
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=71.9MB fps=0.0
+2026-04-19 21:39:43 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-04-19 21:39:46 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 21:40:20 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m01s
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=113.6MB fps=12.9
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=110.6MB fps=12.9
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=3298.0MB fps=0.0
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=28.0MB fps=0.0
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=72.0MB fps=0.0
+2026-04-19 21:40:44 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-04-19 21:40:58 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 21:41:23 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-04-19 21:41:23 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-04-19 21:41:23 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-04-19 21:41:23 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-04-19 21:53:42 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-19 21:53:42 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Started camera_0 PID=1012
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Started camera_1 PID=27696
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Started camera_2 PID=28176
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Started gpu_pool PID=18032 (daemon=False, spawns GPU worker children)
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Started relay PID=3696
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Started gui PID=17332
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Started gpu_monitor PID=15612
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] All processes started.
+2026-04-19 21:53:42 [INFO] [supervisor.supervisor] Supervision loop running
+2026-04-19 21:54:13 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=112.6MB fps=12.9
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=113.4MB fps=12.9
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=3291.4MB fps=5.3
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=28.0MB fps=0.0
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=71.8MB fps=0.0
+2026-04-19 21:54:43 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.8MB fps=0.0
+2026-04-19 21:54:45 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 21:55:19 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 21:55:21 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-04-19 21:55:21 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-04-19 21:55:21 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-04-19 21:55:21 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-04-19 21:59:32 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-19 21:59:32 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Started camera_0 PID=22224
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Started camera_1 PID=17928
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Started camera_2 PID=1504
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Started gpu_pool PID=16536 (daemon=False, spawns GPU worker children)
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Started relay PID=1596
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Started gui PID=7192
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Started gpu_monitor PID=13136
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] All processes started.
+2026-04-19 21:59:32 [INFO] [supervisor.supervisor] Supervision loop running
+2026-04-19 22:00:03 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor] [Health] Uptime 00h01m00s
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=113.6MB fps=12.9
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=112.2MB fps=12.9
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=3293.7MB fps=0.0
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=28.1MB fps=0.0
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=69.4MB fps=0.0
+2026-04-19 22:00:33 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-04-19 22:00:35 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 22:01:09 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor] [Health] Uptime 00h02m01s
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor]   camera_0               alive=True  restarts=0   mem=113.7MB fps=13.1
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor]   camera_1               alive=True  restarts=0   mem=114.1MB fps=13.1
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor]   camera_2               alive=True  restarts=0   mem=0.0MB fps=0.0
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor]   gpu_pool               alive=True  restarts=0   mem=3293.7MB fps=0.0
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor]   relay                  alive=True  restarts=0   mem=28.0MB fps=0.0
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor]   gui                    alive=True  restarts=0   mem=69.3MB fps=0.0
+2026-04-19 22:01:34 [INFO] [supervisor.supervisor]   gpu_monitor            alive=True  restarts=0   mem=35.9MB fps=0.0
+2026-04-19 22:01:40 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-04-19 22:01:40 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-04-19 22:01:40 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-04-19 22:01:40 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete
+2026-04-19 22:14:25 [INFO] [supervisor] Logging initialised → logs\supervisor.log (level=INFO)
+2026-04-19 22:14:25 [INFO] [core.config_loader] Config loaded v2.1: 3 cameras
+2026-04-19 22:14:25 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 22:14:25 [INFO] [supervisor.supervisor] Supervisor v2.1 — IndustrialVisionSystem
+2026-04-19 22:14:25 [INFO] [supervisor.supervisor] ============================================================
+2026-04-19 22:14:25 [INFO] [supervisor.supervisor] Model OK: models/best.pt
+2026-04-19 22:14:25 [INFO] [supervisor.supervisor] [Supervisor] Result fanout thread started
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Started camera_0 PID=16480
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Started camera_1 PID=20832
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Started camera_2 PID=28388
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Started gpu_pool PID=4796 (daemon=False, spawns GPU worker children)
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Started relay PID=6072
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Started gui PID=25000
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Started gpu_monitor PID=25908
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] All processes started.
+2026-04-19 22:14:26 [INFO] [supervisor.supervisor] Supervision loop running
+2026-04-19 22:14:57 [ERROR] [supervisor.supervisor] [camera] cam=2 ConnectionFailed: RTSP failed: rtsp://admin:password@192.168.1.103:554/
+2026-04-19 22:15:20 [INFO] [supervisor.supervisor] [Supervisor] Signal 2 → shutdown
+2026-04-19 22:15:20 [INFO] [supervisor.supervisor] Supervision loop ending
+2026-04-19 22:15:20 [INFO] [supervisor.supervisor] [Supervisor] Shutting down all...
+2026-04-19 22:15:20 [INFO] [supervisor.supervisor] [Supervisor] Shutdown complete

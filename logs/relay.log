@@ -345,3 +345,47 @@
 2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
 2026-04-19 21:35:22 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
 2026-04-19 21:35:38 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 21:38:43 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 21:38:43 [INFO] [relay.relay_process] [Relay] PID=13452 starting (9 relays)
+2026-04-19 21:38:43 [INFO] [relay.relay_process] [PyhidRelay] USB relay device found: <pyhid_usb_relay.controller.Controller object at 0x0000021916234760>
+2026-04-19 21:38:50 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-19 21:38:50 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-19 21:38:50 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-19 21:38:50 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-19 21:38:50 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-19 21:38:50 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-19 21:41:23 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
+2026-04-19 21:41:23 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 21:53:42 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 21:53:42 [INFO] [relay.relay_process] [Relay] PID=3696 starting (9 relays)
+2026-04-19 21:53:43 [INFO] [relay.relay_process] [PyhidRelay] USB relay device found: <pyhid_usb_relay.controller.Controller object at 0x000001C567254760>
+2026-04-19 21:53:47 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-19 21:53:47 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-19 21:53:47 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-19 21:53:47 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-19 21:53:47 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-19 21:53:47 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-19 21:55:21 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
+2026-04-19 21:55:21 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 21:59:33 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 21:59:33 [INFO] [relay.relay_process] [Relay] PID=1596 starting (9 relays)
+2026-04-19 21:59:33 [INFO] [relay.relay_process] [PyhidRelay] USB relay device found: <pyhid_usb_relay.controller.Controller object at 0x00000239DEC34760>
+2026-04-19 21:59:39 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-19 21:59:39 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-19 21:59:39 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-19 21:59:39 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-19 21:59:39 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-19 21:59:39 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-19 22:01:40 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
+2026-04-19 22:01:40 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-19 22:14:26 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-19 22:14:26 [INFO] [relay.relay_process] [Relay] PID=6072 starting (9 relays)
+2026-04-19 22:14:26 [INFO] [relay.relay_process] [PyhidRelay] USB relay device found: <pyhid_usb_relay.controller.Controller object at 0x0000025E81084760>
+2026-04-19 22:14:34 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-19 22:14:34 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-19 22:14:34 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-19 22:14:34 [INFO] [relay.relay_process] [Relay] Relay 4 → ON
+2026-04-19 22:14:34 [INFO] [relay.relay_process] [Relay] Relay 5 → ON
+2026-04-19 22:14:34 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
+2026-04-19 22:15:20 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
+2026-04-19 22:15:20 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
