@@ -1,5 +1,5 @@
 """
-detection/gpu_worker_pool.py  v3.4
+detection/gpu_worker_pool.py  v3.5
 ====================================
 GPU Worker Pool — Shared-Model Architecture.
 
@@ -43,6 +43,14 @@ IPC (unchanged from v2.1):
 pool_size in config now controls the number of INFERENCE THREADS (not processes).
 Recommended: pool_size=2 is fine. With shared model, VRAM does not increase
 proportionally — only thread overhead (~50MB RAM each) is added.
+
+v3.5 fixes
+----------
+* _normalize_boundary_data now validates that oil_can and bunk_hole entry
+  counts match.  Previously min(OC, BH) silently dropped the unmatched zone,
+  leaving its relay permanently OFF with no log message.  The new code logs
+  an ERROR with exact counts and the name of the oversized list so the
+  operator can locate and fix the boundary JSON immediately.
 """
 
 from __future__ import annotations
@@ -167,7 +175,6 @@ class _InferenceThread(threading.Thread):
 
         # Run inference
         t0 = time.time()
-        # CORRECT — del frame moves to AFTER _apply_boundaries is done with it
         with self.lock:
             detections = self._infer(frame)
         self._inference_ms = (time.time() - t0) * 1000
@@ -175,7 +182,7 @@ class _InferenceThread(threading.Thread):
         pair_results, relay_states, problem_count = \
             self._apply_boundaries(cam_id, frame, detections)
 
-        del frame   # ← now safe — nobody needs frame after this point
+        del frame   # now safe — nobody needs frame after this point
         # FPS accounting
         fps = self._update_fps(cam_id)
 
@@ -189,11 +196,11 @@ class _InferenceThread(threading.Thread):
         ]
         sr = 0.0
         msg: dict = DetectionResultMessage(
-            source=ProcessSource.GPU_POOL,      # ← was missing — BaseMessage requires this
+            source=ProcessSource.GPU_POOL,
             camera_id=cam_id,
             detections=det_dicts,
             pair_results=pair_results,
-            relay_states=relay_states,          # ← relay process needs this to trigger relay activations without waiting for the GUI to read the result message
+            relay_states=relay_states,
             frame_data=None,
             inference_time_ms=self._inference_ms,
             fps=fps,
@@ -242,7 +249,7 @@ class _InferenceThread(threading.Thread):
                 )
         self._inference_ms = (time.time() - t0) * 1000
 
-        # --- distribute results --- 
+        # --- distribute results ---
         for i, (task, frame) in enumerate(valid):
             cam_id = task.get("camera_id")
             result = batch_results[i]
@@ -389,10 +396,6 @@ class _InferenceThread(threading.Thread):
             return
         self._last_hb = now
 
-        # ✅ ADD THIS — log per-camera FPS so you can see real numbers
-        # forlogger. cid, cfps in self._fps_acc.items():
-        #     info("[InferThread-%d] cam%d actual FPS: %.1f", self.tid, cid, cfps)
-
         avg_fps = sum(self._fps_acc.values()) / max(len(self._fps_acc), 1)
         vram    = get_gpu_stats() or {}
         hb = make_heartbeat(
@@ -446,9 +449,8 @@ class PoolManager:
         self._boundary_lock  = threading.Lock()
         self._last_boundary_poll = 0.0
         self._threads: List[_InferenceThread] = []
-        # AFTER — depth of 6 is enough: 3 cameras × 2 threads, one task each
+        # depth of 6 is enough: 3 cameras × 2 threads, one task each
         self._task_q = queue.Queue(maxsize=6)
-        # self._task_q = queue.Queue(maxsize=6)
         self._last_hb  = time.time()
         self._last_vram_check = 0.0
 
@@ -679,13 +681,36 @@ class PoolManager:
         logger.info("[PoolManager] Cleaned up")
 
 
-# ── Normalise boundary JSON (v1 → v2 if needed) ───────────────────────────────
+# ── Normalise boundary JSON (flat → nested) ────────────────────────────────────
 def _normalize_boundary_data(data: dict, camera_id: int) -> dict:
+    """
+    Convert the flat camera_X_boundaries.json format to the nested format
+    CameraBoundarySet expects.
+
+    v3.5 FIX: validate that oil_can and bunk_hole lists are the same length.
+    Previously min(OC, BH) silently dropped the unmatched zone so its relay
+    would never fire.  Now an ERROR is logged with full diagnostic info.
+    """
     if "boundaries" in data and "pairs" in data:
         return data
 
     oc_raw = data.get("oil_can", [])
     bh_raw = data.get("bunk_hole", [])
+
+    # v3.5 FIX: explicit count validation — makes the misconfiguration visible
+    # instead of silently dropping the extra zone.
+    if len(oc_raw) != len(bh_raw):
+        logger.error(
+            "[NormBoundary] cam=%d: oil_can boundary count (%d) != "
+            "bunk_hole boundary count (%d).  The %d extra %s zone(s) will be "
+            "ignored and their relays will NEVER fire.  Fix "
+            "camera_%d_boundaries.json so both lists have the same length.",
+            camera_id,
+            len(oc_raw), len(bh_raw),
+            abs(len(oc_raw) - len(bh_raw)),
+            "oil_can" if len(oc_raw) > len(bh_raw) else "bunk_hole",
+            camera_id,
+        )
 
     def to_boundary(item, idx):
         bid     = item.get("id", f"B{idx}")

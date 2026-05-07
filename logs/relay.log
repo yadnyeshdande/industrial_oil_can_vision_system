@@ -389,3 +389,34 @@
 2026-04-19 22:14:34 [INFO] [relay.relay_process] [Relay] Relay 6 → ON
 2026-04-19 22:15:20 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
 2026-04-19 22:15:20 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-22 15:24:11 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-22 15:24:11 [INFO] [relay.relay_process] [Relay] PID=24144 starting (9 relays)
+2026-04-22 15:24:11 [ERROR] [relay.relay_process] [PyhidRelay] Init error: No device found
+2026-04-22 15:24:11 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-22 15:24:11 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-22 15:29:24 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-22 15:29:24 [INFO] [relay.relay_process] [Relay] PID=29048 starting (9 relays)
+2026-04-22 15:29:24 [ERROR] [relay.relay_process] [PyhidRelay] Init error: No device found
+2026-04-22 15:29:24 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-22 15:29:24 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-22 15:29:42 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-27 04:11:22 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-27 04:11:22 [INFO] [relay.relay_process] [Relay] PID=11324 starting (9 relays)
+2026-04-27 04:11:22 [INFO] [relay.relay_process] [PyhidRelay] USB relay device found: <pyhid_usb_relay.controller.Controller object at 0x0000019261F74760>
+2026-04-27 04:11:32 [ERROR] [relay.relay_process] [PyhidRelay] set_relay(ch=9, state=False) error: Index 9 is outside range [1..8]
+2026-04-27 04:11:32 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-27 04:49:42 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-27 04:49:42 [INFO] [relay.relay_process] [Relay] PID=27704 starting (9 relays)
+2026-04-27 04:49:42 [ERROR] [relay.relay_process] [PyhidRelay] Init error: No device found
+2026-04-27 04:49:42 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-27 04:49:42 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-27 04:50:56 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-04-27 04:50:59 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-04-27 04:50:59 [INFO] [relay.relay_process] [Relay] PID=29348 starting (9 relays)
+2026-04-27 04:50:59 [ERROR] [relay.relay_process] [PyhidRelay] Init error: No device found
+2026-04-27 04:50:59 [WARNING] [relay.relay_process] [Relay] pyhid_usb_relay hardware unavailable — falling back to SIMULATED. Physical relay outputs will NOT fire. Check USB connection and install: pip install pyhid-usb-relay hid
+2026-04-27 04:50:59 [INFO] [relay.relay_process] [SimRelay] Initialized 9 relays (SIMULATED)
+2026-04-27 04:51:05 [INFO] [relay.relay_process] [Relay] Relay 1 → ON
+2026-04-27 04:51:05 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
+2026-04-27 04:51:05 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
+2026-04-27 04:53:11 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit

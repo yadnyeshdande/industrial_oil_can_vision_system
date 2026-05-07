@@ -10,6 +10,21 @@ Isolated detection process per camera.
 - Monitors RAM and VRAM
 - Sends heartbeat every 2 seconds
 - Self-terminates on resource violations
+
+v2.2 fixes
+----------
+* _relay_states was hardcoded to [False, False, False] (3 items) but the
+  system has relay_count=9.  Now sized from cfg.relay.relay_count so the
+  relay_states field in result messages covers all 9 channels.
+
+* relay_states local variable inside the detection loop had the same
+  hardcoded-3 problem plus a guard `if 0 <= ri < 3`.  Both corrected.
+
+* _normalize_boundary_data now validates that the boundary JSON has equal
+  numbers of oil_can and bunk_hole entries and logs a clear ERROR when they
+  differ.  Using min() silently dropped the unmatched zone so the
+  corresponding relay never fired; the new check makes the misconfiguration
+  immediately visible in the logs.
 """
 
 from __future__ import annotations
@@ -67,6 +82,22 @@ def _normalize_boundary_data(data: dict, camera_id: int,
 
     oc_raw = data.get("oil_can", [])
     bh_raw = data.get("bunk_hole", [])
+
+    # v2.2 FIX: validate equal counts and log clearly.
+    # Previously min(OC, BH) was used silently, dropping the unmatched zone
+    # and leaving its relay permanently off with no log message.
+    if len(oc_raw) != len(bh_raw):
+        logger.error(
+            "[NormBoundary] cam=%d: oil_can boundary count (%d) != "
+            "bunk_hole boundary count (%d).  The %d extra %s zone(s) will be "
+            "ignored and their relays will NEVER fire.  Fix "
+            "camera_%d_boundaries.json so both lists have the same length.",
+            camera_id,
+            len(oc_raw), len(bh_raw),
+            abs(len(oc_raw) - len(bh_raw)),
+            "oil_can" if len(oc_raw) > len(bh_raw) else "bunk_hole",
+            camera_id,
+        )
 
     def _to_boundary(item: dict, idx: int) -> dict:
         bid     = item.get("id", f"B{idx}")
@@ -144,8 +175,10 @@ class DetectionWorker:
         # Boundary set
         self._boundary_set: Optional[CameraBoundarySet] = None
 
-        # Relay states cache
-        self._relay_states: List[bool] = [False, False, False]
+        # v2.2 FIX: size relay_states from config (relay_count=9), not hardcoded 3.
+        # The old [False, False, False] only covered 3 channels; result messages
+        # sent to the GUI had wrong/missing relay state for cameras 1 and 2.
+        self._relay_states: List[bool] = [False] * cfg.relay.relay_count
 
     # ------------------------------------------------------------------
     # Lifecycle
@@ -237,11 +270,14 @@ class DetectionWorker:
             else:
                 self._ok_count += 1
 
-            # Relay states
-            relay_states = [False, False, False]
+            # v2.2 FIX: relay_states sized from relay_count (was hardcoded to 3
+            # items with a guard `if 0 <= ri < 3` that silently dropped relays
+            # 3–8 for cameras 1 and 2).
+            relay_count = self.cfg.relay.relay_count
+            relay_states = [False] * relay_count
             for pr in pair_results:
                 ri = pr.relay_index
-                if 0 <= ri < 3:
+                if 0 <= ri < relay_count:
                     relay_states[ri] = pr.relay_active
             self._relay_states = relay_states
 

@@ -571,3 +571,68 @@ OSError: [WinError 1455] The paging file is too small for this operation to comp
 2026-04-19 22:15:20 [INFO] [Camera_1] [cam1] Capture released.
 2026-04-19 22:15:20 [INFO] [core.shared_frame] SharedFrameWriter closed: cam1_frame
 2026-04-19 22:15:20 [INFO] [Camera_1] [Camera_1] Exiting cleanly
+2026-04-22 15:24:11 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-04-22 15:24:11 [INFO] [Camera_1] [Camera_1] PID=26508 starting
+2026-04-22 15:24:11 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-22 15:24:11 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:24:11 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:24:41 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-22 15:24:41 [INFO] [Camera_1] [Camera_1] Reconnecting in 2.0s
+2026-04-22 15:24:43 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:24:43 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:25:13 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-22 15:25:13 [INFO] [Camera_1] [Camera_1] Reconnecting in 4.0s
+2026-04-22 15:25:17 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:25:17 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:25:47 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-22 15:25:47 [INFO] [Camera_1] [Camera_1] Reconnecting in 8.0s
+2026-04-22 15:25:55 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:25:55 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:26:25 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-22 15:26:25 [INFO] [Camera_1] [Camera_1] Reconnecting in 16.0s
+2026-04-22 15:26:41 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:26:41 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:27:11 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-22 15:27:11 [INFO] [Camera_1] [Camera_1] Reconnecting in 32.0s
+2026-04-22 15:27:44 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:27:44 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:29:24 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-04-22 15:29:24 [INFO] [Camera_1] [Camera_1] PID=1272 starting
+2026-04-22 15:29:24 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-22 15:29:24 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-22 15:29:24 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:11:22 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-04-27 04:11:22 [INFO] [Camera_1] [Camera_1] PID=26948 starting
+2026-04-27 04:11:22 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-27 04:11:22 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:11:22 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:49:42 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-04-27 04:49:42 [INFO] [Camera_1] [Camera_1] PID=25232 starting
+2026-04-27 04:49:42 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-27 04:49:42 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:49:42 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:50:13 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-27 04:50:13 [INFO] [Camera_1] [Camera_1] Reconnecting in 2.0s
+2026-04-27 04:50:15 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:50:15 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:50:45 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-27 04:50:45 [INFO] [Camera_1] [Camera_1] Reconnecting in 4.0s
+2026-04-27 04:50:49 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:50:49 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:50:59 [INFO] [camera_1] Logging initialised → logs\camera_1.log (level=INFO)
+2026-04-27 04:50:59 [INFO] [Camera_1] [Camera_1] PID=26368 starting
+2026-04-27 04:50:59 [INFO] [core.shared_frame] SharedFrameWriter created: cam1_frame (1280x720 ch=3, 2764824 bytes)
+2026-04-27 04:50:59 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:50:59 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:51:29 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-27 04:51:29 [INFO] [Camera_1] [Camera_1] Reconnecting in 2.0s
+2026-04-27 04:51:31 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:51:31 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:52:01 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-27 04:52:01 [INFO] [Camera_1] [Camera_1] Reconnecting in 4.0s
+2026-04-27 04:52:05 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:52:05 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:52:35 [ERROR] [Camera_1] [cam1] Failed to open stream.
+2026-04-27 04:52:35 [INFO] [Camera_1] [Camera_1] Reconnecting in 8.0s
+2026-04-27 04:52:43 [INFO] [Camera_1] [Camera_1] Connecting: rtsp://admin:Pass_123@192.168.1.249:554/
+2026-04-27 04:52:43 [INFO] [Camera_1] [cam1] Opening RTSP: rtsp://admin:Pass_123@192.168.1.249:554/
