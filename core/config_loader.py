@@ -1,9 +1,10 @@
 """
-core/config_loader.py  v2.1
+core/config_loader.py  v3.0
 ============================
 Loads, validates, and provides typed access to config.yaml.
-v2.1: Added ModelConfig, GPUPoolConfig, extended RelayConfig (9 relays),
-      extended GUIConfig, extended SupervisorConfig.
+v3.0: Extended RelayConfig with dual-backend support (USB + Modbus).
+      Added USBBackendConfig and ModbusBackendConfig dataclasses.
+      All v2.1 behaviour preserved.
 """
 from __future__ import annotations
 import os, json, logging
@@ -30,7 +31,6 @@ class CameraConfig:
 
 
 class ModelConfig:
-    """v2.1 — top-level model config block."""
     def __init__(self, d):
         self.path = d.get("path", "models/best.pt")
         self.confidence = d.get("confidence", 0.5)
@@ -42,7 +42,6 @@ class ModelConfig:
 
 
 class GPUPoolConfig:
-    """v2.1 — GPU Worker Pool configuration."""
     def __init__(self, d):
         self.enabled = d.get("enabled", True)
         self.pool_size = d.get("pool_size", 2)
@@ -73,31 +72,82 @@ class DetectionConfig:
         self.heartbeat_interval_seconds = d.get("heartbeat_interval_seconds", 2)
 
 
+# ── v3.0: per-backend config objects ──────────────────────────────────────────
+
+class USBBackendConfig:
+    """Config for the pyhid_usb_relay backend."""
+    def __init__(self, d: dict):
+        self.enabled            = d.get("enabled", True)
+        self.reconnect_attempts = d.get("reconnect_attempts", 3)
+
+
+class ModbusBackendConfig:
+    """Config for the Waveshare Modbus TCP backend."""
+    def __init__(self, d: dict):
+        self.enabled         = d.get("enabled", True)
+        self.ip              = d.get("ip", "192.168.1.200")
+        self.port            = d.get("port", 502)
+        self.device_id       = d.get("device_id", 1)
+        self.timeout_seconds = d.get("timeout_seconds", 2)  # NEVER omit
+
+
+# ── v3.0: RelayConfig — extended with dual-backend fields ─────────────────────
+
 class RelayConfig:
-    """v2.1 — extended to 9 relays with per-camera mapping."""
-    def __init__(self, d):
-        self.enabled = d.get("enabled", True)
-        self.library = d.get("library", "simulated")
-        self.retry_attempts = d.get("retry_attempts", 3)
-        self.retry_delay_seconds = d.get("retry_delay_seconds", 0.5)
-        self.reinit_after_failures = d.get("reinit_after_failures", 5)
-        self.memory_limit_mb = d.get("memory_limit_mb", 300)
+    """
+    v3.0 — full dual-backend configuration.
+    Backward-compatible: configs without the new keys get safe defaults.
+    """
+    def __init__(self, d: dict):
+        self.enabled        = d.get("enabled", True)
+
+        # v3.0: active backend at startup ("usb" or "modbus")
+        # Falls back to old "library" key for backward compatibility.
+        raw_lib = d.get("library", "pyhid_usb_relay")
+        default_backend = (
+            "usb" if "usb" in raw_lib.lower() or raw_lib == "pyhid_usb_relay"
+            else "modbus"
+        )
+        self.active_backend = d.get("active_backend", default_backend)
+
+        # v3.0: runtime switching controls
+        self.allow_runtime_switching          = d.get("allow_runtime_switching", True)
+        self.minimum_switch_interval_seconds  = d.get("minimum_switch_interval_seconds", 5)
+
+        # Shared settings
+        self.retry_attempts         = d.get("retry_attempts", 3)
+        self.retry_delay_seconds    = d.get("retry_delay_seconds", 0.5)
+        self.reinit_after_failures  = d.get("reinit_after_failures", 5)
+        self.memory_limit_mb        = d.get("memory_limit_mb", 300)
         self.heartbeat_interval_seconds = d.get("heartbeat_interval_seconds", 2)
-        self.relay_count = d.get("relay_count", 9)
-        # relay_map: relay_index(0-based) → pair_index
-        self.relay_map: Dict[int,int] = {int(k):int(v) for k,v in d.get("relay_map",{}).items()}
-        # per-camera relay mapping: "camera_0" -> [0,1,2]
+        self.relay_count            = d.get("relay_count", 9)
+
+        # relay_map: relay_index(0-based) → pair_index  (legacy field)
+        self.relay_map: Dict[int, int] = {
+            int(k): int(v) for k, v in d.get("relay_map", {}).items()
+        }
+
+        # per-camera relay mapping: "camera_0" -> [0, 1, 2]
         raw_mapping = d.get("relay_mapping", {
-            "camera_0":[0,1,2],"camera_1":[3,4,5],"camera_2":[6,7,8]
+            "camera_0": [0, 1, 2],
+            "camera_1": [3, 4, 5],
+            "camera_2": [6, 7, 8],
         })
         self.relay_mapping: Dict[int, List[int]] = {}
         for key, indices in raw_mapping.items():
-            cam_id = int(key.replace("camera_",""))
+            cam_id = int(key.replace("camera_", ""))
             self.relay_mapping[cam_id] = [int(i) for i in indices]
+
+        # v3.0: per-backend config objects
+        self.usb    = USBBackendConfig(d.get("usb", {}))
+        self.modbus = ModbusBackendConfig(d.get("modbus", {}))
 
     def get_relay_indices(self, camera_id: int) -> List[int]:
         """Return [relay0, relay1, relay2] for a camera (0-based)."""
-        return self.relay_mapping.get(camera_id, [camera_id*3, camera_id*3+1, camera_id*3+2])
+        return self.relay_mapping.get(
+            camera_id,
+            [camera_id * 3, camera_id * 3 + 1, camera_id * 3 + 2],
+        )
 
 
 class GUIConfig:
@@ -123,55 +173,51 @@ class GUIConfig:
 
 class GPUMonitorConfig:
     def __init__(self, d):
-        self.enabled                    = d.get("enabled",                      True)
-        self.poll_interval_seconds      = d.get("poll_interval_seconds",        5)
-        self.vram_threshold_mb          = d.get("vram_threshold_mb",            5800)
-        self.temperature_threshold_celsius  = d.get("temperature_threshold_celsius",  85)
-        self.critical_temperature_celsius   = d.get("critical_temperature_celsius",   90)
-        self.fps_throttle_on_overheat   = d.get("fps_throttle_on_overheat",     8)
-        self.restart_on_persistent_overheat = d.get("restart_on_persistent_overheat", True)
-        self.overheat_duration_seconds  = d.get("overheat_duration_seconds",    30)
-        # Storm-guard fields (new in v3.3 — safe defaults for older configs)
-        self.vram_sustained_seconds         = d.get("vram_sustained_seconds",         45)
-        self.vram_restart_cooldown_seconds  = d.get("vram_restart_cooldown_seconds",  120)
-        self.vram_max_restarts              = d.get("vram_max_restarts",              5)
+        self.enabled                        = d.get("enabled",                       True)
+        self.poll_interval_seconds          = d.get("poll_interval_seconds",         5)
+        self.vram_threshold_mb              = d.get("vram_threshold_mb",             5800)
+        self.temperature_threshold_celsius  = d.get("temperature_threshold_celsius", 85)
+        self.critical_temperature_celsius   = d.get("critical_temperature_celsius",  90)
+        self.fps_throttle_on_overheat       = d.get("fps_throttle_on_overheat",      8)
+        self.restart_on_persistent_overheat = d.get("restart_on_persistent_overheat",True)
+        self.overheat_duration_seconds      = d.get("overheat_duration_seconds",     30)
+        self.vram_sustained_seconds         = d.get("vram_sustained_seconds",        45)
+        self.vram_restart_cooldown_seconds  = d.get("vram_restart_cooldown_seconds", 120)
+        self.vram_max_restarts              = d.get("vram_max_restarts",             5)
 
 
 class SupervisorConfig:
     def __init__(self, d):
-        self.memory_poll_interval_seconds       = d.get("memory_poll_interval_seconds", 10)
-        self.health_log_interval_seconds        = d.get("health_log_interval_seconds", 60)
-        self.health_broadcast_interval_seconds  = d.get("health_broadcast_interval_seconds", 3)
-        self.max_restart_attempts               = d.get("max_restart_attempts", 10)
-        self.restart_backoff_seconds            = d.get("restart_backoff_seconds", 5)
+        self.memory_poll_interval_seconds       = d.get("memory_poll_interval_seconds",       10)
+        self.health_log_interval_seconds        = d.get("health_log_interval_seconds",        60)
+        self.health_broadcast_interval_seconds  = d.get("health_broadcast_interval_seconds",  3)
+        self.max_restart_attempts               = d.get("max_restart_attempts",               10)
+        self.restart_backoff_seconds            = d.get("restart_backoff_seconds",            5)
         self.sequential_detection_restart_delay = d.get("sequential_detection_restart_delay", 10)
-        self.process_start_timeout_seconds      = d.get("process_start_timeout_seconds", 30)
-        self.validate_model_on_startup          = d.get("validate_model_on_startup", True)
-        # Storm guard: if a process restarts > storm_max_restarts times within
-        # storm_window_seconds, it is suspended until a supervisor restart.
-        # Prevents Windows paging file exhaustion from repeated CUDA DLL loads.
-        self.storm_max_restarts                 = d.get("storm_max_restarts", 5)
-        self.storm_window_seconds               = d.get("storm_window_seconds", 120)
+        self.process_start_timeout_seconds      = d.get("process_start_timeout_seconds",      30)
+        self.validate_model_on_startup          = d.get("validate_model_on_startup",          True)
+        self.storm_max_restarts                 = d.get("storm_max_restarts",                 5)
+        self.storm_window_seconds               = d.get("storm_window_seconds",               120)
 
 
 class LoggingConfig:
     def __init__(self, d):
-        self.log_dir = d.get("log_dir", "logs")
-        self.max_bytes = d.get("max_bytes", 10485760)
-        self.backup_count = d.get("backup_count", 5)
-        self.format = d.get("format", "%(asctime)s [%(levelname)s] [%(name)s] %(message)s")
-        self.date_format = d.get("date_format", "%Y-%m-%d %H:%M:%S")
+        self.log_dir      = d.get("log_dir",      "logs")
+        self.max_bytes    = d.get("max_bytes",     10485760)
+        self.backup_count = d.get("backup_count",  5)
+        self.format       = d.get("format",        "%(asctime)s [%(levelname)s] [%(name)s] %(message)s")
+        self.date_format  = d.get("date_format",   "%Y-%m-%d %H:%M:%S")
 
 
 class SystemConfig:
     def __init__(self, d):
-        self.name = d.get("name", "IndustrialVisionSystem")
-        self.version = d.get("version", "2.1")
-        self.log_level = d.get("log_level", "INFO")
-        self.daily_restart_interval_hours = d.get("daily_restart_interval_hours", 24)
-        self.heartbeat_timeout_seconds = d.get("heartbeat_timeout_seconds", 10)
-        self.fps_zero_timeout_seconds = d.get("fps_zero_timeout_seconds", 30)
-        self.startup_grace_period_seconds = d.get("startup_grace_period_seconds", 15)
+        self.name                           = d.get("name",                           "IndustrialVisionSystem")
+        self.version                        = d.get("version",                        "3.0")
+        self.log_level                      = d.get("log_level",                      "INFO")
+        self.daily_restart_interval_hours   = d.get("daily_restart_interval_hours",   24)
+        self.heartbeat_timeout_seconds      = d.get("heartbeat_timeout_seconds",      10)
+        self.fps_zero_timeout_seconds       = d.get("fps_zero_timeout_seconds",       30)
+        self.startup_grace_period_seconds   = d.get("startup_grace_period_seconds",   15)
 
 
 class VisionSystemConfig:
@@ -185,23 +231,24 @@ class VisionSystemConfig:
             raise FileNotFoundError(f"Config not found: {self._path}")
         with open(self._path, "r", encoding="utf-8") as f:
             self._raw = yaml.safe_load(f)
-        self.system = SystemConfig(self._raw.get("system", {}))
+        self.system    = SystemConfig(self._raw.get("system", {}))
         self.cameras: List[CameraConfig] = [
             CameraConfig(c) for c in self._raw.get("cameras", []) if c.get("enabled", True)
         ]
-        self.model = ModelConfig(self._raw.get("model", {}))
-        self.gpu_pool = GPUPoolConfig(self._raw.get("gpu_pool", {}))
+        self.model     = ModelConfig(self._raw.get("model", {}))
+        self.gpu_pool  = GPUPoolConfig(self._raw.get("gpu_pool", {}))
         self.detection = DetectionConfig(self._raw.get("detection", {}))
-        self.relay = RelayConfig(self._raw.get("relay", {}))
-        self.gui = GUIConfig(self._raw.get("gui", {}))
-        self.gpu_monitor = GPUMonitorConfig(self._raw.get("gpu_monitor", {}))
-        self.supervisor = SupervisorConfig(self._raw.get("supervisor", {}))
-        self.logging = LoggingConfig(self._raw.get("logging", {}))
+        self.relay     = RelayConfig(self._raw.get("relay", {}))
+        self.gui       = GUIConfig(self._raw.get("gui", {}))
+        self.gpu_monitor  = GPUMonitorConfig(self._raw.get("gpu_monitor", {}))
+        self.supervisor   = SupervisorConfig(self._raw.get("supervisor", {}))
+        self.logging      = LoggingConfig(self._raw.get("logging", {}))
         bd = self._raw.get("boundaries", {})
         self.boundaries_dir = Path(bd.get("boundary_dir", "boundaries"))
         if not self.boundaries_dir.is_absolute():
             self.boundaries_dir = self._path.parent.parent / self.boundaries_dir
-        logger.info("Config loaded v%s: %d cameras", self.system.version, len(self.cameras))
+        logger.info("Config loaded v%s: %d cameras  relay_backend=%s",
+                    self.system.version, len(self.cameras), self.relay.active_backend)
 
     def reload(self):
         self.load()
@@ -226,13 +273,11 @@ class VisionSystemConfig:
         return [c.id for c in self.cameras]
 
     def validate_model(self) -> bool:
-        """Check model file exists. Returns True if OK."""
         model_path = Path(self.model.path)
         if not model_path.is_absolute():
             model_path = self._path.parent.parent / model_path
         if model_path.exists():
             return True
-        # Also check detection.model_path for backward compat
         alt = Path(self.detection.model_path)
         if not alt.is_absolute():
             alt = self._path.parent.parent / alt

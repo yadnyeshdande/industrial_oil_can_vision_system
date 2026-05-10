@@ -420,3 +420,242 @@
 2026-04-27 04:51:05 [INFO] [relay.relay_process] [Relay] Relay 2 → ON
 2026-04-27 04:51:05 [INFO] [relay.relay_process] [Relay] Relay 3 → ON
 2026-04-27 04:53:11 [INFO] [relay.relay_process] [relay] All relays forced OFF on exit
+2026-05-10 15:54:48 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 15:54:48 [INFO] [relay.relay_process] [Relay] PID=17464 starting (9 relays)
+2026-05-10 15:54:48 [CRITICAL] [relay.relay_process] [relay] Fatal: 'RelayConfig' object has no attribute 'library'
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 301, in relay_process_entry
+    worker.run()
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 131, in run
+    self._driver = build_relay_driver(self.rcfg.library, self.rcfg.relay_count)
+AttributeError: 'RelayConfig' object has no attribute 'library'
+2026-05-10 15:55:08 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 15:55:08 [INFO] [relay.relay_process] [Relay] PID=25536 starting (9 relays)
+2026-05-10 15:55:08 [CRITICAL] [relay.relay_process] [relay] Fatal: 'RelayConfig' object has no attribute 'library'
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 301, in relay_process_entry
+    worker.run()
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 131, in run
+    self._driver = build_relay_driver(self.rcfg.library, self.rcfg.relay_count)
+AttributeError: 'RelayConfig' object has no attribute 'library'
+2026-05-10 15:55:19 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 15:55:19 [INFO] [relay.relay_process] [Relay] PID=18652 starting (9 relays)
+2026-05-10 15:55:19 [CRITICAL] [relay.relay_process] [relay] Fatal: 'RelayConfig' object has no attribute 'library'
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 301, in relay_process_entry
+    worker.run()
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 131, in run
+    self._driver = build_relay_driver(self.rcfg.library, self.rcfg.relay_count)
+AttributeError: 'RelayConfig' object has no attribute 'library'
+2026-05-10 15:55:35 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 15:55:35 [INFO] [relay.relay_process] [Relay] PID=16236 starting (9 relays)
+2026-05-10 15:55:35 [CRITICAL] [relay.relay_process] [relay] Fatal: 'RelayConfig' object has no attribute 'library'
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 301, in relay_process_entry
+    worker.run()
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 131, in run
+    self._driver = build_relay_driver(self.rcfg.library, self.rcfg.relay_count)
+AttributeError: 'RelayConfig' object has no attribute 'library'
+2026-05-10 15:55:56 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 15:55:56 [INFO] [relay.relay_process] [Relay] PID=28472 starting (9 relays)
+2026-05-10 15:55:56 [CRITICAL] [relay.relay_process] [relay] Fatal: 'RelayConfig' object has no attribute 'library'
+Traceback (most recent call last):
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 301, in relay_process_entry
+    worker.run()
+  File "d:\New folder\pc 3\vision_system\relay\relay_process.py", line 131, in run
+    self._driver = build_relay_driver(self.rcfg.library, self.rcfg.relay_count)
+AttributeError: 'RelayConfig' object has no attribute 'library'
+2026-05-10 16:01:50 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 16:01:50 [INFO] [relay.relay_process] [Relay] PID=832 starting  backend=usb  relays=9
+2026-05-10 16:01:50 [ERROR] [relay.backends.usb_backend] [USBBackend] connect error: No device found
+2026-05-10 16:01:50 [WARNING] [relay.relay_process] [Relay] Backend 'usb' connect failed at startup — outputs will NOT fire
+2026-05-10 16:01:59 [INFO] [relay.relay_process] [RelayBackend] Switching  usb → modbus
+2026-05-10 16:01:59 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch1=False failed: Device not connected — attempting reconnect
+2026-05-10 16:01:59 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:02 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:02 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch2=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:02 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:05 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:05 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch3=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:05 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:08 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:08 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch4=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:08 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:11 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:11 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch5=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:11 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:14 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:14 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch6=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:14 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:18 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:18 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch7=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:18 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:21 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:21 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch8=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:21 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:02:24 [ERROR] [relay.backends.usb_backend] [USBBackend] Reconnect failed after 3 attempts
+2026-05-10 16:02:24 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch9=False failed: Device not connected — attempting reconnect
+2026-05-10 16:02:24 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:03:48 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 16:03:48 [INFO] [relay.relay_process] [Relay] PID=8516 starting  backend=usb  relays=9
+2026-05-10 16:03:48 [ERROR] [relay.backends.usb_backend] [USBBackend] connect error: No device found
+2026-05-10 16:03:48 [WARNING] [relay.relay_process] [Relay] Backend 'usb' connect failed at startup — outputs will NOT fire
+2026-05-10 16:18:44 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 16:18:44 [INFO] [relay.relay_process] [Relay] PID=15060 starting  backend=modbus  relays=9
+2026-05-10 16:18:44 [INFO] [relay.backends.modbus_backend] [ModbusBackend] Connected to 192.168.1.200:502  slave=1
+2026-05-10 16:18:44 [INFO] [relay.relay_process] [Relay] Backend 'modbus' connected and outputs cleared
+2026-05-10 16:19:15 [INFO] [relay.relay_process] [RelayBackend] Switching  modbus → usb
+2026-05-10 16:19:15 [INFO] [relay.backends.modbus_backend] [ModbusBackend] Disconnected from 192.168.1.200:502
+2026-05-10 16:19:16 [ERROR] [relay.backends.usb_backend] [USBBackend] connect error: No device found
+2026-05-10 16:19:16 [ERROR] [relay.relay_process] [RelayBackend] New backend 'usb' connect FAILED → rolling back to 'modbus'
+2026-05-10 16:19:16 [WARNING] [relay.relay_process] [RelayBackend] Rolling back to 'modbus'
+2026-05-10 16:19:16 [INFO] [relay.backends.modbus_backend] [ModbusBackend] Connected to 192.168.1.200:502  slave=1
+2026-05-10 16:19:16 [INFO] [relay.relay_process] [RelayBackend] Rollback to 'modbus' SUCCESSFUL
+2026-05-10 16:20:07 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 16:20:07 [INFO] [relay.relay_process] [Relay] PID=5336 starting  backend=modbus  relays=9
+2026-05-10 16:20:07 [INFO] [relay.backends.modbus_backend] [ModbusBackend] Connected to 192.168.1.200:502  slave=1
+2026-05-10 16:20:08 [INFO] [relay.relay_process] [Relay] Backend 'modbus' connected and outputs cleared
+2026-05-10 16:21:54 [INFO] [relay.relay_process] [RelayBackend] Switching  modbus → usb
+2026-05-10 16:21:54 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] all_off error: [WinError 10054] An existing connection was forcibly closed by the remote host
+2026-05-10 16:21:54 [INFO] [relay.backends.modbus_backend] [ModbusBackend] Disconnected from 192.168.1.200:502
+2026-05-10 16:21:55 [ERROR] [relay.backends.usb_backend] [USBBackend] connect error: No device found
+2026-05-10 16:21:55 [ERROR] [relay.relay_process] [RelayBackend] New backend 'usb' connect FAILED → rolling back to 'modbus'
+2026-05-10 16:21:55 [WARNING] [relay.relay_process] [RelayBackend] Rolling back to 'modbus'
+2026-05-10 16:21:57 [ERROR] [pymodbus.logging] Connection to (192.168.1.200, 502) failed: timed out
+2026-05-10 16:21:57 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:21:57 [ERROR] [relay.relay_process] [RelayBackend] Both 'modbus' and rollback failed — using SIMULATED backend. Physical relay outputs will NOT fire until manual recovery.
+2026-05-10 16:21:57 [WARNING] [relay.relay_process] [SimBackend] SIMULATED relay — physical outputs will NOT fire
+2026-05-10 16:22:05 [INFO] [relay.relay_process] [RelayBackend] Switching  simulated → modbus
+2026-05-10 16:22:05 [INFO] [relay.relay_process] [SimBackend] Disconnected (simulated)
+2026-05-10 16:22:07 [ERROR] [pymodbus.logging] Repeating....
+2026-05-10 16:22:07 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:22:07 [ERROR] [relay.relay_process] [RelayBackend] New backend 'modbus' connect FAILED → rolling back to 'simulated'
+2026-05-10 16:22:07 [WARNING] [relay.relay_process] [RelayBackend] Rolling back to 'simulated'
+2026-05-10 16:22:07 [WARNING] [relay.relay_process] [SimBackend] SIMULATED relay — physical outputs will NOT fire
+2026-05-10 16:22:07 [INFO] [relay.relay_process] [RelayBackend] Rollback to 'simulated' SUCCESSFUL
+2026-05-10 16:38:04 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 16:38:04 [INFO] [relay.relay_process] [Relay] PID=15636 starting  backend=modbus  relays=9
+2026-05-10 16:38:04 [INFO] [relay.backends.modbus_backend] [ModbusBackend] Connected to 192.168.1.200:502  slave=1
+2026-05-10 16:38:04 [INFO] [relay.relay_process] [Relay] Backend 'modbus' connected and outputs cleared
+2026-05-10 16:38:04 [INFO] [relay.relay_process] [Relay] Running blink test on 'modbus' (9 relays)...
+2026-05-10 16:38:06 [INFO] [relay.relay_process] [Relay] Blink test complete — all 9 relays cycled
+2026-05-10 16:38:35 [WARNING] [relay.backends.modbus_backend] [ModbusBackend] health_check failed: [WinError 10054] An existing connection was forcibly closed by the remote host
+2026-05-10 16:38:35 [WARNING] [relay.relay_process] [Relay] Backend 'modbus' health check FAILED (consecutive=1): [WinError 10054] An existing connection was forcibly closed by the remote host
+2026-05-10 16:38:45 [WARNING] [relay.backends.modbus_backend] [ModbusBackend] Reconnecting to 192.168.1.200:502...
+2026-05-10 16:38:48 [ERROR] [pymodbus.logging] Connection to (192.168.1.200, 502) failed: timed out
+2026-05-10 16:38:48 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:38:52 [ERROR] [pymodbus.logging] Repeating....
+2026-05-10 16:38:52 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:38:57 [ERROR] [pymodbus.logging] Connection to (192.168.1.200, 502) failed: timed out
+2026-05-10 16:38:57 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:38:57 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Reconnect to 192.168.1.200:502 failed after 3 attempts
+2026-05-10 16:38:57 [WARNING] [relay.relay_process] [Relay] Backend 'modbus' health check FAILED (consecutive=2): Reconnect to 192.168.1.200:502 failed after 3 attempts
+2026-05-10 16:38:58 [WARNING] [relay.backends.modbus_backend] [ModbusBackend] Reconnecting to 192.168.1.200:502...
+2026-05-10 16:39:11 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 16:39:11 [INFO] [relay.relay_process] [Relay] PID=21060 starting  backend=modbus  relays=9
+2026-05-10 16:39:13 [ERROR] [pymodbus.logging] Connection to (192.168.1.200, 502) failed: timed out
+2026-05-10 16:39:13 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:39:13 [WARNING] [relay.relay_process] [Relay] Backend 'modbus' connect failed at startup — outputs will NOT fire
+2026-05-10 16:39:18 [INFO] [relay.relay_process] [RelayBackend] Switching  modbus → usb
+2026-05-10 16:39:18 [WARNING] [relay.backends.modbus_backend] [ModbusBackend] Reconnecting to 192.168.1.200:502...
+2026-05-10 16:39:21 [ERROR] [pymodbus.logging] Repeating....
+2026-05-10 16:39:21 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:39:25 [ERROR] [pymodbus.logging] Connection to (192.168.1.200, 502) failed: timed out
+2026-05-10 16:39:25 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:39:30 [ERROR] [pymodbus.logging] Connection to (192.168.1.200, 502) failed: timed out
+2026-05-10 16:39:30 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Could not connect to Modbus relay at 192.168.1.200:502
+2026-05-10 16:39:30 [ERROR] [relay.backends.modbus_backend] [ModbusBackend] Reconnect to 192.168.1.200:502 failed after 3 attempts
+2026-05-10 16:39:30 [INFO] [relay.backends.modbus_backend] [ModbusBackend] Disconnected from 192.168.1.200:502
+2026-05-10 16:39:30 [INFO] [relay.backends.usb_backend] [USBBackend] Connected: <pyhid_usb_relay.controller.Controller object at 0x0000020297370610>
+2026-05-10 16:39:30 [INFO] [relay.relay_process] [RelayBackend] Switch to 'usb' COMPLETE
+2026-05-10 16:39:30 [INFO] [relay.relay_process] [Relay] Backend is already 'usb' — ignoring switch request
+2026-05-10 16:39:54 [INFO] [relay] Logging initialised → logs\relay.log (level=INFO)
+2026-05-10 16:39:54 [INFO] [relay.relay_process] [Relay] PID=28248 starting  backend=usb  relays=9
+2026-05-10 16:39:54 [INFO] [relay.backends.usb_backend] [USBBackend] Connected: <pyhid_usb_relay.controller.Controller object at 0x000001EB3B9E0850>
+2026-05-10 16:39:54 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch3=False failed: Index 3 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:54 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:55 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:55 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch3=False failed: Index 3 is outside range [1..2]
+2026-05-10 16:39:55 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch4=False failed: Index 4 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:55 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:55 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:55 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch4=False failed: Index 4 is outside range [1..2]
+2026-05-10 16:39:55 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch5=False failed: Index 5 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:55 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:56 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:56 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch5=False failed: Index 5 is outside range [1..2]
+2026-05-10 16:39:56 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch6=False failed: Index 6 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:56 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:56 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:56 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch6=False failed: Index 6 is outside range [1..2]
+2026-05-10 16:39:56 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch7=False failed: Index 7 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:56 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:57 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:57 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch7=False failed: Index 7 is outside range [1..2]
+2026-05-10 16:39:57 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch8=False failed: Index 8 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:57 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:57 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:57 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch8=False failed: Index 8 is outside range [1..2]
+2026-05-10 16:39:57 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch9=False failed: Index 9 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:57 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:58 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:58 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch9=False failed: Index 9 is outside range [1..2]
+2026-05-10 16:39:58 [INFO] [relay.relay_process] [Relay] Backend 'usb' connected and outputs cleared
+2026-05-10 16:39:58 [INFO] [relay.relay_process] [Relay] Running blink test on 'usb' (9 relays)...
+2026-05-10 16:39:58 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch3=True failed: Index 3 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:58 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:59 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:59 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch3=True failed: Index 3 is outside range [1..2]
+2026-05-10 16:39:59 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch3=False failed: Index 3 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:59 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:39:59 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:39:59 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch3=False failed: Index 3 is outside range [1..2]
+2026-05-10 16:39:59 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch4=True failed: Index 4 is outside range [1..2] — attempting reconnect
+2026-05-10 16:39:59 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:00 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:00 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch4=True failed: Index 4 is outside range [1..2]
+2026-05-10 16:40:00 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch4=False failed: Index 4 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:00 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:01 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:01 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch4=False failed: Index 4 is outside range [1..2]
+2026-05-10 16:40:01 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch5=True failed: Index 5 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:01 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:01 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:01 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch5=True failed: Index 5 is outside range [1..2]
+2026-05-10 16:40:01 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch5=False failed: Index 5 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:01 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:02 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:02 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch5=False failed: Index 5 is outside range [1..2]
+2026-05-10 16:40:02 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch6=True failed: Index 6 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:02 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:02 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:02 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch6=True failed: Index 6 is outside range [1..2]
+2026-05-10 16:40:02 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch6=False failed: Index 6 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:02 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:03 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:03 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch6=False failed: Index 6 is outside range [1..2]
+2026-05-10 16:40:03 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch7=True failed: Index 7 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:03 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:04 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:04 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch7=True failed: Index 7 is outside range [1..2]
+2026-05-10 16:40:04 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch7=False failed: Index 7 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:04 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:04 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:04 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch7=False failed: Index 7 is outside range [1..2]
+2026-05-10 16:40:04 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch8=True failed: Index 8 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:04 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:05 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:05 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch8=True failed: Index 8 is outside range [1..2]
+2026-05-10 16:40:05 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch8=False failed: Index 8 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:05 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:05 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:05 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch8=False failed: Index 8 is outside range [1..2]
+2026-05-10 16:40:06 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch9=True failed: Index 9 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:06 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:06 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:06 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch9=True failed: Index 9 is outside range [1..2]
+2026-05-10 16:40:06 [WARNING] [relay.backends.usb_backend] [USBBackend] set_state ch9=False failed: Index 9 is outside range [1..2] — attempting reconnect
+2026-05-10 16:40:06 [WARNING] [relay.backends.usb_backend] [USBBackend] Reconnecting USB device...
+2026-05-10 16:40:07 [INFO] [relay.backends.usb_backend] [USBBackend] Reconnected on attempt 1
+2026-05-10 16:40:07 [ERROR] [relay.backends.usb_backend] [USBBackend] Retry set_state ch9=False failed: Index 9 is outside range [1..2]
+2026-05-10 16:40:07 [INFO] [relay.relay_process] [Relay] Blink test complete — all 9 relays cycled

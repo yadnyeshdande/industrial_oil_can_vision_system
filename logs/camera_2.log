@@ -1005,3 +1005,82 @@
 2026-04-27 04:52:35 [INFO] [Camera_2] [Camera_2] Reconnecting in 8.0s
 2026-04-27 04:52:43 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
 2026-04-27 04:52:43 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 15:54:48 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 15:54:48 [INFO] [Camera_2] [Camera_2] PID=3908 starting
+2026-05-10 15:54:48 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 15:54:48 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 15:54:48 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 15:55:18 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 15:55:18 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-05-10 15:55:20 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 15:55:20 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 15:55:50 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 15:55:50 [INFO] [core.shared_frame] SharedFrameWriter closed: cam2_frame
+2026-05-10 15:55:50 [INFO] [Camera_2] [Camera_2] Exiting cleanly
+2026-05-10 16:01:50 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 16:01:50 [INFO] [Camera_2] [Camera_2] PID=10080 starting
+2026-05-10 16:01:50 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 16:01:50 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:01:50 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:02:20 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:02:20 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-05-10 16:02:22 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:02:22 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:03:48 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 16:03:48 [INFO] [Camera_2] [Camera_2] PID=19312 starting
+2026-05-10 16:03:48 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 16:03:48 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:03:48 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:04:18 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:04:18 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-05-10 16:04:20 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:04:20 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:04:50 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:04:50 [INFO] [Camera_2] [Camera_2] Reconnecting in 4.0s
+2026-05-10 16:04:54 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:04:54 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:18:44 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 16:18:44 [INFO] [Camera_2] [Camera_2] PID=24720 starting
+2026-05-10 16:18:44 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 16:18:44 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:18:44 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:19:14 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:19:14 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-05-10 16:19:16 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:19:16 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:20:08 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 16:20:08 [INFO] [Camera_2] [Camera_2] PID=27128 starting
+2026-05-10 16:20:08 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 16:20:08 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:20:08 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:20:38 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:20:38 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-05-10 16:20:40 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:20:40 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:21:10 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:21:10 [INFO] [Camera_2] [Camera_2] Reconnecting in 4.0s
+2026-05-10 16:21:14 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:21:14 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:21:44 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:21:44 [INFO] [Camera_2] [Camera_2] Reconnecting in 8.0s
+2026-05-10 16:21:52 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:21:52 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:38:04 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 16:38:04 [INFO] [Camera_2] [Camera_2] PID=5548 starting
+2026-05-10 16:38:04 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 16:38:04 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:38:04 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:38:34 [ERROR] [Camera_2] [cam2] Failed to open stream.
+2026-05-10 16:38:34 [INFO] [Camera_2] [Camera_2] Reconnecting in 2.0s
+2026-05-10 16:38:36 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:38:36 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:39:11 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 16:39:11 [INFO] [Camera_2] [Camera_2] PID=3592 starting
+2026-05-10 16:39:11 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 16:39:11 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:39:11 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:39:54 [INFO] [camera_2] Logging initialised → logs\camera_2.log (level=INFO)
+2026-05-10 16:39:54 [INFO] [Camera_2] [Camera_2] PID=27092 starting
+2026-05-10 16:39:54 [INFO] [core.shared_frame] SharedFrameWriter created: cam2_frame (1280x720 ch=3, 2764824 bytes)
+2026-05-10 16:39:54 [INFO] [Camera_2] [Camera_2] Connecting: rtsp://admin:password@192.168.1.103:554/
+2026-05-10 16:39:54 [INFO] [Camera_2] [cam2] Opening RTSP: rtsp://admin:password@192.168.1.103:554/

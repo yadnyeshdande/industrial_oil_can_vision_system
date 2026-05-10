@@ -823,3 +823,99 @@ numpy.core._exceptions._ArrayMemoryError: Unable to allocate 5.93 MiB for an arr
 2026-04-27 04:52:42 [INFO] [gui.boundary_editor] Boundaries saved → D:\New folder\pc 3\vision_system\boundaries\camera_0_boundaries.json  (3 OC, 3 BH)
 2026-04-27 04:52:43 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
 2026-04-27 04:52:43 [INFO] [gui.unified_gui] [GUI] Boundaries saved cam 0, reload signalled
+2026-05-10 15:54:48 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 15:54:48 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 15:54:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 15:54:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 15:54:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 15:54:48 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=4284
+2026-05-10 15:54:48 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 15:54:48 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 15:54:48 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame
+2026-05-10 15:54:56 [INFO] [gui.unified_gui] [GUI] Backend change requested: usb → modbus
+2026-05-10 15:55:22 [INFO] [gui.unified_gui] [GUI] Backend change requested: usb → modbus
+2026-05-10 15:56:01 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 15:56:01 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 15:56:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 15:56:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 15:56:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 15:56:01 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=2448
+2026-05-10 15:56:01 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam0_frame
+2026-05-10 15:56:02 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam1_frame
+2026-05-10 15:56:02 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam2_frame
+2026-05-10 15:56:03 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam0_frame
+2026-05-10 15:56:04 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam1_frame
+2026-05-10 15:56:04 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam2_frame
+2026-05-10 15:56:05 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam0_frame
+2026-05-10 15:56:06 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam1_frame
+2026-05-10 15:56:06 [ERROR] [core.shared_frame] SharedFrameReader failed to connect to: cam2_frame
+2026-05-10 16:01:50 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 16:01:50 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 16:01:50 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:01:50 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:01:50 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:01:50 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=3488
+2026-05-10 16:01:50 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 16:01:50 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 16:01:50 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame
+2026-05-10 16:01:58 [INFO] [gui.unified_gui] [GUI] Backend change requested: usb → modbus
+2026-05-10 16:02:15 [INFO] [gui.unified_gui] [GUI] Backend change requested: usb → modbus
+2026-05-10 16:03:48 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 16:03:48 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 16:03:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:03:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:03:48 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:03:48 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=9000
+2026-05-10 16:03:48 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 16:03:48 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 16:03:48 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame
+2026-05-10 16:18:44 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 16:18:44 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:18:44 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:18:44 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:18:44 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:18:44 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=2356
+2026-05-10 16:18:44 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 16:18:44 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 16:18:44 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame
+2026-05-10 16:19:15 [INFO] [gui.unified_gui] [GUI] Backend change requested: modbus → usb
+2026-05-10 16:20:08 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 16:20:08 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:20:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:20:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:20:08 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:20:08 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=27660
+2026-05-10 16:20:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 16:20:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 16:20:08 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame
+2026-05-10 16:21:54 [INFO] [gui.unified_gui] [GUI] Backend change requested: modbus → usb
+2026-05-10 16:22:04 [INFO] [gui.unified_gui] [GUI] Backend change requested: simulated → modbus
+2026-05-10 16:38:04 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 16:38:04 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:38:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:38:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:38:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:38:04 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=4720
+2026-05-10 16:38:04 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 16:38:04 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 16:38:04 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame
+2026-05-10 16:39:11 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 16:39:11 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:39:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:39:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:39:11 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:39:11 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=7328
+2026-05-10 16:39:11 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 16:39:11 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 16:39:11 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame
+2026-05-10 16:39:17 [INFO] [gui.unified_gui] [GUI] Backend change requested: modbus → usb
+2026-05-10 16:39:24 [INFO] [gui.unified_gui] [GUI] Backend change requested: modbus → usb
+2026-05-10 16:39:54 [INFO] [gui] Logging initialised → logs\gui.log (level=INFO)
+2026-05-10 16:39:54 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 16:39:54 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:39:54 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:39:54 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:39:54 [INFO] [gui.unified_gui] [GUI v3.2-relay] PID=24984
+2026-05-10 16:39:54 [INFO] [core.shared_frame] SharedFrameReader connected: cam0_frame
+2026-05-10 16:39:54 [INFO] [core.shared_frame] SharedFrameReader connected: cam1_frame
+2026-05-10 16:39:54 [INFO] [core.shared_frame] SharedFrameReader connected: cam2_frame

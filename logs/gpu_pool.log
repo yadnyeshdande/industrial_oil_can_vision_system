@@ -34044,3 +34044,155 @@ UnboundLocalError: local variable 'frame' referenced before assignment
 2026-04-27 04:52:43 [INFO] [detection.gpu_worker_pool] [PoolManager] Boundary reload for cam 0
 2026-04-27 04:52:43 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
 2026-04-27 04:52:43 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 15:54:48 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 15:54:48 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=7612 — shared-model pool, 3 inference threads
+2026-05-10 15:54:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 15:54:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 15:55:04 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 15:55:04 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 15:55:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 15:55:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 15:55:04 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 15:55:04 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-05-10 16:01:50 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 16:01:50 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=16836 — shared-model pool, 3 inference threads
+2026-05-10 16:01:54 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model D:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 16:01:54 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 16:01:58 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 16:01:58 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 16:01:58 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 16:01:58 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 16:01:58 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 16:01:58 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-05-10 16:03:48 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 16:03:48 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=3852 — shared-model pool, 3 inference threads
+2026-05-10 16:03:51 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 16:03:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 16:03:55 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 16:03:55 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 16:03:55 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 16:03:55 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 16:03:55 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 16:03:55 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-05-10 16:18:44 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 16:18:44 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=1064 — shared-model pool, 3 inference threads
+2026-05-10 16:18:48 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 16:18:49 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 16:18:52 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 16:18:52 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:18:52 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 16:18:52 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 16:18:52 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 16:18:52 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-05-10 16:20:08 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 16:20:08 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=27524 — shared-model pool, 3 inference threads
+2026-05-10 16:20:11 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 16:20:11 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 16:20:15 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 16:20:15 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:20:15 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 16:20:15 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 16:20:15 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 16:20:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-05-10 16:38:04 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 16:38:04 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=14888 — shared-model pool, 3 inference threads
+2026-05-10 16:38:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 16:38:08 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 16:38:12 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 16:38:12 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:38:12 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 16:38:12 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 16:38:12 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 16:38:12 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-05-10 16:39:11 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 16:39:11 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=23660 — shared-model pool, 3 inference threads
+2026-05-10 16:39:15 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 16:39:16 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 16:39:19 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 16:39:19 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=modbus
+2026-05-10 16:39:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 16:39:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 16:39:19 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 16:39:19 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2
+2026-05-10 16:39:54 [INFO] [gpu_pool] Logging initialised → logs\gpu_pool.log (level=INFO)
+2026-05-10 16:39:54 [INFO] [detection.gpu_worker_pool] [PoolManager] PID=1384 — shared-model pool, 3 inference threads
+2026-05-10 16:39:57 [INFO] [detection.gpu_worker_pool] [PoolManager] Loading shared model d:\New folder\pc 3\vision_system\models\best.pt on cuda
+2026-05-10 16:39:57 [INFO] [detection.gpu_worker_pool] [PoolManager] Warmup (fp32)...
+2026-05-10 16:40:01 [INFO] [core.resource_monitor] NVML initialized (pynvml)
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [PoolManager] Shared model ready — VRAM ~1545 MB
+2026-05-10 16:40:01 [INFO] [core.config_loader] Config loaded v3.0: 3 cameras  relay_backend=usb
+2026-05-10 16:40:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=0 oc=3 bh=3 pairs=3
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 0
+2026-05-10 16:40:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=1 oc=3 bh=3 pairs=3
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 1
+2026-05-10 16:40:01 [INFO] [core.boundary_engine] CameraBoundarySet loaded: cam=2 oc=3 bh=3 pairs=3
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [PoolManager] Loaded boundaries cam 2
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [InferThread-0] started
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-0
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [InferThread-1] started
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-1
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [InferThread-2] started
+2026-05-10 16:40:01 [INFO] [detection.gpu_worker_pool] [PoolManager] Started InferThread-2

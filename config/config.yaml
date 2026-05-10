@@ -1,6 +1,6 @@
 system:
   name: "IndustrialVisionSystem"
-  version: "2.1"
+  version: "3.0"
   log_level: "INFO"
   daily_restart_interval_hours: 24
   heartbeat_timeout_seconds: 10
@@ -12,7 +12,7 @@ cameras:
     name: "Camera_1"
     rtsp_url: "rtsp://admin:Pass_123@192.168.1.248:554/"
     enabled: true
-    fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
+    fps_limit: 15
     reconnect_base_delay: 2.0
     reconnect_max_delay: 60.0
     reconnect_max_attempts: 0
@@ -25,7 +25,7 @@ cameras:
     name: "Camera_2"
     rtsp_url: "rtsp://admin:Pass_123@192.168.1.249:554/"
     enabled: true
-    fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
+    fps_limit: 15
     reconnect_base_delay: 2.0
     reconnect_max_delay: 60.0
     reconnect_max_attempts: 0
@@ -38,7 +38,7 @@ cameras:
     name: "Camera_3"
     rtsp_url: "rtsp://admin:password@192.168.1.103:554/"
     enabled: true
-    fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
+    fps_limit: 15
     reconnect_base_delay: 2.0
     reconnect_max_delay: 60.0
     reconnect_max_attempts: 0
@@ -59,15 +59,11 @@ model:
 
 gpu_pool:
   enabled: true
-  pool_size: 3      # was 2 — add a third worker for better load distribution and responsiveness, especially during model warmup
-  device: "cuda"     # increase from 2 → 3 threads to handle 3 cameras at 15fps
-  use_fp16: false     # disable FP16 for better stability and compatibility, especially on consumer GPUs with limited FP16 support 1. your model is fp32 — forcing fp16 fails silently
-  fps_limit: 15      # was 12 — allow slightly higher FPS for better responsiveness, but still limit to prevent overload
-  # Actual usage: ~3.2-4.5 GB for 2 YOLO workers + CUDA runtime.
-  # 0 = disabled (recommended: let VRAM monitor handle GPU memory).
+  pool_size: 3
+  device: "cuda"
+  use_fp16: false
+  fps_limit: 15
   memory_limit_mb: 6000
-  # RTX 3050 6GB: 2 workers x YOLO ~6.1 GB. 6800 leaves buffer for driver/desktop.
-  # Shared-model pool (pool_size=2 with shared weights) reduces this to ~4.5 GB.
   vram_limit_mb: 6800
   inference_timeout_seconds: 5
   heartbeat_interval_seconds: 2
@@ -89,23 +85,53 @@ detection:
   inference_timeout_seconds: 5
   heartbeat_interval_seconds: 2
 
+# ── Relay — v3.0 dual-backend architecture ─────────────────────────────────────
 relay:
   enabled: true
-  library: "pyhid_usb_relay"  # was "Pyhid" — must be exactly this string 
+
+  # Which backend starts active on launch: "usb" or "modbus"
+  active_backend: "modbus"
+
+  # Allow operator to switch backend at runtime via GUI radio buttons.
+  # Set false to lock the backend (useful for production lines that must not change).
+  allow_runtime_switching: true
+
+  # Minimum seconds between consecutive backend switches.
+  # Prevents accidental rapid switching that could corrupt relay state.
+  minimum_switch_interval_seconds: 5
+
+  relay_count: 9
   retry_attempts: 3
   retry_delay_seconds: 0.5
   reinit_after_failures: 5
   memory_limit_mb: 300
   heartbeat_interval_seconds: 2
-  relay_count: 9
+
   relay_mapping:
     camera_0: [0, 1, 2]
     camera_1: [3, 4, 5]
     camera_2: [6, 7, 8]
 
+  # ── USB backend config ──────────────────────────────────────────────────
+  usb:
+    enabled: true
+    # reconnect_attempts: how many times USBRelayBackend retries before
+    # returning False (the relay worker's own retry_attempts wraps this).
+    reconnect_attempts: 3
+
+  # ── Modbus (Waveshare Ethernet Relay) backend config ────────────────────
+  modbus:
+    enabled: true
+    ip: "192.168.1.200"
+    port: 502
+    device_id: 1
+    # timeout_seconds: NEVER omit. Without this, a dead Ethernet cable causes
+    # ModbusTcpClient to hang indefinitely, blocking the entire relay process.
+    timeout_seconds: 2
+
 gui:
   enabled: true
-  window_title: "Industrial Vision System v2.1"
+  window_title: "Industrial Vision System v3.0"
   window_width: 1600
   window_height: 900
   update_interval_ms: 50
@@ -125,14 +151,9 @@ gui:
 gpu_monitor:
   enabled: true
   poll_interval_seconds: 5
-  # Must match gpu_pool.vram_limit_mb. Fire only after sustained_vram_seconds.
   vram_threshold_mb: 6800
-  # Seconds VRAM must stay over threshold before triggering a restart.
-  # Prevents false positives from transient VRAM spikes during model warmup.
   vram_sustained_seconds: 45
-  # Minimum seconds between two consecutive VRAM-triggered restarts (storm guard).
   vram_restart_cooldown_seconds: 120
-  # After this many VRAM restarts, stop retrying and require manual intervention.
   vram_max_restarts: 5
   temperature_threshold_celsius: 85
   critical_temperature_celsius: 90
@@ -146,8 +167,6 @@ supervisor:
   health_broadcast_interval_seconds: 3
   max_restart_attempts: 10
   restart_backoff_seconds: 5
-  # Storm guard: if a process restarts more than N times within window_seconds,
-  # disable further restarts until manual clear. Prevents paging file exhaustion.
   storm_max_restarts: 5
   storm_window_seconds: 120
   sequential_detection_restart_delay: 10
