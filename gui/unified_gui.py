@@ -1,28 +1,23 @@
 """
-gui/unified_gui.py  v3.2
-========================
+gui/unified_gui.py  v3.2-relay
+================================
 Industrial Operator Dashboard — 4-tab layout.
 
-Tabs:
-  [1] Dashboard     — all cameras, relay grid, health bars
-  [2] Camera View   — single camera with [CAM1][CAM2][CAM3] buttons,
-                       [Edit Boundaries] button, [Start/Stop Detection] button
-  [3] System Health — process table + resource bars
-  [4] Logs Viewer   — tail of supervisor/pool/relay logs
+v3.2-relay additions over v3.2:
+  • Tab 1 (Dashboard): Relay Backend panel below the relay grid
+      - Radio buttons: (•) USB Relay  ( ) Ethernet Relay
+      - [Apply] button
+      - Status strip: Current Backend / HEALTHY|DISCONNECTED / Last Error
+  • Tab 2 (Camera View): same backend status strip in the side panel
+  • Relay backend state tracked from RELAY_BACKEND_STATUS IPC messages
+  • Apply button sends RelayBackendChangeMessage through cmd_q
+  • Cooldown guard in GUI (mirrors relay-process guard) prevents spam
+  • All original v3.2 behaviour preserved — no regressions
 
-Improvements over v3.1:
-  • Boundary Editor TAB removed — editing lives in Camera View
-  • Camera selector [CAM 1][CAM 2][CAM 3] buttons, plus arrow keys
-  • [Edit Boundaries] button → freeze frame → launch editor in new window
-  • Mouse callback restored after editor closes (no '+' cursor bleed)
-  • Failsafe: if ANY camera is missing its boundary file,
-      - Detection cannot be started (button disabled)
-      - Amber banner: "Boundaries not configured — Camera X"
-  • Camera status chip: CONNECTED (green) / STALE (amber) / OFFLINE (red)
-  • Detection state pill: DETECTING (green) / PREVIEW MODE (amber)
-  • Hover highlight on all interactive buttons
-  • Flashing red alarm banner when relay is active
-  • Mouse-clickable tabs + fullscreen on startup
+GUI DESIGN RULE (from architecture doc):
+  GUI MUST NEVER DIRECTLY CONTROL RELAYS.
+  The Apply button only sends backend="usb"|"modbus" to the relay process.
+  The relay process is the ONLY output authority.
 """
 from __future__ import annotations
 import json
@@ -47,14 +42,16 @@ if str(_ROOT) not in sys.path:
 from core.config_loader import VisionSystemConfig
 from core.ipc_schema import (
     MessageType, ProcessSource,
-    GUICommandMessage, BoundaryReloadMessage, make_heartbeat,
+    GUICommandMessage, BoundaryReloadMessage,
+    RelayBackendChangeMessage,
+    make_heartbeat,
 )
 from core.logging_setup import setup_process_logging, setup_crash_handler
 from core.resource_monitor import get_process_memory_mb, is_memory_over_limit
 
 logger = logging.getLogger(__name__)
 
-# ── Design tokens ──────────────────────────────────────────────────────────────
+# ── Design tokens (unchanged from v3.2) ───────────────────────────────────────
 BG      = ( 21,  20,  18)
 PANEL   = ( 35,  33,  30)
 PANEL2  = ( 48,  46,  43)
@@ -73,12 +70,21 @@ C_BH    = ( 76, 175,  80)
 R_ON    = ( 55,  55, 210)
 R_OFF   = ( 55,  55,  50)
 
+# Backend-panel colours
+USB_COL    = ( 60, 165, 255)   # orange-ish — USB
+MODBUS_COL = ( 76, 175,  80)   # green — Ethernet
+RADIO_ON   = (255, 255, 255)
+RADIO_OFF  = ( 90,  88,  84)
+
 FONT    = cv2.FONT_HERSHEY_SIMPLEX
 FONT2   = cv2.FONT_HERSHEY_DUPLEX
 TABS    = ["Dashboard", "Camera View", "System Health", "Logs Viewer"]
 TICONS  = ["[1]", "[2]", "[3]", "[4]"]
 TAB_H   = 42
 STAT_H  = 28
+
+# Minimum seconds between Apply clicks (mirrors relay-process cooldown)
+_SWITCH_COOLDOWN = 5.0
 
 
 # ── Drawing primitives ─────────────────────────────────────────────────────────
@@ -101,7 +107,6 @@ def _dot(img, cx, cy, r, c):
     cv2.circle(img, (cx, cy), r, c, -1, cv2.LINE_AA)
 
 def _rr(img, x1, y1, x2, y2, r, c):
-    """Rounded-rect fill."""
     cv2.rectangle(img, (x1+r, y1), (x2-r, y2), c, -1)
     cv2.rectangle(img, (x1, y1+r), (x2, y2-r), c, -1)
     for px, py in [(x1+r, y1+r), (x2-r, y1+r), (x1+r, y2-r), (x2-r, y2-r)]:
@@ -125,18 +130,17 @@ def _sc(status: str):
 
 # ── Button ─────────────────────────────────────────────────────────────────────
 class Btn:
-    """Rectangular button with hover + active state."""
     def __init__(self, x1, y1, x2, y2, label, normal_bg=(50,50,48), active_bg=(40,90,50)):
-        self.x1 = x1; self.y1 = y1; self.x2 = x2; self.y2 = y2
-        self.label = label; self.nbg = normal_bg; self.abg = active_bg
+        self.x1=x1; self.y1=y1; self.x2=x2; self.y2=y2
+        self.label=label; self.nbg=normal_bg; self.abg=active_bg
 
     def draw(self, canvas, hover=False, active=False, border_col=BORDER):
         bg = self.abg if active else ((70,70,68) if hover else self.nbg)
         _rr(canvas, self.x1, self.y1, self.x2, self.y2, 4, bg)
         _box(canvas, self.x1, self.y1, self.x2, self.y2, border_col if active else BORDER, 1)
         (lw, lh), _ = cv2.getTextSize(self.label, FONT2, 0.46, 1)
-        tx = self.x1 + (self.x2 - self.x1 - lw) // 2
-        ty = self.y1 + (self.y2 - self.y1 + lh) // 2
+        tx = self.x1 + (self.x2-self.x1-lw)//2
+        ty = self.y1 + (self.y2-self.y1+lh)//2
         _tb(canvas, self.label, (tx, ty), sc=0.46, col=BRIGHT if active else TEXT)
 
     def hit(self, x, y) -> bool:
@@ -146,30 +150,25 @@ class Btn:
 # ── Mouse state ────────────────────────────────────────────────────────────────
 class MouseState:
     def __init__(self):
-        self.x = 0; self.y = 0
-        self._cx = 0; self._cy = 0; self._clicked = False
+        self.x=0; self.y=0; self._cx=0; self._cy=0; self._clicked=False
 
     def make_cb(self):
         def _cb(event, x, y, flags, param):
-            self.x = x; self.y = y
+            self.x=x; self.y=y
             if event == cv2.EVENT_LBUTTONDOWN:
-                self._cx = x; self._cy = y; self._clicked = True
+                self._cx=x; self._cy=y; self._clicked=True
         return _cb
 
-    def consume(self) -> Optional[Tuple[int, int]]:
+    def consume(self) -> Optional[Tuple[int,int]]:
         if self._clicked:
-            self._clicked = False
-            return (self._cx, self._cy)
+            self._clicked=False; return (self._cx, self._cy)
         return None
 
 
 # ── Frame poller ───────────────────────────────────────────────────────────────
-# Reads every camera's shared memory in a background thread at ~60 fps.
-# The render loop just reads from this cache — it never blocks for frames.
-# This fixes: dashboard black, camera view lag, detection-mode blank screen.
 class FramePoller:
-    _POLL_SLEEP = 0.016   # ~60 fps
-    _RETRY_WAIT = 2.0     # seconds between reconnect attempts
+    _POLL_SLEEP = 0.016
+    _RETRY_WAIT = 2.0
 
     def __init__(self, cam_cfgs):
         self._cfgs   = {c.id: c for c in cam_cfgs}
@@ -179,14 +178,12 @@ class FramePoller:
         self._retry  = {c.id: 0.0  for c in cam_cfgs}
         self._lock   = threading.Lock()
         self._stop   = threading.Event()
-        self._thread = threading.Thread(
-            target=self._run, daemon=True, name="FramePoller")
+        self._thread = threading.Thread(target=self._run, daemon=True, name="FramePoller")
 
     def start(self): self._thread.start()
     def stop(self):  self._stop.set()
 
     def get(self, cam_id):
-        """Return (frame_or_None, timestamp). Never blocks."""
         with self._lock:
             return self._frames.get(cam_id), self._ts.get(cam_id, 0.0)
 
@@ -201,10 +198,7 @@ class FramePoller:
                         if now - self._retry[cid] < self._RETRY_WAIT:
                             continue
                         self._retry[cid] = now
-                        r = SharedFrameReader(
-                            cc.shared_memory_name,
-                            cc.frame_width,
-                            cc.frame_height)
+                        r = SharedFrameReader(cc.shared_memory_name, cc.frame_width, cc.frame_height)
                         if r.connect(timeout=0.05):
                             self._rdrs[cid] = r
                         continue
@@ -215,8 +209,7 @@ class FramePoller:
                             self._ts[cid]     = now
                 except Exception:
                     try:
-                        if self._rdrs[cid]:
-                            self._rdrs[cid].close()
+                        if self._rdrs[cid]: self._rdrs[cid].close()
                     except Exception:
                         pass
                     self._rdrs[cid] = None
@@ -229,18 +222,16 @@ class CameraState:
         self.cam_id  = cam_id
         self.cfg     = cfg
         self.cam_cfg = cfg.get_camera(cam_id)
-        # frame is written by UnifiedGUI from FramePoller cache every render tick.
-        # It is NEVER written by update() — that avoids JPEG decode on the GUI thread.
         self.frame: Optional[np.ndarray] = None
-        self.frame_ts: float = 0.0       # timestamp FramePoller last wrote a frame
+        self.frame_ts: float = 0.0
         self.detections:   List[dict] = []
         self.pair_results: List[dict] = []
         self.fps           = 0.0
         self.inference_ms  = 0.0
         self.problem_count = 0
         self.success_rate  = 100.0
-        self.last_det_update = 0.0       # when detection results last arrived
-        self._bset         = None
+        self.last_det_update = 0.0
+        self._bset = None
         self._load_bd()
 
     def _load_bd(self):
@@ -253,23 +244,18 @@ class CameraState:
         except Exception:
             self._bset = None
 
-    def reload_bd(self):
-        self._load_bd()
+    def reload_bd(self): self._load_bd()
 
     def has_boundaries(self) -> bool:
         return self.cfg.get_boundary_path(self.cam_id).exists()
 
     def update(self, msg: dict):
-        # Do NOT decode frame_data here — the FramePoller feeds frames directly
-        # from shared memory at full rate. Decoding JPEG here would:
-        #   1. Add a full decode cycle on the GUI thread every result message
-        #   2. Show stale frames (by the time the message arrives the frame is old)
-        self.detections   = msg.get("detections", [])
-        self.pair_results = msg.get("pair_results", [])
-        self.fps          = msg.get("fps", 0.0)
-        self.inference_ms = msg.get("inference_time_ms", 0.0)
-        self.problem_count= msg.get("problem_count", 0)
-        self.success_rate = msg.get("success_rate", 100.0)
+        self.detections    = msg.get("detections", [])
+        self.pair_results  = msg.get("pair_results", [])
+        self.fps           = msg.get("fps", 0.0)
+        self.inference_ms  = msg.get("inference_time_ms", 0.0)
+        self.problem_count = msg.get("problem_count", 0)
+        self.success_rate  = msg.get("success_rate", 100.0)
         self.last_det_update = time.time()
 
     @property
@@ -278,8 +264,6 @@ class CameraState:
 
     @property
     def stale(self) -> bool:
-        # A camera is stale when the FramePoller hasn't seen a new frame for 3 s.
-        # (was: based on detection result timestamps — didn't work in preview mode)
         return self.frame_ts == 0.0 or (time.time() - self.frame_ts > 3.0)
 
     @property
@@ -289,92 +273,191 @@ class CameraState:
 
 # ── Tab hit-test ───────────────────────────────────────────────────────────────
 def _tab_hit(x: int, y: int, W: int) -> Optional[int]:
-    if y > TAB_H:
-        return None
+    if y > TAB_H: return None
     tw = W // len(TABS)
     for i in range(len(TABS)):
-        if i * tw <= x < (i + 1) * tw:
-            return i
+        if i * tw <= x < (i + 1) * tw: return i
     return None
 
 
 # ── Common bars ────────────────────────────────────────────────────────────────
 def _draw_tabs(canvas, active: int, W: int, ms: MouseState):
     _fill(canvas, 0, 0, W, TAB_H, (28, 27, 25))
-    _hline(canvas, TAB_H - 1, 0, W, BORDER, 2)
+    _hline(canvas, TAB_H-1, 0, W, BORDER, 2)
     n = len(TABS); tw = W // n
     for i, name in enumerate(TABS):
-        x1 = i * tw; x2 = x1 + tw - 2
+        x1 = i*tw; x2 = x1+tw-2
         is_a = (i == active)
         hov  = (x1 <= ms.x < x2 and ms.y <= TAB_H and not is_a)
-        bg   = T_ACT if is_a else ((55, 55, 52) if hov else T_IDLE)
-        _fill(canvas, x1 + 1, 1, x2, TAB_H - 2, bg)
-        if is_a:
-            _hline(canvas, TAB_H - 2, x1 + 1, x2, ACCENT, 3)
+        bg   = T_ACT if is_a else ((55,55,52) if hov else T_IDLE)
+        _fill(canvas, x1+1, 1, x2, TAB_H-2, bg)
+        if is_a: _hline(canvas, TAB_H-2, x1+1, x2, ACCENT, 3)
         lbl = f"{TICONS[i]} {name}"
         (lw, _), _ = cv2.getTextSize(lbl, FONT, 0.50, 1)
-        _t(canvas, lbl, (x1 + (tw - lw) // 2, TAB_H - 14),
-           sc=0.50, col=BRIGHT if is_a else DIM)
+        _t(canvas, lbl, (x1+(tw-lw)//2, TAB_H-14), sc=0.50, col=BRIGHT if is_a else DIM)
 
 
-def _draw_statusbar(canvas, W: int, H: int, health: dict,
-                    preview: bool, start_t: float):
+def _draw_statusbar(canvas, W: int, H: int, health: dict, preview: bool, start_t: float):
     y1 = H - STAT_H
     _fill(canvas, 0, y1, W, H, (22, 21, 19))
     _hline(canvas, y1, 0, W, BORDER)
     up = time.time() - start_t
-    _t(canvas,
-       f"{time.strftime('%Y-%m-%d %H:%M:%S')}   Uptime {_fmt_up(up)}",
-       (10, y1 + 18), sc=0.46, col=DIM)
+    _t(canvas, f"{time.strftime('%Y-%m-%d %H:%M:%S')}   Uptime {_fmt_up(up)}",
+       (10, y1+18), sc=0.46, col=DIM)
     g  = health.get("gpu_stats", {})
-    cx = W // 2 - 260
+    cx = W//2 - 260
     for lbl, val, warn in [
         ("CPU",  health.get("cpu_pct", 0), 70),
         ("GPU",  g.get("utilization_pct", 0), 85),
         ("VRAM", g.get("vram_used_mb", 0), 5000),
         ("Temp", g.get("temperature_c", 0), 75),
     ]:
-        unit = "MB" if lbl == "VRAM" else "°C" if lbl == "Temp" else "%"
-        col  = ERR if (lbl == "Temp" and val > 85) else WARN if val > warn else DIM
-        _t(canvas, f"{lbl} {val:.0f}{unit}", (cx, y1 + 18), sc=0.46, col=col)
+        unit = "MB" if lbl=="VRAM" else "°C" if lbl=="Temp" else "%"
+        col  = ERR if (lbl=="Temp" and val>85) else WARN if val>warn else DIM
+        _t(canvas, f"{lbl} {val:.0f}{unit}", (cx, y1+18), sc=0.46, col=col)
         cx += 130
     mode = "PREVIEW MODE" if preview else "DETECTING"
     col  = WARN if preview else ACCENT
     (tw, _), _ = cv2.getTextSize(mode, FONT, 0.50, 1)
     mx = W - tw - 22
-    _rr(canvas, mx - 8, y1 + 4, W - 6, H - 4, 4, PANEL2)
-    _box(canvas, mx - 8, y1 + 4, W - 6, H - 4, col, 1)
-    _t(canvas, mode, (mx, y1 + 19), sc=0.50, col=col)
+    _rr(canvas, mx-8, y1+4, W-6, H-4, 4, PANEL2)
+    _box(canvas, mx-8, y1+4, W-6, H-4, col, 1)
+    _t(canvas, mode, (mx, y1+19), sc=0.50, col=col)
 
 
 def _draw_alarm(canvas, W: int, body_y: int, cam_states: Dict) -> int:
-    """Returns banner height used (0 if no alarm)."""
     probs = []
     for cid, st in cam_states.items():
         for pr in st.pair_results:
             if pr.get("relay_active"):
                 probs.append(f"CAM {cid}  {pr.get('pair_name','?')}: {pr.get('status','?')}")
-    if not probs:
-        return 0
+    if not probs: return 0
     bh    = 32
-    flash = int(time.time() * 2) % 2 == 0
-    _fill(canvas, 0, body_y, W, body_y + bh, ERR if flash else (70, 50, 50))
+    flash = int(time.time()*2) % 2 == 0
+    _fill(canvas, 0, body_y, W, body_y+bh, ERR if flash else (70,50,50))
     _t(canvas, "  \u26a0  " + "   |   ".join(probs[:4]),
-       (12, body_y + 22), sc=0.56, col=BRIGHT, th=1)
+       (12, body_y+22), sc=0.56, col=BRIGHT, th=1)
     return bh
 
 
 def _draw_bd_banner(canvas, W: int, body_y: int, missing: List[int]) -> int:
-    """Amber 'Boundaries not configured' banner."""
-    bh  = 32
-    _fill(canvas, 0, body_y, W, body_y + bh, (28, 25, 10))
-    _box(canvas,  0, body_y, W, body_y + bh, WARN, 1)
+    bh = 32
+    _fill(canvas, 0, body_y, W, body_y+bh, (28,25,10))
+    _box(canvas,  0, body_y, W, body_y+bh, WARN, 1)
     cams = ", ".join(f"Camera {c}" for c in sorted(missing))
     _t(canvas,
        f"  \u26a0  Boundaries not configured \u2014 {cams}"
        "   |   Go to Camera View and press [Edit Boundaries]",
-       (12, body_y + 22), sc=0.50, col=WARN)
+       (12, body_y+22), sc=0.50, col=WARN)
     return bh
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Backend status panel — shared between Tab 1 and Tab 2
+# ═══════════════════════════════════════════════════════════════════════════════
+def _draw_backend_panel(
+    canvas,
+    x: int, y: int, w: int,
+    active_backend: str,           # "usb" or "modbus"
+    selected_backend: str,         # what the GUI radio shows (may differ from active)
+    backend_healthy: bool,
+    last_backend_error: str,
+    ms: MouseState,
+    hit_regions: dict,
+    cooldown_remaining: float = 0.0,
+) -> int:
+    """
+    Draws the relay backend selector panel.
+    Returns the height consumed so callers can offset subsequent content.
+
+    hit_regions populated keys:
+      "radio_usb"    — Btn for USB radio
+      "radio_modbus" — Btn for Modbus radio
+      "apply_btn"    — Btn for Apply
+    """
+    PAD  = 6
+    PH   = 110      # panel height
+    BH   = 24       # button height
+
+    # Panel background
+    _fill(canvas, x, y, x+w, y+PH, PANEL)
+    _box(canvas,  x, y, x+w, y+PH, BORDER, 1)
+
+    oy = y + 10
+    _tb(canvas, "RELAY BACKEND", (x+PAD+2, oy+12), sc=0.46, col=DIM)
+    oy += 18
+    _hline(canvas, oy, x+PAD, x+w-PAD, BORDER)
+    oy += 8
+
+    # ── Radio buttons ──────────────────────────────────────────────────────
+    col_active = USB_COL if active_backend == "usb" else MODBUS_COL
+
+    for label, key in [("USB Relay", "usb"), ("Ethernet Relay", "modbus")]:
+        is_sel = (selected_backend == key)
+        is_act = (active_backend == key)
+        radio_col = USB_COL if key == "usb" else MODBUS_COL
+
+        # outer circle
+        cx_r = x + PAD + 10
+        cy_r = oy + 9
+        cv2.circle(canvas, (cx_r, cy_r), 7, radio_col if is_sel else RADIO_OFF, 1, cv2.LINE_AA)
+        if is_sel:
+            cv2.circle(canvas, (cx_r, cy_r), 4, radio_col, -1, cv2.LINE_AA)
+
+        lbl_col = radio_col if is_sel else DIM
+        _t(canvas, label, (cx_r+14, oy+13), sc=0.46, col=lbl_col)
+
+        if is_act:
+            _t(canvas, "(active)", (cx_r+14+len(label)*9, oy+13), sc=0.36, col=DIM)
+
+        # invisible hit target for the radio
+        radio_btn = Btn(x+PAD, oy, x+PAD+180, oy+BH, label,
+                        normal_bg=PANEL, active_bg=PANEL)
+        hit_regions[f"radio_{key}"] = radio_btn
+        oy += BH - 2
+
+    oy += 4
+
+    # ── Apply button ───────────────────────────────────────────────────────
+    pending = (selected_backend != active_backend)
+    on_cd   = (cooldown_remaining > 0)
+
+    if on_cd:
+        apply_lbl = f"Cooldown {cooldown_remaining:.0f}s"
+        apply_bg  = (42, 42, 40)
+        apply_bc  = DIM
+    elif pending:
+        apply_lbl = f"Apply  ({selected_backend.upper()})"
+        apply_bg  = (40, 75, 40)
+        apply_bc  = ACCENT
+    else:
+        apply_lbl = "Apply"
+        apply_bg  = (42, 42, 40)
+        apply_bc  = DIM
+
+    apply_btn = Btn(x+PAD, oy, x+PAD+130, oy+BH, apply_lbl, apply_bg, apply_bg)
+    hov_a     = apply_btn.hit(ms.x, ms.y) and pending and not on_cd
+    _rr(canvas, apply_btn.x1, apply_btn.y1, apply_btn.x2, apply_btn.y2, 4,
+        tuple(min(c+12, 255) for c in apply_bg) if hov_a else apply_bg)
+    _box(canvas, apply_btn.x1, apply_btn.y1, apply_btn.x2, apply_btn.y2, apply_bc, 1)
+    (lw2, lh2), _ = cv2.getTextSize(apply_lbl, FONT2, 0.44, 1)
+    tx = apply_btn.x1 + (130-lw2)//2
+    ty = apply_btn.y1 + (BH+lh2)//2
+    _tb(canvas, apply_lbl, (tx, ty), sc=0.44, col=apply_bc)
+    hit_regions["apply_btn"] = apply_btn
+
+    # ── Status strip ───────────────────────────────────────────────────────
+    status_x = apply_btn.x2 + 12
+    _t(canvas, active_backend.upper(), (status_x, oy+10), sc=0.42,
+       col=USB_COL if active_backend=="usb" else MODBUS_COL)
+    health_col  = ACCENT if backend_healthy else ERR
+    health_txt  = "HEALTHY" if backend_healthy else "DISCONNECTED"
+    _t(canvas, health_txt, (status_x, oy+23), sc=0.38, col=health_col)
+    if last_backend_error:
+        err_clip = last_backend_error[:48]
+        _t(canvas, err_clip, (x+PAD, oy+BH+4), sc=0.35, col=ERR)
+
+    return PH
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -382,67 +465,54 @@ def _draw_bd_banner(canvas, W: int, body_y: int, missing: List[int]) -> int:
 # ═══════════════════════════════════════════════════════════════════════════════
 def _render_dashboard(canvas, W, H, by, bh,
                       cam_states: Dict, relay_states: List[bool],
-                      health: dict, cfg):
+                      health: dict, cfg,
+                      active_backend: str, selected_backend: str,
+                      backend_healthy: bool, last_backend_error: str,
+                      ms: MouseState, hit_regions: dict,
+                      cooldown_remaining: float):
     PAD     = 10
     cam_ids = sorted(cam_states.keys())
     n       = len(cam_ids)
     grid_h  = int(bh * 0.52)
-    cw      = (W - PAD * (n + 1)) // max(n, 1)
-    ch      = grid_h - PAD * 2
+    cw      = (W - PAD*(n+1)) // max(n, 1)
+    ch      = grid_h - PAD*2
 
     for idx, cid in enumerate(cam_ids):
         st  = cam_states[cid]
-        cx  = PAD + idx * (cw + PAD)
+        cx  = PAD + idx*(cw+PAD)
         cy  = by + PAD
-
-        # card
         border = ERR if st.has_problem else (ACCENT if (st.connected and not st.stale) else BORDER)
         _fill(canvas, cx, cy, cx+cw, cy+ch, PANEL)
         _box(canvas,  cx, cy, cx+cw, cy+ch, border, 2)
-
-        # video
-        fh2 = ch - 52; fw2 = cw - 4; fx2 = cx + 2; fy2 = cy + 26
+        fh2 = ch-52; fw2 = cw-4; fx2 = cx+2; fy2 = cy+26
         if st.frame is not None and not st.stale:
             try:
                 canvas[fy2:fy2+fh2, fx2:fx2+fw2] = cv2.resize(st.frame, (fw2, fh2))
             except Exception:
-                _fill(canvas, fx2, fy2, fx2+fw2, fy2+fh2, (18, 18, 18))
+                _fill(canvas, fx2, fy2, fx2+fw2, fy2+fh2, (18,18,18))
         else:
-            _fill(canvas, fx2, fy2, fx2+fw2, fy2+fh2, (18, 18, 18))
-            msg = "No Signal" if st.frame_ts == 0.0 else "Stale"
+            _fill(canvas, fx2, fy2, fx2+fw2, fy2+fh2, (18,18,18))
+            msg = "No Signal" if st.frame_ts==0.0 else "Stale"
             (tw2, _), _ = cv2.getTextSize(msg, FONT, 0.55, 1)
-            _t(canvas, msg, (fx2 + (fw2-tw2)//2, fy2 + fh2//2), sc=0.55, col=DIM)
-
+            _t(canvas, msg, (fx2+(fw2-tw2)//2, fy2+fh2//2), sc=0.55, col=DIM)
         _overlay_bd_small(canvas, st._bset, fx2, fy2, fw2, fh2)
-
-        # name bar
         name = st.cam_cfg.name if st.cam_cfg else f"Camera {cid}"
         _fill(canvas, cx, cy, cx+cw, cy+24, PANEL2)
         _tb(canvas, name, (cx+6, cy+17), sc=0.50)
-
-        # status chip
         bd_ok = st.has_boundaries()
-        chip  = ("OFFLINE" if not st.connected
-                 else "STALE"  if st.stale
-                 else "ERR"    if st.has_problem
-                 else "NO BD"  if not bd_ok
-                 else "OK")
-        chip_col = (DIM     if not st.connected
-                    else WARN   if st.stale
-                    else ERR    if st.has_problem
-                    else WARN   if not bd_ok
-                    else ACCENT)
+        chip  = ("OFFLINE" if not st.connected else "STALE" if st.stale
+                 else "ERR" if st.has_problem else "NO BD" if not bd_ok else "OK")
+        chip_col = (DIM if not st.connected else WARN if st.stale
+                    else ERR if st.has_problem else WARN if not bd_ok else ACCENT)
         (cw2, _), _ = cv2.getTextSize(chip, FONT, 0.40, 1)
-        sx = cx + cw - cw2 - 18
+        sx = cx+cw-cw2-18
         _rr(canvas, sx-4, cy+4, sx+cw2+8, cy+20, 3, chip_col)
         _t(canvas, chip, (sx, cy+17), sc=0.40, col=BRIGHT)
-
-        # bottom strip
-        by2 = cy + ch - 24
-        _fill(canvas, cx, by2, cx+cw, cy+ch-2, (14, 14, 14))
+        by2 = cy+ch-24
+        _fill(canvas, cx, by2, cx+cw, cy+ch-2, (14,14,14))
         _t(canvas, f"FPS {st.fps:.1f}",  (cx+6,   by2+16), sc=0.44, col=DIM)
         _t(canvas, f"{st.inference_ms:.0f}ms", (cx+70, by2+16), sc=0.44, col=DIM)
-        sr_col = ACCENT if st.success_rate >= 99 else WARN if st.success_rate > 80 else ERR
+        sr_col = ACCENT if st.success_rate>=99 else WARN if st.success_rate>80 else ERR
         _t(canvas, f"SR {st.success_rate:.0f}%", (cx+136, by2+16), sc=0.44, col=sr_col)
 
     # pair row
@@ -452,7 +522,7 @@ def _render_dashboard(canvas, W, H, by, bh,
     px = PAD + 72
     for cid in cam_ids:
         for pr in cam_states[cid].pair_results:
-            sc2 = _sc(pr.get("status", "?"))
+            sc2 = _sc(pr.get("status","?"))
             _dot(canvas, px+5, ps_y+13, 5, sc2)
             _t(canvas, f"C{cid}-{pr.get('pair_name','?')}: {pr.get('status','?')}",
                (px+14, ps_y+18), sc=0.42, col=sc2)
@@ -461,33 +531,43 @@ def _render_dashboard(canvas, W, H, by, bh,
     # relay grid
     ry = ps_y + 34
     _t(canvas, "RELAY OUTPUTS", (PAD+6, ry+20), sc=0.44, col=DIM)
-    rx = PAD + 150; rs = 50; rg = 6
+    rx = PAD+150; rs = 50; rg = 6
     for i in range(9):
-        ex  = rx + i * (rs + rg) + (8 if i > 0 and i % 3 == 0 else 0)
+        ex  = rx + i*(rs+rg) + (8 if i>0 and i%3==0 else 0)
         on  = relay_states[i] if i < len(relay_states) else False
         _rr(canvas, ex, ry, ex+rs, ry+rs-4, 6, R_ON if on else R_OFF)
         _box(canvas, ex, ry, ex+rs, ry+rs-4, BORDER, 1)
-        dot = (80, 80, 255) if on else (50, 50, 50)
+        dot = (80,80,255) if on else (50,50,50)
         _dot(canvas, ex+rs//2, ry+13, 7, dot)
         cv2.circle(canvas, (ex+rs//2, ry+13), 7, BRIGHT if on else BORDER, 1, cv2.LINE_AA)
         _tb(canvas, f"R{i+1}", (ex+rs//2-10, ry+29), sc=0.46, col=BRIGHT if on else DIM)
         _t(canvas, "ON" if on else "off", (ex+rs//2-8, ry+43),
-           sc=0.36, col=(80, 80, 255) if on else DIM)
+           sc=0.36, col=(80,80,255) if on else DIM)
     for i, cid in enumerate(cam_ids):
-        gx = rx + i * 3 * (rs + rg) + i * 8
-        _t(canvas, f"Cam {cid}", (gx + rs//2, ry - 4), sc=0.38, col=DIM)
+        gx = rx + i*3*(rs+rg) + i*8
+        _t(canvas, f"Cam {cid}", (gx+rs//2, ry-4), sc=0.38, col=DIM)
 
-    # health mini
-    hy     = ry + rs + 12
+    # ── Backend selector panel (NEW in v3.2-relay) ──────────────────────
+    bp_y = ry + rs + 14
+    bp_w = 420
+    _draw_backend_panel(
+        canvas, PAD, bp_y, bp_w,
+        active_backend, selected_backend,
+        backend_healthy, last_backend_error,
+        ms, hit_regions, cooldown_remaining,
+    )
+
+    # health mini bars (shifted right of backend panel)
+    hy     = bp_y + 8
     gstats = health.get("gpu_stats", {})
-    bx     = PAD + 6
+    bx     = PAD + bp_w + 20
     for lbl, val, maxv, col in [
         ("CPU",  health.get("cpu_pct", 0),  100,  WARN if health.get("cpu_pct",0)>70 else ACCENT),
-        ("RAM",  health.get("ram_used_mb", 0), 16384, ACCENT),
-        ("GPU",  gstats.get("utilization_pct", 0), 100, ACCENT),
-        ("VRAM", gstats.get("vram_used_mb", 0),
-                 gstats.get("vram_total_mb", 6144), ACCENT),
-        ("TEMP", gstats.get("temperature_c", 0), 100,
+        ("RAM",  health.get("ram_used_mb",0),16384,ACCENT),
+        ("GPU",  gstats.get("utilization_pct",0), 100, ACCENT),
+        ("VRAM", gstats.get("vram_used_mb",0),
+                 gstats.get("vram_total_mb",6144), ACCENT),
+        ("TEMP", gstats.get("temperature_c",0), 100,
                  ERR if gstats.get("temperature_c",0)>85
                  else WARN if gstats.get("temperature_c",0)>70 else ACCENT),
     ]:
@@ -498,18 +578,17 @@ def _render_dashboard(canvas, W, H, by, bh,
 
 
 def _overlay_bd_small(canvas, bset, fx, fy, fw, fh):
-    if bset is None:
-        return
+    if bset is None: return
     try:
         bdata = bset.get_all_boundaries()
-        for b in bdata.get("oil_can", []) + bdata.get("bunk_hole", []):
+        for b in bdata.get("oil_can",[]) + bdata.get("bunk_hole",[]):
             pts = b.get_draw_points()
             if pts is not None and len(pts) >= 3:
                 col = C_OC if b.id.upper().startswith("OC") else C_BH
                 sp  = pts.copy().astype(float)
-                sp[:, 0] *= fw / 1280; sp[:, 1] *= fh / 720
+                sp[:,0] *= fw/1280; sp[:,1] *= fh/720
                 sp  = sp.astype(np.int32) + [fx, fy]
-                cv2.polylines(canvas, [sp.reshape(-1, 1, 2)], True, col, 1, cv2.LINE_AA)
+                cv2.polylines(canvas, [sp.reshape(-1,1,2)], True, col, 1, cv2.LINE_AA)
     except Exception:
         pass
 
@@ -518,122 +597,89 @@ def _overlay_bd_small(canvas, bset, fx, fy, fw, fh):
 # TAB 2 — Camera View
 # ═══════════════════════════════════════════════════════════════════════════════
 def _render_camera_view(canvas, W, H, by, bh,
-                        state: CameraState,
-                        relay_states: List[bool],
-                        cfg,
-                        preview: bool,
-                        ms: MouseState,
-                        cam_ids: List[int],
-                        detection_allowed: bool,
-                        hit_regions: dict):
-    """
-    Renders camera view tab.
-    hit_regions is populated with button objects for click handling.
-    """
+                        state: CameraState, relay_states: List[bool], cfg,
+                        preview: bool, ms: MouseState, cam_ids: List[int],
+                        detection_allowed: bool, hit_regions: dict,
+                        active_backend: str, selected_backend: str,
+                        backend_healthy: bool, last_backend_error: str,
+                        cooldown_remaining: float):
     PAD    = 12
     SP     = 240
-    fw     = W - SP - PAD * 3
-    fh     = min(int(fw * 9 / 16), bh - 96)
+    fw     = W - SP - PAD*3
+    fh     = min(int(fw*9/16), bh-96)
     fx     = PAD
     fy     = by + PAD
 
-    # ── video feed ─────────────────────────────────────────────────────────────
-    _fill(canvas, fx, fy, fx+fw, fy+fh, (10, 10, 10))
+    _fill(canvas, fx, fy, fx+fw, fy+fh, (10,10,10))
     _box(canvas,  fx, fy, fx+fw, fy+fh, BORDER, 1)
-
     if state.frame is not None and not state.stale:
         try:
             canvas[fy:fy+fh, fx:fx+fw] = cv2.resize(state.frame, (fw, fh))
         except Exception:
             pass
     else:
-        msg = "No Signal" if state.frame_ts == 0.0 else "Waiting for frame..."
+        msg = "No Signal" if state.frame_ts==0.0 else "Waiting for frame..."
         (tw2, _), _ = cv2.getTextSize(msg, FONT, 0.7, 1)
-        _t(canvas, msg, (fx + (fw-tw2)//2, fy + fh//2), sc=0.7, col=DIM)
+        _t(canvas, msg, (fx+(fw-tw2)//2, fy+fh//2), sc=0.7, col=DIM)
 
     _overlay_bd_large(canvas, state._bset, fx, fy, fw, fh)
-
     for det in state.detections:
-        x1n, y1n, x2n, y2n = det["bbox"]
-        x1 = int(x1n*fw)+fx; y1 = int(y1n*fh)+fy
-        x2 = int(x2n*fw)+fx; y2 = int(y2n*fh)+fy
-        col = C_OC if "oil" in det.get("class_name", "") else C_BH
-        cv2.rectangle(canvas, (x1, y1), (x2, y2), col, 2)
+        x1n,y1n,x2n,y2n = det["bbox"]
+        x1=int(x1n*fw)+fx; y1=int(y1n*fh)+fy; x2=int(x2n*fw)+fx; y2=int(y2n*fh)+fy
+        col = C_OC if "oil" in det.get("class_name","") else C_BH
+        cv2.rectangle(canvas, (x1,y1), (x2,y2), col, 2)
         lbl = f"{det.get('class_name','?')} {det.get('confidence',0):.0%}"
         (lw2, lh2), _ = cv2.getTextSize(lbl, FONT, 0.44, 1)
         _fill(canvas, x1, y1-lh2-6, x1+lw2+8, y1, col)
         _t(canvas, lbl, (x1+4, y1-4), sc=0.44, col=(0,0,0))
 
-    # ── button row ─────────────────────────────────────────────────────────────
-    bar_y  = fy + fh + 8
-    btn_h  = 30
-    bx     = fx
-
-    # Camera selector buttons
+    # button row
+    bar_y = fy+fh+8; btn_h = 30; bx = fx
     cam_btns = []
     for cid in cam_ids:
-        active   = (cid == state.cam_id)
-        lbl      = f"CAM {cid + 1}"
-        btn      = Btn(bx, bar_y, bx + 74, bar_y + btn_h, lbl,
-                       (40, 90, 50) if active else (50, 50, 48),
-                       (40, 90, 50))
-        hover    = btn.hit(ms.x, ms.y) and not active
+        active = (cid == state.cam_id)
+        lbl    = f"CAM {cid+1}"
+        btn    = Btn(bx, bar_y, bx+74, bar_y+btn_h, lbl,
+                     (40,90,50) if active else (50,50,48), (40,90,50))
+        hover  = btn.hit(ms.x, ms.y) and not active
         border_c = ACCENT if active else BORDER
         _rr(canvas, btn.x1, btn.y1, btn.x2, btn.y2, 4,
-            btn.abg if active else ((70, 70, 68) if hover else btn.nbg))
+            btn.abg if active else ((70,70,68) if hover else btn.nbg))
         _box(canvas, btn.x1, btn.y1, btn.x2, btn.y2, border_c, 1)
         (lw2, lh2), _ = cv2.getTextSize(lbl, FONT2, 0.46, 1)
-        tx = btn.x1 + (74 - lw2) // 2
-        ty = btn.y1 + (btn_h + lh2) // 2
+        tx = btn.x1 + (74-lw2)//2; ty = btn.y1 + (btn_h+lh2)//2
         _tb(canvas, lbl, (tx, ty), sc=0.46, col=BRIGHT if active else TEXT)
-        cam_btns.append((cid, btn))
-        bx += 78
+        cam_btns.append((cid, btn)); bx += 78
+    hit_regions["cam_btns"] = cam_btns; bx += 8
 
-    hit_regions["cam_btns"] = cam_btns
-
-    bx += 8
-    # Edit Boundaries button
-    edit_btn = Btn(bx, bar_y, bx + 162, bar_y + btn_h, "Edit Boundaries",
-                   (45, 45, 35), (60, 55, 30))
+    edit_btn = Btn(bx, bar_y, bx+162, bar_y+btn_h, "Edit Boundaries", (45,45,35), (60,55,30))
     bd_ok    = state.has_boundaries()
     e_col    = WARN if not bd_ok else ACC_B
     hover_e  = edit_btn.hit(ms.x, ms.y)
     _rr(canvas, edit_btn.x1, edit_btn.y1, edit_btn.x2, edit_btn.y2, 4,
-        (65, 60, 38) if hover_e else edit_btn.nbg)
+        (65,60,38) if hover_e else edit_btn.nbg)
     _box(canvas, edit_btn.x1, edit_btn.y1, edit_btn.x2, edit_btn.y2, e_col, 1)
     (lw2, lh2), _ = cv2.getTextSize("Edit Boundaries", FONT2, 0.46, 1)
-    tx = edit_btn.x1 + (162 - lw2) // 2
-    ty = edit_btn.y1 + (btn_h + lh2) // 2
+    tx = edit_btn.x1 + (162-lw2)//2; ty = edit_btn.y1 + (btn_h+lh2)//2
     _tb(canvas, "Edit Boundaries", (tx, ty), sc=0.46, col=e_col)
-    hit_regions["edit_btn"] = edit_btn
-    bx += 170
+    hit_regions["edit_btn"] = edit_btn; bx += 170
 
-    # Start / Stop Detection button
     if not preview:
-        det_lbl = "Stop Detection"
-        det_nbg = (60, 35, 35)
-        det_bc  = ERR
+        det_lbl="Stop Detection"; det_nbg=(60,35,35); det_bc=ERR
     elif detection_allowed:
-        det_lbl = "Start Detection"
-        det_nbg = (35, 55, 35)
-        det_bc  = ACCENT
+        det_lbl="Start Detection"; det_nbg=(35,55,35); det_bc=ACCENT
     else:
-        det_lbl = "Detection Locked"
-        det_nbg = (40, 40, 40)
-        det_bc  = DIM
-
-    det_btn  = Btn(bx, bar_y, bx + 162, bar_y + btn_h, det_lbl, det_nbg, det_nbg)
+        det_lbl="Detection Locked"; det_nbg=(40,40,40); det_bc=DIM
+    det_btn  = Btn(bx, bar_y, bx+162, bar_y+btn_h, det_lbl, det_nbg, det_nbg)
     hover_d  = det_btn.hit(ms.x, ms.y) and (not preview or detection_allowed)
     _rr(canvas, det_btn.x1, det_btn.y1, det_btn.x2, det_btn.y2, 4,
-        tuple(min(c+14, 255) for c in det_nbg) if hover_d else det_nbg)
+        tuple(min(c+14,255) for c in det_nbg) if hover_d else det_nbg)
     _box(canvas, det_btn.x1, det_btn.y1, det_btn.x2, det_btn.y2, det_bc, 1)
     (lw2, lh2), _ = cv2.getTextSize(det_lbl, FONT2, 0.46, 1)
-    tx = det_btn.x1 + (162 - lw2) // 2
-    ty = det_btn.y1 + (btn_h + lh2) // 2
+    tx = det_btn.x1 + (162-lw2)//2; ty = det_btn.y1 + (btn_h+lh2)//2
     _tb(canvas, det_lbl, (tx, ty), sc=0.46, col=det_bc)
     hit_regions["det_btn"] = det_btn
 
-    # info line below buttons
     info_y = bar_y + btn_h + 14
     if not bd_ok:
         _t(canvas, "  \u26a0  No boundaries — press [Edit Boundaries] to draw them",
@@ -643,75 +689,84 @@ def _render_camera_view(canvas, W, H, by, bh,
            (fx, info_y), sc=0.46, col=WARN)
     else:
         name = state.cam_cfg.name if state.cam_cfg else f"Camera {state.cam_id}"
-        _t(canvas,
-           f"{name}   FPS {state.fps:.1f}   {state.inference_ms:.0f}ms   SR {state.success_rate:.0f}%",
+        _t(canvas, f"{name}   FPS {state.fps:.1f}   {state.inference_ms:.0f}ms   SR {state.success_rate:.0f}%",
            (fx, info_y), sc=0.44, col=DIM)
     _t(canvas, "\u2190 \u2192  change camera   E  edit boundaries   D  detect   P  preview",
-       (fx, info_y + 18), sc=0.38, col=DIM)
+       (fx, info_y+18), sc=0.38, col=DIM)
 
-    # ── side panel ─────────────────────────────────────────────────────────────
-    sx = fx + fw + PAD; sy = by + PAD; sw = SP - PAD
+    # side panel
+    sx = fx+fw+PAD; sy = by+PAD; sw = SP-PAD
     _fill(canvas, sx, sy, sx+sw, sy+bh-20, PANEL)
     _box(canvas,  sx, sy, sx+sw, sy+bh-20, BORDER, 1)
-
-    oy = sy + 14
+    oy = sy+14
     _tb(canvas, "PAIR STATUS", (sx+10, oy), sc=0.54); oy += 26
     _hline(canvas, oy, sx, sx+sw, BORDER); oy += 12
 
     cam_relays = cfg.relay.get_relay_indices(state.cam_id)
     for i, pr in enumerate(state.pair_results):
-        status = pr.get("status", "?")
-        sc2    = _sc(status)
+        status = pr.get("status","?"); sc2 = _sc(status)
         ri     = cam_relays[i] if i < len(cam_relays) else 0
         r_on   = relay_states[ri] if ri < len(relay_states) else False
-
         _dot(canvas, sx+13, oy+7, 7, sc2)
-        _tb(canvas, pr.get("pair_name", f"P{i+1}"), (sx+27, oy+12), sc=0.50)
-        oy += 24
+        _tb(canvas, pr.get("pair_name",f"P{i+1}"), (sx+27, oy+12), sc=0.50); oy += 24
 
-        def _row(lbl2, val2, col2, _oy=None):
+        def _row(lbl2, val2, col2):
             nonlocal oy
             _t(canvas, lbl2, (sx+14, oy), sc=0.40, col=DIM)
-            _t(canvas, val2, (sx+88, oy), sc=0.40, col=col2)
-            oy += 16
+            _t(canvas, val2, (sx+88, oy), sc=0.40, col=col2); oy += 16
 
         _row("Status:", status, sc2)
-        _row("OilCan:",  "✓" if pr.get("oil_can_present")  else "✗",
+        _row("OilCan:",   "✓" if pr.get("oil_can_present")  else "✗",
              ACCENT if pr.get("oil_can_present")  else ERR)
         _row("BunkHole:", "✓" if pr.get("bunk_hole_present") else "✗",
              ACCENT if pr.get("bunk_hole_present") else ERR)
         _row(f"R{ri+1}:", "ON" if r_on else "off", ERR if r_on else ACCENT)
-        oy += 8
-        _hline(canvas, oy, sx+8, sx+sw-8, BORDER); oy += 10
+        oy += 8; _hline(canvas, oy, sx+8, sx+sw-8, BORDER); oy += 10
 
-    # connection + detection status at bottom of side panel
-    bot_y = sy + bh - 80
+    # Connection + detection status
+    bot_y = sy + bh - 130
     conn_col = ACCENT if (state.connected and not state.stale) else WARN if state.stale else ERR
     conn_txt = "CONNECTED" if (state.connected and not state.stale) else "STALE" if state.stale else "OFFLINE"
     _dot(canvas, sx+15, bot_y+8,  6, conn_col)
     _t(canvas, conn_txt, (sx+26, bot_y+13), sc=0.44, col=conn_col)
-
     det_col = ACCENT if not preview else WARN
     det_txt = "DETECTING" if not preview else "PREVIEW"
     _dot(canvas, sx+15, bot_y+28, 6, det_col)
-    _t(canvas, det_txt, (sx+26, bot_y+33), sc=0.44, col=det_col)
+    _t(canvas, det_txt,  (sx+26, bot_y+33), sc=0.44, col=det_col)
+
+    # ── Backend mini-status in side panel ──────────────────────────────────
+    _hline(canvas, bot_y+46, sx+8, sx+sw-8, BORDER)
+    _t(canvas, "RELAY BACKEND", (sx+8, bot_y+60), sc=0.40, col=DIM)
+    be_col = USB_COL if active_backend=="usb" else MODBUS_COL
+    _t(canvas, active_backend.upper(), (sx+8, bot_y+74), sc=0.44, col=be_col)
+    hc = ACCENT if backend_healthy else ERR
+    _t(canvas, "HEALTHY" if backend_healthy else "DISCONNECTED",
+       (sx+8, bot_y+88), sc=0.38, col=hc)
+    # Small radio indicator
+    for bi, (blbl, bkey) in enumerate([("USB","usb"),("ETH","modbus")]):
+        is_sel = (selected_backend == bkey)
+        bc2    = USB_COL if bkey=="usb" else MODBUS_COL
+        cx_r = sx + 8 + bi*70; cy_r = bot_y + 105
+        cv2.circle(canvas, (cx_r, cy_r), 5, bc2 if is_sel else RADIO_OFF, 1, cv2.LINE_AA)
+        if is_sel:
+            cv2.circle(canvas, (cx_r, cy_r), 3, bc2, -1, cv2.LINE_AA)
+        _t(canvas, blbl, (cx_r+8, cy_r+4), sc=0.36, col=bc2 if is_sel else DIM)
 
 
 def _overlay_bd_large(canvas, bset, fx, fy, fw, fh):
-    if bset is None:
-        return
+    if bset is None: return
     try:
         bdata = bset.get_all_boundaries()
-        ov    = canvas.copy()
-        for group, col in [("oil_can", C_OC), ("bunk_hole", C_BH)]:
-            for b in bdata.get(group, []):
+        ov = canvas.copy()
+        for group, col in [("oil_can",C_OC),("bunk_hole",C_BH)]:
+            for b in bdata.get(group,[]):
                 pts = b.get_draw_points()
                 if pts is not None and len(pts) >= 3:
                     sp = pts.copy().astype(float)
-                    sp[:, 0] *= fw / 1280; sp[:, 1] *= fh / 720
+                    sp[:,0] *= fw/1280; sp[:,1] *= fh/720
                     sp = sp.astype(np.int32) + [fx, fy]
-                    cv2.fillPoly(ov, [sp.reshape(-1, 1, 2)], col)
-                    cv2.polylines(canvas, [sp.reshape(-1, 1, 2)], True, col, 2, cv2.LINE_AA)
+                    cv2.fillPoly(ov, [sp.reshape(-1,1,2)], col)
+                    cv2.polylines(canvas, [sp.reshape(-1,1,2)], True, col, 2, cv2.LINE_AA)
                     cx2, cy2 = sp.mean(0).astype(int)
                     _t(canvas, b.id, (cx2-14, cy2), sc=0.55, col=col, th=2)
         cv2.addWeighted(ov, 0.15, canvas, 0.85, 0, canvas)
@@ -723,83 +778,65 @@ def _overlay_bd_large(canvas, bset, fx, fy, fw, fh):
 # TAB 3 — System Health
 # ═══════════════════════════════════════════════════════════════════════════════
 def _render_health(canvas, W, H, by, bh, health: dict):
-    PAD = 14; oy = by + PAD
+    PAD=14; oy=by+PAD
     _tb(canvas, "SYSTEM HEALTH", (PAD, oy+20), sc=0.70); oy += 50
-    g = health.get("gpu_stats", {}); BW = 280; BHR = 12
-
+    g = health.get("gpu_stats",{}); BW=280; BHR=12
     for lbl, val, maxv, unit, col in [
-        ("CPU Usage",  health.get("cpu_pct", 0), 100, "%",
-         WARN if health.get("cpu_pct", 0) > 70 else ACCENT),
-        ("RAM",        health.get("ram_used_mb", 0), 16384, "MB", ACCENT),
-        ("GPU Usage",  g.get("utilization_pct", 0), 100, "%", ACCENT),
-        ("VRAM",       g.get("vram_used_mb", 0), g.get("vram_total_mb", 6144), "MB",
-         ERR if g.get("vram_used_mb", 0) > 5000 else ACCENT),
-        ("GPU Temp",   g.get("temperature_c", 0), 100, "°C",
-         ERR if g.get("temperature_c", 0) > 85
-         else WARN if g.get("temperature_c", 0) > 70 else ACCENT),
+        ("CPU Usage",health.get("cpu_pct",0),100,"%",WARN if health.get("cpu_pct",0)>70 else ACCENT),
+        ("RAM",health.get("ram_used_mb",0),16384,"MB",ACCENT),
+        ("GPU Usage",g.get("utilization_pct",0),100,"%",ACCENT),
+        ("VRAM",g.get("vram_used_mb",0),g.get("vram_total_mb",6144),"MB",
+         ERR if g.get("vram_used_mb",0)>5000 else ACCENT),
+        ("GPU Temp",g.get("temperature_c",0),100,"°C",
+         ERR if g.get("temperature_c",0)>85 else WARN if g.get("temperature_c",0)>70 else ACCENT),
     ]:
         _t(canvas, lbl, (PAD, oy+10), sc=0.48, col=DIM)
         _bar(canvas, PAD+140, oy, BW, BHR, val, maxv, col)
-        _t(canvas, f"{val:.0f}{unit}", (PAD+146+BW, oy+10), sc=0.46, col=col)
-        oy += 28
-
+        _t(canvas, f"{val:.0f}{unit}", (PAD+146+BW, oy+10), sc=0.46, col=col); oy += 28
     oy += 6
-    _t(canvas,
-       f"Uptime: {_fmt_up(health.get('system_uptime_s', 0))}"
-       f"   Total Restarts: {health.get('total_restarts', 0)}",
-       (PAD, oy), sc=0.46, col=DIM); oy += 28
+    _t(canvas, f"Uptime: {_fmt_up(health.get('system_uptime_s',0))}"
+       f"   Total Restarts: {health.get('total_restarts',0)}", (PAD, oy), sc=0.46, col=DIM); oy += 28
     _hline(canvas, oy, PAD, W-PAD, BORDER); oy += 12
     _tb(canvas, "PROCESSES", (PAD, oy+12), sc=0.52, col=DIM); oy += 26
-
-    cols = [("Name",160),("PID",80),("Status",100),("Restarts",90),("Mem",80),("FPS",60)]
-    hx = PAD
-    for h2, cw2 in cols:
+    cols=[("Name",160),("PID",80),("Status",100),("Restarts",90),("Mem",80),("FPS",60)]
+    hx=PAD
+    for h2,cw2 in cols:
         _t(canvas, h2, (hx, oy), sc=0.42, col=DIM); hx += cw2
     oy += 6; _hline(canvas, oy, PAD, W-PAD, BORDER); oy += 10
-
-    for proc in health.get("processes", []):
-        status = proc.get("status", "?"); rc = proc.get("restart_count", 0)
-        rows = [
-            (proc.get("name","?"),        TEXT),
-            (str(proc.get("pid", "-")),   DIM),
-            (status, ACCENT if status == "running" else ERR),
-            (str(rc), ERR if rc > 3 else WARN if rc > 0 else ACCENT),
-            (f"{proc.get('memory_mb',0):.0f}", DIM),
-            (f"{proc.get('fps',0):.1f}",  DIM),
-        ]
-        rx = PAD
-        for (val2, c2), (_, cw2) in zip(rows, cols):
+    for proc in health.get("processes",[]):
+        status=proc.get("status","?"); rc=proc.get("restart_count",0)
+        rows=[(proc.get("name","?"),TEXT),(str(proc.get("pid","-")),DIM),
+              (status,ACCENT if status=="running" else ERR),
+              (str(rc),ERR if rc>3 else WARN if rc>0 else ACCENT),
+              (f"{proc.get('memory_mb',0):.0f}",DIM),(f"{proc.get('fps',0):.1f}",DIM)]
+        rx=PAD
+        for (val2,c2),(_, cw2) in zip(rows,cols):
             _t(canvas, val2, (rx, oy+12), sc=0.44, col=c2); rx += cw2
         oy += 20
-        if oy > by + bh - 20:
-            break
+        if oy > by+bh-20: break
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — Logs
 # ═══════════════════════════════════════════════════════════════════════════════
 def _render_logs(canvas, W, H, by, bh, log_lines: deque):
-    PAD = 14; oy = by + PAD
+    PAD=14; oy=by+PAD
     _tb(canvas, "LOGS VIEWER", (PAD, oy+16), sc=0.65); oy += 40
-    _t(canvas, "supervisor.log  ·  gpu_pool.log  ·  relay.log",
-       (PAD, oy), sc=0.42, col=DIM); oy += 18
+    _t(canvas, "supervisor.log  ·  gpu_pool.log  ·  relay.log", (PAD, oy), sc=0.42, col=DIM); oy += 18
     _hline(canvas, oy, PAD, W-PAD, BORDER); oy += 10
-    max_l = (by + bh - oy) // 18
+    max_l = (by+bh-oy)//18
     for line in list(log_lines)[-max_l:]:
         col = (ERR if "CRITICAL" in line or "FATAL" in line
                else (80,100,220) if "ERROR" in line
-               else WARN if "WARNING" in line
-               else DIM)
-        _t(canvas, line[:140], (PAD, oy), sc=0.40, col=col)
-        oy += 18
+               else WARN if "WARNING" in line else DIM)
+        _t(canvas, line[:140], (PAD, oy), sc=0.40, col=col); oy += 18
 
 
 def _refresh_logs(log_lines: deque, cfg):
     log_dir = Path(cfg.logging.log_dir)
     for name in ("supervisor.log","gpu_pool.log","relay.log","camera_0.log"):
         p = log_dir / name
-        if not p.exists():
-            continue
+        if not p.exists(): continue
         try:
             with open(p, "r", encoding="utf-8", errors="replace") as f:
                 for line in f.readlines()[-20:]:
@@ -809,11 +846,10 @@ def _refresh_logs(log_lines: deque, cfg):
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Main GUI
+# Main GUI class
 # ═══════════════════════════════════════════════════════════════════════════════
 class UnifiedGUI:
-    def __init__(self, cfg, result_q, relay_q, hb_q, cmd_q, health_q,
-                 stop_ev, preview):
+    def __init__(self, cfg, result_q, relay_q, hb_q, cmd_q, health_q, stop_ev, preview):
         self.cfg        = cfg
         self.gcfg       = cfg.gui
         self.result_q   = result_q
@@ -826,7 +862,7 @@ class UnifiedGUI:
         self.pid        = os.getpid()
         self.cam_ids    = sorted(c.id for c in cfg.cameras)
         self.cam_states = {cid: CameraState(cid, cfg) for cid in self.cam_ids}
-        self.relay_states: List[bool] = [False] * 9
+        self.relay_states: List[bool] = [False]*9
         self.health     = {}
         self.log_lines  = deque(maxlen=300)
         self._tab       = 0
@@ -836,15 +872,19 @@ class UnifiedGUI:
         self._last_log  = time.time()
         self._in_editor = False
         self._ms        = MouseState()
-        self._hit       = {}          # buttons drawn last frame
-        # FramePoller reads all camera SHMs in a background thread.
-        # Frames are available immediately in the render loop — no blocking.
+        self._hit       = {}
         self._poller    = FramePoller(cfg.cameras)
 
-    # ── helpers ────────────────────────────────────────────────────────────────
+        # ── v3.2-relay: backend tracking ─────────────────────────────────
+        self._active_backend:     str   = cfg.relay.active_backend   # confirmed by relay process
+        self._selected_backend:   str   = cfg.relay.active_backend   # GUI radio selection
+        self._backend_healthy:    bool  = False
+        self._last_backend_error: str   = ""
+        self._last_switch_sent:   float = 0.0   # for GUI-side cooldown display
+
+    # ── helpers ────────────────────────────────────────────────────────────
     def _missing_bd(self) -> List[int]:
-        return [cid for cid in self.cam_ids
-                if not self.cam_states[cid].has_boundaries()]
+        return [cid for cid in self.cam_ids if not self.cam_states[cid].has_boundaries()]
 
     def _can_detect(self) -> bool:
         return len(self._missing_bd()) == 0
@@ -853,24 +893,24 @@ class UnifiedGUI:
         cid = self.cam_ids[self._cam_idx % len(self.cam_ids)]
         return self.cam_states[cid]
 
-    # ── main loop ──────────────────────────────────────────────────────────────
+    def _cooldown_remaining(self) -> float:
+        elapsed = time.time() - self._last_switch_sent
+        return max(0.0, _SWITCH_COOLDOWN - elapsed)
+
+    # ── main loop ──────────────────────────────────────────────────────────
     def run(self):
-        logger.info("[GUI v3.2] PID=%d", self.pid)
-        WNAME = "Industrial Vision System v3.2"
+        logger.info("[GUI v3.2-relay] PID=%d", self.pid)
+        WNAME = "Industrial Vision System v3.0"
         try:
             cv2.namedWindow(WNAME, cv2.WINDOW_NORMAL)
-            cv2.setWindowProperty(WNAME, cv2.WND_PROP_FULLSCREEN,
-                                  cv2.WINDOW_FULLSCREEN)
+            cv2.setWindowProperty(WNAME, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
             cv2.setMouseCallback(WNAME, self._ms.make_cb())
         except Exception as e:
             logger.warning("[GUI] No display: %s", e)
-            self._headless()
-            return
+            self._headless(); return
 
         W, H     = self.gcfg.window_width, self.gcfg.window_height
         interval = self.gcfg.update_interval_ms / 1000.0
-
-        # Start background frame poller — runs for the lifetime of the GUI process
         self._poller.start()
 
         while not self.stop_ev.is_set():
@@ -880,27 +920,19 @@ class UnifiedGUI:
                 self._on_click(*click, W, H, WNAME)
 
             self._drain()
-
-            # Pull latest frames from poller into CameraState objects.
-            # This happens every render tick regardless of preview/detect mode,
-            # so Dashboard, Camera View, and the boundary editor all see live video.
             for cid, st in self.cam_states.items():
                 frame, ts = self._poller.get(cid)
                 if frame is not None:
-                    st.frame    = frame
-                    st.frame_ts = ts
+                    st.frame = frame; st.frame_ts = ts
 
             try:
                 r = cv2.getWindowImageRect(WNAME)
-                if r[2] > 100 and r[3] > 100:
-                    W, H = r[2], r[3]
+                if r[2]>100 and r[3]>100: W,H = r[2],r[3]
             except Exception:
                 pass
 
             canvas  = np.full((H, W, 3), BG, dtype=np.uint8)
             missing = self._missing_bd()
-
-            # alarm / banner
             banner_h = 0
             if missing and not self._in_editor:
                 banner_h = _draw_bd_banner(canvas, W, TAB_H, missing)
@@ -911,8 +943,7 @@ class UnifiedGUI:
             body_h = H - body_y - STAT_H - 4
 
             _draw_tabs(canvas, self._tab, W, self._ms)
-            _draw_statusbar(canvas, W, H, self.health,
-                            bool(self.preview.value), self._start)
+            _draw_statusbar(canvas, W, H, self.health, bool(self.preview.value), self._start)
             self._render(canvas, W, H, body_y, body_h)
 
             try:
@@ -921,205 +952,217 @@ class UnifiedGUI:
                 break
 
             key = cv2.waitKey(1) & 0xFF
-            if not self._on_key(key, WNAME):
-                break
+            if not self._on_key(key, WNAME): break
 
             self._heartbeat()
-            if is_memory_over_limit(self.gcfg.memory_limit_mb):
-                break
+            if is_memory_over_limit(self.gcfg.memory_limit_mb): break
 
-            dt = time.time() - t0
-            if interval - dt > 0:
-                time.sleep(interval - dt)
+            dt = time.time()-t0
+            if interval-dt > 0: time.sleep(interval-dt)
 
         cv2.destroyAllWindows()
 
     def _headless(self):
         while not self.stop_ev.is_set():
             self._drain(); self._heartbeat()
-            if is_memory_over_limit(self.gcfg.memory_limit_mb):
-                break
+            if is_memory_over_limit(self.gcfg.memory_limit_mb): break
             time.sleep(0.1)
 
-    # ── click handler ──────────────────────────────────────────────────────────
+    # ── click handler ──────────────────────────────────────────────────────
     def _on_click(self, x: int, y: int, W: int, H: int, wname: str):
-        # Tab bar
         hit = _tab_hit(x, y, W)
         if hit is not None:
-            self._tab = hit
+            self._tab = hit; return
+
+        # Radio buttons (Dashboard or Camera View)
+        for key in ("radio_usb", "radio_modbus"):
+            btn = self._hit.get(key)
+            if btn and btn.hit(x, y):
+                self._selected_backend = "usb" if key=="radio_usb" else "modbus"
+                return
+
+        # Apply button
+        ab = self._hit.get("apply_btn")
+        if ab and ab.hit(x, y):
+            if (self._selected_backend != self._active_backend
+                    and self._cooldown_remaining() <= 0):
+                self._send_backend_change(self._selected_backend)
             return
 
-        # Camera View buttons
-        if self._tab != 1:
-            return
+        if self._tab != 1: return
 
-        # Camera selector
         for cid, btn in self._hit.get("cam_btns", []):
             if btn.hit(x, y):
                 if cid in self.cam_ids:
                     self._cam_idx = self.cam_ids.index(cid)
                 return
 
-        # Edit Boundaries
         eb = self._hit.get("edit_btn")
         if eb and eb.hit(x, y):
-            if not self._in_editor:
-                self._open_editor(wname)
+            if not self._in_editor: self._open_editor(wname)
             return
 
-        # Start / Stop Detection
         db = self._hit.get("det_btn")
         if db and db.hit(x, y):
             if not bool(self.preview.value):
-                # Currently detecting → stop
-                self.preview.value = 1
-                self._cmd("stop_detection")
+                self.preview.value = 1; self._cmd("stop_detection")
             elif self._can_detect():
-                self.preview.value = 0
-                self._cmd("start_detection")
+                self.preview.value = 0; self._cmd("start_detection")
             else:
                 logger.warning("[GUI] Detection blocked — configure boundaries first")
             return
 
-    # ── key handler ────────────────────────────────────────────────────────────
+    # ── key handler ────────────────────────────────────────────────────────
     def _on_key(self, key: int, wname: str) -> bool:
-        if key in (ord('q'), ord('Q'), 27):
-            return False
-        if key == ord('1'):   self._tab = 0
-        elif key == ord('2'): self._tab = 1
-        elif key == ord('3'): self._tab = 2
-        elif key == ord('4'): self._tab = 3
-        elif key in (81, ord('a')):   # left arrow
-            self._cam_idx = (self._cam_idx - 1) % max(len(self.cam_ids), 1)
-        elif key in (83, ord('f')):   # right arrow
-            self._cam_idx = (self._cam_idx + 1) % max(len(self.cam_ids), 1)
-        elif key in (ord('e'), ord('E')):
-            if not self._in_editor:
-                self._open_editor(wname)
-        elif key in (ord('d'), ord('D')):
-            if self._can_detect():
-                self.preview.value = 0
-                self._cmd("start_detection")
-            else:
-                logger.warning("[GUI] Detection blocked — configure boundaries first")
-        elif key in (ord('p'), ord('P')):
-            self.preview.value = 1
-            self._cmd("stop_detection")
+        if key in (ord('q'), ord('Q'), 27): return False
+        if key==ord('1'):   self._tab=0
+        elif key==ord('2'): self._tab=1
+        elif key==ord('3'): self._tab=2
+        elif key==ord('4'): self._tab=3
+        elif key in (81, ord('a')):
+            self._cam_idx = (self._cam_idx-1) % max(len(self.cam_ids),1)
+        elif key in (83, ord('f')):
+            self._cam_idx = (self._cam_idx+1) % max(len(self.cam_ids),1)
+        elif key in (ord('e'),ord('E')):
+            if not self._in_editor: self._open_editor(wname)
+        elif key in (ord('d'),ord('D')):
+            if self._can_detect(): self.preview.value=0; self._cmd("start_detection")
+        elif key in (ord('p'),ord('P')):
+            self.preview.value=1; self._cmd("stop_detection")
+        elif key in (ord('u'),ord('U')):
+            # shortcut: select USB backend
+            self._selected_backend = "usb"
+        elif key in (ord('m'),ord('M')):
+            # shortcut: select Modbus/Ethernet backend
+            self._selected_backend = "modbus"
         return True
 
-    # ── tab renderer ───────────────────────────────────────────────────────────
+    # ── tab renderer ───────────────────────────────────────────────────────
     def _render(self, canvas, W, H, body_y, body_h):
         t = self._tab
+        hit = {}
         if t == 0:
-            _render_dashboard(canvas, W, H, body_y, body_h,
-                              self.cam_states, self.relay_states,
-                              self.health, self.cfg)
+            _render_dashboard(
+                canvas, W, H, body_y, body_h,
+                self.cam_states, self.relay_states, self.health, self.cfg,
+                self._active_backend, self._selected_backend,
+                self._backend_healthy, self._last_backend_error,
+                self._ms, hit, self._cooldown_remaining(),
+            )
+            self._hit = hit
         elif t == 1:
             if self.cam_ids:
                 st = self._active_state()
-                # Frames now come from FramePoller (pushed above in the render loop).
-                # No read_preview() call needed — works in both preview and detect mode.
-                hit = {}
-                _render_camera_view(canvas, W, H, body_y, body_h,
-                                    st, self.relay_states, self.cfg,
-                                    bool(self.preview.value),
-                                    self._ms, self.cam_ids,
-                                    self._can_detect(), hit)
+                _render_camera_view(
+                    canvas, W, H, body_y, body_h,
+                    st, self.relay_states, self.cfg,
+                    bool(self.preview.value), self._ms, self.cam_ids,
+                    self._can_detect(), hit,
+                    self._active_backend, self._selected_backend,
+                    self._backend_healthy, self._last_backend_error,
+                    self._cooldown_remaining(),
+                )
                 self._hit = hit
         elif t == 2:
             _render_health(canvas, W, H, body_y, body_h, self.health)
         elif t == 3:
-            if time.time() - self._last_log > 3.0:
-                _refresh_logs(self.log_lines, self.cfg)
-                self._last_log = time.time()
+            if time.time()-self._last_log > 3.0:
+                _refresh_logs(self.log_lines, self.cfg); self._last_log=time.time()
             _render_logs(canvas, W, H, body_y, body_h, self.log_lines)
 
-    # ── boundary editor ────────────────────────────────────────────────────────
+    # ── boundary editor ────────────────────────────────────────────────────
     def _open_editor(self, main_wname: str):
         st    = self._active_state()
-        # BUG FIX: "st.frame or st.read_preview()" raises
-        #   ValueError: The truth value of an array is ambiguous
-        # because Python calls bool(numpy_array) on the left operand.
-        # Use explicit None check instead.
         frame = st.frame if st.frame is not None else None
         if frame is None:
-            cc = self.cfg.get_camera(st.cam_id)
-            h  = cc.frame_height if cc else 720
-            w  = cc.frame_width  if cc else 1280
+            cc  = self.cfg.get_camera(st.cam_id)
+            h   = cc.frame_height if cc else 720
+            w   = cc.frame_width  if cc else 1280
             frame = np.full((h, w, 3), 30, dtype=np.uint8)
-            cv2.putText(frame,
-                        "No live feed — drawing on blank frame",
-                        (20, h // 2), FONT, 0.9, TEXT, 2)
-
+            cv2.putText(frame, "No live feed — drawing on blank frame",
+                        (20, h//2), FONT, 0.9, TEXT, 2)
         out_path = self.cfg.get_boundary_path(st.cam_id)
         self._in_editor = True
-
-        # Clear main-window mouse callback so '+' cursor does not bleed back
         try:
             cv2.setMouseCallback(main_wname, lambda *a: None)
         except Exception:
             pass
-
         try:
             from gui.boundary_editor import run_boundary_editor
             saved = run_boundary_editor(st.cam_id, frame, out_path)
             if saved:
                 st.reload_bd()
                 self._send_reload(st.cam_id, str(out_path))
-                logger.info("[GUI] Boundaries saved cam %d, reload signalled",
-                            st.cam_id)
+                logger.info("[GUI] Boundaries saved cam %d, reload signalled", st.cam_id)
         except Exception as e:
             logger.error("[GUI] Editor error: %s", e, exc_info=True)
         finally:
             self._in_editor = False
-            # Restore main-window mouse callback
             try:
                 cv2.setMouseCallback(main_wname, self._ms.make_cb())
             except Exception:
                 pass
 
-    # ── queues ─────────────────────────────────────────────────────────────────
+    # ── queues ─────────────────────────────────────────────────────────────
     def _drain(self):
         for _ in range(60):
-            try:
-                msg = self.result_q.get_nowait()
-            except Exception:
-                break
+            try: msg = self.result_q.get_nowait()
+            except Exception: break
             if msg.get("type") in (MessageType.DETECTION_RESULT.value, "pool_result"):
                 cid = msg.get("camera_id")
                 if cid in self.cam_states:
                     self.cam_states[cid].update(msg)
 
         for _ in range(20):
-            try:
-                msg = self.relay_q.get_nowait()
-            except Exception:
-                break
-            if msg.get("type") == MessageType.RELAY_STATE.value:
-                s = msg.get("relay_states", [])
-                self.relay_states = s + [False] * (9 - len(s))
+            try: msg = self.relay_q.get_nowait()
+            except Exception: break
+            mtype = msg.get("type")
+            if mtype == MessageType.RELAY_STATE.value:
+                s = msg.get("relay_states",[])
+                self.relay_states = s + [False]*(9-len(s))
+            elif mtype == MessageType.RELAY_BACKEND_STATUS.value:
+                self._active_backend     = msg.get("active_backend", self._active_backend)
+                self._backend_healthy    = msg.get("backend_healthy", False)
+                self._last_backend_error = msg.get("last_backend_error","")
+                # NOTE: do NOT auto-sync _selected_backend here.
+                # _active_backend = what relay process is actually running.
+                # _selected_backend = what the operator has chosen in the radio.
+                # These are intentionally separate until Apply is clicked.
 
         for _ in range(5):
-            try:
-                msg = self.health_q.get_nowait()
-            except Exception:
-                break
+            try: msg = self.health_q.get_nowait()
+            except Exception: break
             if msg.get("type") == MessageType.HEALTH_SNAPSHOT.value:
                 self.health = msg
 
     def _cmd(self, cmd: str):
         try:
-            self.cmd_q.put_nowait(
-                GUICommandMessage(camera_id=None, command=cmd).to_dict())
+            self.cmd_q.put_nowait(GUICommandMessage(camera_id=None, command=cmd).to_dict())
         except Exception:
             pass
 
     def _send_reload(self, cam_id: int, path: str):
         try:
-            self.cmd_q.put_nowait(
-                BoundaryReloadMessage(camera_id=cam_id, boundary_file=path).to_dict())
+            self.cmd_q.put_nowait(BoundaryReloadMessage(camera_id=cam_id, boundary_file=path).to_dict())
         except Exception:
             pass
+
+    def _send_backend_change(self, backend: str):
+        """
+        Send a relay_backend_change message through cmd_q → supervisor → relay process.
+        The supervisor fanout thread routes it into relay_result_q automatically
+        because _drain_gui_cmd in supervisor passes unknown message types through.
+        We handle routing in the supervisor patch below.
+        """
+        try:
+            self.cmd_q.put_nowait(
+                RelayBackendChangeMessage(camera_id=None, backend=backend).to_dict()
+            )
+            self._last_switch_sent = time.time()
+            logger.info("[GUI] Backend change requested: %s → %s",
+                        self._active_backend, backend)
+        except Exception as e:
+            logger.warning("[GUI] Failed to send backend change: %s", e)
 
     def _heartbeat(self):
         now = time.time()
@@ -1127,7 +1170,8 @@ class UnifiedGUI:
             try:
                 self.hb_q.put_nowait(
                     make_heartbeat(ProcessSource.GUI, None, "GUI",
-                                   self.pid, get_process_memory_mb(), 0.0).to_dict())
+                                   self.pid, get_process_memory_mb(), 0.0).to_dict()
+                )
             except Exception:
                 pass
             self._last_hb = now
@@ -1143,8 +1187,7 @@ def gui_process_entry(config_path, result_queue, relay_state_queue,
                           cfg.logging.max_bytes, cfg.logging.backup_count)
     setup_crash_handler("gui", log_dir)
 
-    def _sig(s, f):
-        stop_event.set()
+    def _sig(s, f): stop_event.set()
     signal.signal(signal.SIGTERM, _sig)
 
     gui = UnifiedGUI(cfg, result_queue, relay_state_queue, heartbeat_queue,
@@ -1153,4 +1196,4 @@ def gui_process_entry(config_path, result_queue, relay_state_queue,
         gui.run()
     except Exception as e:
         logger.critical("[gui] Fatal: %s", e, exc_info=True)
-        sys.exit(0)   # GUI crash is non-fatal to production
+        sys.exit(0)

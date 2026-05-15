@@ -223,20 +223,53 @@ class Supervisor:
             try: self._handle_sup(self._supervisor_q.get_nowait())
             except Exception: break
 
+        """
+    supervisor/supervisor.py — patch for v3.0 relay backend switching
+    =================================================================
+    In supervisor.py, find the _drain_gui_cmd method and replace it with
+    the version below.  The only change is the elif block that routes
+    RELAY_BACKEND_CHANGE messages into _relay_result_q so the relay
+    process receives them.
+
+    Everything else in supervisor.py is unchanged.
+    """
+
+    # ── REPLACE _drain_gui_cmd in class Supervisor with this ──────────────────────
+
     def _drain_gui_cmd(self):
         for _ in range(30):
-            try: msg = self._gui_cmd_q.get_nowait()
-            except Exception: break
+            try:
+                msg = self._gui_cmd_q.get_nowait()
+            except Exception:
+                break
+
             mtype = msg.get("type")
+
             if mtype == MessageType.BOUNDARY_RELOAD.value:
-                try: self._inference_q.put_nowait(msg)
-                except Exception: pass
+                # Forward to GPU pool so it reloads boundary files
+                try:
+                    self._inference_q.put_nowait(msg)
+                except Exception:
+                    pass
+
             elif mtype == MessageType.GUI_COMMAND.value:
-                cmd = msg.get("command","")
+                cmd = msg.get("command", "")
                 if cmd == "start_detection":
-                    self._preview_mode.value = 0; logger.info("[Supervisor] Detection STARTED by operator")
+                    self._preview_mode.value = 0
+                    logger.info("[Supervisor] Detection STARTED by operator")
                 elif cmd == "stop_detection":
-                    self._preview_mode.value = 1; logger.info("[Supervisor] Detection PAUSED by operator")
+                    self._preview_mode.value = 1
+                    logger.info("[Supervisor] Detection PAUSED by operator")
+
+            elif mtype == MessageType.RELAY_BACKEND_CHANGE.value:
+                # v3.0: route backend-switch request directly to the relay process.
+                # The relay process reads from _relay_result_q, so we put it there.
+                backend = msg.get("backend", "usb")
+                logger.info("[Supervisor] Routing backend change → relay process: %s", backend)
+                try:
+                    self._relay_result_q.put_nowait(msg)
+                except Exception as e:
+                    logger.warning("[Supervisor] Could not route backend change to relay: %s", e)
 
     def _handle_msg(self, msg):
         mtype = msg.get("type"); src = msg.get("source",""); cam_id = msg.get("camera_id")

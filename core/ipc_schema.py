@@ -1,5 +1,5 @@
 """
-core/ipc_schema.py  (v2.1 — extended, fully backward-compatible)
+core/ipc_schema.py  (v3.0 — relay dual-backend support, fully backward-compatible)
 """
 from __future__ import annotations
 import time, uuid
@@ -8,22 +8,25 @@ from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 
 class MessageType(str, Enum):
-    FRAME_READY       = "frame_ready"
-    DETECTION_RESULT  = "detection_result"
-    VISUAL_UPDATE     = "visual_update"
-    HEARTBEAT         = "heartbeat"
-    RESTART           = "restart"
-    ERROR             = "error"
-    HEALTH_REPORT     = "health_report"
-    RELAY_COMMAND     = "relay_command"
-    RELAY_STATE       = "relay_state"
-    SHUTDOWN          = "shutdown"
-    GPU_STATS         = "gpu_stats"
-    PROCESS_STATUS    = "process_status"
-    INFERENCE_REQUEST = "inference_request"
-    HEALTH_SNAPSHOT   = "health_snapshot"
-    BOUNDARY_RELOAD   = "boundary_reload"
-    GUI_COMMAND       = "gui_command"
+    FRAME_READY            = "frame_ready"
+    DETECTION_RESULT       = "detection_result"
+    VISUAL_UPDATE          = "visual_update"
+    HEARTBEAT              = "heartbeat"
+    RESTART                = "restart"
+    ERROR                  = "error"
+    HEALTH_REPORT          = "health_report"
+    RELAY_COMMAND          = "relay_command"
+    RELAY_STATE            = "relay_state"
+    SHUTDOWN               = "shutdown"
+    GPU_STATS              = "gpu_stats"
+    PROCESS_STATUS         = "process_status"
+    INFERENCE_REQUEST      = "inference_request"
+    HEALTH_SNAPSHOT        = "health_snapshot"
+    BOUNDARY_RELOAD        = "boundary_reload"
+    GUI_COMMAND            = "gui_command"
+    # v3.0 — relay dual-backend
+    RELAY_BACKEND_CHANGE   = "relay_backend_change"   # GUI → relay process
+    RELAY_BACKEND_STATUS   = "relay_backend_status"   # relay process → GUI
 
 class ProcessSource(str, Enum):
     SUPERVISOR  = "supervisor"
@@ -95,7 +98,7 @@ class DetectionResultMessage(BaseMessage):
     type: MessageType = field(default=MessageType.DETECTION_RESULT, init=False)
     detections: List[Dict] = field(default_factory=list)
     pair_results: List[Dict] = field(default_factory=list)
-    relay_states: List[bool] = field(default_factory=list)   # ← ADD THIS
+    relay_states: List[bool] = field(default_factory=list)
     inference_time_ms: float = 0.0
     fps: float = 0.0
     total_detections: int = 0
@@ -103,13 +106,12 @@ class DetectionResultMessage(BaseMessage):
     success_rate: float = 100.0
     frame_shape: Tuple = (720, 1280, 3)
     frame_data: Optional[bytes] = None
-
     def to_dict(self):
         d = super().to_dict()
         d.update({
             "detections": self.detections,
             "pair_results": self.pair_results,
-            "relay_states": self.relay_states,               # ← ADD THIS
+            "relay_states": self.relay_states,
             "inference_time_ms": self.inference_time_ms,
             "fps": self.fps,
             "total_detections": self.total_detections,
@@ -215,6 +217,49 @@ class GUICommandMessage(BaseMessage):
     def to_dict(self):
         d=super().to_dict(); d["command"]=self.command; d["params"]=self.params; return d
 
+# ── v3.0 additions ─────────────────────────────────────────────────────────────
+
+@dataclass
+class RelayBackendChangeMessage(BaseMessage):
+    """
+    GUI → Supervisor → relay_result_queue → Relay Process.
+    Requests a runtime backend switch (no process restarts needed).
+    backend: "usb" or "modbus"
+    """
+    type: MessageType = field(default=MessageType.RELAY_BACKEND_CHANGE, init=False)
+    source: ProcessSource = field(default=ProcessSource.GUI, init=False)
+    backend: str = "usb"
+
+    def to_dict(self):
+        d = super().to_dict()
+        d["backend"] = self.backend
+        return d
+
+
+@dataclass
+class RelayBackendStatusMessage(BaseMessage):
+    """
+    Relay Process → state_out_queue → GUI.
+    Sent immediately after every backend switch and on every heartbeat.
+    GUI uses this to update the backend status panel.
+    """
+    type: MessageType = field(default=MessageType.RELAY_BACKEND_STATUS, init=False)
+    source: ProcessSource = field(default=ProcessSource.RELAY, init=False)
+    active_backend: str = "usb"
+    backend_healthy: bool = False
+    last_backend_error: str = ""
+
+    def to_dict(self):
+        d = super().to_dict()
+        d.update({
+            "active_backend":     self.active_backend,
+            "backend_healthy":    self.backend_healthy,
+            "last_backend_error": self.last_backend_error,
+        })
+        return d
+
+
+# ── factory helpers ────────────────────────────────────────────────────────────
 def make_heartbeat(source,camera_id,process_name,pid,memory_mb,fps,status="running",extra=None):
     return HeartbeatMessage(source=source,camera_id=camera_id,process_name=process_name,
         pid=pid,memory_mb=memory_mb,fps=fps,status=status,extra=extra or {})
