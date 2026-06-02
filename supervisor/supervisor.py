@@ -301,10 +301,15 @@ class Supervisor:
         #    from these thread-safe local queues, never from mp.Queue directly.
         #    If _heartbeat_q deadlocks due to a worker dying mid-write, only
         #    the bridge daemon thread gets stuck — not the main loop.
-        self._hb_reader  = SafeQueueReader(
-            self._heartbeat_q, name="HBReader",  maxsize=500)
-        self._sup_reader = SafeQueueReader(
-            self._supervisor_q, name="SupReader", maxsize=200)
+        # Replace with:
+        self._hb_reader      = SafeQueueReader(
+            self._heartbeat_q,  name="HBReader",     maxsize=500)
+        self._sup_reader     = SafeQueueReader(
+            self._supervisor_q, name="SupReader",    maxsize=200)
+        # Deadlock guard: GUI process writes here; if it dies mid-write on
+        # Windows the mutex is abandoned.  Same risk as _heartbeat_q.
+        self._gui_cmd_reader = SafeQueueReader(
+            self._gui_cmd_q,    name="GuiCmdReader", maxsize=100)
 
         # ── Task 2 & 3: thread-safe signal queues (queue.Queue, not mp.Queue)
         #    used by watchdog thread and daily-restart thread to tell the main
@@ -314,6 +319,11 @@ class Supervisor:
 
         _preview_init = 1 if self.cfg.gui.start_in_preview_mode else 0
         self._preview_mode = Value('i', _preview_init)
+         # Add immediately after:
+        # Shared Value read by camera and gpu_pool processes every frame loop tick.
+        # 0.0  = use each process's own config fps_limit (normal operation).
+        # >0.0 = hard cap to this FPS (thermal throttle active).
+        self._throttle_fps = mp.Value('d', 0.0)
 
         self._processes: Dict[str, ManagedProcess] = {}
         self._running           = False
@@ -413,7 +423,8 @@ class Supervisor:
         p = Process(
             target=camera_process_entry,
             args=(camera_id, self.config_path, self._inference_q,
-                  self._heartbeat_q, stop_ev, self._preview_mode, self.log_dir),
+                  self._heartbeat_q, stop_ev, self._preview_mode,
+                  self._throttle_fps, self.log_dir),
             name=key, daemon=True)
         p.start()
         self._processes[key] = ManagedProcess(
@@ -427,7 +438,7 @@ class Supervisor:
         p = Process(
             target=pool_manager_process_entry,
             args=(self.config_path, self._inference_q, self._result_q,
-                  self._heartbeat_q, stop_ev, self.log_dir),
+                  self._heartbeat_q, stop_ev, self._throttle_fps, self.log_dir),
             name=key, daemon=False)   # daemon=False: spawns GPU worker children
         p.start()
         self._processes[key] = ManagedProcess("GPU Pool", key, p, stop_ev)
@@ -437,10 +448,11 @@ class Supervisor:
         from detection.detection_process import detection_process_entry
         key = f"detection_{camera_id}"
         stop_ev = Event()
+        # Replace with:
         p = Process(
             target=detection_process_entry,
             args=(camera_id, self.config_path, self._result_q,
-                  self._heartbeat_q, stop_ev, self.log_dir),
+                  self._heartbeat_q, stop_ev, self._throttle_fps, self.log_dir),
             name=key, daemon=True)
         p.start()
         self._processes[key] = ManagedProcess(
@@ -577,20 +589,23 @@ class Supervisor:
             if "gui" in self._processes:
                 self._restart_process("gui")
 
+    # Replace with:
     def _drain_gui_cmd(self):
-        """Route GUI commands — uses put_nowait so never blocks."""
-        for _ in range(30):
-            msg = self._gui_cmd_q._internal_poll() if hasattr(
-                self._gui_cmd_q, '_internal_poll') else None
-            # Use safe_get_nowait pattern
-            try:
-                msg = self._gui_cmd_q.get_nowait()
-            except Exception:
-                break
+        """
+        Route GUI commands via SafeQueueReader bridge (Task 1 loophole fix).
 
+        _gui_cmd_q is written by the GUI process.  If the GUI dies mid-write
+        on Windows, the internal mutex is abandoned and any direct get_nowait()
+        call in the supervisor would block forever — identical to the original
+        heartbeat queue deadlock.  Using the SafeQueueReader bridge isolates
+        this risk to a daemon thread.
+        """
+        for msg in self._gui_cmd_reader.drain(max_items=30):
             mtype = msg.get("type")
+
             if mtype == MessageType.BOUNDARY_RELOAD.value:
                 safe_put(self._inference_q, msg)
+
             elif mtype == MessageType.GUI_COMMAND.value:
                 cmd = msg.get("command", "")
                 if cmd == "start_detection":
@@ -599,10 +614,14 @@ class Supervisor:
                 elif cmd == "stop_detection":
                     self._preview_mode.value = 1
                     logger.info("[Supervisor] Detection PAUSED by operator")
+
             elif mtype == MessageType.RELAY_BACKEND_CHANGE.value:
                 backend = msg.get("backend", "usb")
                 logger.info("[Supervisor] Routing backend change → relay: %s", backend)
                 safe_put(self._relay_result_q, msg)
+
+        if not self._gui_cmd_reader.is_thread_alive():
+            self._gui_cmd_reader.respawn_thread()
 
     # ─── Message handlers ────────────────────────────────────────────────────
 
@@ -638,8 +657,29 @@ class Supervisor:
             target = msg.get("target", "")
             if target == "detection_all":
                 self._restart_all_detection()
+
         elif mtype == MessageType.GPU_STATS.value:
             self._last_gpu_stats = msg
+            # Task 3 FIX: propagate throttle_fps to all workers via shared Value.
+            # Previously this branch only stored the message for the GUI.
+            throttle = msg.get("throttle_fps")
+            if throttle is not None and throttle > 0:
+                if self._throttle_fps.value != float(throttle):
+                    logger.warning(
+                        "[Supervisor] Thermal throttle ACTIVE: %.0f FPS  "
+                        "(GPU=%.1f°C)",
+                        throttle, msg.get("temperature_c", 0))
+                    self._throttle_fps.value = float(throttle)
+
+        elif mtype == MessageType.FPS_LIMIT_UPDATE.value:
+            # Sent by gpu_monitor when temperature normalises (reason="restore").
+            fps    = msg.get("fps_limit", 0.0)
+            reason = msg.get("reason", "")
+            if reason == "restore" and self._throttle_fps.value != 0.0:
+                logger.info(
+                    "[Supervisor] Thermal throttle LIFTED — "
+                    "restoring config FPS in all workers")
+                self._throttle_fps.value = 0.0
 
     # ─── Health checks ────────────────────────────────────────────────────────
 

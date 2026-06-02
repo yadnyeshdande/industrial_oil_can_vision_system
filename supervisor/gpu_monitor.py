@@ -18,6 +18,8 @@ import time
 from pathlib import Path
 from multiprocessing import Queue
 
+from torch import Optional
+
 _ROOT = Path(__file__).parent.parent
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
@@ -29,6 +31,7 @@ from core.ipc_schema import (
 )
 from core.logging_setup import setup_process_logging, setup_crash_handler
 from core.resource_monitor import get_gpu_stats, get_process_memory_mb, shutdown_nvml
+from core.ipc_schema import make_fps_limit_command   # used in temperature normalisation path
 
 logger = logging.getLogger(__name__)
 
@@ -79,6 +82,12 @@ class GPUMonitorWorker:
         self._vram_sustained  = getattr(self.gcfg, "vram_sustained_seconds",    45)
         self._vram_cooldown   = getattr(self.gcfg, "vram_restart_cooldown_seconds", 120)
         self._vram_max        = getattr(self.gcfg, "vram_max_restarts",          5)
+         # Add immediately after:
+        # Tracks the active throttle value for the ENTIRE overheat period.
+        # Without this, throttle_fps is only sent on the first detection tick;
+        # every subsequent poll during overheat sends None, so the supervisor
+        # never gets a sustained signal to hold the reduced FPS.
+        self._active_throttle_fps: Optional[float] = None
 
     def run(self):
         logger.info("[GPUMonitor] PID=%d starting", self.pid)
@@ -96,26 +105,52 @@ class GPUMonitorWorker:
                 util_pct = stats.get("utilization_pct", 0)
                 power_w = stats.get("power_w", 0)
 
-                throttle_fps = None
+                # throttle_fps = None
 
                 # Temperature handling
+                 # ─── new ────────────────────────────────────────────────────────────
                 if temp_c >= self.gcfg.temperature_threshold_celsius:
                     if not self._overheating:
-                        self._overheating = True
-                        self._overheat_start = time.time()
-                        logger.warning("[GPUMonitor] GPU overheating: %.1f°C", temp_c)
-                        throttle_fps = self.gcfg.fps_throttle_on_overheat
+                        # First detection: latch state and set active throttle.
+                        self._overheating         = True
+                        self._overheat_start      = time.time()
+                        self._active_throttle_fps = self.gcfg.fps_throttle_on_overheat
+                        logger.warning(
+                            "[GPUMonitor] GPU overheating: %.1f°C — "
+                            "throttling to %.0f FPS",
+                            temp_c, self._active_throttle_fps)
 
                     overheat_duration = time.time() - self._overheat_start
                     if (overheat_duration >= self.gcfg.overheat_duration_seconds
                             and self.gcfg.restart_on_persistent_overheat):
-                        logger.critical("[GPUMonitor] Persistent overheat %.1f°C for %.0fs → restart detection",
-                                        temp_c, overheat_duration)
+                        logger.critical(
+                            "[GPUMonitor] Persistent overheat %.1f°C for %.0fs → restart detection",
+                            temp_c, overheat_duration)
                         self._send_restart_command("overheat")
-                        self._overheat_start = time.time()  # reset timer
+                        self._overheat_start = time.time()
+
                 else:
                     if self._overheating:
-                        logger.info("[GPUMonitor] GPU temperature normalised: %.1f°C", temp_c)
+                        logger.info(
+                            "[GPUMonitor] GPU temperature normalised: %.1f°C — "
+                            "sending FPS restore command",
+                            temp_c)
+                        self._active_throttle_fps = None
+
+                        # Task 2 FIX: actively signal the supervisor to restore FPS.
+                        # Previously this branch only flipped a bool and logged.
+                        # The supervisor never received a "go back to normal" message.
+                        # Replace with (remove the import line):
+                        # from core.ipc_schema import make_fps_limit_command
+                        try:
+                            self.supervisor_queue.put_nowait(
+                                make_fps_limit_command(
+                                    fps_limit=0.0, reason="restore"
+                                ).to_dict()
+                            )
+                        except Exception:
+                            pass
+
                     self._overheating = False
 
                 # ── VRAM threshold — sustained violation + cooldown ─────────
@@ -182,7 +217,7 @@ class GPUMonitorWorker:
                     temperature_c=temp_c,
                     utilization_pct=util_pct,
                     power_w=power_w,
-                    throttle_fps=throttle_fps,
+                    throttle_fps=self._active_throttle_fps,   # persists entire overheat period,
                 )
                 try:
                     self.supervisor_queue.put_nowait(gpu_msg.to_dict())

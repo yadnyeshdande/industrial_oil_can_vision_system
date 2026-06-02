@@ -132,13 +132,14 @@ class DetectionWorker:
     Core detection loop for one camera.
     Reads from shared memory, runs YOLO, applies boundary logic, sends results.
     """
-
+    # Replace with:
     def __init__(self,
-                 camera_id:       int,
-                 cfg:             VisionSystemConfig,
-                 result_queue:    Queue,
-                 heartbeat_queue: Queue,
-                 stop_event:      mp.Event):
+                 camera_id:          int,
+                 cfg:                VisionSystemConfig,
+                 result_queue:       Queue,
+                 heartbeat_queue:    Queue,
+                 stop_event:         mp.Event,
+                 throttle_fps_value = None):   # mp.Value('d') from supervisor
         self.camera_id       = camera_id
         self.cfg             = cfg
         self.dcfg:           DetectionConfig = cfg.detection
@@ -168,8 +169,11 @@ class DetectionWorker:
         self._reader:       Optional[SharedFrameReader]  = None
         self._boundary_set: Optional[CameraBoundarySet]  = None
 
+        # Replace With:
         # v2.2: sized from relay_count, not hardcoded 3
         self._relay_states: List[bool] = [False] * cfg.relay.relay_count
+        # Thermal throttle shared Value from supervisor (None in unit tests)
+        self._throttle_fps_value = throttle_fps_value
 
     # ─── Lifecycle ────────────────────────────────────────────────────────────
 
@@ -203,8 +207,9 @@ class DetectionWorker:
         if not self._reader.connect(timeout=30.0):
             logger.critical("[%s] Cannot connect to shared memory, exiting", self.name)
             return
-
-        interval = 1.0 / max(self.dcfg.fps_limit, 1)
+        
+        # Find and DELETE this line (before the while loop):
+        # interval = 1.0 / max(self.dcfg.fps_limit, 1)
         logger.info("[%s] Detection loop started (fps_limit=%d)", self.name, self.dcfg.fps_limit)
 
         while not self.stop_event.is_set():
@@ -294,8 +299,16 @@ class DetectionWorker:
                 self._check_resources()
                 self._last_vram_check = now
 
+            # Replace with:
+            # Dynamic interval: re-read throttle Value every frame.
+            # 0.0  = no throttle; use config fps_limit.
+            # >0.0 = thermal cap active.
+            _throttle  = (self._throttle_fps_value.value
+                          if self._throttle_fps_value is not None else 0.0)
+            _active_fps = _throttle if _throttle > 0.0 else self.dcfg.fps_limit
+            _interval   = 1.0 / max(_active_fps, 1)
             elapsed_loop = time.time() - loop_start
-            sleep_t = interval - elapsed_loop
+            sleep_t = _interval - elapsed_loop
             if sleep_t > 0:
                 time.sleep(sleep_t)
 
@@ -515,12 +528,13 @@ class DetectionWorker:
 # ─────────────────────────────────────────────────────────────────────────────
 # Process entry point
 # ─────────────────────────────────────────────────────────────────────────────
-
+# Replace with:
 def detection_process_entry(camera_id: int,
                              config_path: str,
                              result_queue: Queue,
                              heartbeat_queue: Queue,
                              stop_event: mp.Event,
+                             throttle_fps_value = None,   # mp.Value('d') from supervisor
                              log_dir: str = "logs"):
     cfg     = VisionSystemConfig(config_path)
     cam_cfg = cfg.get_camera(camera_id)
@@ -537,7 +551,9 @@ def detection_process_entry(camera_id: int,
     signal.signal(signal.SIGTERM, _sig)
     signal.signal(signal.SIGINT,  _sig)
 
-    worker = DetectionWorker(camera_id, cfg, result_queue, heartbeat_queue, stop_event)
+    # Replace with:
+    worker = DetectionWorker(camera_id, cfg, result_queue, heartbeat_queue,
+                             stop_event, throttle_fps_value=throttle_fps_value)
     try:
         worker.run()
     except SystemExit:

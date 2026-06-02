@@ -27,6 +27,8 @@ class MessageType(str, Enum):
     # v3.0 — relay dual-backend
     RELAY_BACKEND_CHANGE   = "relay_backend_change"   # GUI → relay process
     RELAY_BACKEND_STATUS   = "relay_backend_status"   # relay process → GUI
+     # Add immediately after:
+    FPS_LIMIT_UPDATE       = "fps_limit_update"       # gpu_monitor → supervisor
 
 class ProcessSource(str, Enum):
     SUPERVISOR  = "supervisor"
@@ -258,6 +260,28 @@ class RelayBackendStatusMessage(BaseMessage):
         })
         return d
 
+@dataclass
+class FpsLimitCommandMessage(BaseMessage):
+    """
+    gpu_monitor → supervisor_queue.
+    fps_limit == 0.0 means "restore config default" (sent on temperature normalisation).
+    fps_limit  > 0.0 means "throttle to this value"  (sent on first overheat detection).
+    reason: "throttle" | "restore"
+    """
+    type:   MessageType   = field(default=MessageType.FPS_LIMIT_UPDATE, init=False)
+    source: ProcessSource = field(default=ProcessSource.GPU_MONITOR,    init=False)
+    fps_limit: float = 0.0
+    reason:    str   = ""
+
+    def to_dict(self):
+        d = super().to_dict()
+        d.update({"fps_limit": self.fps_limit, "reason": self.reason})
+        return d
+
+
+def make_fps_limit_command(fps_limit: float, reason: str = "") -> FpsLimitCommandMessage:
+    """Factory: fps_limit=0.0 + reason='restore' → lift throttle."""
+    return FpsLimitCommandMessage(camera_id=None, fps_limit=fps_limit, reason=reason)
 
 # ── factory helpers ────────────────────────────────────────────────────────────
 def make_heartbeat(source,camera_id,process_name,pid,memory_mb,fps,status="running",extra=None):

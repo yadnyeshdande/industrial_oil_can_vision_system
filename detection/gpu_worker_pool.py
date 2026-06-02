@@ -127,8 +127,10 @@ class _InferenceThread(threading.Thread):
         The PoolManager's resource-monitor decides whether to exit.
     """
 
+    # Replace with:
     def __init__(self, thread_id, cfg, task_q, result_queue, heartbeat_queue,
-                 model, inference_lock, stop_event, boundary_sets, boundary_lock):
+                 model, inference_lock, stop_event, boundary_sets, boundary_lock,
+                 throttle_fps_value=None):
         super().__init__(name=f"InferThread-{thread_id}", daemon=True)
         self.tid            = thread_id
         self.cfg            = cfg
@@ -142,11 +144,14 @@ class _InferenceThread(threading.Thread):
         self.stop_event     = stop_event
         self.b_sets         = boundary_sets
         self.b_lock         = boundary_lock
-        self._readers:       Dict[int, SharedFrameReader] = {}
-        self._fps_acc:       Dict[int, float]             = {}
-        self._fps_ts:        Dict[int, float]             = {}
-        self._inference_ms:  float                        = 0.0
-        self._last_hb:       float                        = time.time()
+        # Replace with:
+        self._readers:            Dict[int, SharedFrameReader] = {}
+        self._fps_acc:            Dict[int, float]             = {}
+        self._fps_ts:             Dict[int, float]             = {}
+        self._inference_ms:       float                        = 0.0
+        self._last_hb:            float                        = time.time()
+        self._throttle_fps_value  = throttle_fps_value   # mp.Value('d') or None
+        self._task_t0:            float                        = 0.0  # task start time for throttle FPS calculation
 
     def run(self):
         logger.info("[InferThread-%d] started", self.tid)
@@ -179,8 +184,10 @@ class _InferenceThread(threading.Thread):
         logger.info("[InferThread-%d] stopped", self.tid)
 
     # ── Single-frame path ─────────────────────────────────────────────────────
-
+    
+    # Replace with:
     def _process(self, task: dict):
+        task_start = time.time()   # whole-task clock: includes SHM read
         cam_id = task.get("camera_id")
         shm    = task.get("shm_name") or task.get("shared_memory_name", "")
         w      = task.get("frame_width",  1280)
@@ -193,7 +200,9 @@ class _InferenceThread(threading.Thread):
         if frame is None:
             return
 
-        t0 = time.time()
+        t0 = time.time()   # inference-only clock (used only for inference_ms)
+
+
         with self.lock:
             detections = self._infer(frame)
         self._inference_ms = (time.time() - t0) * 1000
@@ -219,8 +228,10 @@ class _InferenceThread(threading.Thread):
             self.result_queue.put_nowait(msg)
         except Exception:
             pass
-
-        self._maybe_heartbeat(cam_id, fps)
+        
+        # Replace with: 
+        self._maybe_heartbeat(cam_id, fps) # Task 4: enforce thermal FPS cap (self._thermal_sleep(t0))
+        self._thermal_sleep(task_start)   # enforce thermal FPS cap from task start
 
     # ── Batch path ────────────────────────────────────────────────────────────
 
@@ -318,7 +329,12 @@ class _InferenceThread(threading.Thread):
                     self.result_queue.put_nowait(msg)
                 except Exception:
                     pass
+                # Replace with (remove _thermal_sleep from inside the loop): self._thermal_sleep(t0)   # Task 4: enforce thermal FPS cap
                 self._maybe_heartbeat(cam_id, fps)
+                # NOTE: thermal sleep is applied ONCE after the whole batch below —
+                # not here.  Applying it per-frame with a shared t0 meant frames
+                # 1..N-1 always saw elapsed > target and slept 0.
+        
         finally:
             # Task 4: explicit batch result cleanup
             if batch_results is not None:
@@ -326,6 +342,25 @@ class _InferenceThread(threading.Thread):
                     del batch_results
                 except Exception:
                     pass
+
+        # Thermal sleep — applied ONCE for the whole batch.
+        #
+        # Target total time = N_frames / fps_cap.  This ensures the GPU gets
+        # N × (1/fps_cap) seconds of wall-clock time per batch, regardless of
+        # how many frames were in it, giving silicon time to cool between batches.
+        #
+        # Doing this per-frame with a shared t0 was wrong: frame 0 might sleep
+        # correctly, but by frame 1 elapsed already exceeds target and sleep=0.
+        if valid and self._throttle_fps_value is not None:
+            fps_cap = self._throttle_fps_value.value
+            if fps_cap <= 0.0:
+                fps_cap = getattr(self.pcfg, "fps_limit", 0.0)
+            if fps_cap > 0.0:
+                target_total = len(valid) / fps_cap   # N frames × (1/fps_cap) s each
+                elapsed_total = time.time() - t0
+                batch_sleep = target_total - elapsed_total
+                if batch_sleep > 0.001:
+                    time.sleep(batch_sleep)
 
     # ── Core inference ────────────────────────────────────────────────────────
 
@@ -420,6 +455,36 @@ class _InferenceThread(threading.Thread):
             logger.error("[InferThread-%d] boundary eval error: %s", self.tid, e, exc_info=True)
             return [], [], 0
 
+# Thwart GPU overheating by sleeping between inference tasks to enforce an active FPS cap.
+    def _thermal_sleep(self, task_start: float):
+        """
+        Enforce the active FPS cap after each single-frame inference task.
+
+        task_start must be set at the BEGINNING of the task (before SHM read),
+        not at inference start.  This ensures the full task time — including
+        SHM read, boundary eval, queue put — is counted against the cap,
+        preventing the FPS limit from being slightly exceeded.
+
+        For batch tasks, do NOT call this per-frame; use the batch-level
+        sleep block in _process_batch instead (shared t0 breaks per-frame math).
+
+        throttle_fps_value.value is read without a lock; double-reads of a
+        C double are atomic on all platforms Python targets.
+        0.0 = no throttle; use config fps_limit as ceiling.
+        """
+        if self._throttle_fps_value is None:
+            return
+        fps_cap = self._throttle_fps_value.value
+        if fps_cap <= 0.0:
+            fps_cap = getattr(self.pcfg, "fps_limit", 0.0)   # config default
+        if fps_cap <= 0.0:
+            return
+        target_interval = 1.0 / fps_cap
+        elapsed = time.time() - task_start
+        sleep_t = target_interval - elapsed
+        if sleep_t > 0.001:   # skip sub-millisecond sleeps
+            time.sleep(sleep_t)
+
     # ── Utilities ─────────────────────────────────────────────────────────────
 
     def _read_frame(self, cam_id, shm_name, w, h) -> Optional[np.ndarray]:
@@ -491,15 +556,18 @@ class PoolManager:
 
     CACHE_CLEAR_INTERVAL_S = 300.0   # routine empty_cache() period
 
-    def __init__(self, cfg, inference_queue, result_queue, heartbeat_queue, stop_event):
+    def __init__(self, cfg, inference_queue, result_queue, heartbeat_queue,
+                 stop_event, throttle_fps_value=None):
         self.cfg             = cfg
         self.pcfg            = cfg.gpu_pool
         self.mcfg            = cfg.model
         self.inference_queue = inference_queue
         self.result_queue    = result_queue
         self.hb_q            = heartbeat_queue
-        self.stop_event      = stop_event
-        self.pid             = os.getpid()
+        # Replace with:
+        self.stop_event             = stop_event
+        self._throttle_fps_value    = throttle_fps_value   # mp.Value('d') from supervisor
+        self.pid                    = os.getpid()
         self.name            = "GPUPoolManager"
 
         self._model           = None
@@ -510,9 +578,11 @@ class PoolManager:
         self._last_boundary_poll = 0.0
         self._threads: List[_InferenceThread] = []
         self._task_q  = queue.Queue(maxsize=6)
-        self._last_hb = time.time()
-        self._last_resource_check = 0.0
-        self._last_cache_clear    = time.time()
+        # Replace with:
+        self._last_hb              = time.time()
+        self._last_resource_check  = 0.0
+        self._last_cache_clear     = time.time()
+        self._throttle_fps_value   = None   # set by run() from process entry arg
 
     def run(self):
         logger.info("[PoolManager] PID=%d — shared-model pool, %d inference threads",
@@ -526,12 +596,14 @@ class PoolManager:
             self._load_boundaries(cam.id)
 
         for i in range(self.pcfg.pool_size):
+            # Replace with:
             t = _InferenceThread(
                 thread_id=i, cfg=self.cfg, task_q=self._task_q,
                 result_queue=self.result_queue, heartbeat_queue=self.hb_q,
                 model=self._model, inference_lock=self._inference_lock,
                 stop_event=self.stop_event, boundary_sets=self._boundary_sets,
-                boundary_lock=self._boundary_lock)
+                boundary_lock=self._boundary_lock,
+                throttle_fps_value=self._throttle_fps_value)   # Task 4: pass throttle_fps_value to threads
             t.start()
             self._threads.append(t)
             logger.info("[PoolManager] Started InferThread-%d", i)
@@ -740,8 +812,10 @@ class PoolManager:
 # Process entry point
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Replace with:
 def pool_manager_process_entry(config_path, inference_queue, result_queue,
-                                heartbeat_queue, stop_event, log_dir="logs"):
+                                    heartbeat_queue, stop_event,
+                                    throttle_fps_value=None, log_dir="logs"):
     cfg = VisionSystemConfig(config_path)
     setup_process_logging("gpu_pool", log_dir, cfg.system.log_level,
                           cfg.logging.max_bytes, cfg.logging.backup_count)
@@ -752,8 +826,10 @@ def pool_manager_process_entry(config_path, inference_queue, result_queue,
     signal.signal(signal.SIGTERM, _sig)
     signal.signal(signal.SIGINT,  _sig)
 
+    # Replace with:
     manager = PoolManager(cfg, inference_queue, result_queue,
-                          heartbeat_queue, stop_event)
+                          heartbeat_queue, stop_event,
+                          throttle_fps_value=throttle_fps_value)   # Task 4: pass throttle_fps_value to PoolManager
     try:
         manager.run()
     except SystemExit:

@@ -166,8 +166,9 @@ class BufferlessCapture:
 # ─────────────────────────────────────────────────────────────────────────────
 
 class CameraWorker:
+    # Replace with:
     def __init__(self, cam_cfg, inference_queue, heartbeat_queue,
-                 stop_event, preview_mode):
+                 stop_event, preview_mode, throttle_fps_value=None):
         self.cfg             = cam_cfg
         self.inference_queue = inference_queue
         self.heartbeat_queue = heartbeat_queue
@@ -185,6 +186,8 @@ class CameraWorker:
         self._last_heartbeat      = time.time()
         self._reconnect_delay     = cam_cfg.reconnect_base_delay
         self._reconnect_attempts  = 0
+        # Add immediately after:
+        self._throttle_fps_value = throttle_fps_value   # mp.Value('d') from supervisor
 
     def run(self):
         log = logging.getLogger(self.name)
@@ -195,8 +198,8 @@ class CameraWorker:
             width=self.cfg.frame_width,
             height=self.cfg.frame_height,
         )
-
-        interval = 1.0 / max(self.cfg.fps_limit, 1)
+        # Find and DELETE this line (it's before the outer while loop):
+        # interval = 1.0 / max(self.cfg.fps_limit, 1)
 
         while not self.stop_event.is_set():
             if not self._connect():
@@ -269,10 +272,16 @@ class CameraWorker:
                     self._cleanup_local()
                     sys.exit(1)   # Task 5: hard exit, NOT stop_event.set()
 
-                sleep_t = interval - (time.time() - loop_start)
+                # Task 5: dynamic interval — re-read throttle Value every frame.
+                # 0.0 = no throttle; use config fps_limit.
+                # >0.0 = thermal cap active; enforce it by sleeping longer.
+                _throttle = (self._throttle_fps_value.value
+                             if self._throttle_fps_value is not None else 0.0)
+                _active_fps = _throttle if _throttle > 0.0 else self.cfg.fps_limit
+                _interval   = 1.0 / max(_active_fps, 1)
+                sleep_t = _interval - (time.time() - loop_start)
                 if sleep_t > 0:
                     time.sleep(sleep_t)
-
             self._release_cap()
 
         self._cleanup_local()
@@ -363,8 +372,10 @@ class CameraWorker:
 # Process entry point
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Replace with:
 def camera_process_entry(camera_id, config_path, inference_queue, heartbeat_queue,
-                          stop_event, preview_mode, log_dir="logs"):
+                              stop_event, preview_mode,
+                              throttle_fps_value=None, log_dir="logs"):
     cfg     = VisionSystemConfig(config_path)
     cam_cfg = cfg.get_camera(camera_id)
     if cam_cfg is None:
@@ -380,8 +391,10 @@ def camera_process_entry(camera_id, config_path, inference_queue, heartbeat_queu
     signal.signal(signal.SIGTERM, _sig)
     signal.signal(signal.SIGINT,  _sig)
 
+    # Replace with:
     worker = CameraWorker(cam_cfg, inference_queue, heartbeat_queue,
-                           stop_event, preview_mode)
+                           stop_event, preview_mode,
+                           throttle_fps_value=throttle_fps_value)   # Task 5: pass throttle_fps_value to CameraWorker
     try:
         worker.run()
     except SystemExit:
