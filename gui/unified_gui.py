@@ -1,23 +1,25 @@
 """
-gui/unified_gui.py  v3.2-relay
+gui/unified_gui.py  v4.0
 ================================
 Industrial Operator Dashboard — 4-tab layout.
 
-v3.2-relay additions over v3.2:
-  • Tab 1 (Dashboard): Relay Backend panel below the relay grid
-      - Radio buttons: (•) USB Relay  ( ) Ethernet Relay
-      - [Apply] button
-      - Status strip: Current Backend / HEALTHY|DISCONNECTED / Last Error
-  • Tab 2 (Camera View): same backend status strip in the side panel
-  • Relay backend state tracked from RELAY_BACKEND_STATUS IPC messages
-  • Apply button sends RelayBackendChangeMessage through cmd_q
-  • Cooldown guard in GUI (mirrors relay-process guard) prevents spam
-  • All original v3.2 behaviour preserved — no regressions
+v4.0 changes:
+  • Ethernet relay (Waveshare Modbus TCP) is the sole, final relay backend.
+  • Removed the USB/Ethernet backend selector radio buttons and Apply
+    button — there is nothing to select any more.
+  • Added a prominent, flashing "NO RELAY CONNECTED" top banner whenever
+    the Ethernet relay is unreachable — the GUI never silently hides a
+    relay failure.
+  • Tab 1 (Dashboard) and Tab 2 (Camera View) both show a compact,
+    read-only relay connection status panel (CONNECTED / NO RELAY
+    CONNECTED + last error).
+  • Relay status is tracked from RELAY_BACKEND_STATUS IPC messages.
+  • All other v3.2 behaviour preserved — no regressions.
 
 GUI DESIGN RULE (from architecture doc):
   GUI MUST NEVER DIRECTLY CONTROL RELAYS.
-  The Apply button only sends backend="usb"|"modbus" to the relay process.
-  The relay process is the ONLY output authority.
+  The GUI only ever displays relay connection status. The relay process
+  is the ONLY output authority and the only thing that talks to hardware.
 """
 from __future__ import annotations
 import json
@@ -43,7 +45,6 @@ from core.config_loader import VisionSystemConfig
 from core.ipc_schema import (
     MessageType, ProcessSource,
     GUICommandMessage, BoundaryReloadMessage,
-    RelayBackendChangeMessage,
     make_heartbeat,
 )
 from core.logging_setup import setup_process_logging, setup_crash_handler
@@ -70,21 +71,12 @@ C_BH    = ( 76, 175,  80)
 R_ON    = ( 55,  55, 210)
 R_OFF   = ( 55,  55,  50)
 
-# Backend-panel colours
-USB_COL    = ( 60, 165, 255)   # orange-ish — USB
-MODBUS_COL = ( 76, 175,  80)   # green — Ethernet
-RADIO_ON   = (255, 255, 255)
-RADIO_OFF  = ( 90,  88,  84)
-
 FONT    = cv2.FONT_HERSHEY_SIMPLEX
 FONT2   = cv2.FONT_HERSHEY_DUPLEX
 TABS    = ["Dashboard", "Camera View", "System Health", "Logs Viewer"]
 TICONS  = ["[1]", "[2]", "[3]", "[4]"]
 TAB_H   = 42
 STAT_H  = 28
-
-# Minimum seconds between Apply clicks (mirrors relay-process cooldown)
-_SWITCH_COOLDOWN = 5.0
 
 
 # ── Drawing primitives ─────────────────────────────────────────────────────────
@@ -352,110 +344,58 @@ def _draw_bd_banner(canvas, W: int, body_y: int, missing: List[int]) -> int:
     return bh
 
 
+def _draw_relay_banner(canvas, W: int, body_y: int, last_error: str) -> int:
+    """
+    Top-of-screen failsafe warning shown whenever the Ethernet relay is
+    unreachable. This is the highest-priority banner: if the relay can't
+    fire, an operator needs to know immediately, even before boundary or
+    detection alarms.
+    """
+    bh    = 32
+    flash = int(time.time()*2) % 2 == 0
+    _fill(canvas, 0, body_y, W, body_y+bh, ERR if flash else (70,50,50))
+    msg = "  \u26a0  NO RELAY CONNECTED — Ethernet relay unreachable, physical outputs will NOT fire"
+    if last_error:
+        msg += f"   ({last_error[:60]})"
+    _t(canvas, msg, (12, body_y+22), sc=0.54, col=BRIGHT, th=1)
+    return bh
+
+
 # ═══════════════════════════════════════════════════════════════════════════════
-# Backend status panel — shared between Tab 1 and Tab 2
+# Relay status panel — shared between Tab 1 and Tab 2 (read-only, no controls)
 # ═══════════════════════════════════════════════════════════════════════════════
-def _draw_backend_panel(
+def _draw_relay_status_panel(
     canvas,
     x: int, y: int, w: int,
-    active_backend: str,           # "usb" or "modbus"
-    selected_backend: str,         # what the GUI radio shows (may differ from active)
     backend_healthy: bool,
     last_backend_error: str,
-    ms: MouseState,
-    hit_regions: dict,
-    cooldown_remaining: float = 0.0,
 ) -> int:
     """
-    Draws the relay backend selector panel.
+    Draws the read-only Ethernet relay connection status panel.
+    Ethernet (Modbus) is the sole relay backend — there is nothing to
+    select or switch, so this panel is purely informational.
     Returns the height consumed so callers can offset subsequent content.
-
-    hit_regions populated keys:
-      "radio_usb"    — Btn for USB radio
-      "radio_modbus" — Btn for Modbus radio
-      "apply_btn"    — Btn for Apply
     """
-    PAD  = 6
-    PH   = 110      # panel height
-    BH   = 24       # button height
+    PAD = 6
+    PH  = 64
 
-    # Panel background
     _fill(canvas, x, y, x+w, y+PH, PANEL)
     _box(canvas,  x, y, x+w, y+PH, BORDER, 1)
 
     oy = y + 10
-    _tb(canvas, "RELAY BACKEND", (x+PAD+2, oy+12), sc=0.46, col=DIM)
+    _tb(canvas, "RELAY", (x+PAD+2, oy+12), sc=0.46, col=DIM)
     oy += 18
     _hline(canvas, oy, x+PAD, x+w-PAD, BORDER)
-    oy += 8
+    oy += 16
 
-    # ── Radio buttons ──────────────────────────────────────────────────────
-    col_active = USB_COL if active_backend == "usb" else MODBUS_COL
+    status_col = ACCENT if backend_healthy else ERR
+    status_txt = "ETHERNET RELAY — CONNECTED" if backend_healthy else "NO RELAY CONNECTED"
+    _dot(canvas, x+PAD+6, oy-4, 6, status_col)
+    _t(canvas, status_txt, (x+PAD+18, oy), sc=0.46, col=status_col)
+    oy += 20
 
-    for label, key in [("USB Relay", "usb"), ("Ethernet Relay", "modbus")]:
-        is_sel = (selected_backend == key)
-        is_act = (active_backend == key)
-        radio_col = USB_COL if key == "usb" else MODBUS_COL
-
-        # outer circle
-        cx_r = x + PAD + 10
-        cy_r = oy + 9
-        cv2.circle(canvas, (cx_r, cy_r), 7, radio_col if is_sel else RADIO_OFF, 1, cv2.LINE_AA)
-        if is_sel:
-            cv2.circle(canvas, (cx_r, cy_r), 4, radio_col, -1, cv2.LINE_AA)
-
-        lbl_col = radio_col if is_sel else DIM
-        _t(canvas, label, (cx_r+14, oy+13), sc=0.46, col=lbl_col)
-
-        if is_act:
-            _t(canvas, "(active)", (cx_r+14+len(label)*9, oy+13), sc=0.36, col=DIM)
-
-        # invisible hit target for the radio
-        radio_btn = Btn(x+PAD, oy, x+PAD+180, oy+BH, label,
-                        normal_bg=PANEL, active_bg=PANEL)
-        hit_regions[f"radio_{key}"] = radio_btn
-        oy += BH - 2
-
-    oy += 4
-
-    # ── Apply button ───────────────────────────────────────────────────────
-    pending = (selected_backend != active_backend)
-    on_cd   = (cooldown_remaining > 0)
-
-    if on_cd:
-        apply_lbl = f"Cooldown {cooldown_remaining:.0f}s"
-        apply_bg  = (42, 42, 40)
-        apply_bc  = DIM
-    elif pending:
-        apply_lbl = f"Apply  ({selected_backend.upper()})"
-        apply_bg  = (40, 75, 40)
-        apply_bc  = ACCENT
-    else:
-        apply_lbl = "Apply"
-        apply_bg  = (42, 42, 40)
-        apply_bc  = DIM
-
-    apply_btn = Btn(x+PAD, oy, x+PAD+130, oy+BH, apply_lbl, apply_bg, apply_bg)
-    hov_a     = apply_btn.hit(ms.x, ms.y) and pending and not on_cd
-    _rr(canvas, apply_btn.x1, apply_btn.y1, apply_btn.x2, apply_btn.y2, 4,
-        tuple(min(c+12, 255) for c in apply_bg) if hov_a else apply_bg)
-    _box(canvas, apply_btn.x1, apply_btn.y1, apply_btn.x2, apply_btn.y2, apply_bc, 1)
-    (lw2, lh2), _ = cv2.getTextSize(apply_lbl, FONT2, 0.44, 1)
-    tx = apply_btn.x1 + (130-lw2)//2
-    ty = apply_btn.y1 + (BH+lh2)//2
-    _tb(canvas, apply_lbl, (tx, ty), sc=0.44, col=apply_bc)
-    hit_regions["apply_btn"] = apply_btn
-
-    # ── Status strip ───────────────────────────────────────────────────────
-    status_x = apply_btn.x2 + 12
-    _t(canvas, active_backend.upper(), (status_x, oy+10), sc=0.42,
-       col=USB_COL if active_backend=="usb" else MODBUS_COL)
-    health_col  = ACCENT if backend_healthy else ERR
-    health_txt  = "HEALTHY" if backend_healthy else "DISCONNECTED"
-    _t(canvas, health_txt, (status_x, oy+23), sc=0.38, col=health_col)
-    if last_backend_error:
-        err_clip = last_backend_error[:48]
-        _t(canvas, err_clip, (x+PAD, oy+BH+4), sc=0.35, col=ERR)
+    if not backend_healthy and last_backend_error:
+        _t(canvas, last_backend_error[:56], (x+PAD, oy), sc=0.35, col=ERR)
 
     return PH
 
@@ -466,10 +406,7 @@ def _draw_backend_panel(
 def _render_dashboard(canvas, W, H, by, bh,
                       cam_states: Dict, relay_states: List[bool],
                       health: dict, cfg,
-                      active_backend: str, selected_backend: str,
-                      backend_healthy: bool, last_backend_error: str,
-                      ms: MouseState, hit_regions: dict,
-                      cooldown_remaining: float):
+                      backend_healthy: bool, last_backend_error: str):
     PAD     = 10
     cam_ids = sorted(cam_states.keys())
     n       = len(cam_ids)
@@ -547,17 +484,15 @@ def _render_dashboard(canvas, W, H, by, bh,
         gx = rx + i*3*(rs+rg) + i*8
         _t(canvas, f"Cam {cid}", (gx+rs//2, ry-4), sc=0.38, col=DIM)
 
-    # ── Backend selector panel (NEW in v3.2-relay) ──────────────────────
+    # ── Relay status panel (read-only — Ethernet is the only backend) ────
     bp_y = ry + rs + 14
-    bp_w = 420
-    _draw_backend_panel(
+    bp_w = 320
+    _draw_relay_status_panel(
         canvas, PAD, bp_y, bp_w,
-        active_backend, selected_backend,
         backend_healthy, last_backend_error,
-        ms, hit_regions, cooldown_remaining,
     )
 
-    # health mini bars (shifted right of backend panel)
+    # health mini bars (shifted right of relay status panel)
     hy     = bp_y + 8
     gstats = health.get("gpu_stats", {})
     bx     = PAD + bp_w + 20
@@ -600,9 +535,7 @@ def _render_camera_view(canvas, W, H, by, bh,
                         state: CameraState, relay_states: List[bool], cfg,
                         preview: bool, ms: MouseState, cam_ids: List[int],
                         detection_allowed: bool, hit_regions: dict,
-                        active_backend: str, selected_backend: str,
-                        backend_healthy: bool, last_backend_error: str,
-                        cooldown_remaining: float):
+                        backend_healthy: bool, last_backend_error: str):
     PAD    = 12
     SP     = 240
     fw     = W - SP - PAD*3
@@ -734,23 +667,15 @@ def _render_camera_view(canvas, W, H, by, bh,
     _dot(canvas, sx+15, bot_y+28, 6, det_col)
     _t(canvas, det_txt,  (sx+26, bot_y+33), sc=0.44, col=det_col)
 
-    # ── Backend mini-status in side panel ──────────────────────────────────
+    # ── Relay mini-status in side panel (read-only) ─────────────────────────
     _hline(canvas, bot_y+46, sx+8, sx+sw-8, BORDER)
-    _t(canvas, "RELAY BACKEND", (sx+8, bot_y+60), sc=0.40, col=DIM)
-    be_col = USB_COL if active_backend=="usb" else MODBUS_COL
-    _t(canvas, active_backend.upper(), (sx+8, bot_y+74), sc=0.44, col=be_col)
-    hc = ACCENT if backend_healthy else ERR
-    _t(canvas, "HEALTHY" if backend_healthy else "DISCONNECTED",
-       (sx+8, bot_y+88), sc=0.38, col=hc)
-    # Small radio indicator
-    for bi, (blbl, bkey) in enumerate([("USB","usb"),("ETH","modbus")]):
-        is_sel = (selected_backend == bkey)
-        bc2    = USB_COL if bkey=="usb" else MODBUS_COL
-        cx_r = sx + 8 + bi*70; cy_r = bot_y + 105
-        cv2.circle(canvas, (cx_r, cy_r), 5, bc2 if is_sel else RADIO_OFF, 1, cv2.LINE_AA)
-        if is_sel:
-            cv2.circle(canvas, (cx_r, cy_r), 3, bc2, -1, cv2.LINE_AA)
-        _t(canvas, blbl, (cx_r+8, cy_r+4), sc=0.36, col=bc2 if is_sel else DIM)
+    _t(canvas, "RELAY", (sx+8, bot_y+60), sc=0.40, col=DIM)
+    rc = ACCENT if backend_healthy else ERR
+    rt = "ETHERNET — CONNECTED" if backend_healthy else "NO RELAY CONNECTED"
+    _dot(canvas, sx+13, bot_y+74, 5, rc)
+    _t(canvas, rt, (sx+24, bot_y+78), sc=0.40, col=rc)
+    if not backend_healthy and last_backend_error:
+        _t(canvas, last_backend_error[:36], (sx+8, bot_y+94), sc=0.32, col=ERR)
 
 
 def _overlay_bd_large(canvas, bset, fx, fy, fw, fh):
@@ -875,12 +800,9 @@ class UnifiedGUI:
         self._hit       = {}
         self._poller    = FramePoller(cfg.cameras)
 
-        # ── v3.2-relay: backend tracking ─────────────────────────────────
-        self._active_backend:     str   = cfg.relay.active_backend   # confirmed by relay process
-        self._selected_backend:   str   = cfg.relay.active_backend   # GUI radio selection
+        # ── v4.0: relay connection tracking (read-only, no selection) ─────
         self._backend_healthy:    bool  = False
         self._last_backend_error: str   = ""
-        self._last_switch_sent:   float = 0.0   # for GUI-side cooldown display
 
     # ── helpers ────────────────────────────────────────────────────────────
     def _missing_bd(self) -> List[int]:
@@ -893,13 +815,9 @@ class UnifiedGUI:
         cid = self.cam_ids[self._cam_idx % len(self.cam_ids)]
         return self.cam_states[cid]
 
-    def _cooldown_remaining(self) -> float:
-        elapsed = time.time() - self._last_switch_sent
-        return max(0.0, _SWITCH_COOLDOWN - elapsed)
-
     # ── main loop ──────────────────────────────────────────────────────────
     def run(self):
-        logger.info("[GUI v3.2-relay] PID=%d", self.pid)
+        logger.info("[GUI v4.0] PID=%d", self.pid)
         WNAME = "Industrial Vision System v3.0"
         try:
             cv2.namedWindow(WNAME, cv2.WINDOW_NORMAL)
@@ -934,7 +852,12 @@ class UnifiedGUI:
             canvas  = np.full((H, W, 3), BG, dtype=np.uint8)
             missing = self._missing_bd()
             banner_h = 0
-            if missing and not self._in_editor:
+            # Priority: relay disconnected > boundaries missing > active alarm.
+            # A disconnected relay means even a detected problem cannot be
+            # physically acted on, so it takes precedence over other banners.
+            if not self._backend_healthy and not self._in_editor:
+                banner_h = _draw_relay_banner(canvas, W, TAB_H, self._last_backend_error)
+            elif missing and not self._in_editor:
                 banner_h = _draw_bd_banner(canvas, W, TAB_H, missing)
             elif any(st.has_problem for st in self.cam_states.values()):
                 banner_h = _draw_alarm(canvas, W, TAB_H, self.cam_states)
@@ -973,21 +896,6 @@ class UnifiedGUI:
         hit = _tab_hit(x, y, W)
         if hit is not None:
             self._tab = hit; return
-
-        # Radio buttons (Dashboard or Camera View)
-        for key in ("radio_usb", "radio_modbus"):
-            btn = self._hit.get(key)
-            if btn and btn.hit(x, y):
-                self._selected_backend = "usb" if key=="radio_usb" else "modbus"
-                return
-
-        # Apply button
-        ab = self._hit.get("apply_btn")
-        if ab and ab.hit(x, y):
-            if (self._selected_backend != self._active_backend
-                    and self._cooldown_remaining() <= 0):
-                self._send_backend_change(self._selected_backend)
-            return
 
         if self._tab != 1: return
 
@@ -1029,12 +937,6 @@ class UnifiedGUI:
             if self._can_detect(): self.preview.value=0; self._cmd("start_detection")
         elif key in (ord('p'),ord('P')):
             self.preview.value=1; self._cmd("stop_detection")
-        elif key in (ord('u'),ord('U')):
-            # shortcut: select USB backend
-            self._selected_backend = "usb"
-        elif key in (ord('m'),ord('M')):
-            # shortcut: select Modbus/Ethernet backend
-            self._selected_backend = "modbus"
         return True
 
     # ── tab renderer ───────────────────────────────────────────────────────
@@ -1045,9 +947,7 @@ class UnifiedGUI:
             _render_dashboard(
                 canvas, W, H, body_y, body_h,
                 self.cam_states, self.relay_states, self.health, self.cfg,
-                self._active_backend, self._selected_backend,
                 self._backend_healthy, self._last_backend_error,
-                self._ms, hit, self._cooldown_remaining(),
             )
             self._hit = hit
         elif t == 1:
@@ -1058,9 +958,7 @@ class UnifiedGUI:
                     st, self.relay_states, self.cfg,
                     bool(self.preview.value), self._ms, self.cam_ids,
                     self._can_detect(), hit,
-                    self._active_backend, self._selected_backend,
                     self._backend_healthy, self._last_backend_error,
-                    self._cooldown_remaining(),
                 )
                 self._hit = hit
         elif t == 2:
@@ -1121,13 +1019,8 @@ class UnifiedGUI:
                 s = msg.get("relay_states",[])
                 self.relay_states = s + [False]*(9-len(s))
             elif mtype == MessageType.RELAY_BACKEND_STATUS.value:
-                self._active_backend     = msg.get("active_backend", self._active_backend)
                 self._backend_healthy    = msg.get("backend_healthy", False)
                 self._last_backend_error = msg.get("last_backend_error","")
-                # NOTE: do NOT auto-sync _selected_backend here.
-                # _active_backend = what relay process is actually running.
-                # _selected_backend = what the operator has chosen in the radio.
-                # These are intentionally separate until Apply is clicked.
 
         for _ in range(5):
             try: msg = self.health_q.get_nowait()
@@ -1146,23 +1039,6 @@ class UnifiedGUI:
             self.cmd_q.put_nowait(BoundaryReloadMessage(camera_id=cam_id, boundary_file=path).to_dict())
         except Exception:
             pass
-
-    def _send_backend_change(self, backend: str):
-        """
-        Send a relay_backend_change message through cmd_q → supervisor → relay process.
-        The supervisor fanout thread routes it into relay_result_q automatically
-        because _drain_gui_cmd in supervisor passes unknown message types through.
-        We handle routing in the supervisor patch below.
-        """
-        try:
-            self.cmd_q.put_nowait(
-                RelayBackendChangeMessage(camera_id=None, backend=backend).to_dict()
-            )
-            self._last_switch_sent = time.time()
-            logger.info("[GUI] Backend change requested: %s → %s",
-                        self._active_backend, backend)
-        except Exception as e:
-            logger.warning("[GUI] Failed to send backend change: %s", e)
 
     def _heartbeat(self):
         now = time.time()

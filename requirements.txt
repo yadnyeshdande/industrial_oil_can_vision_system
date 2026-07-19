@@ -21,9 +21,8 @@ ultralytics>=8.0.0
 # GPU monitoring
 pynvml>=11.5.0
 
-# USB Relay
-# pyhid-usb-relay  # Install separately: pip install pyhid-usb-relay
-# hid              # Install separately: pip install hid
+# Ethernet Relay (Waveshare Modbus TCP) — the only relay backend
+pymodbus>=3.0.0
 
 # GUI (optional PyQt5 — not required for OpenCV GUI)
 # PyQt5>=5.15.0

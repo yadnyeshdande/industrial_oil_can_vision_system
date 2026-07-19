@@ -25,7 +25,6 @@ class MessageType(str, Enum):
     BOUNDARY_RELOAD        = "boundary_reload"
     GUI_COMMAND            = "gui_command"
     # v3.0 — relay dual-backend
-    RELAY_BACKEND_CHANGE   = "relay_backend_change"   # GUI → relay process
     RELAY_BACKEND_STATUS   = "relay_backend_status"   # relay process → GUI
      # Add immediately after:
     FPS_LIMIT_UPDATE       = "fps_limit_update"       # gpu_monitor → supervisor
@@ -222,39 +221,22 @@ class GUICommandMessage(BaseMessage):
 # ── v3.0 additions ─────────────────────────────────────────────────────────────
 
 @dataclass
-class RelayBackendChangeMessage(BaseMessage):
-    """
-    GUI → Supervisor → relay_result_queue → Relay Process.
-    Requests a runtime backend switch (no process restarts needed).
-    backend: "usb" or "modbus"
-    """
-    type: MessageType = field(default=MessageType.RELAY_BACKEND_CHANGE, init=False)
-    source: ProcessSource = field(default=ProcessSource.GUI, init=False)
-    backend: str = "usb"
-
-    def to_dict(self):
-        d = super().to_dict()
-        d["backend"] = self.backend
-        return d
-
-
-@dataclass
 class RelayBackendStatusMessage(BaseMessage):
     """
     Relay Process → state_out_queue → GUI.
-    Sent immediately after every backend switch and on every heartbeat.
-    GUI uses this to update the backend status panel.
+    Sent on every heartbeat and immediately after any connect/disconnect
+    transition. GUI uses this to show the "No Relay Connected" warning.
+    There is only one relay backend (Ethernet/Modbus), so this message
+    only ever reports its connectivity — there is nothing to select.
     """
     type: MessageType = field(default=MessageType.RELAY_BACKEND_STATUS, init=False)
     source: ProcessSource = field(default=ProcessSource.RELAY, init=False)
-    active_backend: str = "usb"
     backend_healthy: bool = False
     last_backend_error: str = ""
 
     def to_dict(self):
         d = super().to_dict()
         d.update({
-            "active_backend":     self.active_backend,
             "backend_healthy":    self.backend_healthy,
             "last_backend_error": self.last_backend_error,
         })

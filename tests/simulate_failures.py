@@ -86,7 +86,7 @@ def simulate_detection_crash(camera_id: int = 0):
 
 
 def simulate_relay_failure():
-    """Kill the relay process to simulate USB failure."""
+    """Kill the relay process to simulate an Ethernet relay / hardware failure."""
     print("\n[SIM] Simulating Relay process failure...")
     procs = find_process_by_name("relay_process")
     if not procs:

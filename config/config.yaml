@@ -85,20 +85,14 @@ detection:
   inference_timeout_seconds: 5
   heartbeat_interval_seconds: 2
 
-# ── Relay — v3.0 dual-backend architecture ─────────────────────────────────────
+# ── Relay — v4.0 Ethernet-only architecture ─────────────────────────────────────
+# The Waveshare Modbus TCP Ethernet relay is the sole, final relay backend.
+# There is no USB relay, no backend selection, and no simulated fallback.
+# If the Ethernet relay is unreachable, the relay process reports it as
+# disconnected (GUI shows "No Relay Connected") and keeps retrying the
+# same Ethernet target indefinitely.
 relay:
   enabled: true
-
-  # Which backend starts active on launch: "usb" or "modbus"
-  active_backend: "modbus"
-
-  # Allow operator to switch backend at runtime via GUI radio buttons.
-  # Set false to lock the backend (useful for production lines that must not change).
-  allow_runtime_switching: true
-
-  # Minimum seconds between consecutive backend switches.
-  # Prevents accidental rapid switching that could corrupt relay state.
-  minimum_switch_interval_seconds: 5
 
   relay_count: 9
   retry_attempts: 3
@@ -112,16 +106,8 @@ relay:
     camera_1: [3, 4, 5]
     camera_2: [6, 7, 8]
 
-  # ── USB backend config ──────────────────────────────────────────────────
-  usb:
-    enabled: true
-    # reconnect_attempts: how many times USBRelayBackend retries before
-    # returning False (the relay worker's own retry_attempts wraps this).
-    reconnect_attempts: 3
-
-  # ── Modbus (Waveshare Ethernet Relay) backend config ────────────────────
+  # ── Ethernet Relay (Waveshare Modbus TCP) ────────────────────────────────
   modbus:
-    enabled: true
     ip: "192.168.1.200"
     port: 502
     device_id: 1

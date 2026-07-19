@@ -12,7 +12,7 @@ Production-grade, self-healing, GPU-accelerated, multi-camera machine vision sys
 Supervisor
 ├── Camera Process × 3      (RTSP capture → Shared Memory)
 ├── Detection Process × 3   (YOLO GPU → Boundary Pairing → Results)
-├── Relay Process            (USB Relay control)
+├── Relay Process            (Ethernet Relay control — Waveshare Modbus TCP)
 ├── GUI Process              (OpenCV visualization)
 └── GPU Monitor Process      (VRAM + Temperature watchdog)
 ```
@@ -32,7 +32,7 @@ Supervisor
 | RAM | 16 GB | 32 GB |
 | OS | Windows 11 | Windows 11 |
 | Cameras | 3× RTSP/PoE | 3× RTSP/PoE |
-| USB | USB-A for relay | USB-A for relay |
+| Network | 1× extra Ethernet port for relay | 1× extra Ethernet port for relay |
 
 ---
 
@@ -61,7 +61,7 @@ vision_system/
 ├── detection/
 │   └── detection_process.py     # YOLO GPU detection process
 ├── relay/
-│   └── relay_process.py         # USB relay control process
+│   └── relay_process.py         # Ethernet (Modbus TCP) relay control process
 ├── gui/
 │   └── gui_process.py           # Visualization process
 ├── supervisor/
@@ -98,8 +98,8 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 # Other dependencies
 pip install numpy opencv-python PyYAML psutil ultralytics pynvml
 
-# USB relay (optional)
-pip install pyhid-usb-relay hid
+# Ethernet relay (Waveshare Modbus TCP) — required, this is the only relay backend
+pip install pymodbus
 ```
 
 ### Step 2: Configure
@@ -234,7 +234,7 @@ No code changes required.
 - [ ] YOLO model placed in `models/best.pt`
 - [ ] All 3 camera RTSP URLs validated
 - [ ] Boundary JSON files validated per camera
-- [ ] USB relay connected and `pyhid_usb_relay` working
+- [ ] Ethernet relay reachable and `pymodbus` connection verified
 - [ ] `python tests/test_system.py` — all pass
 - [ ] 72-hour stress test completed
 - [ ] Failure simulation tests completed

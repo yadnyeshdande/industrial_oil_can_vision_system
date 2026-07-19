@@ -188,13 +188,15 @@ class TestBoundaryEngineV2:
 
 
 class TestRelayV2:
-    def test_9_relay_driver(self):
-        from relay.relay_process import SimulatedRelayDriver
-        drv = SimulatedRelayDriver(9)
-        assert drv.initialize()
-        for i in range(9): assert drv.set_relay(i, True)
-        drv.close()
-        print("✓ SimulatedRelayDriver with 9 relays")
+    def test_no_usb_or_simulated_backend(self):
+        """v4.0: USB relay and simulated relay backends must be gone completely."""
+        import relay.backends as backends
+        assert not hasattr(backends, "USBRelayBackend")
+        import relay.relay_process as relay_process
+        assert not hasattr(relay_process, "_SimulatedBackend")
+        assert not hasattr(relay_process, "SimulatedRelayDriver")
+        from relay.backends.modbus_backend import ModbusRelayBackend  # only backend left
+        print("✓ USB + simulated relay backends removed — Ethernet/Modbus is the only backend")
 
     def test_relay_camera_mapping(self):
         from core.config_loader import VisionSystemConfig
@@ -206,8 +208,6 @@ class TestRelayV2:
         print(f"✓ Camera 2 relay mapping: {indices}")
 
     def test_relay_worker_state_update(self):
-        from relay.relay_process import SimulatedRelayDriver
-        drv = SimulatedRelayDriver(9); drv.initialize()
         states = [False]*9; cached = [False]*9
         # Camera 1 pair 0 → relay 3 should turn ON
         relay_indices = [3, 4, 5]

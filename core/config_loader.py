@@ -72,19 +72,11 @@ class DetectionConfig:
         self.heartbeat_interval_seconds = d.get("heartbeat_interval_seconds", 2)
 
 
-# ── v3.0: per-backend config objects ──────────────────────────────────────────
-
-class USBBackendConfig:
-    """Config for the pyhid_usb_relay backend."""
-    def __init__(self, d: dict):
-        self.enabled            = d.get("enabled", True)
-        self.reconnect_attempts = d.get("reconnect_attempts", 3)
-
+# ── Ethernet relay backend config ──────────────────────────────────────────────
 
 class ModbusBackendConfig:
-    """Config for the Waveshare Modbus TCP backend."""
+    """Config for the Waveshare Modbus TCP (Ethernet relay) backend."""
     def __init__(self, d: dict):
-        self.enabled         = d.get("enabled", True)
         self.ip              = d.get("ip", "192.168.1.200")
         self.port            = d.get("port", 502)
         self.device_id       = d.get("device_id", 1)
@@ -95,24 +87,14 @@ class ModbusBackendConfig:
 
 class RelayConfig:
     """
-    v3.0 — full dual-backend configuration.
-    Backward-compatible: configs without the new keys get safe defaults.
+    v4.0 — Ethernet-only relay configuration.
+    The Waveshare Modbus TCP relay is the sole, final backend. There is
+    no backend selection and no software simulation fallback: if the
+    Ethernet relay is unreachable, the system reports it as disconnected
+    and keeps retrying the same Ethernet target.
     """
     def __init__(self, d: dict):
         self.enabled        = d.get("enabled", True)
-
-        # v3.0: active backend at startup ("usb" or "modbus")
-        # Falls back to old "library" key for backward compatibility.
-        raw_lib = d.get("library", "pyhid_usb_relay")
-        default_backend = (
-            "usb" if "usb" in raw_lib.lower() or raw_lib == "pyhid_usb_relay"
-            else "modbus"
-        )
-        self.active_backend = d.get("active_backend", default_backend)
-
-        # v3.0: runtime switching controls
-        self.allow_runtime_switching          = d.get("allow_runtime_switching", True)
-        self.minimum_switch_interval_seconds  = d.get("minimum_switch_interval_seconds", 5)
 
         # Shared settings
         self.retry_attempts         = d.get("retry_attempts", 3)
@@ -138,8 +120,7 @@ class RelayConfig:
             cam_id = int(key.replace("camera_", ""))
             self.relay_mapping[cam_id] = [int(i) for i in indices]
 
-        # v3.0: per-backend config objects
-        self.usb    = USBBackendConfig(d.get("usb", {}))
+        # Ethernet relay (Waveshare Modbus TCP) config — the only backend
         self.modbus = ModbusBackendConfig(d.get("modbus", {}))
 
     def get_relay_indices(self, camera_id: int) -> List[int]:
@@ -247,8 +228,8 @@ class VisionSystemConfig:
         self.boundaries_dir = Path(bd.get("boundary_dir", "boundaries"))
         if not self.boundaries_dir.is_absolute():
             self.boundaries_dir = self._path.parent.parent / self.boundaries_dir
-        logger.info("Config loaded v%s: %d cameras  relay_backend=%s",
-                    self.system.version, len(self.cameras), self.relay.active_backend)
+        logger.info("Config loaded v%s: %d cameras  relay_backend=ethernet(modbus)",
+                    self.system.version, len(self.cameras))
 
     def reload(self):
         self.load()

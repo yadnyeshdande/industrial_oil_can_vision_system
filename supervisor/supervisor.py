@@ -615,11 +615,6 @@ class Supervisor:
                     self._preview_mode.value = 1
                     logger.info("[Supervisor] Detection PAUSED by operator")
 
-            elif mtype == MessageType.RELAY_BACKEND_CHANGE.value:
-                backend = msg.get("backend", "usb")
-                logger.info("[Supervisor] Routing backend change → relay: %s", backend)
-                safe_put(self._relay_result_q, msg)
-
         if not self._gui_cmd_reader.is_thread_alive():
             self._gui_cmd_reader.respawn_thread()
 
