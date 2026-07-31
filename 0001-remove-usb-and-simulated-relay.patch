@@ -1,0 +1,1716 @@
+From 7e4dbdf8eebb97544bd7da45da5faf541b9588ae Mon Sep 17 00:00:00 2001
+From: "Claude (AI pair-programming assistant)" <dev@example.com>
+Date: Sun, 19 Jul 2026 13:10:01 +0000
+Subject: [PATCH] Remove USB relay + simulated relay fallback; Ethernet relay
+ is now the sole backend
+
+- Delete relay/backends/usb_backend.py and its export from backends/__init__.py
+- Delete _SimulatedBackend and the USB/Modbus factory from relay_process.py;
+  the relay process now only ever builds a ModbusRelayBackend and keeps
+  retrying the SAME Ethernet target on failure (no fallback of any kind)
+- Remove backend-switching entirely: RELAY_BACKEND_CHANGE message type,
+  RelayBackendChangeMessage, the supervisor routing for it, and the
+  GUI's radio-button/Apply-button selector panel
+- GUI now shows a flashing top-of-screen "NO RELAY CONNECTED" banner
+  (highest priority, above boundary/alarm banners) whenever the Ethernet
+  relay is unreachable, plus a compact read-only status panel on the
+  Dashboard and Camera View tabs
+- Simplify RelayConfig/config.yaml to drop active_backend, usb block,
+  and runtime-switching options; Ethernet/Modbus is the only backend
+- requirements.txt: drop commented-out pyhid-usb-relay/hid, add pymodbus
+  (which was actually missing despite being required)
+- Remove 2 USB-only dev scripts from 'prerequisite trials/'
+- Fix tests/test_system.py: replace two tests that referenced a
+  SimulatedRelayDriver class that never matched the real code (already
+  broken) with a real regression test asserting USB/simulated backends
+  are gone
+- README.md: update USB relay mentions to reflect the Ethernet backend
+
+Verified: full repo byte-compiles cleanly; config_loader, ipc_schema,
+relay/backends, relay_process, and unified_gui all import and
+instantiate correctly; simulated an unreachable Ethernet relay (both
+with and without pymodbus installed) and confirmed the relay process
+reports NO RELAY CONNECTED with a clear error and keeps retrying the
+same target rather than falling back to anything.
+---
+ README.md                                   |  12 +-
+ config/config.yaml                          |  28 +-
+ core/config_loader.py                       |  39 +-
+ core/ipc_schema.py                          |  26 +-
+ gui/unified_gui.py                          | 270 ++++--------
+ prerequisite trials/fix_pyhid_libusb.py     |  53 ---
+ prerequisite trials/pyhid_usb_relay_test.py |  10 -
+ relay/backends/__init__.py                  |   3 +-
+ relay/backends/usb_backend.py               | 172 --------
+ relay/relay_process.py                      | 462 +++++---------------
+ requirements.txt                            |   5 +-
+ supervisor/supervisor.py                    |   5 -
+ tests/simulate_failures.py                  |   2 +-
+ tests/test_system.py                        |  18 +-
+ 14 files changed, 231 insertions(+), 874 deletions(-)
+ delete mode 100644 prerequisite trials/fix_pyhid_libusb.py
+ delete mode 100644 prerequisite trials/pyhid_usb_relay_test.py
+ delete mode 100644 relay/backends/usb_backend.py
+
+diff --git a/README.md b/README.md
+index e599ca1..14a10fe 100644
+--- a/README.md
++++ b/README.md
+@@ -12,7 +12,7 @@ Production-grade, self-healing, GPU-accelerated, multi-camera machine vision sys
+ Supervisor
+ ├── Camera Process × 3      (RTSP capture → Shared Memory)
+ ├── Detection Process × 3   (YOLO GPU → Boundary Pairing → Results)
+-├── Relay Process            (USB Relay control)
++├── Relay Process            (Ethernet Relay control — Waveshare Modbus TCP)
+ ├── GUI Process              (OpenCV visualization)
+ └── GPU Monitor Process      (VRAM + Temperature watchdog)
+ ```
+@@ -32,7 +32,7 @@ Supervisor
+ | RAM | 16 GB | 32 GB |
+ | OS | Windows 11 | Windows 11 |
+ | Cameras | 3× RTSP/PoE | 3× RTSP/PoE |
+-| USB | USB-A for relay | USB-A for relay |
++| Network | 1× extra Ethernet port for relay | 1× extra Ethernet port for relay |
+ 
+ ---
+ 
+@@ -61,7 +61,7 @@ vision_system/
+ ├── detection/
+ │   └── detection_process.py     # YOLO GPU detection process
+ ├── relay/
+-│   └── relay_process.py         # USB relay control process
++│   └── relay_process.py         # Ethernet (Modbus TCP) relay control process
+ ├── gui/
+ │   └── gui_process.py           # Visualization process
+ ├── supervisor/
+@@ -98,8 +98,8 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+ # Other dependencies
+ pip install numpy opencv-python PyYAML psutil ultralytics pynvml
+ 
+-# USB relay (optional)
+-pip install pyhid-usb-relay hid
++# Ethernet relay (Waveshare Modbus TCP) — required, this is the only relay backend
++pip install pymodbus
+ ```
+ 
+ ### Step 2: Configure
+@@ -234,7 +234,7 @@ No code changes required.
+ - [ ] YOLO model placed in `models/best.pt`
+ - [ ] All 3 camera RTSP URLs validated
+ - [ ] Boundary JSON files validated per camera
+-- [ ] USB relay connected and `pyhid_usb_relay` working
++- [ ] Ethernet relay reachable and `pymodbus` connection verified
+ - [ ] `python tests/test_system.py` — all pass
+ - [ ] 72-hour stress test completed
+ - [ ] Failure simulation tests completed
+diff --git a/config/config.yaml b/config/config.yaml
+index f1dd718..7b6fe22 100644
+--- a/config/config.yaml
++++ b/config/config.yaml
+@@ -85,21 +85,15 @@ detection:
+   inference_timeout_seconds: 5
+   heartbeat_interval_seconds: 2
+ 
+-# ── Relay — v3.0 dual-backend architecture ─────────────────────────────────────
++# ── Relay — v4.0 Ethernet-only architecture ─────────────────────────────────────
++# The Waveshare Modbus TCP Ethernet relay is the sole, final relay backend.
++# There is no USB relay, no backend selection, and no simulated fallback.
++# If the Ethernet relay is unreachable, the relay process reports it as
++# disconnected (GUI shows "No Relay Connected") and keeps retrying the
++# same Ethernet target indefinitely.
+ relay:
+   enabled: true
+ 
+-  # Which backend starts active on launch: "usb" or "modbus"
+-  active_backend: "modbus"
+-
+-  # Allow operator to switch backend at runtime via GUI radio buttons.
+-  # Set false to lock the backend (useful for production lines that must not change).
+-  allow_runtime_switching: true
+-
+-  # Minimum seconds between consecutive backend switches.
+-  # Prevents accidental rapid switching that could corrupt relay state.
+-  minimum_switch_interval_seconds: 5
+-
+   relay_count: 9
+   retry_attempts: 3
+   retry_delay_seconds: 0.5
+@@ -112,16 +106,8 @@ relay:
+     camera_1: [3, 4, 5]
+     camera_2: [6, 7, 8]
+ 
+-  # ── USB backend config ──────────────────────────────────────────────────
+-  usb:
+-    enabled: true
+-    # reconnect_attempts: how many times USBRelayBackend retries before
+-    # returning False (the relay worker's own retry_attempts wraps this).
+-    reconnect_attempts: 3
+-
+-  # ── Modbus (Waveshare Ethernet Relay) backend config ────────────────────
++  # ── Ethernet Relay (Waveshare Modbus TCP) ────────────────────────────────
+   modbus:
+-    enabled: true
+     ip: "192.168.1.200"
+     port: 502
+     device_id: 1
+diff --git a/core/config_loader.py b/core/config_loader.py
+index bf9e5d5..0e01b98 100644
+--- a/core/config_loader.py
++++ b/core/config_loader.py
+@@ -72,19 +72,11 @@ class DetectionConfig:
+         self.heartbeat_interval_seconds = d.get("heartbeat_interval_seconds", 2)
+ 
+ 
+-# ── v3.0: per-backend config objects ──────────────────────────────────────────
+-
+-class USBBackendConfig:
+-    """Config for the pyhid_usb_relay backend."""
+-    def __init__(self, d: dict):
+-        self.enabled            = d.get("enabled", True)
+-        self.reconnect_attempts = d.get("reconnect_attempts", 3)
+-
++# ── Ethernet relay backend config ──────────────────────────────────────────────
+ 
+ class ModbusBackendConfig:
+-    """Config for the Waveshare Modbus TCP backend."""
++    """Config for the Waveshare Modbus TCP (Ethernet relay) backend."""
+     def __init__(self, d: dict):
+-        self.enabled         = d.get("enabled", True)
+         self.ip              = d.get("ip", "192.168.1.200")
+         self.port            = d.get("port", 502)
+         self.device_id       = d.get("device_id", 1)
+@@ -95,25 +87,15 @@ class ModbusBackendConfig:
+ 
+ class RelayConfig:
+     """
+-    v3.0 — full dual-backend configuration.
+-    Backward-compatible: configs without the new keys get safe defaults.
++    v4.0 — Ethernet-only relay configuration.
++    The Waveshare Modbus TCP relay is the sole, final backend. There is
++    no backend selection and no software simulation fallback: if the
++    Ethernet relay is unreachable, the system reports it as disconnected
++    and keeps retrying the same Ethernet target.
+     """
+     def __init__(self, d: dict):
+         self.enabled        = d.get("enabled", True)
+ 
+-        # v3.0: active backend at startup ("usb" or "modbus")
+-        # Falls back to old "library" key for backward compatibility.
+-        raw_lib = d.get("library", "pyhid_usb_relay")
+-        default_backend = (
+-            "usb" if "usb" in raw_lib.lower() or raw_lib == "pyhid_usb_relay"
+-            else "modbus"
+-        )
+-        self.active_backend = d.get("active_backend", default_backend)
+-
+-        # v3.0: runtime switching controls
+-        self.allow_runtime_switching          = d.get("allow_runtime_switching", True)
+-        self.minimum_switch_interval_seconds  = d.get("minimum_switch_interval_seconds", 5)
+-
+         # Shared settings
+         self.retry_attempts         = d.get("retry_attempts", 3)
+         self.retry_delay_seconds    = d.get("retry_delay_seconds", 0.5)
+@@ -138,8 +120,7 @@ class RelayConfig:
+             cam_id = int(key.replace("camera_", ""))
+             self.relay_mapping[cam_id] = [int(i) for i in indices]
+ 
+-        # v3.0: per-backend config objects
+-        self.usb    = USBBackendConfig(d.get("usb", {}))
++        # Ethernet relay (Waveshare Modbus TCP) config — the only backend
+         self.modbus = ModbusBackendConfig(d.get("modbus", {}))
+ 
+     def get_relay_indices(self, camera_id: int) -> List[int]:
+@@ -247,8 +228,8 @@ class VisionSystemConfig:
+         self.boundaries_dir = Path(bd.get("boundary_dir", "boundaries"))
+         if not self.boundaries_dir.is_absolute():
+             self.boundaries_dir = self._path.parent.parent / self.boundaries_dir
+-        logger.info("Config loaded v%s: %d cameras  relay_backend=%s",
+-                    self.system.version, len(self.cameras), self.relay.active_backend)
++        logger.info("Config loaded v%s: %d cameras  relay_backend=ethernet(modbus)",
++                    self.system.version, len(self.cameras))
+ 
+     def reload(self):
+         self.load()
+diff --git a/core/ipc_schema.py b/core/ipc_schema.py
+index 1e238c2..806cf2c 100644
+--- a/core/ipc_schema.py
++++ b/core/ipc_schema.py
+@@ -25,7 +25,6 @@ class MessageType(str, Enum):
+     BOUNDARY_RELOAD        = "boundary_reload"
+     GUI_COMMAND            = "gui_command"
+     # v3.0 — relay dual-backend
+-    RELAY_BACKEND_CHANGE   = "relay_backend_change"   # GUI → relay process
+     RELAY_BACKEND_STATUS   = "relay_backend_status"   # relay process → GUI
+      # Add immediately after:
+     FPS_LIMIT_UPDATE       = "fps_limit_update"       # gpu_monitor → supervisor
+@@ -221,40 +220,23 @@ class GUICommandMessage(BaseMessage):
+ 
+ # ── v3.0 additions ─────────────────────────────────────────────────────────────
+ 
+-@dataclass
+-class RelayBackendChangeMessage(BaseMessage):
+-    """
+-    GUI → Supervisor → relay_result_queue → Relay Process.
+-    Requests a runtime backend switch (no process restarts needed).
+-    backend: "usb" or "modbus"
+-    """
+-    type: MessageType = field(default=MessageType.RELAY_BACKEND_CHANGE, init=False)
+-    source: ProcessSource = field(default=ProcessSource.GUI, init=False)
+-    backend: str = "usb"
+-
+-    def to_dict(self):
+-        d = super().to_dict()
+-        d["backend"] = self.backend
+-        return d
+-
+-
+ @dataclass
+ class RelayBackendStatusMessage(BaseMessage):
+     """
+     Relay Process → state_out_queue → GUI.
+-    Sent immediately after every backend switch and on every heartbeat.
+-    GUI uses this to update the backend status panel.
++    Sent on every heartbeat and immediately after any connect/disconnect
++    transition. GUI uses this to show the "No Relay Connected" warning.
++    There is only one relay backend (Ethernet/Modbus), so this message
++    only ever reports its connectivity — there is nothing to select.
+     """
+     type: MessageType = field(default=MessageType.RELAY_BACKEND_STATUS, init=False)
+     source: ProcessSource = field(default=ProcessSource.RELAY, init=False)
+-    active_backend: str = "usb"
+     backend_healthy: bool = False
+     last_backend_error: str = ""
+ 
+     def to_dict(self):
+         d = super().to_dict()
+         d.update({
+-            "active_backend":     self.active_backend,
+             "backend_healthy":    self.backend_healthy,
+             "last_backend_error": self.last_backend_error,
+         })
+diff --git a/gui/unified_gui.py b/gui/unified_gui.py
+index 60efb08..58687ee 100644
+--- a/gui/unified_gui.py
++++ b/gui/unified_gui.py
+@@ -1,23 +1,25 @@
+ """
+-gui/unified_gui.py  v3.2-relay
++gui/unified_gui.py  v4.0
+ ================================
+ Industrial Operator Dashboard — 4-tab layout.
+ 
+-v3.2-relay additions over v3.2:
+-  • Tab 1 (Dashboard): Relay Backend panel below the relay grid
+-      - Radio buttons: (•) USB Relay  ( ) Ethernet Relay
+-      - [Apply] button
+-      - Status strip: Current Backend / HEALTHY|DISCONNECTED / Last Error
+-  • Tab 2 (Camera View): same backend status strip in the side panel
+-  • Relay backend state tracked from RELAY_BACKEND_STATUS IPC messages
+-  • Apply button sends RelayBackendChangeMessage through cmd_q
+-  • Cooldown guard in GUI (mirrors relay-process guard) prevents spam
+-  • All original v3.2 behaviour preserved — no regressions
++v4.0 changes:
++  • Ethernet relay (Waveshare Modbus TCP) is the sole, final relay backend.
++  • Removed the USB/Ethernet backend selector radio buttons and Apply
++    button — there is nothing to select any more.
++  • Added a prominent, flashing "NO RELAY CONNECTED" top banner whenever
++    the Ethernet relay is unreachable — the GUI never silently hides a
++    relay failure.
++  • Tab 1 (Dashboard) and Tab 2 (Camera View) both show a compact,
++    read-only relay connection status panel (CONNECTED / NO RELAY
++    CONNECTED + last error).
++  • Relay status is tracked from RELAY_BACKEND_STATUS IPC messages.
++  • All other v3.2 behaviour preserved — no regressions.
+ 
+ GUI DESIGN RULE (from architecture doc):
+   GUI MUST NEVER DIRECTLY CONTROL RELAYS.
+-  The Apply button only sends backend="usb"|"modbus" to the relay process.
+-  The relay process is the ONLY output authority.
++  The GUI only ever displays relay connection status. The relay process
++  is the ONLY output authority and the only thing that talks to hardware.
+ """
+ from __future__ import annotations
+ import json
+@@ -43,7 +45,6 @@ from core.config_loader import VisionSystemConfig
+ from core.ipc_schema import (
+     MessageType, ProcessSource,
+     GUICommandMessage, BoundaryReloadMessage,
+-    RelayBackendChangeMessage,
+     make_heartbeat,
+ )
+ from core.logging_setup import setup_process_logging, setup_crash_handler
+@@ -70,12 +71,6 @@ C_BH    = ( 76, 175,  80)
+ R_ON    = ( 55,  55, 210)
+ R_OFF   = ( 55,  55,  50)
+ 
+-# Backend-panel colours
+-USB_COL    = ( 60, 165, 255)   # orange-ish — USB
+-MODBUS_COL = ( 76, 175,  80)   # green — Ethernet
+-RADIO_ON   = (255, 255, 255)
+-RADIO_OFF  = ( 90,  88,  84)
+-
+ FONT    = cv2.FONT_HERSHEY_SIMPLEX
+ FONT2   = cv2.FONT_HERSHEY_DUPLEX
+ TABS    = ["Dashboard", "Camera View", "System Health", "Logs Viewer"]
+@@ -83,9 +78,6 @@ TICONS  = ["[1]", "[2]", "[3]", "[4]"]
+ TAB_H   = 42
+ STAT_H  = 28
+ 
+-# Minimum seconds between Apply clicks (mirrors relay-process cooldown)
+-_SWITCH_COOLDOWN = 5.0
+-
+ 
+ # ── Drawing primitives ─────────────────────────────────────────────────────────
+ def _t(img, txt, pos, sc=0.50, col=TEXT, th=1):
+@@ -352,110 +344,58 @@ def _draw_bd_banner(canvas, W: int, body_y: int, missing: List[int]) -> int:
+     return bh
+ 
+ 
++def _draw_relay_banner(canvas, W: int, body_y: int, last_error: str) -> int:
++    """
++    Top-of-screen failsafe warning shown whenever the Ethernet relay is
++    unreachable. This is the highest-priority banner: if the relay can't
++    fire, an operator needs to know immediately, even before boundary or
++    detection alarms.
++    """
++    bh    = 32
++    flash = int(time.time()*2) % 2 == 0
++    _fill(canvas, 0, body_y, W, body_y+bh, ERR if flash else (70,50,50))
++    msg = "  \u26a0  NO RELAY CONNECTED — Ethernet relay unreachable, physical outputs will NOT fire"
++    if last_error:
++        msg += f"   ({last_error[:60]})"
++    _t(canvas, msg, (12, body_y+22), sc=0.54, col=BRIGHT, th=1)
++    return bh
++
++
+ # ═══════════════════════════════════════════════════════════════════════════════
+-# Backend status panel — shared between Tab 1 and Tab 2
++# Relay status panel — shared between Tab 1 and Tab 2 (read-only, no controls)
+ # ═══════════════════════════════════════════════════════════════════════════════
+-def _draw_backend_panel(
++def _draw_relay_status_panel(
+     canvas,
+     x: int, y: int, w: int,
+-    active_backend: str,           # "usb" or "modbus"
+-    selected_backend: str,         # what the GUI radio shows (may differ from active)
+     backend_healthy: bool,
+     last_backend_error: str,
+-    ms: MouseState,
+-    hit_regions: dict,
+-    cooldown_remaining: float = 0.0,
+ ) -> int:
+     """
+-    Draws the relay backend selector panel.
++    Draws the read-only Ethernet relay connection status panel.
++    Ethernet (Modbus) is the sole relay backend — there is nothing to
++    select or switch, so this panel is purely informational.
+     Returns the height consumed so callers can offset subsequent content.
+-
+-    hit_regions populated keys:
+-      "radio_usb"    — Btn for USB radio
+-      "radio_modbus" — Btn for Modbus radio
+-      "apply_btn"    — Btn for Apply
+     """
+-    PAD  = 6
+-    PH   = 110      # panel height
+-    BH   = 24       # button height
++    PAD = 6
++    PH  = 64
+ 
+-    # Panel background
+     _fill(canvas, x, y, x+w, y+PH, PANEL)
+     _box(canvas,  x, y, x+w, y+PH, BORDER, 1)
+ 
+     oy = y + 10
+-    _tb(canvas, "RELAY BACKEND", (x+PAD+2, oy+12), sc=0.46, col=DIM)
++    _tb(canvas, "RELAY", (x+PAD+2, oy+12), sc=0.46, col=DIM)
+     oy += 18
+     _hline(canvas, oy, x+PAD, x+w-PAD, BORDER)
+-    oy += 8
+-
+-    # ── Radio buttons ──────────────────────────────────────────────────────
+-    col_active = USB_COL if active_backend == "usb" else MODBUS_COL
+-
+-    for label, key in [("USB Relay", "usb"), ("Ethernet Relay", "modbus")]:
+-        is_sel = (selected_backend == key)
+-        is_act = (active_backend == key)
+-        radio_col = USB_COL if key == "usb" else MODBUS_COL
+-
+-        # outer circle
+-        cx_r = x + PAD + 10
+-        cy_r = oy + 9
+-        cv2.circle(canvas, (cx_r, cy_r), 7, radio_col if is_sel else RADIO_OFF, 1, cv2.LINE_AA)
+-        if is_sel:
+-            cv2.circle(canvas, (cx_r, cy_r), 4, radio_col, -1, cv2.LINE_AA)
+-
+-        lbl_col = radio_col if is_sel else DIM
+-        _t(canvas, label, (cx_r+14, oy+13), sc=0.46, col=lbl_col)
+-
+-        if is_act:
+-            _t(canvas, "(active)", (cx_r+14+len(label)*9, oy+13), sc=0.36, col=DIM)
+-
+-        # invisible hit target for the radio
+-        radio_btn = Btn(x+PAD, oy, x+PAD+180, oy+BH, label,
+-                        normal_bg=PANEL, active_bg=PANEL)
+-        hit_regions[f"radio_{key}"] = radio_btn
+-        oy += BH - 2
+-
+-    oy += 4
+-
+-    # ── Apply button ───────────────────────────────────────────────────────
+-    pending = (selected_backend != active_backend)
+-    on_cd   = (cooldown_remaining > 0)
+-
+-    if on_cd:
+-        apply_lbl = f"Cooldown {cooldown_remaining:.0f}s"
+-        apply_bg  = (42, 42, 40)
+-        apply_bc  = DIM
+-    elif pending:
+-        apply_lbl = f"Apply  ({selected_backend.upper()})"
+-        apply_bg  = (40, 75, 40)
+-        apply_bc  = ACCENT
+-    else:
+-        apply_lbl = "Apply"
+-        apply_bg  = (42, 42, 40)
+-        apply_bc  = DIM
+-
+-    apply_btn = Btn(x+PAD, oy, x+PAD+130, oy+BH, apply_lbl, apply_bg, apply_bg)
+-    hov_a     = apply_btn.hit(ms.x, ms.y) and pending and not on_cd
+-    _rr(canvas, apply_btn.x1, apply_btn.y1, apply_btn.x2, apply_btn.y2, 4,
+-        tuple(min(c+12, 255) for c in apply_bg) if hov_a else apply_bg)
+-    _box(canvas, apply_btn.x1, apply_btn.y1, apply_btn.x2, apply_btn.y2, apply_bc, 1)
+-    (lw2, lh2), _ = cv2.getTextSize(apply_lbl, FONT2, 0.44, 1)
+-    tx = apply_btn.x1 + (130-lw2)//2
+-    ty = apply_btn.y1 + (BH+lh2)//2
+-    _tb(canvas, apply_lbl, (tx, ty), sc=0.44, col=apply_bc)
+-    hit_regions["apply_btn"] = apply_btn
+-
+-    # ── Status strip ───────────────────────────────────────────────────────
+-    status_x = apply_btn.x2 + 12
+-    _t(canvas, active_backend.upper(), (status_x, oy+10), sc=0.42,
+-       col=USB_COL if active_backend=="usb" else MODBUS_COL)
+-    health_col  = ACCENT if backend_healthy else ERR
+-    health_txt  = "HEALTHY" if backend_healthy else "DISCONNECTED"
+-    _t(canvas, health_txt, (status_x, oy+23), sc=0.38, col=health_col)
+-    if last_backend_error:
+-        err_clip = last_backend_error[:48]
+-        _t(canvas, err_clip, (x+PAD, oy+BH+4), sc=0.35, col=ERR)
++    oy += 16
++
++    status_col = ACCENT if backend_healthy else ERR
++    status_txt = "ETHERNET RELAY — CONNECTED" if backend_healthy else "NO RELAY CONNECTED"
++    _dot(canvas, x+PAD+6, oy-4, 6, status_col)
++    _t(canvas, status_txt, (x+PAD+18, oy), sc=0.46, col=status_col)
++    oy += 20
++
++    if not backend_healthy and last_backend_error:
++        _t(canvas, last_backend_error[:56], (x+PAD, oy), sc=0.35, col=ERR)
+ 
+     return PH
+ 
+@@ -466,10 +406,7 @@ def _draw_backend_panel(
+ def _render_dashboard(canvas, W, H, by, bh,
+                       cam_states: Dict, relay_states: List[bool],
+                       health: dict, cfg,
+-                      active_backend: str, selected_backend: str,
+-                      backend_healthy: bool, last_backend_error: str,
+-                      ms: MouseState, hit_regions: dict,
+-                      cooldown_remaining: float):
++                      backend_healthy: bool, last_backend_error: str):
+     PAD     = 10
+     cam_ids = sorted(cam_states.keys())
+     n       = len(cam_ids)
+@@ -547,17 +484,15 @@ def _render_dashboard(canvas, W, H, by, bh,
+         gx = rx + i*3*(rs+rg) + i*8
+         _t(canvas, f"Cam {cid}", (gx+rs//2, ry-4), sc=0.38, col=DIM)
+ 
+-    # ── Backend selector panel (NEW in v3.2-relay) ──────────────────────
++    # ── Relay status panel (read-only — Ethernet is the only backend) ────
+     bp_y = ry + rs + 14
+-    bp_w = 420
+-    _draw_backend_panel(
++    bp_w = 320
++    _draw_relay_status_panel(
+         canvas, PAD, bp_y, bp_w,
+-        active_backend, selected_backend,
+         backend_healthy, last_backend_error,
+-        ms, hit_regions, cooldown_remaining,
+     )
+ 
+-    # health mini bars (shifted right of backend panel)
++    # health mini bars (shifted right of relay status panel)
+     hy     = bp_y + 8
+     gstats = health.get("gpu_stats", {})
+     bx     = PAD + bp_w + 20
+@@ -600,9 +535,7 @@ def _render_camera_view(canvas, W, H, by, bh,
+                         state: CameraState, relay_states: List[bool], cfg,
+                         preview: bool, ms: MouseState, cam_ids: List[int],
+                         detection_allowed: bool, hit_regions: dict,
+-                        active_backend: str, selected_backend: str,
+-                        backend_healthy: bool, last_backend_error: str,
+-                        cooldown_remaining: float):
++                        backend_healthy: bool, last_backend_error: str):
+     PAD    = 12
+     SP     = 240
+     fw     = W - SP - PAD*3
+@@ -734,23 +667,15 @@ def _render_camera_view(canvas, W, H, by, bh,
+     _dot(canvas, sx+15, bot_y+28, 6, det_col)
+     _t(canvas, det_txt,  (sx+26, bot_y+33), sc=0.44, col=det_col)
+ 
+-    # ── Backend mini-status in side panel ──────────────────────────────────
++    # ── Relay mini-status in side panel (read-only) ─────────────────────────
+     _hline(canvas, bot_y+46, sx+8, sx+sw-8, BORDER)
+-    _t(canvas, "RELAY BACKEND", (sx+8, bot_y+60), sc=0.40, col=DIM)
+-    be_col = USB_COL if active_backend=="usb" else MODBUS_COL
+-    _t(canvas, active_backend.upper(), (sx+8, bot_y+74), sc=0.44, col=be_col)
+-    hc = ACCENT if backend_healthy else ERR
+-    _t(canvas, "HEALTHY" if backend_healthy else "DISCONNECTED",
+-       (sx+8, bot_y+88), sc=0.38, col=hc)
+-    # Small radio indicator
+-    for bi, (blbl, bkey) in enumerate([("USB","usb"),("ETH","modbus")]):
+-        is_sel = (selected_backend == bkey)
+-        bc2    = USB_COL if bkey=="usb" else MODBUS_COL
+-        cx_r = sx + 8 + bi*70; cy_r = bot_y + 105
+-        cv2.circle(canvas, (cx_r, cy_r), 5, bc2 if is_sel else RADIO_OFF, 1, cv2.LINE_AA)
+-        if is_sel:
+-            cv2.circle(canvas, (cx_r, cy_r), 3, bc2, -1, cv2.LINE_AA)
+-        _t(canvas, blbl, (cx_r+8, cy_r+4), sc=0.36, col=bc2 if is_sel else DIM)
++    _t(canvas, "RELAY", (sx+8, bot_y+60), sc=0.40, col=DIM)
++    rc = ACCENT if backend_healthy else ERR
++    rt = "ETHERNET — CONNECTED" if backend_healthy else "NO RELAY CONNECTED"
++    _dot(canvas, sx+13, bot_y+74, 5, rc)
++    _t(canvas, rt, (sx+24, bot_y+78), sc=0.40, col=rc)
++    if not backend_healthy and last_backend_error:
++        _t(canvas, last_backend_error[:36], (sx+8, bot_y+94), sc=0.32, col=ERR)
+ 
+ 
+ def _overlay_bd_large(canvas, bset, fx, fy, fw, fh):
+@@ -875,12 +800,9 @@ class UnifiedGUI:
+         self._hit       = {}
+         self._poller    = FramePoller(cfg.cameras)
+ 
+-        # ── v3.2-relay: backend tracking ─────────────────────────────────
+-        self._active_backend:     str   = cfg.relay.active_backend   # confirmed by relay process
+-        self._selected_backend:   str   = cfg.relay.active_backend   # GUI radio selection
++        # ── v4.0: relay connection tracking (read-only, no selection) ─────
+         self._backend_healthy:    bool  = False
+         self._last_backend_error: str   = ""
+-        self._last_switch_sent:   float = 0.0   # for GUI-side cooldown display
+ 
+     # ── helpers ────────────────────────────────────────────────────────────
+     def _missing_bd(self) -> List[int]:
+@@ -893,13 +815,9 @@ class UnifiedGUI:
+         cid = self.cam_ids[self._cam_idx % len(self.cam_ids)]
+         return self.cam_states[cid]
+ 
+-    def _cooldown_remaining(self) -> float:
+-        elapsed = time.time() - self._last_switch_sent
+-        return max(0.0, _SWITCH_COOLDOWN - elapsed)
+-
+     # ── main loop ──────────────────────────────────────────────────────────
+     def run(self):
+-        logger.info("[GUI v3.2-relay] PID=%d", self.pid)
++        logger.info("[GUI v4.0] PID=%d", self.pid)
+         WNAME = "Industrial Vision System v3.0"
+         try:
+             cv2.namedWindow(WNAME, cv2.WINDOW_NORMAL)
+@@ -934,7 +852,12 @@ class UnifiedGUI:
+             canvas  = np.full((H, W, 3), BG, dtype=np.uint8)
+             missing = self._missing_bd()
+             banner_h = 0
+-            if missing and not self._in_editor:
++            # Priority: relay disconnected > boundaries missing > active alarm.
++            # A disconnected relay means even a detected problem cannot be
++            # physically acted on, so it takes precedence over other banners.
++            if not self._backend_healthy and not self._in_editor:
++                banner_h = _draw_relay_banner(canvas, W, TAB_H, self._last_backend_error)
++            elif missing and not self._in_editor:
+                 banner_h = _draw_bd_banner(canvas, W, TAB_H, missing)
+             elif any(st.has_problem for st in self.cam_states.values()):
+                 banner_h = _draw_alarm(canvas, W, TAB_H, self.cam_states)
+@@ -974,21 +897,6 @@ class UnifiedGUI:
+         if hit is not None:
+             self._tab = hit; return
+ 
+-        # Radio buttons (Dashboard or Camera View)
+-        for key in ("radio_usb", "radio_modbus"):
+-            btn = self._hit.get(key)
+-            if btn and btn.hit(x, y):
+-                self._selected_backend = "usb" if key=="radio_usb" else "modbus"
+-                return
+-
+-        # Apply button
+-        ab = self._hit.get("apply_btn")
+-        if ab and ab.hit(x, y):
+-            if (self._selected_backend != self._active_backend
+-                    and self._cooldown_remaining() <= 0):
+-                self._send_backend_change(self._selected_backend)
+-            return
+-
+         if self._tab != 1: return
+ 
+         for cid, btn in self._hit.get("cam_btns", []):
+@@ -1029,12 +937,6 @@ class UnifiedGUI:
+             if self._can_detect(): self.preview.value=0; self._cmd("start_detection")
+         elif key in (ord('p'),ord('P')):
+             self.preview.value=1; self._cmd("stop_detection")
+-        elif key in (ord('u'),ord('U')):
+-            # shortcut: select USB backend
+-            self._selected_backend = "usb"
+-        elif key in (ord('m'),ord('M')):
+-            # shortcut: select Modbus/Ethernet backend
+-            self._selected_backend = "modbus"
+         return True
+ 
+     # ── tab renderer ───────────────────────────────────────────────────────
+@@ -1045,9 +947,7 @@ class UnifiedGUI:
+             _render_dashboard(
+                 canvas, W, H, body_y, body_h,
+                 self.cam_states, self.relay_states, self.health, self.cfg,
+-                self._active_backend, self._selected_backend,
+                 self._backend_healthy, self._last_backend_error,
+-                self._ms, hit, self._cooldown_remaining(),
+             )
+             self._hit = hit
+         elif t == 1:
+@@ -1058,9 +958,7 @@ class UnifiedGUI:
+                     st, self.relay_states, self.cfg,
+                     bool(self.preview.value), self._ms, self.cam_ids,
+                     self._can_detect(), hit,
+-                    self._active_backend, self._selected_backend,
+                     self._backend_healthy, self._last_backend_error,
+-                    self._cooldown_remaining(),
+                 )
+                 self._hit = hit
+         elif t == 2:
+@@ -1121,13 +1019,8 @@ class UnifiedGUI:
+                 s = msg.get("relay_states",[])
+                 self.relay_states = s + [False]*(9-len(s))
+             elif mtype == MessageType.RELAY_BACKEND_STATUS.value:
+-                self._active_backend     = msg.get("active_backend", self._active_backend)
+                 self._backend_healthy    = msg.get("backend_healthy", False)
+                 self._last_backend_error = msg.get("last_backend_error","")
+-                # NOTE: do NOT auto-sync _selected_backend here.
+-                # _active_backend = what relay process is actually running.
+-                # _selected_backend = what the operator has chosen in the radio.
+-                # These are intentionally separate until Apply is clicked.
+ 
+         for _ in range(5):
+             try: msg = self.health_q.get_nowait()
+@@ -1147,23 +1040,6 @@ class UnifiedGUI:
+         except Exception:
+             pass
+ 
+-    def _send_backend_change(self, backend: str):
+-        """
+-        Send a relay_backend_change message through cmd_q → supervisor → relay process.
+-        The supervisor fanout thread routes it into relay_result_q automatically
+-        because _drain_gui_cmd in supervisor passes unknown message types through.
+-        We handle routing in the supervisor patch below.
+-        """
+-        try:
+-            self.cmd_q.put_nowait(
+-                RelayBackendChangeMessage(camera_id=None, backend=backend).to_dict()
+-            )
+-            self._last_switch_sent = time.time()
+-            logger.info("[GUI] Backend change requested: %s → %s",
+-                        self._active_backend, backend)
+-        except Exception as e:
+-            logger.warning("[GUI] Failed to send backend change: %s", e)
+-
+     def _heartbeat(self):
+         now = time.time()
+         if now - self._last_hb >= 2.0:
+@@ -1196,4 +1072,4 @@ def gui_process_entry(config_path, result_queue, relay_state_queue,
+         gui.run()
+     except Exception as e:
+         logger.critical("[gui] Fatal: %s", e, exc_info=True)
+-        sys.exit(0)
+\ No newline at end of file
++        sys.exit(0)
+diff --git a/prerequisite trials/fix_pyhid_libusb.py b/prerequisite trials/fix_pyhid_libusb.py
+deleted file mode 100644
+index d0d1ecb..0000000
+--- a/prerequisite trials/fix_pyhid_libusb.py	
++++ /dev/null
+@@ -1,53 +0,0 @@
+-#!/usr/bin/env python3
+-"""
+-Fix pyhid_usb_relay libusb DLL location issue
+-Run this after installing pyhid_usb_relay and libusb packages
+-"""
+-import pathlib
+-import shutil
+-import sys
+-
+-def fix_libusb_dll():
+-    """Copy libusb-1.0.dll to the location pyhid_usb_relay expects."""
+-    try:
+-        # Locate the libusb package
+-        libusb_base = pathlib.Path('.')
+-        
+-        # Search for libusb in site-packages
+-        import libusb
+-        libusb_base = pathlib.Path(libusb.__file__).parent
+-        
+-        # Source DLL location (new libusb package structure)
+-        windows_x64_dll = libusb_base / '_platform/windows/x86_64/libusb-1.0.dll'
+-        
+-        if not windows_x64_dll.exists():
+-            print(f"❌ Error: Source DLL not found at {windows_x64_dll}")
+-            print("Make sure 'libusb' package is installed: pip install libusb")
+-            return False
+-        
+-        # Create destination directory
+-        x64_dir = libusb_base / 'x64'
+-        x64_dir.mkdir(parents=True, exist_ok=True)
+-        
+-        # Copy DLL
+-        dest_dll = x64_dir / 'libusb-1.0.dll'
+-        shutil.copy2(windows_x64_dll, dest_dll)
+-        
+-        print(f"✅ Success! Copied libusb-1.0.dll to {dest_dll}")
+-        
+-        # Verify it works
+-        import pyhid_usb_relay
+-        relay = pyhid_usb_relay.find()
+-        print(f"✅ pyhid_usb_relay working! Relay state: {relay.state}")
+-        return True
+-        
+-    except FileNotFoundError as e:
+-        print(f"❌ Error: {e}")
+-        return False
+-    except Exception as e:
+-        print(f"❌ Unexpected error: {type(e).__name__}: {e}")
+-        return False
+-
+-if __name__ == '__main__':
+-    success = fix_libusb_dll()
+-    sys.exit(0 if success else 1)
+\ No newline at end of file
+diff --git a/prerequisite trials/pyhid_usb_relay_test.py b/prerequisite trials/pyhid_usb_relay_test.py
+deleted file mode 100644
+index f7a906a..0000000
+--- a/prerequisite trials/pyhid_usb_relay_test.py	
++++ /dev/null
+@@ -1,10 +0,0 @@
+-import pyhid_usb_relay
+-
+-relay = pyhid_usb_relay.find()
+-
+-print(relay.state)
+-print("Toggeling relay")
+-
+-relay.toggle_state(1)
+-
+-print(relay.state)
+\ No newline at end of file
+diff --git a/relay/backends/__init__.py b/relay/backends/__init__.py
+index a05ad7b..9755027 100644
+--- a/relay/backends/__init__.py
++++ b/relay/backends/__init__.py
+@@ -1,6 +1,5 @@
+ """relay/backends — hardware abstraction layer for relay outputs."""
+ from relay.backends.base_backend import RelayBackend
+-from relay.backends.usb_backend import USBRelayBackend
+ from relay.backends.modbus_backend import ModbusRelayBackend
+ 
+-__all__ = ["RelayBackend", "USBRelayBackend", "ModbusRelayBackend"]
+\ No newline at end of file
++__all__ = ["RelayBackend", "ModbusRelayBackend"]
+diff --git a/relay/backends/usb_backend.py b/relay/backends/usb_backend.py
+deleted file mode 100644
+index bb9a9b7..0000000
+--- a/relay/backends/usb_backend.py
++++ /dev/null
+@@ -1,172 +0,0 @@
+-"""
+-relay/backends/usb_backend.py
+-==============================
+-USB relay backend using pyhid_usb_relay.
+-
+-Wraps the existing PyhidRelayDriver logic from relay_process.py v2.2
+-and adds auto-reconnect on every write failure, so a Windows USB-stack
+-glitch or cable wobble does not take the whole relay process down.
+-
+-pyhid_usb_relay API (>= 0.0.2):
+-    import pyhid_usb_relay
+-    device = pyhid_usb_relay.find()          # returns device object or None
+-    device.set_state(channel_1based, True)   # set channel ON  (1-based)
+-    device.set_state(channel_1based, False)  # set channel OFF (1-based)
+-    device.state                             # dict {1: bool, 2: bool, ...}
+-
+-relay_idx here is always 0-based; we add 1 internally before calling set_state.
+-"""
+-from __future__ import annotations
+-import logging
+-import time
+-from typing import Optional
+-
+-from relay.backends.base_backend import RelayBackend
+-
+-logger = logging.getLogger(__name__)
+-
+-
+-class USBRelayBackend(RelayBackend):
+-
+-    def __init__(self, relay_count: int = 9, reconnect_attempts: int = 3):
+-        self._relay_count     = relay_count
+-        self._reconnect_max   = reconnect_attempts
+-        self._device          = None
+-        self._last_err: str   = ""
+-
+-    # ── public property ────────────────────────────────────────────────────
+-    @property
+-    def last_error(self) -> str:
+-        return self._last_err
+-
+-    # ── RelayBackend interface ─────────────────────────────────────────────
+-    def connect(self) -> bool:
+-        try:
+-            import pyhid_usb_relay
+-            self._device = pyhid_usb_relay.find()
+-            if self._device is None:
+-                self._last_err = (
+-                    "No USB relay device found — check USB cable and driver. "
+-                    "Windows: also run fix_pyhid_libusb.py"
+-                )
+-                logger.error("[USBBackend] %s", self._last_err)
+-                return False
+-            self._last_err = ""
+-            logger.info("[USBBackend] Connected: %s", self._device)
+-            return True
+-
+-        except ImportError:
+-            self._last_err = (
+-                "pyhid_usb_relay not installed. "
+-                "Run: pip install pyhid-usb-relay hid"
+-            )
+-            logger.error("[USBBackend] %s", self._last_err)
+-            return False
+-
+-        except Exception as e:
+-            self._last_err = str(e)
+-            logger.error("[USBBackend] connect error: %s", e)
+-            return False
+-
+-    def disconnect(self):
+-        try:
+-            if self._device is not None:
+-                self.all_off()
+-        except Exception as e:
+-            logger.warning("[USBBackend] all_off during disconnect failed: %s", e)
+-        finally:
+-            self._device = None
+-            logger.info("[USBBackend] Disconnected")
+-
+-    def relay_on(self, relay_idx: int) -> bool:
+-        return self._write(relay_idx, True)
+-
+-    def relay_off(self, relay_idx: int) -> bool:
+-        return self._write(relay_idx, False)
+-
+-    def read_relay(self, relay_idx: int) -> Optional[bool]:
+-        try:
+-            if self._device is None:
+-                self._last_err = "Device not connected"
+-                return None
+-            state_map = self._device.state           # {1: bool, 2: bool, ...}
+-            return bool(state_map.get(relay_idx + 1, False))
+-        except Exception as e:
+-            self._last_err = str(e)
+-            logger.warning("[USBBackend] read_relay ch%d error: %s",
+-                           relay_idx + 1, e)
+-            return None
+-
+-    def all_off(self) -> bool:
+-        ok = True
+-        for i in range(self._relay_count):
+-            if not self._write(i, False):
+-                ok = False
+-        return ok
+-
+-    def health_check(self) -> bool:
+-        """Read device.state as a lightweight liveness probe."""
+-        try:
+-            if self._device is None:
+-                self._last_err = "Device not connected"
+-                return False
+-            _ = self._device.state          # probe — raises on dead handle
+-            self._last_err = ""
+-            return True
+-        except Exception as e:
+-            self._last_err = str(e)
+-            logger.warning("[USBBackend] health_check failed: %s", e)
+-            return False
+-
+-    # ── internal helpers ───────────────────────────────────────────────────
+-    def _write(self, relay_idx: int, state: bool) -> bool:
+-        """
+-        Write relay state with one auto-reconnect attempt on failure.
+-        USB HID can freeze under Windows without raising at connect time.
+-        """
+-        try:
+-            if self._device is None:
+-                raise RuntimeError("Device not connected")
+-            self._device.set_state(relay_idx + 1, bool(state))  # 1-based
+-            self._last_err = ""
+-            return True
+-
+-        except Exception as e:
+-            self._last_err = str(e)
+-            logger.warning(
+-                "[USBBackend] set_state ch%d=%s failed: %s — attempting reconnect",
+-                relay_idx + 1, state, e,
+-            )
+-            if self._reconnect():
+-                try:
+-                    self._device.set_state(relay_idx + 1, bool(state))
+-                    self._last_err = ""
+-                    return True
+-                except Exception as e2:
+-                    self._last_err = str(e2)
+-                    logger.error(
+-                        "[USBBackend] Retry set_state ch%d=%s failed: %s",
+-                        relay_idx + 1, state, e2,
+-                    )
+-            return False
+-
+-    def _reconnect(self) -> bool:
+-        logger.warning("[USBBackend] Reconnecting USB device...")
+-        self._device = None
+-        for attempt in range(self._reconnect_max):
+-            time.sleep(0.5 * (attempt + 1))
+-            try:
+-                import pyhid_usb_relay
+-                self._device = pyhid_usb_relay.find()
+-                if self._device is not None:
+-                    self._last_err = ""
+-                    logger.info("[USBBackend] Reconnected on attempt %d", attempt + 1)
+-                    return True
+-            except Exception as e:
+-                logger.debug("[USBBackend] Reconnect attempt %d error: %s",
+-                             attempt + 1, e)
+-        self._last_err = (
+-            f"Reconnect failed after {self._reconnect_max} attempts"
+-        )
+-        logger.error("[USBBackend] %s", self._last_err)
+-        return False
+\ No newline at end of file
+diff --git a/relay/relay_process.py b/relay/relay_process.py
+index f4f3d3d..ea0ed83 100644
+--- a/relay/relay_process.py
++++ b/relay/relay_process.py
+@@ -1,34 +1,31 @@
+ """
+-relay/relay_process.py  v3.0
++relay/relay_process.py  v4.0
+ =============================
+-Dual-backend relay process: USB (pyhid_usb_relay) + Ethernet (Waveshare Modbus TCP).
+-
+-Architecture
+-============
+-  Only ONE backend is active at a time.
+-  Backend is selectable at runtime via GUI radio buttons without restarting
+-  detection, cameras, or the supervisor.
+-
+-  Supervisor
+-  └── Relay Process
+-        ├── USB Backend      (pyhid_usb_relay)
+-        └── Modbus Backend   (Waveshare Modbus TCP)
+-
+-Safe switching sequence (Step 11 of the design guide):
+-  1  Freeze writes           (self._switching = True)
+-  2  Turn all outputs OFF    (old_backend.all_off)
+-  3  Disconnect old backend  (old_backend.disconnect)
+-  4  Create new backend
+-  5  Connect new backend
+-  6  Health check            → rollback if failed
+-  7  Restore cached states   (re-energise any relay that was ON)
+-  8  Resume writes           (self._switching = False)
+-
+-Failure rollback:
+-  If the new backend fails to connect or fails health_check,
+-  the process automatically reconnects the old backend before resuming.
+-
+-Preserved from v2.2:
++Ethernet-only relay process (Waveshare Modbus TCP Relay).
++
++v4.0 — Ethernet relay is the sole, final backend:
++  • USB relay backend removed completely.
++  • Simulated/software relay backend removed completely — there is no
++    fallback. If the Ethernet relay hardware is unreachable, the process
++    reports it as disconnected and keeps retrying the SAME Ethernet
++    target. It never fabricates relay state and never pretends outputs
++    fired.
++  • Runtime backend switching removed — there is nothing to switch to.
++
++Failsafe behaviour:
++  1. On startup, connect to the Ethernet relay. If that fails, the relay
++     process stays alive, marks itself DISCONNECTED, and reports this to
++     the GUI (which shows a "No Relay Connected" warning).
++  2. Every 10s, a health check probes the Ethernet relay.
++  3. After `reinit_after_failures` consecutive failed health checks, the
++     process tears down and recreates the Modbus connection from scratch
++     and tries again — always against the same configured Ethernet
++     target, never a different backend.
++  4. Detection results keep arriving and are cached (`_cached_states`)
++     even while disconnected, so relay outputs are correctly re-applied
++     the moment the Ethernet relay comes back online.
++
++Preserved from earlier versions:
+   • 9-relay support with per-camera mapping
+   • Periodic re-sync of ON relays (silent hardware failure guard)
+   • Consecutive-failure reinit
+@@ -59,6 +56,7 @@ from core.ipc_schema import (
+ from core.logging_setup import setup_process_logging, setup_crash_handler
+ from core.resource_monitor import get_process_memory_mb, is_memory_over_limit
+ from relay.backends.base_backend import RelayBackend
++from relay.backends.modbus_backend import ModbusRelayBackend
+ 
+ logger = logging.getLogger(__name__)
+ 
+@@ -66,87 +64,21 @@ logger = logging.getLogger(__name__)
+ _RESYNC_INTERVAL = 30.0
+ 
+ 
+-# ── Simulated backend (local fallback — never imported from backends/) ─────────
+-class _SimulatedBackend(RelayBackend):
+-    """
+-    In-memory backend used when hardware is unavailable.
+-    Keeps the relay process alive so the system degrades gracefully.
+-    """
+-    def __init__(self, relay_count: int):
+-        self._n      = relay_count
+-        self._states = [False] * relay_count
+-        self._err    = ""
+-
+-    @property
+-    def last_error(self) -> str:
+-        return self._err
+-
+-    def connect(self) -> bool:
+-        logger.warning("[SimBackend] SIMULATED relay — physical outputs will NOT fire")
+-        return True
+-
+-    def disconnect(self):
+-        logger.info("[SimBackend] Disconnected (simulated)")
+-
+-    def relay_on(self, idx: int) -> bool:
+-        if 0 <= idx < self._n:
+-            self._states[idx] = True
+-            logger.debug("[SimBackend] Relay %d ON (simulated)", idx + 1)
+-            return True
+-        return False
+-
+-    def relay_off(self, idx: int) -> bool:
+-        if 0 <= idx < self._n:
+-            self._states[idx] = False
+-            logger.debug("[SimBackend] Relay %d OFF (simulated)", idx + 1)
+-            return True
+-        return False
+-
+-    def read_relay(self, idx: int):
+-        return self._states[idx] if 0 <= idx < self._n else None
+-
+-    def all_off(self) -> bool:
+-        self._states = [False] * self._n
+-        return True
+-
+-    def health_check(self) -> bool:
+-        return True
+-
+-
+ # ── Backend factory ────────────────────────────────────────────────────────────
+-def _create_backend(name: str, rcfg: RelayConfig) -> RelayBackend:
++def _create_modbus_backend(rcfg: RelayConfig) -> ModbusRelayBackend:
+     """
+-    Instantiate a backend by name.
+-    Falls back to _SimulatedBackend if the import fails or config disables it.
++    Build a fresh ModbusRelayBackend from config. Always targets the same
++    configured Ethernet relay — there is no other backend to fall back to.
+     """
+-    name = name.lower()
+-
+-    if name == "usb":
+-        try:
+-            from relay.backends.usb_backend import USBRelayBackend
+-            return USBRelayBackend(relay_count=rcfg.relay_count)
+-        except Exception as e:
+-            logger.error("[RelayFactory] USB backend unavailable: %s — using simulated", e)
+-            return _SimulatedBackend(rcfg.relay_count)
+-
+-    if name == "modbus":
+-        try:
+-            from relay.backends.modbus_backend import ModbusRelayBackend
+-            mcfg = rcfg.modbus
+-            return ModbusRelayBackend(
+-                ip=mcfg.ip,
+-                port=mcfg.port,
+-                device_id=mcfg.device_id,
+-                timeout_seconds=mcfg.timeout_seconds,
+-                relay_count=rcfg.relay_count,
+-                retry_attempts=rcfg.retry_attempts,
+-            )
+-        except Exception as e:
+-            logger.error("[RelayFactory] Modbus backend unavailable: %s — using simulated", e)
+-            return _SimulatedBackend(rcfg.relay_count)
+-
+-    logger.error("[RelayFactory] Unknown backend '%s' — using simulated", name)
+-    return _SimulatedBackend(rcfg.relay_count)
++    mcfg = rcfg.modbus
++    return ModbusRelayBackend(
++        ip=mcfg.ip,
++        port=mcfg.port,
++        device_id=mcfg.device_id,
++        timeout_seconds=mcfg.timeout_seconds,
++        relay_count=rcfg.relay_count,
++        retry_attempts=rcfg.retry_attempts,
++    )
+ 
+ 
+ # ── Main worker ────────────────────────────────────────────────────────────────
+@@ -170,18 +102,16 @@ class RelayWorker:
+         self.pid  = os.getpid()
+         self.name = "Relay"
+ 
+-        # ── Active backend state ──────────────────────────────────────────
+-        self.active_backend_name: str = self.rcfg.active_backend   # "usb" or "modbus"
+-        self.backend: Optional[RelayBackend] = None
++        # ── The one and only backend ────────────────────────────────────
++        self.backend: Optional[ModbusRelayBackend] = None
+ 
+-        # ── Relay state cache — INDEPENDENT of backend ───────────────────
+-        # Survives backend switches.  Without this, switching clears relay
+-        # knowledge and results in false alarms.
++        # ── Relay state cache — INDEPENDENT of connection state ──────────
++        # Survives disconnects/reinits so relay knowledge isn't lost the
++        # moment the Ethernet cable is unplugged.
+         self._cached_states: List[bool] = [False] * self.rcfg.relay_count
+ 
+-        # ── Switching guard ───────────────────────────────────────────────
+-        self._switching        = False          # freeze writes during switch
+-        self._last_switch_time = 0.0            # for cooldown enforcement
++        # ── Reinit guard ───────────────────────────────────────────────────
++        self._reiniting = False          # freeze writes while reconnecting
+ 
+         # ── Backend health tracking ───────────────────────────────────────
+         self._backend_healthy    = False
+@@ -200,26 +130,28 @@ class RelayWorker:
+     # ══════════════════════════════════════════════════════════════════════
+     def run(self):
+         logger.info(
+-            "[Relay] PID=%d starting  backend=%s  relays=%d",
+-            self.pid, self.active_backend_name, self.rcfg.relay_count,
++            "[Relay] PID=%d starting  backend=ethernet(modbus)  relays=%d",
++            self.pid, self.rcfg.relay_count,
+         )
+ 
+-        # Startup — connect chosen backend and clear all outputs
+-        self.backend = _create_backend(self.active_backend_name, self.rcfg)
++        # Startup — connect the Ethernet relay and clear all outputs
++        self.backend = _create_modbus_backend(self.rcfg)
+         if self.backend.connect():
+             self.backend.all_off()
+             self._backend_healthy    = True
+             self._last_backend_error = ""
+-            logger.info("[Relay] Backend '%s' connected and outputs cleared",
+-                        self.active_backend_name)
++            logger.info("[Relay] Ethernet relay connected and outputs cleared")
+             self._blink_test()
+         else:
+             self._backend_healthy    = False
+             self._last_backend_error = self.backend.last_error
+-            logger.warning("[Relay] Backend '%s' connect failed at startup — "
+-                           "outputs will NOT fire", self.active_backend_name)
++            logger.warning(
++                "[Relay] Ethernet relay connect FAILED at startup (%s) — "
++                "outputs will NOT fire. No relay connected.",
++                self._last_backend_error,
++            )
+ 
+-        self._send_backend_status()
++        self._send_relay_status()
+ 
+         while not self.stop_event.is_set():
+             try:
+@@ -236,9 +168,6 @@ class RelayWorker:
+             if mtype == MessageType.SHUTDOWN.value:
+                 break
+ 
+-            elif mtype == MessageType.RELAY_BACKEND_CHANGE.value:
+-                self._handle_backend_change(msg_dict)
+-
+             elif mtype in (MessageType.DETECTION_RESULT.value, "pool_result"):
+                 self._handle_detection_result(msg_dict)
+ 
+@@ -257,8 +186,8 @@ class RelayWorker:
+     # Detection result handler
+     # ══════════════════════════════════════════════════════════════════════
+     def _handle_detection_result(self, msg: dict):
+-        if self._switching:
+-            return          # silently drop during backend switch
++        if self._reiniting:
++            return          # silently drop while reconnecting
+ 
+         camera_id   = msg.get("camera_id", 0)
+         pair_results = msg.get("pair_results", [])
+@@ -300,167 +229,11 @@ class RelayWorker:
+         except Exception:
+             pass
+ 
+-    # ══════════════════════════════════════════════════════════════════════
+-    # Backend switching
+-    # ══════════════════════════════════════════════════════════════════════
+-    def _handle_backend_change(self, msg: dict):
+-        new_name = msg.get("backend", "usb").lower()
+-
+-        if new_name == self.active_backend_name:
+-            logger.info("[Relay] Backend is already '%s' — ignoring switch request",
+-                        new_name)
+-            return
+-
+-        # Cooldown guard — prevent rapid repeated switching
+-        min_interval = getattr(self.rcfg, "minimum_switch_interval_seconds", 5)
+-        elapsed      = time.time() - self._last_switch_time
+-        if elapsed < min_interval:
+-            remaining = min_interval - elapsed
+-            logger.warning(
+-                "[Relay] Backend switch cooldown active — %.1fs remaining",
+-                remaining,
+-            )
+-            return
+-
+-        if not getattr(self.rcfg, "allow_runtime_switching", True):
+-            logger.warning("[Relay] Runtime backend switching is disabled in config")
+-            return
+-
+-        self._switch_backend(new_name)
+-
+-    def _switch_backend(self, new_name: str):
+-        """
+-        Full safe-switching sequence.  The 8 numbered steps correspond
+-        to Steps 1–8 in the architecture guide (Doc 1).
+-        """
+-        old_name    = self.active_backend_name
+-        old_backend = self.backend
+-
+-        logger.info("[RelayBackend] Switching  %s → %s", old_name, new_name)
+-
+-        # ── Step 1: Freeze writes ─────────────────────────────────────────
+-        self._switching = True
+-
+-        try:
+-            # ── Step 2: Turn all outputs OFF ──────────────────────────────
+-            if old_backend is not None:
+-                try:
+-                    old_backend.all_off()
+-                    logger.debug("[RelayBackend] Old backend outputs cleared")
+-                except Exception as e:
+-                    logger.warning("[RelayBackend] all_off on old backend failed: %s", e)
+-
+-            # ── Step 3: Disconnect old backend ────────────────────────────
+-            if old_backend is not None:
+-                try:
+-                    old_backend.disconnect()
+-                except Exception as e:
+-                    logger.warning("[RelayBackend] disconnect old backend failed: %s", e)
+-
+-            # ── Steps 4 & 5: Create and connect new backend ───────────────
+-            new_backend = _create_backend(new_name, self.rcfg)
+-            if not new_backend.connect():
+-                logger.error(
+-                    "[RelayBackend] New backend '%s' connect FAILED → rolling back to '%s'",
+-                    new_name, old_name,
+-                )
+-                self._last_backend_error = (
+-                    f"Switch to {new_name} failed (connect): "
+-                    + new_backend.last_error
+-                )
+-                self._rollback(old_name, old_backend)
+-                return
+-
+-            # ── Step 6: Health check ──────────────────────────────────────
+-            if not new_backend.health_check():
+-                logger.error(
+-                    "[RelayBackend] New backend '%s' health check FAILED → rolling back to '%s'",
+-                    new_name, old_name,
+-                )
+-                self._last_backend_error = (
+-                    f"Switch to {new_name} failed (health check): "
+-                    + new_backend.last_error
+-                )
+-                try:
+-                    new_backend.disconnect()
+-                except Exception:
+-                    pass
+-                self._rollback(old_name, old_backend)
+-                return
+-
+-            # ── Switch accepted ───────────────────────────────────────────
+-            self.backend             = new_backend
+-            self.active_backend_name = new_name
+-            self._last_switch_time   = time.time()
+-            self._backend_healthy    = True
+-            self._last_backend_error = ""
+-            self._consecutive_failures = 0
+-
+-            # ── Step 7: Restore relay states ──────────────────────────────
+-            on_relays = [i for i, s in enumerate(self._cached_states) if s]
+-            if on_relays:
+-                logger.info("[RelayBackend] Restoring %d ON relays after switch: %s",
+-                            len(on_relays), [i + 1 for i in on_relays])
+-                for idx in on_relays:
+-                    try:
+-                        new_backend.relay_on(idx)
+-                    except Exception as e:
+-                        logger.warning(
+-                            "[RelayBackend] State restore relay %d failed: %s", idx + 1, e
+-                        )
+-
+-            logger.info("[RelayBackend] Switch to '%s' COMPLETE", new_name)
+-
+-        finally:
+-            # ── Step 8: Resume writes ─────────────────────────────────────
+-            self._switching = False
+-            self._send_backend_status()
+-
+-    def _rollback(self, old_name: str, old_backend: Optional[RelayBackend]):
+-        """
+-        Reconnect the previous backend after a failed switch.
+-        If rollback also fails, fall through to simulated backend so
+-        the relay process stays alive.
+-        """
+-        logger.warning("[RelayBackend] Rolling back to '%s'", old_name)
+-
+-        if old_backend is not None:
+-            try:
+-                if old_backend.connect():
+-                    # Restore ON states onto the old backend
+-                    for idx, state in enumerate(self._cached_states):
+-                        if state:
+-                            try:
+-                                old_backend.relay_on(idx)
+-                            except Exception:
+-                                pass
+-                    self.backend             = old_backend
+-                    self.active_backend_name = old_name
+-                    self._backend_healthy    = True
+-                    logger.info("[RelayBackend] Rollback to '%s' SUCCESSFUL", old_name)
+-                    return
+-            except Exception as e:
+-                logger.error("[RelayBackend] Rollback connect error: %s", e)
+-
+-        # Last resort: fall back to simulated so the process stays up
+-        logger.error(
+-            "[RelayBackend] Both '%s' and rollback failed — using SIMULATED backend. "
+-            "Physical relay outputs will NOT fire until manual recovery.",
+-            old_name,
+-        )
+-        sim = _SimulatedBackend(self.rcfg.relay_count)
+-        sim.connect()
+-        self.backend             = sim
+-        self.active_backend_name = "simulated"
+-        self._backend_healthy    = False
+-        if not self._last_backend_error:
+-            self._last_backend_error = "Switch + rollback both failed — using simulated"
+-
+     # ══════════════════════════════════════════════════════════════════════
+     # Low-level relay write (with retry + reinit on repeated failures)
+     # ══════════════════════════════════════════════════════════════════════
+     def _write_relay(self, index: int, state: bool):
+-        if self._switching:
++        if self._reiniting:
+             return
+ 
+         for attempt in range(self.rcfg.retry_attempts):
+@@ -492,15 +265,15 @@ class RelayWorker:
+         logger.error("[Relay] %s", self._last_backend_error)
+ 
+         if self._consecutive_failures >= self.rcfg.reinit_after_failures:
+-            logger.warning("[Relay] %d consecutive failures — reinitialising backend",
++            logger.warning("[Relay] %d consecutive failures — reinitialising Ethernet relay",
+                            self._consecutive_failures)
+             self._reinit_backend()
+ 
+     # ══════════════════════════════════════════════════════════════════════
+-    # Periodic re-sync of ON relays (v2.2 silent-failure guard)
++    # Periodic re-sync of ON relays (silent-failure guard)
+     # ══════════════════════════════════════════════════════════════════════
+     def _maybe_resync(self):
+-        if self._switching:
++        if self._reiniting:
+             return
+         now = time.time()
+         if now - self._last_resync < _RESYNC_INTERVAL:
+@@ -526,48 +299,54 @@ class RelayWorker:
+                     logger.warning("[Relay] Re-sync error relay %d: %s", i + 1, e)
+ 
+     # ══════════════════════════════════════════════════════════════════════
+-    # Backend reinit (after repeated write failures)
++    # Backend reinit (after repeated write/health-check failures)
+     # ══════════════════════════════════════════════════════════════════════
+     def _reinit_backend(self):
+         """
+-        Disconnect and reconnect the current backend after repeated failures.
+-        Resets _cached_states because physical relay state is unknown after
+-        a hard disconnect.
++        Disconnect and reconnect the Ethernet relay after repeated failures.
++        Always targets the same configured Ethernet relay — there is no
++        other backend to fall back to. Resets _cached_states because
++        physical relay state is unknown after a hard disconnect.
+         """
+-        # Safe shutdown of current backend
++        self._reiniting = True
+         try:
+-            if self.backend:
+-                for i in range(self.rcfg.relay_count):
+-                    try:
+-                        self.backend.relay_off(i)
+-                    except Exception:
+-                        pass
+-                self.backend.disconnect()
+-        except Exception:
+-            pass
+-        time.sleep(1.0)
+-
+-        # Reconnect
+-        new_backend = _create_backend(self.active_backend_name, self.rcfg)
+-        if new_backend.connect():
+-            self.backend          = new_backend
+-            self._backend_healthy = True
+-            self._last_backend_error = ""
+-            logger.info("[Relay] Reinit backend '%s' successful",
+-                        self.active_backend_name)
+-            self._blink_test()
+-        else:
+-            self._backend_healthy    = False
+-            self._last_backend_error = new_backend.last_error
+-            logger.warning("[Relay] Reinit backend '%s' failed — using simulated",
+-                           self.active_backend_name)
+-            sim = _SimulatedBackend(self.rcfg.relay_count)
+-            sim.connect()
+-            self.backend = sim
++            # Safe shutdown of current connection
++            try:
++                if self.backend:
++                    for i in range(self.rcfg.relay_count):
++                        try:
++                            self.backend.relay_off(i)
++                        except Exception:
++                            pass
++                    self.backend.disconnect()
++            except Exception:
++                pass
++            time.sleep(1.0)
++
++            # Reconnect — fresh Modbus client, same Ethernet target
++            new_backend = _create_modbus_backend(self.rcfg)
++            if new_backend.connect():
++                self.backend              = new_backend
++                self._backend_healthy     = True
++                self._last_backend_error  = ""
++                logger.info("[Relay] Ethernet relay reinit successful")
++                self._blink_test()
++            else:
++                self.backend              = new_backend
++                self._backend_healthy     = False
++                self._last_backend_error  = new_backend.last_error
++                logger.warning(
++                    "[Relay] Ethernet relay reinit FAILED (%s) — No relay "
++                    "connected. Will keep retrying the same Ethernet target.",
++                    self._last_backend_error,
++                )
+ 
+-        self._consecutive_failures = 0
+-        self._cached_states        = [False] * self.rcfg.relay_count
+-        self._last_resync          = time.time()
++            self._consecutive_failures = 0
++            self._cached_states        = [False] * self.rcfg.relay_count
++            self._last_resync          = time.time()
++        finally:
++            self._reiniting = False
++            self._send_relay_status()
+ 
+     # ══════════════════════════════════════════════════════════════════════
+     # Shutdown helpers
+@@ -606,8 +385,6 @@ class RelayWorker:
+                 "relay_states":        self._cached_states,
+                 "relay_count":         self.rcfg.relay_count,
+                 "failures":            self._consecutive_failures,
+-                # v3.0 additions — read by supervisor health broadcast → GUI
+-                "active_backend":      self.active_backend_name,
+                 "backend_healthy":     self._backend_healthy,
+                 "last_backend_error":  self._last_backend_error,
+             },
+@@ -617,19 +394,18 @@ class RelayWorker:
+         except Exception:
+             pass
+ 
+-        # Also push a lightweight backend-status message directly to the
++        # Also push a lightweight relay-status message directly to the
+         # state_out_queue so the GUI sees it immediately without waiting
+         # for the supervisor's 3-second health-snapshot cycle.
+-        self._send_backend_status()
++        self._send_relay_status()
+ 
+-    def _send_backend_status(self):
++    def _send_relay_status(self):
+         """Push a relay_backend_status message to the GUI via state_out_queue."""
+         msg = {
+             "type":               MessageType.RELAY_BACKEND_STATUS.value,
+             "source":             ProcessSource.RELAY.value,
+             "camera_id":          None,
+             "timestamp":          time.time(),
+-            "active_backend":     self.active_backend_name,
+             "backend_healthy":    self._backend_healthy,
+             "last_backend_error": self._last_backend_error,
+         }
+@@ -643,16 +419,17 @@ class RelayWorker:
+     # ══════════════════════════════════════════════════════════════════════
+     def _maybe_health_check(self):
+         """
+-        Probe the active backend every 10 seconds.
++        Probe the Ethernet relay every 10 seconds.
+         Updates _backend_healthy so the heartbeat reports real status.
+-        Triggers reinit when consecutive failures reach the threshold.
++        Triggers reinit when consecutive failures reach the threshold —
++        always reconnecting to the SAME Ethernet target.
+         """
+         now = time.time()
+         if now - self._last_health_check < 10.0:
+             return
+         self._last_health_check = now
+ 
+-        if self._switching or self.backend is None:
++        if self._reiniting or self.backend is None:
+             return
+ 
+         ok = False
+@@ -663,21 +440,18 @@ class RelayWorker:
+ 
+         if ok:
+             if not self._backend_healthy:
+-                logger.info("[Relay] Backend '%s' is healthy again",
+-                            self.active_backend_name)
++                logger.info("[Relay] Ethernet relay is healthy again")
+             self._backend_healthy    = True
+             self._last_backend_error = ""
+             self._consecutive_failures = 0
+         else:
+             self._backend_healthy    = False
+             self._last_backend_error = (
+-                self.backend.last_error or
+-                f"Health check failed on '{self.active_backend_name}'"
++                self.backend.last_error or "Ethernet relay health check failed"
+             )
+             self._consecutive_failures += 1
+             logger.warning(
+-                "[Relay] Backend '%s' health check FAILED (consecutive=%d): %s",
+-                self.active_backend_name,
++                "[Relay] Ethernet relay health check FAILED (consecutive=%d): %s",
+                 self._consecutive_failures,
+                 self._last_backend_error,
+             )
+@@ -692,8 +466,8 @@ class RelayWorker:
+         Gives visual confirmation that the hardware and wiring are alive.
+         Also exercises the full coil range so any dead channel is obvious.
+         """
+-        logger.info("[Relay] Running blink test on '%s' (%d relays)...",
+-                    self.active_backend_name, self.rcfg.relay_count)
++        logger.info("[Relay] Running blink test on Ethernet relay (%d relays)...",
++                    self.rcfg.relay_count)
+         try:
+             for i in range(self.rcfg.relay_count):
+                 self.backend.relay_on(i)
+@@ -738,4 +512,4 @@ def relay_process_entry(
+         worker.run()
+     except Exception as e:
+         logger.critical("[relay] Fatal: %s", e, exc_info=True)
+-        sys.exit(1)
+\ No newline at end of file
++        sys.exit(1)
+diff --git a/requirements.txt b/requirements.txt
+index b5e3da8..3b70828 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -21,9 +21,8 @@ ultralytics>=8.0.0
+ # GPU monitoring
+ pynvml>=11.5.0
+ 
+-# USB Relay
+-# pyhid-usb-relay  # Install separately: pip install pyhid-usb-relay
+-# hid              # Install separately: pip install hid
++# Ethernet Relay (Waveshare Modbus TCP) — the only relay backend
++pymodbus>=3.0.0
+ 
+ # GUI (optional PyQt5 — not required for OpenCV GUI)
+ # PyQt5>=5.15.0
+diff --git a/supervisor/supervisor.py b/supervisor/supervisor.py
+index bdbfd29..ca291b2 100644
+--- a/supervisor/supervisor.py
++++ b/supervisor/supervisor.py
+@@ -615,11 +615,6 @@ class Supervisor:
+                     self._preview_mode.value = 1
+                     logger.info("[Supervisor] Detection PAUSED by operator")
+ 
+-            elif mtype == MessageType.RELAY_BACKEND_CHANGE.value:
+-                backend = msg.get("backend", "usb")
+-                logger.info("[Supervisor] Routing backend change → relay: %s", backend)
+-                safe_put(self._relay_result_q, msg)
+-
+         if not self._gui_cmd_reader.is_thread_alive():
+             self._gui_cmd_reader.respawn_thread()
+ 
+diff --git a/tests/simulate_failures.py b/tests/simulate_failures.py
+index 80a3407..5fa499b 100644
+--- a/tests/simulate_failures.py
++++ b/tests/simulate_failures.py
+@@ -86,7 +86,7 @@ def simulate_detection_crash(camera_id: int = 0):
+ 
+ 
+ def simulate_relay_failure():
+-    """Kill the relay process to simulate USB failure."""
++    """Kill the relay process to simulate an Ethernet relay / hardware failure."""
+     print("\n[SIM] Simulating Relay process failure...")
+     procs = find_process_by_name("relay_process")
+     if not procs:
+diff --git a/tests/test_system.py b/tests/test_system.py
+index 3d52861..be20e6f 100644
+--- a/tests/test_system.py
++++ b/tests/test_system.py
+@@ -188,13 +188,15 @@ class TestBoundaryEngineV2:
+ 
+ 
+ class TestRelayV2:
+-    def test_9_relay_driver(self):
+-        from relay.relay_process import SimulatedRelayDriver
+-        drv = SimulatedRelayDriver(9)
+-        assert drv.initialize()
+-        for i in range(9): assert drv.set_relay(i, True)
+-        drv.close()
+-        print("✓ SimulatedRelayDriver with 9 relays")
++    def test_no_usb_or_simulated_backend(self):
++        """v4.0: USB relay and simulated relay backends must be gone completely."""
++        import relay.backends as backends
++        assert not hasattr(backends, "USBRelayBackend")
++        import relay.relay_process as relay_process
++        assert not hasattr(relay_process, "_SimulatedBackend")
++        assert not hasattr(relay_process, "SimulatedRelayDriver")
++        from relay.backends.modbus_backend import ModbusRelayBackend  # only backend left
++        print("✓ USB + simulated relay backends removed — Ethernet/Modbus is the only backend")
+ 
+     def test_relay_camera_mapping(self):
+         from core.config_loader import VisionSystemConfig
+@@ -206,8 +208,6 @@ class TestRelayV2:
+         print(f"✓ Camera 2 relay mapping: {indices}")
+ 
+     def test_relay_worker_state_update(self):
+-        from relay.relay_process import SimulatedRelayDriver
+-        drv = SimulatedRelayDriver(9); drv.initialize()
+         states = [False]*9; cached = [False]*9
+         # Camera 1 pair 0 → relay 3 should turn ON
+         relay_indices = [3, 4, 5]
+-- 
+2.43.0
+
